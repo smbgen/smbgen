@@ -1,0 +1,1073 @@
+@extends('layouts.admin')
+
+@section('content')
+<div class="space-y-8">
+    <!-- Header -->
+    <div class="flex justify-between items-center">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-100">Admin Dashboard</h1>
+            <p class="text-gray-400">Manage leads, clients, and system overview</p>
+        </div>
+        <div class="text-sm text-gray-400">
+            Welcome, {{ auth()->user()->name }} (Administrator)
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    @foreach (['success', 'info', 'warning', 'error'] as $msg)
+        @if(session($msg))
+            <div class="p-4 rounded-lg {{ $msg === 'error' ? 'bg-red-100 border border-red-400 text-red-700' : 
+                ($msg === 'warning' ? 'bg-yellow-100 border border-yellow-400 text-yellow-700' : 
+                ($msg === 'info' ? 'bg-blue-100 border border-blue-400 text-blue-700' : 
+                'bg-green-100 border border-green-400 text-green-700')) }}">
+                {{ session($msg) }}
+            </div>
+        @endif
+    @endforeach
+
+    <!-- Quick Client Creation -->
+    <div class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-700 text-white px-6 py-4 rounded-t-lg cursor-pointer" onclick="toggleClientForm()">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold">Quick Client Creation</h3>
+                <i class="fas fa-chevron-down transition-transform duration-200" id="clientFormChevron"></i>
+            </div>
+            <p class="text-gray-300 text-sm mt-1">Create a new client record quickly and optionally start a meeting</p>
+        </div>
+        <div id="clientFormContent" class="hidden p-6">
+            <form id="quickClientForm" action="{{ route('clients.store') }}" method="POST" class="space-y-4">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
+                        <input type="text" name="first_name" id="first_name" required
+                               class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-green-500 focus:border-green-500"
+                               placeholder="John">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
+                        <input type="text" name="last_name" id="last_name" required
+                               class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-green-500 focus:border-green-500"
+                               placeholder="Doe">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                        <input type="email" name="email" id="client_email" required
+                               class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-green-500 focus:border-green-500"
+                               placeholder="john.doe@example.com">
+                    </div>
+                </div>
+                <input type="hidden" name="name" id="full_name">
+                <div class="flex gap-3 pt-2">
+                    <button type="submit" name="action" value="save" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i>Save Client Record
+                    </button>
+                    <button type="submit" name="action" value="meeting" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors">
+                        <i class="fas fa-video mr-2"></i>Save & Start Meeting
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Email Services Card -->
+    <div class="card border-l-4 transition-colors">
+        <div class="bg-gray-700 text-white px-6 py-4 rounded-t-lg">
+            <h3 class="text-lg font-semibold">Email Services</h3>
+            <p class="text-gray-300 text-sm mt-1">Compose, track, and debug email communications</p>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Email Composer -->
+                @if((bool) data_get(config('business'), 'features.email_composer', env('FEATURE_EMAIL_COMPOSER')) && Route::has('admin.email.index'))
+                    <div class="hover:bg-gray-700  text-center p-4 border-2 border-gray-600 bg-gray-800/20 rounded-lg transition-colors">
+                        <div class="text-3xl mb-3">✉️</div>
+                        <h4 class="font-semibold text-gray-200 mb-2">Email Composer</h4>
+                        <p class="text-gray-400 text-sm mb-4">Send emails to clients and users with templates</p>
+                        <div class="space-y-2">
+                            <a href="{{ route('admin.email.index') }}" class="btn-primary text-sm w-full block">
+                                <i class="fas fa-edit mr-2"></i>Compose Email
+                            </a>
+                            <div class="text-xs text-gray-400 space-y-1">
+                                <div><i class="fas fa-check-circle mr-1"></i>Quick Templates</div>
+                                <div><i class="fas fa-check-circle mr-1"></i>Multi-Recipient</div>
+                                <div><i class="fas fa-check-circle mr-1"></i>Email History</div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Email Deliverability Dashboard -->
+                @if(Route::has('admin.email-logs.index'))
+                    <div class="hover:bg-gray-700  text-center p-4 border-2 border-gray-600 bg-gray-800/20 rounded-lg transition-colors">
+                        <div class="text-3xl mb-3">📧</div>
+                        <h4 class="font-semibold text-gray-200 mb-2">Email Deliverability</h4>
+                        <p class="text-gray-400 text-sm mb-4">Track email delivery, opens, clicks, and failures</p>
+                        <div class="space-y-2">
+                            <a href="{{ route('admin.email-logs.index') }}" class="btn-primary text-sm w-full block">
+                                <i class="fas fa-chart-line mr-2"></i>View Email Logs
+                            </a>
+                            @php
+                                try {
+                                    $trackingService = app(\App\Services\EmailTrackingService::class);
+                                    $recentStats = $trackingService->getStats(24);
+                                } catch (\Exception $e) {
+                                    $recentStats = [
+                                        'sent' => 0,
+                                        'delivery_rate' => 0,
+                                        'open_rate' => 0
+                                    ];
+                                    \Log::warning('Failed to load email stats in dashboard', [
+                                        'error' => $e->getMessage()
+                                    ]);
+                                }
+                            @endphp
+                            <div class="text-xs text-gray-400 space-y-1">
+                                <div>📤 Sent: {{ $recentStats['sent'] ?? 0 }}</div>
+                                <div>✅ Delivered: {{ number_format($recentStats['delivery_rate'] ?? 0, 1) }}%</div>
+                                <div>📨 Opened: {{ number_format($recentStats['open_rate'] ?? 0, 1) }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Email Debug (Only show when APP_DEBUG=true) -->
+                @if(config('app.debug') && Route::has('admin.email.test'))
+                    <div class="text-center p-4 border-2 border-yellow-500 bg-yellow-900/20 rounded-lg hover:bg-yellow-900/30 transition-colors">
+                        <div class="text-3xl mb-3">�️</div>
+                        <h4 class="font-semibold text-yellow-300 mb-2">Email Debug</h4>
+                        <p class="text-yellow-200 text-sm mb-4">Test email configuration and send test emails</p>
+                        <div class="space-y-2">
+                            <button onclick="document.getElementById('emailDebugModal').classList.remove('hidden')" class="btn-primary text-sm w-full block">
+                                <i class="fas fa-envelope mr-2"></i>Send Test Email
+                            </button>
+                            <div class="text-xs text-yellow-300 space-y-1">
+                                <div>Mailer: {{ config('mail.default', 'N/A') }}</div>
+                                <div>Host: {{ config('mail.mailers.smtp.host', 'N/A') }}</div>
+                                <div>From: {{ config('mail.from.address', 'N/A') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CMS Services -->
+    <div class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-700 text-white px-6 py-4 rounded-t-lg">
+            <h3 class="text-lg font-semibold">CMS Services</h3>
+            <p class="text-gray-300 text-sm mt-1">Content management and website editing tools</p>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- CMS Editor -->
+                <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                    <div class="text-3xl mb-3">📝</div>
+                    <h4 class="font-semibold text-gray-100 mb-2">CMS Editor</h4>
+                    <p class="text-gray-400 text-sm mb-4">Edit website content and pages</p>
+                    @if(config('business.features.cms'))
+                        <a href="{{ route('admin.cms.index') }}" class="btn-primary text-sm">
+                            <i class="fas fa-edit mr-2"></i>Manage Pages
+                        </a>
+                    @else
+                        <div class="text-xs text-yellow-400 mb-2">
+                            Enable via FEATURE_CMS=true in .env
+                        </div>
+                        <button class="btn-secondary text-sm" disabled>
+                            <i class="fas fa-edit mr-2"></i>Coming Soon
+                        </button>
+                    @endif
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Lead Form Services -->
+    <div class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-700 text-white px-6 py-4 rounded-t-lg">
+            <h3 class="text-lg font-semibold">Lead Form Services</h3>
+            <p class="text-gray-300 text-sm mt-1">Lead capture and form management tools</p>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Lead Form Generation -->
+                <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                    <div class="text-3xl mb-3">🔧</div>
+                    <h4 class="font-semibold text-gray-100 mb-2">Lead Form Generation</h4>
+                    <p class="text-gray-400 text-sm mb-4">Create and customize lead capture forms</p>
+                    <button class="btn-secondary text-sm" disabled>
+                        <i class="fas fa-plus mr-2"></i>Coming Soon
+                    </button>
+                </div>
+
+                <!-- Lead Form Capture -->
+                <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                    <div class="text-3xl mb-3">📥</div>
+                    <h4 class="font-semibold text-gray-100 mb-2">Lead Form Capture</h4>
+                    <p class="text-gray-400 text-sm mb-4">View and manage captured leads</p>
+                    <a href="#leads" class="btn-primary text-sm">
+                        <i class="fas fa-list mr-2"></i>View Leads
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoicing and Payments -->
+    <div class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-700 text-white px-6 py-4 rounded-t-lg">
+            <h3 class="text-lg font-semibold">Invoicing and Payments</h3>
+            <p class="text-gray-300 text-sm mt-1">Invoice management and payment processing</p>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Invoice Settings -->
+                <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                    <div class="text-3xl mb-3">⚙️</div>
+                    <h4 class="font-semibold text-gray-100 mb-2">Invoice Settings</h4>
+                    <p class="text-gray-400 text-sm mb-4">Configure invoice templates and defaults</p>
+                    <button class="btn-secondary text-sm" disabled>
+                        <i class="fas fa-cog mr-2"></i>Coming Soon
+                    </button>
+                </div>
+
+                <!-- Payment System Settings -->
+                <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                    <div class="text-3xl mb-3">💳</div>
+                    <h4 class="font-semibold text-gray-100 mb-2">Payment System Settings</h4>
+                    <p class="text-gray-400 text-sm mb-4">Configure payment gateways and methods</p>
+                    <button class="btn-secondary text-sm" disabled>
+                        <i class="fas fa-credit-card mr-2"></i>Coming Soon
+                    </button>
+                </div>
+
+                <!-- Invoice Generation -->
+                <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                    <div class="text-3xl mb-3">📄</div>
+                    <h4 class="font-semibold text-gray-100 mb-2">Invoice Generation</h4>
+                    <p class="text-gray-400 text-sm mb-4">Create and send invoices to clients</p>
+                    <a href="{{ route('admin.billing.index') }}" class="btn-primary text-sm">
+                        <i class="fas fa-file-invoice mr-2"></i>Manage Invoices
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Tools & Services -->
+    <div class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-700 text-white px-6 py-4 rounded-t-lg">
+            <h3 class="text-lg font-semibold">Client Tools & Services</h3>
+            <p class="text-gray-300 text-sm mt-1">Access all enabled tools and services</p>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Debug Tools (Only show when APP_DEBUG=true) -->
+                @if(config('app.debug') && Route::has('debug.info'))
+                    <div class="text-center p-4 border-2 border-yellow-500 bg-yellow-900/20 rounded-lg hover:bg-gray-800/30 transition-colors">
+                        <div class="text-3xl mb-3">🛠️</div>
+                        <h4 class="font-semibold text-gray-200 mb-2">APP DEBUG TRUE</h4>
+                        <p class="text-gray-400 text-sm mb-4">Debug tools and error page testing</p>
+                        <div class="space-y-2">
+                            <a href="{{ route('debug.info') }}" class="btn-primary text-sm block">
+                                <i class="fas fa-bug mr-2"></i>Debug Dashboard
+                            </a>
+                            <a href="{{ route('debug.design') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition-colors text-sm block">
+                                <i class="fas fa-palette mr-2"></i>Design Playground
+                            </a>
+                            <div class="text-xs text-gray-400">
+                                Environment: {{ app()->environment() }}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Bookings & Calendar (feature-flagged) -->
+                @if ((bool) data_get(config('business'), 'features.appointments', env('FEATURE_APPOINTMENTS', false)))
+                    <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                        <div class="text-3xl mb-3">📆</div>
+                        <h4 class="font-semibold text-gray-100 mb-2">Google Calendar API Bookings</h4>
+                        <p class="text-gray-400 text-sm mb-4">Public booking page and admin calendar connection</p>
+                        <div class="space-y-2">
+                            <a href="{{ route('booking.wizard') }}" class="btn-primary text-sm w-full block">
+                                <i class="fas fa-calendar-plus mr-2"></i>Public Booking Page
+                            </a>
+                            <div class="grid grid-cols-2 gap-2">
+                                @if(auth()->user()->google_refresh_token)
+                                    <a href="{{ route('admin.calendar.index') }}" class="btn-success text-xs">
+                                        <i class="fas fa-check-circle mr-1"></i>GCal Connected
+                                    </a>
+                                @else
+                                    <a href="{{ route('admin.calendar.index') }}" class="btn-secondary text-xs">
+                                        <i class="fas fa-exclamation-triangle mr-1"></i>Connect GCal
+                                    </a>
+                                @endif
+                                <a href="{{ route('admin.availability.index') }}" class="btn-secondary text-xs">
+                                    <i class="fas fa-clock mr-1"></i>Set Availability
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Cyber Audit Tool -->
+                @if ((bool) data_get(config('business'), 'features.cyber_audit', false))
+                    <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                        <div class="text-3xl mb-3">🔒</div>
+                        <h4 class="font-semibold text-gray-100 mb-2">Cyber Audit (wip)</h4>
+                        <p class="text-gray-400 text-sm mb-4">AI-powered cybersecurity assessment</p>
+                        <a href="{{ route('cyber-audit.index') }}" class="btn-success text-sm">
+                            <i class="fas fa-shield-alt mr-2"></i>Start Audit
+                        </a>
+                    </div>
+                @endif
+
+                <!-- SEO Assistant -->
+                @if ((bool) data_get(config('business'), 'features.ai_seo_tool', false))
+                    <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                        <div class="text-3xl mb-3">🔍</div>
+                        <h4 class="font-semibold text-gray-100 mb-2">SEO Assistant (wip)</h4>
+                        <p class="text-gray-400 text-sm mb-4">AI-powered SEO optimization</p>
+                        <a href="{{ route('client.seo-assistant') }}" class="btn-primary text-sm">
+                            <i class="fas fa-search mr-2"></i>Open Tool
+                        </a>
+                    </div>
+                @endif
+
+                <!-- Cyber Audit Demo -->
+                @if((Route::has('cyber-audit-demo')) && (bool) data_get(config('business'), 'features.cyber_audit_demo', false))
+                    <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h4 class="font-semibold text-gray-100 mb-2">Cyber Audit Demo (Landing Page)</h4>
+                        <p class="text-gray-400 text-sm mb-4">Interactive demo with chat interface</p>
+                        @if((Route::has('cyber-audit-demo')) && (bool) data_get(config('business'), 'features.cyber_audit_demo', false))
+                            <a href="{{ route('cyber-audit-demo') }}" class="btn-secondary text-sm">
+                                <i class="fas fa-play mr-2"></i>View Demo
+                            </a>
+                        @endif
+                    </div>
+                @endif
+
+                <!-- ClientBridge System -->
+                <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                    <div class="text-3xl mb-3">⚙️</div>
+                    <h4 class="font-semibold text-gray-100 mb-2">ClientBridge System</h4>
+                    <p class="text-gray-400 text-sm mb-4">System settings and access management</p>
+                    <div class="space-y-2">
+                        @if(auth()->check() && auth()->user()->isAdministrator())
+                        <a href="{{ route('admin.environment_settings.index') }}" class="btn-secondary text-xs w-full block">
+                            <i class="fas fa-cog mr-1"></i> Environment Settings
+                        </a>
+                        <a href="{{ route('admin.business_settings.index') }}" class="btn-secondary text-xs w-full block">
+                            <i class="fas fa-building mr-1"></i> Business Settings
+                        </a>
+                        <a href="{{ route('admin.social-accounts') }}" class="btn-secondary text-xs w-full block">
+                            <i class="fas fa-users mr-1"></i> Manage Access
+                        </a>
+                        @endif
+                        <a href="{{ route('profile.edit') }}" class="btn-secondary text-xs w-full block">
+                            <i class="fas fa-user mr-1"></i> Edit Profile
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Additional Client Services -->
+            <div class="mt-8 pt-6 border-t border-gray-700">
+                <h4 class="text-lg font-semibold text-gray-100 mb-4">Additional Services</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="{{ route('messages.index') }}" class="flex items-center p-3 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-envelope text-green-400 mr-3"></i>
+                        <div class="text-left">
+                            <div class="font-medium text-gray-100">Messages (beta)</div>
+                            <div class="text-sm text-gray-400">View and send messages</div>
+                        </div>
+                    </a>
+                    
+                    <a href="{{ route('dashboard') }}" class="flex items-center p-3 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-tachometer-alt text-purple-400 mr-3"></i>
+                        <div class="text-left">
+                            <div class="font-medium text-gray-100">Client Dashboard Preview</div>
+                            <div class="text-sm text-gray-400">View client portal experience</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats Grid (Full Width, Compact, Single Line) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-full">
+        <!-- Total Leads -->
+        <a href="#leads" class="card px-3 py-2 block hover:bg-gray-800/50 transition-colors">
+            <div class="flex items-center justify-between">
+                <span class="text-base font-semibold text-gray-100">📊 Total Leads</span>
+                <span class="text-xl font-bold text-gray-300">{{ $leads->count() }}</span>
+                <span class="text-xs text-gray-400 ml-2">Lead form submissions</span>
+            </div>
+        </a>
+
+        <!-- Total Clients -->
+        <a href="{{ route('clients.index') }}" class="card px-3 py-2 block hover:bg-gray-800/50 transition-colors">
+            <div class="flex items-center justify-between">
+                <span class="text-base font-semibold text-gray-100">👥 Total Clients</span>
+                <span class="text-xl font-bold text-gray-300">{{ $clients->count() ?? 0 }}</span>
+                <span class="text-xs text-gray-400 ml-2">Active clients</span>
+            </div>
+        </a>
+
+        <!-- Recent Messages -->
+        <a href="{{ route('messages.index') }}" class="card px-3 py-2 block hover:bg-gray-800/50 transition-colors">
+            <div class="flex items-center justify-between">
+                <span class="text-base font-semibold text-gray-100">💬 Messages</span>
+                <span class="text-xl font-bold text-gray-300">{{ \App\Models\Message::count() }}</span>
+                <span class="text-xs text-gray-400 ml-2">Total messages</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Leads Section -->
+    <div id="leads" class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
+            <h3 class="text-lg font-semibold">📊 Lead Form Submissions</h3>
+            <div class="flex items-center space-x-2">
+                <a href="{{ route('leads.export.csv') }}" class="btn-secondary text-xs" title="Download CSV">
+                    Download CSV
+                </a>
+                <span class="text-sm text-gray-200" title="Live updating">Live</span>
+            </div>
+        </div>
+        <div class="p-6">
+            @if ($leads->count())
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-700">
+                        <thead class="bg-gray-800">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Message</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Submitted</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">IP</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800 divide-y divide-gray-700">
+                            @foreach($leads as $lead)
+                                <tr class="hover:bg-gray-700">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{{ $lead->name ?? 'Unknown' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $lead->email ?? 'N/A' }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-300">
+                                        <div class="max-w-xs truncate">{{ $lead->message ?? 'N/A' }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                        {{ $lead->created_at ? $lead->created_at->format('M j, Y g:i A') : 'N/A' }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $lead->ip_address ?? 'N/A' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                        <form method="POST" action="{{ route('leads.convert', $lead) }}" class="inline">
+                                            @csrf
+                                            <button type="submit" class="btn-success text-xs">Convert</button>
+                                        </form>
+                                        <form method="POST" action="{{ route('leads.destroy', $lead) }}" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-danger text-xs" onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-gray-400 text-center py-8">No leads yet.</p>
+            @endif
+        </div>
+    </div>
+
+    <!-- Clients Section -->
+    <div class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
+            <h3 class="text-lg font-semibold">👥 Manage Clients</h3>
+            <div class="flex items-center space-x-2">
+                <a href="{{ route('clients.export.csv') }}" class="btn-secondary text-xs" title="Download CSV">Download CSV</a>
+                <a href="{{ route('clients.index') }}" class="text-white hover:text-green-200 text-sm">
+                    View All Clients
+                </a>
+            </div>
+        </div>
+        <div class="p-6">
+            @isset($clients)
+                @if($clients->count())
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-700">
+                            <thead class="bg-gray-800">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Phone</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-gray-800 divide-y divide-gray-700">
+                                @foreach($clients as $client)
+                                    <tr class="hover:bg-gray-700">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{{ $client->name ?? 'Unknown' }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $client->email ?? 'N/A' }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $client->phone ?? 'N/A' }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $client->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                                {{ $client->is_active ? 'Active' : 'Inactive' }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                            <a href="{{ route('clients.edit', $client) }}" class="btn-primary text-xs">Edit</a>
+                                            <a href="{{ route('clients.show', $client) }}" class="btn-secondary text-xs">View</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p class="text-gray-400 text-center py-8">No clients found.</p>
+                @endif
+            @else
+                <p class="text-gray-400 text-center py-8">Client data not available.</p>
+            @endisset
+        </div>
+    </div>
+
+    <!-- Invoices Section -->
+    <div class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
+            <h3 class="text-lg font-semibold">🧾 Recent Invoices</h3>
+            <a href="{{ route('admin.billing.index') }}" class="text-white hover:text-yellow-200 text-sm">View All Invoices ({{ $invoiceCount ?? 0 }})</a>
+        </div>
+        <div class="p-6">
+            @if(isset($invoices) && $invoices->count())
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-700">
+                        <thead class="bg-gray-800">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">#</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Client</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Total</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800 divide-y divide-gray-700">
+                            @foreach($invoices as $inv)
+                                <tr class="hover:bg-gray-700">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{{ $inv->id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $inv->user->name ?? $inv->user->email ?? '—' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ '$' . number_format(($inv->total_amount ?? 0) / 100, 2) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $inv->status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">{{ ucfirst($inv->status) }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                        <a href="{{ route('admin.billing.show', $inv->user) }}" class="btn-secondary text-xs">View</a>
+                                        <form method="POST" action="{{ route('admin.billing.invoices.send', $inv) }}" class="inline">
+                                            @csrf
+                                            <button type="submit" class="btn-primary text-xs">Send</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-gray-400 text-center py-8">No invoices yet.</p>
+            @endif
+        </div>
+    </div>
+
+    <!-- Recent Bookings -->
+    @if ((bool) data_get(config('business'), 'features.appointments', env('FEATURE_APPOINTMENTS', false)))
+    <div class="card hover:bg-gray-800/50 transition-colors">
+        <div class="bg-gray-700 text-white px-6 py-4 rounded-t-lg">
+            <h3 class="text-lg font-semibold">📅 Recent Bookings</h3>
+            <p class="text-gray-300 text-sm mt-1">Latest appointment requests ({{ $bookingCount }} total) - Click row to expand details</p>
+        </div>
+        <div class="p-6">
+            @if(count($bookings) > 0)
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left py-2 text-gray-300 w-8"></th>
+                                <th class="text-left py-2 text-gray-300">Customer</th>
+                                <th class="text-left py-2 text-gray-300">Staff</th>
+                                <th class="text-left py-2 text-gray-300">Date & Time</th>
+                                <th class="text-left py-2 text-gray-300">Status</th>
+                                <th class="text-left py-2 text-gray-300">GCal</th>
+                                <th class="text-left py-2 text-gray-300">Email</th>
+                                <th class="text-left py-2 text-gray-300">Created</th>
+                                <th class="text-right py-2 text-gray-300">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($bookings as $booking)
+                                @php
+                                    // Get email logs for this booking
+                                    $emailLogs = \App\Models\EmailLog::where('booking_id', $booking->id)
+                                        ->orderBy('created_at', 'desc')
+                                        ->get();
+                                    $latestEmail = $emailLogs->first();
+                                    
+                                    // Google Calendar status
+                                    $hasGoogleEvent = !empty($booking->google_calendar_event_id);
+                                    $hasMeetLink = !empty($booking->google_meet_link);
+                                @endphp
+                                
+                                <!-- Main Row (Clickable) -->
+                                <tr class="border-b border-gray-800 hover:bg-gray-700 cursor-pointer" 
+                                    onclick="document.getElementById('booking-details-{{ $booking->id }}').classList.toggle('hidden')">
+                                    <td class="py-3">
+                                        <i class="fas fa-chevron-right text-gray-500 text-xs transition-transform" 
+                                           id="chevron-{{ $booking->id }}"></i>
+                                    </td>
+                                    <td class="py-3">
+                                        <div class="font-medium text-gray-300">{{ $booking->customer_name }}</div>
+                                        <div class="text-xs text-gray-400">{{ $booking->customer_email }}</div>
+                                    </td>
+                                    <td class="py-3 text-gray-300">
+                                        {{ optional($booking->staff)->name ?? 'Not assigned' }}
+                                    </td>
+                                    <td class="py-3 text-gray-300">
+                                        {{ optional($booking->booking_date)->format('M j, Y') ?? 'N/A' }}<br>
+                                        <span class="text-xs text-gray-400">{{ $booking->booking_time ?? 'N/A' }} ({{ $booking->duration ?? 0 }}m)</span>
+                                    </td>
+                                    <td class="py-3">
+                                        <span class="px-2 py-1 rounded text-xs font-medium
+                                            @if($booking->status === 'confirmed') bg-green-900 text-green-300
+                                            @elseif($booking->status === 'cancelled') bg-red-900 text-red-300
+                                            @else bg-yellow-900 text-yellow-300 @endif">
+                                            {{ ucfirst($booking->status) }}
+                                        </span>
+                                    </td>
+                                    <td class="py-3">
+                                        @if($hasGoogleEvent && $hasMeetLink)
+                                            <span class="text-green-400" title="Google Calendar event created with Meet link">
+                                                <i class="fas fa-check-circle"></i>
+                                            </span>
+                                        @elseif($hasGoogleEvent)
+                                            <span class="text-yellow-400" title="Google Calendar event created (no Meet link)">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        @else
+                                            <span class="text-gray-600" title="No Google Calendar event">
+                                                <i class="fas fa-times-circle"></i>
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td class="py-3">
+                                        @if($latestEmail)
+                                            @if($latestEmail->status === 'opened' || $latestEmail->status === 'clicked')
+                                                <span class="text-green-400" title="Email opened ({{ $latestEmail->open_count }}x)">
+                                                    <i class="fas fa-envelope-open"></i>
+                                                </span>
+                                            @elseif($latestEmail->status === 'sent' || $latestEmail->status === 'delivered')
+                                                <span class="text-blue-400" title="Email sent">
+                                                    <i class="fas fa-envelope"></i>
+                                                </span>
+                                            @elseif($latestEmail->status === 'bounced' || $latestEmail->status === 'failed')
+                                                <span class="text-red-400" title="Email failed">
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </span>
+                                            @else
+                                                <span class="text-gray-500" title="Email pending">
+                                                    <i class="fas fa-clock"></i>
+                                                </span>
+                                            @endif
+                                        @else
+                                            <span class="text-gray-600" title="No emails sent">
+                                                <i class="fas fa-minus-circle"></i>
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td class="py-3 text-xs text-gray-400">
+                                        {{ $booking->created_at ? $booking->created_at->diffForHumans() : 'Unknown' }}
+                                    </td>
+                                    <td class="py-3 text-right space-x-2" onclick="event.stopPropagation()">
+                                        @if(Route::has('admin.bookings.send-reminder'))
+                                            <form action="{{ route('admin.bookings.send-reminder', $booking->id) }}" method="POST" class="inline" onsubmit="return confirm('Send reminder email to {{ $booking->customer_name }}?');">
+                                                @csrf
+                                                <button type="submit" class="text-blue-400 hover:text-blue-300 text-xs font-medium transition-colors">
+                                                    <i class="fas fa-paper-plane mr-1"></i>Remind
+                                                </button>
+                                            </form>
+                                        @endif
+                                        <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this booking?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-400 hover:text-red-300 text-xs font-medium transition-colors">
+                                                <i class="fas fa-trash-alt mr-1"></i>Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Expanded Details Row -->
+                                <tr id="booking-details-{{ $booking->id }}" class="hidden bg-gray-900/50 border-b border-gray-800">
+                                    <td colspan="9" class="p-6">
+                                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                            
+                                            <!-- Booking Details -->
+                                            <div class="bg-gray-800/50 rounded-lg p-4">
+                                                <h4 class="font-semibold text-gray-200 mb-3 flex items-center">
+                                                    <i class="fas fa-info-circle mr-2"></i>Booking Details
+                                                </h4>
+                                                <div class="space-y-2 text-sm">
+                                                    <div class="flex justify-between">
+                                                        <span class="text-gray-400">ID:</span>
+                                                        <span class="text-gray-300 font-mono">#{{ $booking->id }}</span>
+                                                    </div>
+                                                    <div class="flex justify-between">
+                                                        <span class="text-gray-400">Phone:</span>
+                                                        <span class="text-gray-300">{{ $booking->customer_phone ?? 'Not provided' }}</span>
+                                                    </div>
+                                                    <div class="flex justify-between">
+                                                        <span class="text-gray-400">Duration:</span>
+                                                        <span class="text-gray-300">{{ $booking->duration }} minutes</span>
+                                                    </div>
+                                                    @if($booking->notes)
+                                                        <div class="pt-2 border-t border-gray-700">
+                                                            <span class="text-gray-400 block mb-1">Notes:</span>
+                                                            <p class="text-gray-300 text-xs">{{ $booking->notes }}</p>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Google Calendar Status -->
+                                            <div class="bg-gray-800/50 rounded-lg p-4">
+                                                <h4 class="font-semibold text-gray-200 mb-3 flex items-center">
+                                                    <i class="fab fa-google mr-2"></i>Google Calendar Status
+                                                </h4>
+                                                <div class="space-y-2 text-sm">
+                                                    <div class="flex items-start justify-between">
+                                                        <span class="text-gray-400">Event Created:</span>
+                                                        @if($hasGoogleEvent)
+                                                            <span class="text-green-400 flex items-center">
+                                                                <i class="fas fa-check-circle mr-1"></i>Yes
+                                                            </span>
+                                                        @else
+                                                            <span class="text-red-400 flex items-center">
+                                                                <i class="fas fa-times-circle mr-1"></i>No
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                    @if($hasGoogleEvent)
+                                                        <div class="flex items-start justify-between">
+                                                            <span class="text-gray-400">Event ID:</span>
+                                                            <span class="text-gray-300 font-mono text-xs break-all max-w-[180px]">
+                                                                {{ substr($booking->google_calendar_event_id, 0, 20) }}...
+                                                            </span>
+                                                        </div>
+                                                    @endif
+                                                    <div class="flex items-start justify-between">
+                                                        <span class="text-gray-400">Meet Link:</span>
+                                                        @if($hasMeetLink)
+                                                            <a href="{{ $booking->google_meet_link }}" target="_blank" 
+                                                               class="text-blue-400 hover:text-blue-300 flex items-center">
+                                                                <i class="fas fa-video mr-1"></i>Join
+                                                            </a>
+                                                        @else
+                                                            <span class="text-gray-500">Not generated</span>
+                                                        @endif
+                                                    </div>
+                                                    @if($hasGoogleEvent)
+                                                        <div class="pt-2 border-t border-gray-700">
+                                                            <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" 
+                                                               class="text-xs text-blue-400 hover:text-blue-300">
+                                                                <i class="fas fa-external-link-alt mr-1"></i>View in Google Calendar
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Email Deliverability Status -->
+                                            <div class="bg-gray-800/50 rounded-lg p-4">
+                                                <h4 class="font-semibold text-gray-200 mb-3 flex items-center">
+                                                    <i class="fas fa-envelope mr-2"></i>Email Tracking
+                                                </h4>
+                                                @if($emailLogs->count() > 0)
+                                                    <div class="space-y-3 text-sm">
+                                                        @foreach($emailLogs as $email)
+                                                            <div class="pb-2 {{ !$loop->last ? 'border-b border-gray-700' : '' }}">
+                                                                <div class="flex justify-between items-start mb-1">
+                                                                    <span class="text-gray-400 text-xs">{{ $email->created_at->format('M j, g:i A') }}</span>
+                                                                    <span class="text-xs">{!! $email->status_badge !!}</span>
+                                                                </div>
+                                                                <div class="text-xs text-gray-300 mb-1">{{ $email->subject }}</div>
+                                                                @if($email->status === 'opened' || $email->status === 'clicked')
+                                                                    <div class="text-xs space-y-1 mt-2">
+                                                                        @if($email->opened_at)
+                                                                            <div class="flex justify-between text-gray-400">
+                                                                                <span>Opened:</span>
+                                                                                <span>{{ $email->opened_at->diffForHumans() }} ({{ $email->open_count }}x)</span>
+                                                                            </div>
+                                                                        @endif
+                                                                        @if($email->clicked_at)
+                                                                            <div class="flex justify-between text-gray-400">
+                                                                                <span>Clicked:</span>
+                                                                                <span>{{ $email->clicked_at->diffForHumans() }}</span>
+                                                                            </div>
+                                                                        @endif
+                                                                        @if($email->ip_address)
+                                                                            <div class="flex justify-between text-gray-500">
+                                                                                <span>IP:</span>
+                                                                                <span class="font-mono">{{ $email->ip_address }}</span>
+                                                                            </div>
+                                                                        @endif
+                                                                    </div>
+                                                                @elseif($email->status === 'bounced' || $email->status === 'failed')
+                                                                    <div class="text-xs text-red-400 mt-1">
+                                                                        {{ $email->error_message ?? 'Unknown error' }}
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                @else
+                                                    <div class="text-sm text-gray-400 flex items-center justify-center py-4">
+                                                        <i class="fas fa-inbox mr-2"></i>
+                                                        No emails sent yet
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-gray-400 text-center py-8">No bookings yet.</p>
+            @endif
+        </div>
+    </div>
+    @endif
+
+    <!-- Recent Activity Summary
+    <div class="card p-6">
+        <h3 class="text-lg font-semibold text-gray-100 mb-4"> Recent Activity</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-400">
+            <div class="flex justify-between">
+                <span>New leads today:</span>
+                <span class="text-gray-300">{{ $leads->where('created_at', '>=', today())->count() }}</span>
+            </div>
+            <div class="flex justify-between">
+                <span>Active clients:</span>
+                <span class="text-gray-300">{{ $clients->where('is_active', true)->count() ?? 0 }}</span>
+            </div>
+        </div>
+    </div> -->
+
+</div>
+
+<!-- Email Debug Modal -->
+@if(config('app.debug') && Route::has('admin.email.test'))
+<div id="emailDebugModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">📧 Email Debug & Test</h2>
+                <button onclick="document.getElementById('emailDebugModal').classList.add('hidden')" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Email Configuration Display -->
+            <div class="bg-gray-900 rounded-lg p-4 mb-6">
+                <h3 class="text-lg font-semibold text-gray-200 mb-3">Current Email Configuration</h3>
+                <div class="space-y-2 text-sm font-mono">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Mailer:</span>
+                        <span class="text-white">{{ config('mail.default', 'Not configured') }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Host:</span>
+                        <span class="text-white">{{ config('mail.mailers.smtp.host', 'Not configured') }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Port:</span>
+                        <span class="text-white">{{ config('mail.mailers.smtp.port', 'Not configured') }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Encryption:</span>
+                        <span class="text-white">{{ config('mail.mailers.smtp.encryption', 'None') }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Username:</span>
+                        <span class="text-white">{{ config('mail.mailers.smtp.username', 'Not configured') }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">From Address:</span>
+                        <span class="text-white">{{ config('mail.from.address', 'Not configured') }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">From Name:</span>
+                        <span class="text-white">{{ config('mail.from.name', 'Not configured') }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Send Test Email Form -->
+            <div class="bg-gray-900 rounded-lg p-4">
+                <h3 class="text-lg font-semibold text-gray-200 mb-3">Send Test Email</h3>
+                <form action="{{ route('admin.email.test') }}" method="POST" class="space-y-4">
+                    @csrf
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Recipient Email</label>
+                        <input type="email" name="email" required 
+                               value="{{ auth()->user()->email }}"
+                               class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="test@example.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                        <input type="text" name="subject" required 
+                               value="ClientBridge Test Email"
+                               class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                        <textarea name="message" rows="4" required
+                                  class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500">This is a test email from ClientBridge.
+
+If you received this, your email configuration is working correctly!
+
+Timestamp: {{ now()->format('Y-m-d H:i:s') }}</textarea>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Test Email
+                        </button>
+                        <button type="button" onclick="document.getElementById('emailDebugModal').classList.add('hidden')" 
+                                class="bg-gray-700 hover:bg-gray-600 text-white font-medium px-4 py-2 rounded-lg transition-colors">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="mt-4 bg-yellow-900/30 border border-yellow-500/50 rounded-lg p-4">
+                <h4 class="text-gray-200 font-semibold mb-2">Tips:</h4>
+                <ul class="text-sm text-yellow-200 space-y-1">
+                    <li>• Check spam folder if email doesn't arrive</li>
+                    <li>• Verify SMTP credentials in .env file</li>
+                    <li>• Ensure firewall allows SMTP port (465/587)</li>
+                    <li>• Check Laravel logs for detailed errors</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+@push('scripts')
+<script>
+    // Auto-refresh leads table
+    function fetchLeads() {
+        fetch("{{ route('leads.partial') }}")
+            .then(response => response.text())
+            .then(html => {
+                // Update the leads table content
+                console.log('Leads updated');
+            })
+            .catch(error => console.error('Error fetching leads:', error));
+    }
+
+    // Refresh leads every 15 seconds
+    setInterval(fetchLeads, 15000);
+    
+    // Toggle client form visibility
+    function toggleClientForm() {
+        const content = document.getElementById('clientFormContent');
+        const chevron = document.getElementById('clientFormChevron');
+        
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            chevron.style.transform = 'rotate(180deg)';
+        } else {
+            content.classList.add('hidden');
+            chevron.style.transform = 'rotate(0deg)';
+        }
+    }
+    
+    // Booking row expansion with chevron rotation
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('[id^="booking-details-"]').forEach(function(detailsRow) {
+            const bookingId = detailsRow.id.replace('booking-details-', '');
+            const chevron = document.getElementById('chevron-' + bookingId);
+            
+            if (chevron) {
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'class') {
+                            if (detailsRow.classList.contains('hidden')) {
+                                chevron.style.transform = 'rotate(0deg)';
+                            } else {
+                                chevron.style.transform = 'rotate(90deg)';
+                            }
+                        }
+                    });
+                });
+                
+                observer.observe(detailsRow, { attributes: true });
+            }
+        });
+
+        // Quick client creation form handling
+        const firstNameInput = document.getElementById('first_name');
+        const lastNameInput = document.getElementById('last_name');
+        const fullNameInput = document.getElementById('full_name');
+        const clientForm = document.getElementById('quickClientForm');
+
+        function updateFullName() {
+            const firstName = firstNameInput.value.trim();
+            const lastName = lastNameInput.value.trim();
+            fullNameInput.value = (firstName + ' ' + lastName).trim();
+        }
+
+        firstNameInput.addEventListener('input', updateFullName);
+        lastNameInput.addEventListener('input', updateFullName);
+
+        // Handle form submission for meeting creation
+        clientForm.addEventListener('submit', function(e) {
+            updateFullName(); // Ensure name is updated before submission
+            
+            const action = e.submitter.value;
+            if (action === 'meeting') {
+                // Store meeting intent in session/localStorage
+                localStorage.setItem('startMeetingAfterClientCreate', 'true');
+                localStorage.setItem('meetingClientEmail', document.getElementById('client_email').value);
+            }
+        });
+    });
+</script>
+@endpush
+@endsection

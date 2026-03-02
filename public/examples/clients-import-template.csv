@@ -1,0 +1,6 @@
+name,email,phone,property_address,notes,source_site
+John Doe,john.doe@example.com,555-1234,123 Main Street,Interested in mold inspection,Website
+Jane Smith,jane.smith@example.com,555-5678,456 Oak Avenue,Water damage repair needed,Referral
+Bob Johnson,bob.johnson@example.com,555-9012,789 Pine Road,Air quality testing request,Google Ads
+Alice Williams,,555-3456,321 Elm Drive,Emergency services needed,Phone Call
+Mike Brown,mike.brown@example.com,,654 Maple Court,Prevention consultation,Email Campaign
