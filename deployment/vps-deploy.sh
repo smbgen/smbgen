@@ -4,7 +4,7 @@ set -e
 # Get the project root directory (parent of deployment/)
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-echo "🚀 Deploying ClientBridge to VPS..."
+echo "🚀 Deploying smbgen to VPS..."
 echo "📂 Project root: $PROJECT_ROOT"
 echo ""
 

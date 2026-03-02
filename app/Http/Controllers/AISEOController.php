@@ -35,7 +35,7 @@ class AISEOController extends Controller
                 ->post('https://api.openai.com/v1/chat/completions', [
                     'model' => 'gpt-3.5-turbo',
                     'messages' => [
-                        ['role' => 'system', 'content' => 'You are CLIENTBRIDGE AI SEO Assistant. Answer queries with expert-level SEO guidance.'],
+                        ['role' => 'system', 'content' => 'You are smbgen AI SEO Assistant. Answer queries with expert-level SEO guidance.'],
                         ['role' => 'user', 'content' => $query],
                     ],
                     'max_tokens' => 1000,

@@ -14,7 +14,7 @@
   <div class="px-4 w-full max-w-md z-10">
     <div class="bg-gray-800/90 border border-gray-700 rounded-xl shadow-xl p-6">
       <div class="space-y-6">
-      <h2 class="text-center text-2xl font-bold text-gray-100">{{ config('app.company_name', 'CLIENTBRIDGE') }}</h2>
+      <h2 class="text-center text-2xl font-bold text-gray-100">{{ config('app.company_name', 'smbgen') }}</h2>
 
   <form method="POST" action="{{ route('login') }}" class="space-y-4">
     @csrf
@@ -83,9 +83,9 @@
   {{-- Footer --}}
   <footer class="absolute bottom-0 w-full text-center pb-3 text-gray-400 text-sm z-10">
     <div class="opacity-75">
-      © {{ date('Y') }} {{ config('app.company_name', 'CLIENTBRIDGE') }} ·
-      <a href="https://clientbridge.app/privacy_policy.php" class="text-gray-300 hover:text-white underline">Privacy</a> ·
-      <a href="https://clientbridge.app/terms_service.php" class="text-gray-300 hover:text-white underline">Terms</a>
+      © {{ date('Y') }} {{ config('app.company_name', 'smbgen') }} ·
+      <a href="https://smbgen.com/privacy-policy" class="text-gray-300 hover:text-white underline">Privacy</a> ·
+      <a href="https://smbgen.com/terms" class="text-gray-300 hover:text-white underline">Terms</a>
     </div>
   </footer>
 
@@ -96,7 +96,7 @@
   <div id="secureSessionToast" class="bg-gray-800 text-white border border-gray-600 rounded-lg shadow-lg w-full opacity-100 pointer-events-none" role="alert">
     <div class="bg-gray-700 text-white border-b-0 py-1 px-2 rounded-t-lg flex items-center">
       <strong class="text-xs">Session protection enabled</strong>
-      <small class="text-xs ml-auto text-right">    <strong>CLIENTBRIDGE</strong><br> cloud monitoring</small>
+      <small class="text-xs ml-auto text-right">    <strong>smbgen</strong><br> cloud monitoring</small>
     </div>
     <div class="text-xs py-2 px-3">
       <div>IP: {{ request()->ip() }}</div>
@@ -105,8 +105,8 @@
     </div>
   </div>
 
-  <a id="sessionPill" href="https://clientbridge.app" target="_blank" rel="noopener noreferrer" aria-label="Open clientbridge.app in a new tab" class="hidden bg-green-600 text-white text-xs rounded-full px-2 py-0.5 shadow-lg mt-2 text-center transform origin-center pointer-events-auto cursor-pointer">
-    <strong>CLIENTBRIDGE</strong>
+  <a id="sessionPill" href="https://smbgen.com" target="_blank" rel="noopener noreferrer" aria-label="Open smbgen.com in a new tab" class="hidden bg-green-600 text-white text-xs rounded-full px-2 py-0.5 shadow-lg mt-2 text-center transform origin-center pointer-events-auto cursor-pointer">
+    <strong>smbgen</strong>
   </a>
 </div>
 
@@ -155,7 +155,7 @@
     function init() { DPR = Math.max(1, window.devicePixelRatio || 1); resize(); particles.length = 0; for (let i = 0; i < COUNT; i++) particles.push(makeParticle(canvas.width / DPR, canvas.height / DPR)); }
     function drawFrame(now) { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(59,130,246,0.06)'; ctx.fillRect(0, 0, canvas.width / DPR, canvas.height / DPR); for (let p of particles) { p.phase += 0.018 * p.speed; p.x += p.vx * p.speed + Math.sin(p.phase) * 0.12 + globalVelocity.x; p.y += p.vy * p.speed + Math.cos(p.phase * 0.7) * 0.08 + globalVelocity.y; if (p.x < -10) p.x = canvas.width / DPR + 10; if (p.x > canvas.width / DPR + 10) p.x = -10; if (p.y < -10) p.y = canvas.height / DPR + 10; if (p.y > canvas.height / DPR + 10) p.y = -10; ctx.beginPath(); ctx.fillStyle = `rgba(255,255,255,${p.opacity})`; ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); }
       for (let i = cursorParticles.length - 1; i >= 0; i--) { const cp = cursorParticles[i]; cp.x += cp.vx * 0.6 + globalVelocity.x * 1.6; cp.y += cp.vy * 0.6 + globalVelocity.y * 1.6; cp.life -= 1; if (cp.life <= 0) { cursorParticles.splice(i, 1); continue; } ctx.beginPath(); ctx.fillStyle = `rgba(255,255,255,${Math.max(0.06, cp.opacity * (cp.life / 120))})`; ctx.arc(cp.x, cp.y, cp.r, 0, Math.PI * 2); ctx.fill(); }
-      ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'black'; const fontSize = Math.max(40, Math.min(140, (canvas.width / DPR) * 0.09)); ctx.font = `700 ${fontSize}px Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; const textX = (canvas.width / DPR) * 0.72; const textY = (canvas.height / DPR) * 0.88; try { ctx.fillText(@json(config('app.company_name', 'CLIENTBRIDGE')), textX, textY); } catch (e) { } ctx.restore(); }
+      ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'black'; const fontSize = Math.max(40, Math.min(140, (canvas.width / DPR) * 0.09)); ctx.font = `700 ${fontSize}px Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; const textX = (canvas.width / DPR) * 0.72; const textY = (canvas.height / DPR) * 0.88; try { ctx.fillText(@json(config('app.company_name', 'smbgen')), textX, textY); } catch (e) { } ctx.restore(); }
     let animationId = null; if (mediaReduced.matches) { init(); drawFrame(); return; } window.addEventListener('resize', () => { init(); }); init(); animationId = requestAnimationFrame(function loop(now){ drawFrame(now); animationId = requestAnimationFrame(loop); }); document.addEventListener('visibilitychange', () => { if (document.hidden) { if (animationId) cancelAnimationFrame(animationId); } else { animationId = requestAnimationFrame(function loop(now){ drawFrame(now); animationId = requestAnimationFrame(loop); }); } });
   })();
 </script>

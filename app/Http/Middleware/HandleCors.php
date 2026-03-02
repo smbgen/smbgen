@@ -14,8 +14,7 @@ class HandleCors
         // Allow specific domains
         $allowedOrigins = [
             'https://houston1.oldlinecyber.com',
-            'https://clientbridge-laravel-dev-main-edfzhw.laravel.cloud',
-            'http://clientbridge-laravel-dev-main-edfzhw.laravel.cloud', // Allow HTTP for development
+            'https://smbgen.com',
             env('APP_URL'), // Allow the current app URL
         ];
 

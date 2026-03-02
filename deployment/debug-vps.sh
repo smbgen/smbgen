@@ -3,7 +3,7 @@
 # Get the project root directory (parent of deployment/)
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-echo "=== ClientBridge VPS Debug Script ==="
+echo "=== smbgen VPS Debug Script ==="
 echo "Run this on your VPS to diagnose deployment issues"
 echo "=========================================="
 echo "📂 Project root: $PROJECT_ROOT"

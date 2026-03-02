@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Troubleshoot npm/Vite issues in ClientBridge Laravel project
+# Troubleshoot npm/Vite issues in smbgen Laravel project
 # Run this if npm run dev/build fails with "vite not recognized"
 
-echo "🔧 npm/Vite Troubleshooting for ClientBridge"
+echo "🔧 npm/Vite Troubleshooting for smbgen"
 echo "==========================================="
 echo ""
 

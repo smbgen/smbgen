@@ -10,7 +10,7 @@
         $navbarSettings = \App\Models\CmsNavbarSetting::getSettings();
         
         // Get page title or use default
-        $pageTitle = $title ?? (isset($page) ? $page->title : config('app.name', 'CLIENTBRIDGE'));
+        $pageTitle = $title ?? (isset($page) ? $page->title : config('app.name', 'smbgen'));
         
         // Generate SEO title using template
         $seoTitle = $companyColors->seo_title_template 
@@ -115,7 +115,7 @@
     @yield('content')
 
     @php
-        $companyName = config('business.company_name', config('app.name', 'CLIENTBRIDGE'));
+        $companyName = config('business.company_name', config('app.name', 'smbgen'));
         $companyWebsite = config('business.contact.website');
         $companyHost = $companyWebsite ? parse_url($companyWebsite, PHP_URL_HOST) : null;
     @endphp

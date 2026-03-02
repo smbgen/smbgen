@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document explains environment variables and feature flags for ClientBridge. See `.env.example` for a complete template.
+This document explains environment variables and feature flags for smbgen. See `.env.example` for a complete template.
 
 ---
 
@@ -194,7 +194,7 @@ BUSINESS_EMAIL=info@yourdomain.com
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_DATABASE=clientbridge
+DB_DATABASE=smbgen
 DB_USERNAME=your-username
 DB_PASSWORD=your-secure-password
 

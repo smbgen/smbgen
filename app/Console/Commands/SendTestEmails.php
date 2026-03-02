@@ -131,7 +131,7 @@ class SendTestEmails extends Command
                             
                             <hr style='border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;'>
                             <p style='color: #9ca3af; font-size: 14px; margin: 0;'>
-                                Test email #{$i} sent by CLIENTBRIDGE Email Testing System
+                                Test email #{$i} sent by smbgen Email Testing System
                             </p>
                         </div>
                     </body>

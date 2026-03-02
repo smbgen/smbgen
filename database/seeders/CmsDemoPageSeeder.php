@@ -79,7 +79,7 @@ HTML;
 
         $bodyContent = <<<'HTML'
 <div class="hero">
-  <h1 style="font-size: 3.5rem; font-weight: bold; margin-bottom: 1.5rem;">Welcome to CLIENTBRIDGE</h1>
+  <h1 style="font-size: 3.5rem; font-weight: bold; margin-bottom: 1.5rem;">Welcome to smbgen</h1>
   <p style="font-size: 1.25rem; margin-bottom: 2rem;">Simple. Secure. Smart Infrastructure for Small Business.</p>
   <a href="#contact" class="btn-main">Get Started Today</a>
 </div>
@@ -87,7 +87,7 @@ HTML;
 <div style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
   
   <section style="text-align: center; margin: 4rem 0;">
-    <h2 style="font-size: 2.5rem; color: var(--color-deep); margin-bottom: 1rem;">Why Choose CLIENTBRIDGE?</h2>
+    <h2 style="font-size: 2.5rem; color: var(--color-deep); margin-bottom: 1rem;">Why Choose smbgen?</h2>
     <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto 3rem;">
       We provide everything your small business needs to thrive online—secure infrastructure, 
       professional branding, and tools that just work.
@@ -128,7 +128,7 @@ HTML;
   <section style="background: linear-gradient(135deg, var(--color-ground), var(--color-deep)); color: white; padding: 4rem 2rem; border-radius: 16px; text-align: center; margin: 4rem 0;">
     <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Grow Your Business?</h2>
     <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-      Join hundreds of small businesses that trust CLIENTBRIDGE for their infrastructure.
+      Join hundreds of small businesses that trust smbgen for their infrastructure.
     </p>
     <a href="#contact" class="btn-main" style="background: white; color: var(--color-deep);">
       Start Your Free Consultation
@@ -190,7 +190,7 @@ HTML;
       Let's Talk About Your Business
     </h2>
     <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 3rem;">
-      Fill out the form below and we'll reach out to discuss how CLIENTBRIDGE can help you grow.
+      Fill out the form below and we'll reach out to discuss how smbgen can help you grow.
     </p>
   </section>
   
@@ -238,7 +238,7 @@ HTML;
         CmsPage::updateOrCreate(
             ['slug' => 'demo'],
             [
-                'title' => 'CLIENTBRIDGE Demo Page',
+                'title' => 'smbgen Demo Page',
                 'head_content' => $headContent,
                 'body_content' => $bodyContent,
                 'is_published' => false, // Draft by default

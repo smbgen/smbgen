@@ -83,7 +83,7 @@ php artisan tinker --execute="
 try {
     Mail::raw('Test email body', function(\$message) {
         \$message->to('alexramse92@gmail.com')
-                ->subject('SMTP Test from ClientBridge');
+                ->subject('SMTP Test from smbgen');
     });
     echo 'Email sent successfully' . PHP_EOL;
 } catch (\Exception \$e) {

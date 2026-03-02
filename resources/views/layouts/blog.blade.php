@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>@yield('title', 'Blog') - {{ config('app.name', 'CLIENTBRIDGE') }}</title>
+    <title>@yield('title', 'Blog') - {{ config('app.name', 'smbgen') }}</title>
     
     <!-- SEO Meta Tags -->
     @stack('meta')

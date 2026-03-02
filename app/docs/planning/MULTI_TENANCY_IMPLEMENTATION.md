@@ -1,5 +1,5 @@
 # Multi-Tenancy Implementation Plan
-**ClientBridge SaaS Transformation**
+**smbgen SaaS Transformation**
 
 **Date:** December 28, 2025  
 **Current State:** Single-tenant Laravel app with dormant Stancl/tenancy v3.9  
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Transform ClientBridge from single-tenant to multi-tenant SaaS platform, enabling multiple customer organizations (tenants) to run on shared infrastructure with isolated data, customizable features per pricing tier, and centralized super admin management.
+Transform smbgen from single-tenant to multi-tenant SaaS platform, enabling multiple customer organizations (tenants) to run on shared infrastructure with isolated data, customizable features per pricing tier, and centralized super admin management.
 
 **Key Benefits:**
 - Enable SaaS business model with recurring revenue
@@ -26,7 +26,7 @@ Transform ClientBridge from single-tenant to multi-tenant SaaS platform, enablin
 ## Current Architecture Analysis
 
 ### Existing Setup
-Transform ClientBridge from single-tenant to a booking-first multi-tenant SaaS offering, where shared infrastructure provides booking + landing pages + client areas. Messaging and more complex features (API, phone, full CMS, advanced billing) are reserved for dedicated instances. Centralized super admin manages tenants and dedicated deployments.
+Transform smbgen from single-tenant to a booking-first multi-tenant SaaS offering, where shared infrastructure provides booking + landing pages + client areas. Messaging and more complex features (API, phone, full CMS, advanced billing) are reserved for dedicated instances. Centralized super admin manages tenants and dedicated deployments.
 - **Status:** `TENANCY_ENABLED=false` - completely dormant
 **Key Benefits:**
 - Rapid onboarding via booking-first flow
@@ -34,7 +34,7 @@ Transform ClientBridge from single-tenant to a booking-first multi-tenant SaaS o
 - Lower support and infra costs for entry tiers
 - Self-service signup for Free (Gmail) tier; upgrade path to paid booking tier and dedicated tiers
 - **Bootstrappers:** Database, Cache, Filesystem, Queue isolation ready
-- **Identification:** Subdomain-based (`{tenant}.clientbridge.test`)
+- **Identification:** Subdomain-based (`{tenant}.smbgen.test`)
 - **Scope Decision:** Multi-tenant MVP limited to booking + landing pages + client area
 
     /pricing             → Pricing plans (Free Gmail, Booking, Dedicated)
@@ -70,7 +70,7 @@ ROLE_CLIENT = 'client' (default)
 7. Create first super admin user via seeder
 8. Add Free (Gmail) eligibility guard (Google OAuth + email domain check)
 - ✅ Tenant isolation bootstrappers ready
-3. Configure local DNS for testing (*.clientbridge.test)
+3. Configure local DNS for testing (*.smbgen.test)
 4. Add `/signup-gmail` route and controller for Free tier onboarding
 - ✅ Google OAuth (needs multi-tenant adaptation)
 1. Define plan features and limits in seeder (booking-first presets)
@@ -122,19 +122,19 @@ ROLE_CLIENT = 'client' (default)
 
 ```
 Central Domain (no tenant context):
-  https://clientbridge.app
+  https://smbgen.com
     /                    → Landing page
     /pricing             → Pricing plans
     /register            → Tenant signup
     /super-admin/*       → Super admin panel
 
 Tenant Subdomains:
-  https://acme.clientbridge.app
+  https://acme.smbgen.com
     /login               → Tenant-specific auth
     /dashboard           → Client portal
     /admin/*             → Tenant admin panel
     
-  https://globex.clientbridge.app
+  https://globex.smbgen.com
     /login               → Separate auth
     /dashboard           → Separate data
     /admin/*             → Separate admin panel
@@ -151,7 +151,7 @@ Tenant Subdomains:
 Schema::create('tenants', function (Blueprint $table) {
     $table->id();
     $table->string('name');                          // "Acme Corp"
-    $table->string('slug')->unique();                // "acme" → acme.clientbridge.app
+    $table->string('slug')->unique();                // "acme" → acme.smbgen.com
     $table->string('domain')->nullable()->unique();  // Custom domain: "app.acme.com"
     $table->foreignId('plan_id')->constrained();
     
@@ -358,7 +358,7 @@ if (!auth()->check() || !auth()->user()->isSuperAdmin()) {
 $host = request()->getHost();
 $subdomain = explode('.', $host)[0];
 
-if ($subdomain && !in_array($subdomain, ['www', 'app', 'clientbridge'])) {
+if ($subdomain && !in_array($subdomain, ['www', 'app', 'smbgen'])) {
     $tenant = Tenant::where('slug', $subdomain)->firstOrFail();
     tenancy()->initialize($tenant);
 }
@@ -773,7 +773,7 @@ php artisan tinker
 **Tasks:**
 1. Update routes/web.php to separate central vs tenant routes
 2. Apply InitializeTenancy middleware to tenant routes
-3. Configure local DNS for testing (*.clientbridge.test)
+3. Configure local DNS for testing (*.smbgen.test)
 4. Add tenant() global helper function
 5. Test tenant isolation (User A cannot see Tenant B data)
 6. Update all models with tenant global scope
@@ -786,8 +786,8 @@ php artisan tinker
 **Testing:**
 ```bash
 # Test subdomain routing
-curl -H "Host: acme.clientbridge.test" http://localhost/dashboard
-curl -H "Host: globex.clientbridge.test" http://localhost/dashboard
+curl -H "Host: acme.smbgen.test" http://localhost/dashboard
+curl -H "Host: globex.smbgen.test" http://localhost/dashboard
 
 # Test data isolation
 php artisan tinker
@@ -940,7 +940,7 @@ php artisan tinker
 **Current:** Testing in production on Laravel Cloud
 
 **Recommendation:**
-- **Local:** Herd with SQLite, subdomain testing (*.clientbridge.test)
+- **Local:** Herd with SQLite, subdomain testing (*.smbgen.test)
 - **Staging:** Laravel Cloud staging environment with MySQL
 - **Production:** Laravel Cloud production with MySQL
 
@@ -995,7 +995,7 @@ php artisan tinker
 
 **Options:**
 - **A. Subdomains Only (MVP)**
-  - tenant.clientbridge.app
+  - tenant.smbgen.com
   - Pros: Simple DNS, easy SSL
   - Cons: Less professional for customers
   

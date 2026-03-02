@@ -56,7 +56,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-900">CLIENTBRIDGE</h1>
+                    <h1 class="text-2xl font-bold text-gray-900">smbgen</h1>
                     <p class="text-sm text-gray-600">Design Playground - Local Development Only</p>
                 </div>
                 <div class="text-right">
@@ -105,19 +105,19 @@
                     <div class="space-y-4">
                         <div class="logo-container bg-white">
                             <div class="text-center">
-                                <h2 class="text-3xl font-black text-blue-600">CLIENTBRIDGE</h2>
+                                <h2 class="text-3xl font-black text-blue-600">smbgen</h2>
                                 <p class="text-xs text-gray-500 mt-1">Professional Services Platform</p>
                             </div>
                         </div>
                         <div class="logo-container bg-slate-900">
                             <div class="text-center">
-                                <h2 class="text-3xl font-black text-white">CLIENTBRIDGE</h2>
+                                <h2 class="text-3xl font-black text-white">smbgen</h2>
                                 <p class="text-xs text-gray-300 mt-1">Professional Services Platform</p>
                             </div>
                         </div>
                         <div class="logo-container bg-blue-600">
                             <div class="text-center">
-                                <h2 class="text-3xl font-black text-white">CLIENTBRIDGE</h2>
+                                <h2 class="text-3xl font-black text-white">smbgen</h2>
                                 <p class="text-xs text-blue-100 mt-1">Professional Services Platform</p>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                    <h3 class="text-xl font-bold text-gray-900">smbgen</h3>
                                     <p class="text-xs text-gray-500">Trusted Platform</p>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                    <h3 class="text-xl font-bold text-gray-900">smbgen</h3>
                                     <p class="text-xs text-gray-500">Connect & Manage</p>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                    <h3 class="text-xl font-bold text-gray-900">smbgen</h3>
                                     <p class="text-xs text-gray-500">Dashboard Portal</p>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@
                         <div class="logo-container">
                             <div class="text-center">
                                 <h3 class="text-lg font-bold text-blue-600">CB</h3>
-                                <p class="text-xs text-gray-400">CLIENTBRIDGE</p>
+                                <p class="text-xs text-gray-400">smbgen</p>
                             </div>
                         </div>
                     </div>
@@ -195,17 +195,17 @@
                     <div class="space-y-4">
                         <div class="logo-container">
                             <div class="bg-blue-600 text-white px-4 py-2 rounded-full">
-                                <span class="text-sm font-bold">CLIENTBRIDGE</span>
+                                <span class="text-sm font-bold">smbgen</span>
                             </div>
                         </div>
                         <div class="logo-container">
                             <div class="border-2 border-blue-600 text-blue-600 px-4 py-2 rounded-lg">
-                                <span class="text-sm font-bold">CLIENTBRIDGE</span>
+                                <span class="text-sm font-bold">smbgen</span>
                             </div>
                         </div>
                         <div class="logo-container">
                             <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg">
-                                <span class="text-sm font-bold">CLIENTBRIDGE</span>
+                                <span class="text-sm font-bold">smbgen</span>
                             </div>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                                 <div class="w-12 h-12 bg-blue-600 rounded-lg mx-auto mb-2 flex items-center justify-center">
                                     <span class="text-white font-bold text-lg">CB</span>
                                 </div>
-                                <h4 class="text-sm font-semibold text-gray-900">CLIENTBRIDGE</h4>
+                                <h4 class="text-sm font-semibold text-gray-900">smbgen</h4>
                             </div>
                         </div>
                     </div>
@@ -238,19 +238,19 @@
                     <div class="space-y-4">
                         <div class="logo-container">
                             <div class="text-center">
-                                <h3 class="text-lg font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                <h3 class="text-lg font-bold text-gray-900">smbgen</h3>
                                 <p class="text-xs text-blue-600 font-medium">CYBER SECURITY</p>
                             </div>
                         </div>
                         <div class="logo-container">
                             <div class="text-center">
-                                <h3 class="text-lg font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                <h3 class="text-lg font-bold text-gray-900">smbgen</h3>
                                 <p class="text-xs text-green-600 font-medium">IT CONSULTING</p>
                             </div>
                         </div>
                         <div class="logo-container">
                             <div class="text-center">
-                                <h3 class="text-lg font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                <h3 class="text-lg font-bold text-gray-900">smbgen</h3>
                                 <p class="text-xs text-purple-600 font-medium">BUSINESS SOLUTIONS</p>
                             </div>
                         </div>
@@ -327,7 +327,7 @@
                             <div class="flex items-center space-x-3">
                                 <div class="w-4 h-12 bg-blue-600 rounded-full"></div>
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                    <h3 class="text-xl font-bold text-gray-900">smbgen</h3>
                                 </div>
                                 <div class="w-4 h-12 bg-purple-600 rounded-full"></div>
                             </div>
@@ -337,13 +337,13 @@
                                 <div class="w-3 h-3 bg-blue-600 rounded-full"></div>
                                 <div class="w-3 h-3 bg-green-600 rounded-full"></div>
                                 <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
-                                <h3 class="text-lg font-bold text-gray-900 ml-4">CLIENTBRIDGE</h3>
+                                <h3 class="text-lg font-bold text-gray-900 ml-4">smbgen</h3>
                             </div>
                         </div>
                         <div class="logo-container">
                             <div class="relative">
                                 <div class="absolute -top-2 -left-2 w-6 h-6 border-l-4 border-t-4 border-blue-600 rounded-tl-lg"></div>
-                                <h3 class="text-xl font-bold text-gray-900 px-4 py-2">CLIENTBRIDGE</h3>
+                                <h3 class="text-xl font-bold text-gray-900 px-4 py-2">smbgen</h3>
                                 <div class="absolute -bottom-2 -right-2 w-6 h-6 border-r-4 border-b-4 border-purple-600 rounded-br-lg"></div>
                             </div>
                         </div>
@@ -353,7 +353,7 @@
                                     <span class="text-white font-bold text-sm">CB</span>
                                 </div>
                                 <div class="bg-white px-4 py-2 rounded-r-lg border-2 border-l-0 border-gray-200">
-                                    <span class="text-gray-900 font-semibold">CLIENTBRIDGE</span>
+                                    <span class="text-gray-900 font-semibold">smbgen</span>
                                 </div>
                             </div>
                         </div>
@@ -365,7 +365,7 @@
                     <h3 class="text-lg font-semibold mb-4 text-gray-900">Script & Handwritten Styles</h3>
                     <div class="space-y-4">
                         <div class="logo-container">
-                            <h3 class="text-2xl italic text-gray-800" style="font-family: cursive;">CLIENTBRIDGE</h3>
+                            <h3 class="text-2xl italic text-gray-800" style="font-family: cursive;">smbgen</h3>
                         </div>
                         <div class="logo-container">
                             <h3 class="text-xl text-blue-600" style="font-family: 'Brush Script MT', cursive; font-weight: bold;">
@@ -374,7 +374,7 @@
                         </div>
                         <div class="logo-container">
                             <div class="text-center">
-                                <h3 class="text-lg italic text-gray-700 mb-1" style="font-family: serif;">CLIENTBRIDGE</h3>
+                                <h3 class="text-lg italic text-gray-700 mb-1" style="font-family: serif;">smbgen</h3>
                                 <div class="w-24 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto"></div>
                                 <p class="text-xs text-gray-500 mt-1" style="font-family: serif;">Professional Services</p>
                             </div>
@@ -412,7 +412,7 @@
                                     <span class="text-white text-xs font-bold">★</span>
                                 </div>
                                 <div class="text-center">
-                                    <h4 class="text-sm font-bold text-blue-600">CLIENTBRIDGE</h4>
+                                    <h4 class="text-sm font-bold text-blue-600">smbgen</h4>
                                     <p class="text-xs text-gray-600">Certified Professional</p>
                                 </div>
                             </div>
@@ -443,8 +443,8 @@
                         </div>
                         <div class="logo-container">
                             <div class="relative">
-                                <h3 class="text-2xl font-black text-blue-600 relative z-10">CLIENTBRIDGE</h3>
-                                <div class="absolute top-1 left-1 text-2xl font-black text-gray-300 z-0">CLIENTBRIDGE</div>
+                                <h3 class="text-2xl font-black text-blue-600 relative z-10">smbgen</h3>
+                                <div class="absolute top-1 left-1 text-2xl font-black text-gray-300 z-0">smbgen</div>
                             </div>
                         </div>
                     </div>
@@ -455,22 +455,22 @@
                     <h3 class="text-lg font-semibold mb-4 text-gray-900">Size Variations</h3>
                     <div class="space-y-4">
                         <div class="logo-container">
-                            <h1 class="text-5xl font-black text-blue-600">CLIENTBRIDGE</h1>
+                            <h1 class="text-5xl font-black text-blue-600">smbgen</h1>
                         </div>
                         <div class="logo-container">
-                            <h2 class="text-3xl font-bold text-gray-900">CLIENTBRIDGE</h2>
+                            <h2 class="text-3xl font-bold text-gray-900">smbgen</h2>
                         </div>
                         <div class="logo-container">
-                            <h3 class="text-xl font-semibold text-gray-800">CLIENTBRIDGE</h3>
+                            <h3 class="text-xl font-semibold text-gray-800">smbgen</h3>
                         </div>
                         <div class="logo-container">
-                            <h4 class="text-lg font-medium text-gray-700">CLIENTBRIDGE</h4>
+                            <h4 class="text-lg font-medium text-gray-700">smbgen</h4>
                         </div>
                         <div class="logo-container">
-                            <h5 class="text-base font-normal text-gray-600">CLIENTBRIDGE</h5>
+                            <h5 class="text-base font-normal text-gray-600">smbgen</h5>
                         </div>
                         <div class="logo-container">
-                            <h6 class="text-sm text-gray-500">CLIENTBRIDGE</h6>
+                            <h6 class="text-sm text-gray-500">smbgen</h6>
                         </div>
                     </div>
                 </div>
@@ -488,7 +488,7 @@
                         </div>
                         <div class="logo-container">
                             <div class="relative overflow-hidden">
-                                <h3 class="text-2xl font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                <h3 class="text-2xl font-bold text-gray-900">smbgen</h3>
                                 <div class="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 animate-pulse" style="width: 100%;"></div>
                             </div>
                         </div>
@@ -511,7 +511,7 @@
                     <div class="w-full h-96 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300">
                         <div class="absolute inset-0 bg-black/10"></div>
                         <div class="text-center relative z-10">
-                            <h1 class="text-7xl font-black text-white mb-4 tracking-wide">CLIENTBRIDGE</h1>
+                            <h1 class="text-7xl font-black text-white mb-4 tracking-wide">smbgen</h1>
                             <p class="text-2xl text-white/90 font-light tracking-wider">Professional Services Platform</p>
                             <div class="mt-6 w-32 h-1 bg-white/60 mx-auto rounded-full"></div>
                         </div>
@@ -521,7 +521,7 @@
                     <!-- Hero Logo 2: Dark with Neon Effect -->
                     <div class="w-full h-96 bg-gray-900 rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300">
                         <div class="text-center">
-                            <h1 class="text-8xl font-black text-white mb-4" style="text-shadow: 0 0 30px #3b82f6, 0 0 60px #3b82f6;">CLIENTBRIDGE</h1>
+                            <h1 class="text-8xl font-black text-white mb-4" style="text-shadow: 0 0 30px #3b82f6, 0 0 60px #3b82f6;">smbgen</h1>
                             <p class="text-xl text-blue-400 font-medium tracking-widest">SECURE • RELIABLE • PROFESSIONAL</p>
                             <div class="mt-8 flex justify-center space-x-2">
                                 <div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
@@ -538,7 +538,7 @@
                             <div class="w-32 h-32 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl mx-auto mb-8 flex items-center justify-center shadow-2xl">
                                 <span class="text-5xl font-black text-white">CB</span>
                             </div>
-                            <h1 class="text-6xl font-light text-gray-900 mb-4 tracking-widest">CLIENTBRIDGE</h1>
+                            <h1 class="text-6xl font-light text-gray-900 mb-4 tracking-widest">smbgen</h1>
                             <p class="text-lg text-gray-600 font-normal">Bridging Business & Technology</p>
                         </div>
                         <div class="absolute top-8 right-8 text-gray-400 text-sm">Hero Style 3</div>
@@ -572,7 +572,7 @@
                             <div class="absolute top-1/3 right-1/3 w-10 h-10 border border-white"></div>
                         </div>
                         <div class="text-center relative z-10">
-                            <h1 class="text-7xl font-black text-white mb-4">CLIENTBRIDGE</h1>
+                            <h1 class="text-7xl font-black text-white mb-4">smbgen</h1>
                             <p class="text-xl text-white/80 font-medium">Innovation Through Connection</p>
                         </div>
                         <div class="absolute top-8 right-8 text-white/50 text-sm">Hero Style 5</div>
@@ -582,10 +582,10 @@
                     <div class="w-full h-96 bg-gray-50 rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300">
                         <div class="text-center relative">
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <h1 class="text-9xl font-black text-gray-200 select-none">CLIENTBRIDGE</h1>
+                                <h1 class="text-9xl font-black text-gray-200 select-none">smbgen</h1>
                             </div>
                             <div class="relative z-10">
-                                <h1 class="text-6xl font-bold text-blue-600 mb-4">CLIENTBRIDGE</h1>
+                                <h1 class="text-6xl font-bold text-blue-600 mb-4">smbgen</h1>
                                 <p class="text-lg text-gray-800 font-medium tracking-wide">PROFESSIONAL SERVICES PLATFORM</p>
                                 <div class="mt-6 flex justify-center space-x-1">
                                     <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
@@ -602,7 +602,7 @@
                         <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20"></div>
                         <div class="bg-white/10 backdrop-blur-md rounded-3xl px-16 py-12 border border-white/20 shadow-2xl">
                             <div class="text-center">
-                                <h1 class="text-6xl font-black text-white mb-4">CLIENTBRIDGE</h1>
+                                <h1 class="text-6xl font-black text-white mb-4">smbgen</h1>
                                 <p class="text-lg text-white/90">Enterprise Solutions</p>
                                 <div class="mt-6 w-24 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto"></div>
                             </div>
@@ -613,7 +613,7 @@
                     <!-- Hero Logo 8: Bold Outlined Text -->
                     <div class="w-full h-96 bg-blue-600 rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300">
                         <div class="text-center">
-                            <h1 class="text-8xl font-black text-transparent mb-4" style="-webkit-text-stroke: 4px white; text-stroke: 4px white;">CLIENTBRIDGE</h1>
+                            <h1 class="text-8xl font-black text-transparent mb-4" style="-webkit-text-stroke: 4px white; text-stroke: 4px white;">smbgen</h1>
                             <div class="bg-white px-8 py-3 rounded-full">
                                 <p class="text-blue-600 font-bold text-lg">TRUSTED PLATFORM</p>
                             </div>
@@ -641,7 +641,7 @@
                                     </svg>
                                 </div>
                             </div>
-                            <h1 class="text-7xl font-black mb-4">CLIENTBRIDGE</h1>
+                            <h1 class="text-7xl font-black mb-4">smbgen</h1>
                             <p class="text-xl font-light">Secure • Connected • Powerful</p>
                         </div>
                         <div class="absolute top-8 right-8 text-white/60 text-sm">Hero Style 9</div>
@@ -655,7 +655,7 @@
                         <div class="absolute bottom-16 right-16 w-6 h-6 bg-blue-300 rounded-full animate-bounce" style="animation-delay: 1.5s;"></div>
                         
                         <div class="text-center text-white">
-                            <h1 class="text-7xl font-black mb-6">CLIENTBRIDGE</h1>
+                            <h1 class="text-7xl font-black mb-6">smbgen</h1>
                             <div class="bg-white/10 backdrop-blur-sm rounded-2xl px-8 py-4">
                                 <p class="text-lg font-medium">Next Generation Platform</p>
                             </div>
@@ -669,7 +669,7 @@
                         <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 h-32 bg-gradient-to-t from-yellow-400 to-transparent rounded-full opacity-60"></div>
                         
                         <div class="text-center text-white relative z-10">
-                            <h1 class="text-8xl font-black mb-4" style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">CLIENTBRIDGE</h1>
+                            <h1 class="text-8xl font-black mb-4" style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">smbgen</h1>
                             <p class="text-xl font-bold tracking-wider">FUTURE FORWARD</p>
                         </div>
                         <div class="absolute top-8 right-8 text-white/70 text-sm">Hero Style 11</div>
@@ -681,7 +681,7 @@
                         
                         <div class="text-center relative z-10">
                             <div class="inline-block border-4 border-blue-600 rounded-2xl px-12 py-8 mb-6">
-                                <h1 class="text-5xl font-black text-blue-600">CLIENTBRIDGE</h1>
+                                <h1 class="text-5xl font-black text-blue-600">smbgen</h1>
                             </div>
                             <p class="text-gray-800 font-medium text-lg">PRECISION • CLARITY • EXCELLENCE</p>
                         </div>
@@ -714,7 +714,7 @@
                             <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg px-8 py-2 mb-8 inline-block shadow-2xl">
                                 <span class="text-sm font-bold tracking-widest">ESTABLISHED 2024</span>
                             </div>
-                            <h1 class="text-7xl font-black mb-4 tracking-wide">CLIENTBRIDGE</h1>
+                            <h1 class="text-7xl font-black mb-4 tracking-wide">smbgen</h1>
                             <div class="bg-white/10 rounded-full px-8 py-3">
                                 <p class="text-lg font-semibold">ENTERPRISE GRADE SOLUTIONS</p>
                             </div>
@@ -733,7 +733,7 @@
                         </div>
                         
                         <div class="text-center text-white relative z-10">
-                            <h1 class="text-7xl font-black mb-4 transform -rotate-2">CLIENTBRIDGE</h1>
+                            <h1 class="text-7xl font-black mb-4 transform -rotate-2">smbgen</h1>
                             <div class="bg-white text-blue-600 rounded-full px-6 py-2 inline-block transform rotate-1">
                                 <p class="font-bold">Creative Solutions</p>
                             </div>
@@ -1271,7 +1271,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                    <h3 class="text-lg font-bold text-gray-900">smbgen</h3>
                                     <p class="text-xs text-blue-600">Secure Platform</p>
                                 </div>
                             </div>
@@ -1284,7 +1284,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                    <h3 class="text-lg font-bold text-gray-900">smbgen</h3>
                                     <p class="text-xs text-green-600">Client Management</p>
                                 </div>
                             </div>
@@ -1297,7 +1297,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-bold text-gray-900">CLIENTBRIDGE</h3>
+                                    <h3 class="text-lg font-bold text-gray-900">smbgen</h3>
                                     <p class="text-xs text-purple-600">Analytics & Reports</p>
                                 </div>
                             </div>
@@ -1378,7 +1378,7 @@
                     <div class="space-y-4">
                         <div class="h-32 bg-gray-100 rounded-lg relative overflow-hidden flex items-center justify-center">
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-6xl font-black text-gray-200 rotate-45 select-none">CLIENTBRIDGE</span>
+                                <span class="text-6xl font-black text-gray-200 rotate-45 select-none">smbgen</span>
                             </div>
                             <div class="relative z-10 bg-white p-4 rounded-lg shadow-sm">
                                 <p class="text-gray-700">Sample content with watermark background</p>
@@ -1386,7 +1386,7 @@
                         </div>
                         <div class="h-32 bg-blue-50 rounded-lg relative overflow-hidden flex items-center justify-center">
                             <div class="absolute bottom-4 right-4">
-                                <span class="text-blue-200 text-sm font-bold">CLIENTBRIDGE</span>
+                                <span class="text-blue-200 text-sm font-bold">smbgen</span>
                             </div>
                             <div class="text-center">
                                 <h4 class="font-semibold text-gray-900">Document Title</h4>
@@ -1412,7 +1412,7 @@
                                     <div class="w-16 h-16 bg-blue-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
                                         <span class="text-white font-bold text-xl">CB</span>
                                     </div>
-                                    <h2 class="text-2xl font-bold text-gray-900">CLIENTBRIDGE</h2>
+                                    <h2 class="text-2xl font-bold text-gray-900">smbgen</h2>
                                     <p class="text-gray-600 text-sm">Welcome back</p>
                                 </div>
                                 <div class="space-y-4">
@@ -1430,7 +1430,7 @@
                             <div class="w-full">
                                 <div class="bg-white rounded-lg p-8 shadow-xl">
                                     <div class="text-center mb-6">
-                                        <h2 class="text-2xl font-bold text-gray-900 mb-2">CLIENTBRIDGE</h2>
+                                        <h2 class="text-2xl font-bold text-gray-900 mb-2">smbgen</h2>
                                         <p class="text-gray-600">Secure Client Portal</p>
                                     </div>
                                     <div class="space-y-4">
@@ -1454,7 +1454,7 @@
                         <div class="bg-gray-100 rounded-lg p-4 min-h-64">
                             <div class="grid grid-cols-12 gap-4 h-full">
                                 <div class="col-span-3 bg-gray-800 rounded-lg p-3">
-                                    <div class="text-white font-bold text-sm mb-4">CLIENTBRIDGE</div>
+                                    <div class="text-white font-bold text-sm mb-4">smbgen</div>
                                     <nav class="space-y-2">
                                         <div class="bg-blue-600 text-white p-2 rounded text-xs">Dashboard</div>
                                         <div class="text-gray-300 p-2 text-xs hover:bg-gray-700 rounded cursor-pointer">Clients</div>
@@ -1503,7 +1503,7 @@
                                                 <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                                                     <span class="text-white font-bold text-sm">CB</span>
                                                 </div>
-                                                <span class="font-bold">CLIENTBRIDGE</span>
+                                                <span class="font-bold">smbgen</span>
                                             </div>
                                             <nav class="flex space-x-6">
                                                 <a href="#" class="text-blue-600 font-medium text-sm border-b-2 border-blue-600 pb-1">Dashboard</a>
@@ -1572,7 +1572,7 @@
                                 <div class="w-full h-full bg-white rounded-2xl overflow-hidden">
                                     <div class="bg-blue-600 p-4 text-white">
                                         <div class="flex justify-between items-center mb-4">
-                                            <h2 class="font-bold">CLIENTBRIDGE</h2>
+                                            <h2 class="font-bold">smbgen</h2>
                                             <div class="w-8 h-8 bg-white/20 rounded-full"></div>
                                         </div>
                                         <p class="text-blue-100 text-sm">Welcome back, John</p>
@@ -1724,7 +1724,7 @@
                         <div class="grid grid-cols-12 gap-4 h-full">
                             <!-- Sidebar -->
                             <div class="col-span-2 bg-gray-800 rounded-lg p-3">
-                                <div class="text-white text-sm font-semibold mb-3">CLIENTBRIDGE</div>
+                                <div class="text-white text-sm font-semibold mb-3">smbgen</div>
                                 <div class="space-y-2">
                                     <div class="bg-blue-600 text-white text-xs p-2 rounded">Dashboard</div>
                                     <div class="text-gray-300 text-xs p-2">Clients</div>
@@ -1794,7 +1794,7 @@
                                 <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                                     <span class="text-white font-bold text-sm">CB</span>
                                 </div>
-                                <span class="font-semibold">CLIENTBRIDGE</span>
+                                <span class="font-semibold">smbgen</span>
                             </div>
                             <div class="flex items-center space-x-4">
                                 <span class="text-sm text-gray-600">Welcome, John Doe</span>
@@ -1848,7 +1848,7 @@
                         <!-- Hero Section -->
                         <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-6 mb-4">
                             <div class="text-center">
-                                <h1 class="text-2xl font-bold mb-2">CLIENTBRIDGE</h1>
+                                <h1 class="text-2xl font-bold mb-2">smbgen</h1>
                                 <p class="mb-4">Professional Client Management Platform</p>
                                 <button class="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold">Get Started</button>
                             </div>

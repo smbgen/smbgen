@@ -1,9 +1,9 @@
 # Developer & Contributor Getting Started Guide
 
-Welcome to **ClientBridge**! This guide will help you set up the development environment and understand the technology stack, regardless of your OS or experience level.
+Welcome to **smbgen**! This guide will help you set up the development environment and understand the technology stack, regardless of your OS or experience level.
 
 ## Table of Contents
-1. [What is ClientBridge?](#what-is-clientbridge)
+1. [What is smbgen?](#what-is-smbgen)
 2. [Technology Stack Explained](#technology-stack-explained)
 3. [Development Environment Setup](#development-environment-setup)
 4. [Quick Start](#quick-start)
@@ -12,9 +12,9 @@ Welcome to **ClientBridge**! This guide will help you set up the development env
 
 ---
 
-## What is ClientBridge?
+## What is smbgen?
 
-ClientBridge is a **Laravel-based client management platform** with:
+smbgen is a **Laravel-based client management platform** with:
 - **CMS** (Content Management System) for managing web pages and content
 - **Booking system** for appointment scheduling
 - **Multi-tenancy support** - serve multiple clients under different domains/subdomains
@@ -172,8 +172,8 @@ source ~/.bashrc
 
 ```bash
 cd ~/Projects  # or wherever you want to keep code
-git clone https://github.com/alexramsey92/clientbridge-laravel.git
-cd clientbridge-laravel
+git clone https://github.com/alexramsey92/smbgen.git
+cd smbgen
 ```
 
 #### Step 4: Install Dependencies
@@ -209,7 +209,7 @@ php artisan migrate
 
 **Option A: Use Herd (Recommended)**
 - Open Herd app from system tray
-- Navigate to http://clientbridge.test
+- Navigate to http://smbgen.test
 - It automatically serves your application
 
 **Option B: Use Laravel's Built-in Server**
@@ -254,8 +254,8 @@ valet install
 
 ```bash
 cd ~/Projects  # or your preferred location
-git clone https://github.com/alexramsey92/clientbridge-laravel.git
-cd clientbridge-laravel
+git clone https://github.com/alexramsey92/smbgen.git
+cd smbgen
 
 # Install dependencies
 composer install
@@ -273,7 +273,7 @@ php artisan migrate
 
 # Serve with Valet
 valet park
-# Now visit http://clientbridge-laravel.test
+# Now visit http://smbgen.test
 ```
 
 **If Using Homestead Instead:**
@@ -315,8 +315,8 @@ sudo apt install -y git
 
 ```bash
 cd ~/projects  # or your preferred location
-git clone https://github.com/alexramsey92/clientbridge-laravel.git
-cd clientbridge-laravel
+git clone https://github.com/alexramsey92/smbgen.git
+cd smbgen
 
 # Install dependencies
 composer install
@@ -350,9 +350,9 @@ npm run dev
 ```bash
 composer global require laravel/valet
 valet install
-cd ~/projects/clientbridge-laravel
+cd ~/projects/smbgen
 valet link
-# Visit http://clientbridge-laravel.test
+# Visit http://smbgen.test
 ```
 
 ---
@@ -362,8 +362,8 @@ valet link
 ### First Time Running The App
 
 1. **Start your development environment:**
-   - **Windows (Herd):** Open Herd app, visit http://clientbridge.test
-   - **Mac (Valet):** `valet link`, visit http://clientbridge-laravel.test
+   - **Windows (Herd):** Open Herd app, visit http://smbgen.test
+   - **Mac (Valet):** `valet link`, visit http://smbgen.test
    - **Linux:** Run `php artisan serve`, visit http://localhost:8000
 
 2. **Watch for frontend changes:**
@@ -386,7 +386,7 @@ valet link
 ### Project Structure
 
 ```
-clientbridge-laravel/
+smbgen/
 ├── app/                    # Application code
 │   ├── Http/              # Controllers, requests, middleware
 │   ├── Models/            # Database models (User, Client, Booking, etc.)
@@ -685,7 +685,7 @@ dd($variable);  // Will output and stop execution
 ## Getting Help
 
 1. **Check the docs:** `app/docs/` has guides for specific features
-2. **Search GitHub issues:** https://github.com/alexramsey92/clientbridge-laravel/issues
+2. **Search GitHub issues:** https://github.com/alexramsey92/smbgen/issues
 3. **Laravel documentation:** https://laravel.com/docs
 4. **Ask in conversations:** When confused, ask clearly with error messages
 
@@ -718,5 +718,5 @@ dd($variable);  // Will output and stop execution
 ---
 
 **Updated:** January 5, 2026  
-**Maintained by:** ClientBridge Team  
+**Maintained by:** smbgen Team  
 **Questions?** Check [app/docs/](./README.md) for more guides or create a GitHub issue

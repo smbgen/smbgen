@@ -11,14 +11,14 @@
     </div>
 
     <!-- Current Plan Badge -->
-    @if($tenant->plan)
+    @if($subscription->plan)
         <div class="mb-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
             <div class="flex items-center">
                 <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <span class="text-blue-800 dark:text-blue-200 font-medium">
-                    Current Plan: <span class="font-bold capitalize">{{ $tenant->plan }}</span>
+                    Current Plan: <span class="font-bold capitalize">{{ $subscription->plan }}</span>
                 </span>
             </div>
         </div>
@@ -27,7 +27,7 @@
     <!-- Plans Grid -->
     <div class="grid md:grid-cols-3 gap-8">
         @foreach($plans as $planKey => $plan)
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden border-2 {{ $tenant->plan === $planKey ? 'border-blue-500' : 'border-gray-200 dark:border-gray-700' }} transition-transform hover:scale-105">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden border-2 {{ $subscription->plan === $planKey ? 'border-blue-500' : 'border-gray-200 dark:border-gray-700' }} transition-transform hover:scale-105">
                 <!-- Plan Header -->
                 <div class="p-6 {{ $planKey === 'professional' ? 'bg-gradient-to-br from-blue-500 to-purple-600' : 'bg-gray-50 dark:bg-gray-900' }}">
                     <h3 class="text-2xl font-bold {{ $planKey === 'professional' ? 'text-white' : 'text-gray-900 dark:text-white' }}">
@@ -62,7 +62,7 @@
                     </ul>
 
                     <!-- Action Button -->
-                    @if($tenant->plan === $planKey)
+                    @if($subscription->plan === $planKey)
                         <button disabled class="w-full bg-gray-300 text-gray-600 px-4 py-2 rounded-md font-medium cursor-not-allowed">
                             Current Plan
                         </button>
@@ -71,7 +71,7 @@
                             @csrf
                             <input type="hidden" name="plan" value="{{ $planKey }}">
                             <button type="submit" class="w-full {{ $planKey === 'professional' ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700' : 'bg-blue-600 hover:bg-blue-700' }} text-white px-4 py-2 rounded-md font-medium transition duration-150 ease-in-out">
-                                @if($tenant->plan)
+                                @if($subscription->plan)
                                     {{ $planKey === 'enterprise' ? 'Upgrade' : 'Change' }} to {{ $plan['name'] }}
                                 @else
                                     Get Started
@@ -90,11 +90,11 @@
             All plans include 14-day free trial. No credit card required to start.
         </p>
         <p class="text-sm text-gray-500 dark:text-gray-500">
-            Need help choosing? <a href="mailto:support@clientbridge.app" class="text-blue-600 hover:text-blue-700 underline">Contact our team</a>
+            Need help choosing? <a href="mailto:support@smbgen.com" class="text-blue-600 hover:text-blue-700 underline">Contact our team</a>
         </p>
     </div>
 
-    @if($tenant->stripe_subscription_id)
+    @if($subscription->stripe_subscription_id)
         <div class="mt-8 text-center">
             <a href="{{ route('admin.subscription.manage') }}" class="text-blue-600 hover:text-blue-700 underline">
                 Manage Your Subscription

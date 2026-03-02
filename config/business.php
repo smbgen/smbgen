@@ -16,16 +16,16 @@ return [
     |
     */
 
-    'name' => env('BUSINESS_NAME', env('COMPANY_NAME', 'CLIENTBRIDGE')),
-    'company_name' => env('COMPANY_NAME', 'CLIENTBRIDGE'),
+    'name' => env('BUSINESS_NAME', env('COMPANY_NAME', 'smbgen')),
+    'company_name' => env('COMPANY_NAME', 'smbgen'),
     'tagline' => env('BUSINESS_TAGLINE', 'Client Management & AI Tools'),
     'description' => env('BUSINESS_DESCRIPTION', 'Professional client management platform with AI-powered tools'),
 
     // Contact Information
     'contact' => [
-        'email' => env('BUSINESS_EMAIL', 'support@clientbridge.app'),
+        'email' => env('BUSINESS_EMAIL', 'support@smbgen.com'),
         'phone' => env('BUSINESS_PHONE', ''),
-        'website' => env('BUSINESS_WEBSITE', 'https://clientbridge.app'),
+        'website' => env('BUSINESS_WEBSITE', 'https://smbgen.com'),
         'address' => env('BUSINESS_ADDRESS', ''),
     ],
 

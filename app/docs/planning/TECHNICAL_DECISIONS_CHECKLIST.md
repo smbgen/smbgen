@@ -1,5 +1,5 @@
 # Technical Decisions Checklist
-**ClientBridge Multi-Tenancy Implementation**
+**smbgen Multi-Tenancy Implementation**
 
 **Purpose:** Critical decisions needed before starting implementation  
 **Status:** 🟡 Awaiting Decisions  
@@ -125,7 +125,7 @@ Rationale:
 ```
 Decision maker: _________________
 Date: _________________
-Staging URL: https://staging.clientbridge.app
+Staging URL: https://staging.smbgen.com
 ```
 
 ---
@@ -135,7 +135,7 @@ Staging URL: https://staging.clientbridge.app
 ### Decision: Subdomains Only vs Custom Domains
 
 **Option A: Subdomains Only (MVP)**
-- `tenant.clientbridge.app`
+- `tenant.smbgen.com`
 - ✅ Simple DNS management
 - ✅ Easy SSL (wildcard cert)
 - ✅ Fast implementation
@@ -175,10 +175,10 @@ Rationale:
 
 ### Decision: OAuth Redirect Handling
 
-**Problem:** Google doesn't support wildcard redirect URIs (`*.clientbridge.app`)
+**Problem:** Google doesn't support wildcard redirect URIs (`*.smbgen.com`)
 
 **Option A: Central Auth Proxy** (Recommended for MVP)
-- Central auth at `auth.clientbridge.app`
+- Central auth at `auth.smbgen.com`
 - Flow: `tenant.app` → `auth.app` → Google → `auth.app` → `tenant.app`
 - ✅ Single Google OAuth app
 - ✅ Simple configuration
@@ -192,7 +192,7 @@ Rationale:
 - ❌ User friction
 
 **Option C: Central Login Page**
-- All users log in at `app.clientbridge.app`
+- All users log in at `app.smbgen.com`
 - After auth, redirect to tenant subdomain
 - ✅ Single OAuth app
 - ❌ Less intuitive UX
@@ -204,7 +204,7 @@ Rationale:
 - [ ] **Option C** - Central login page
 
 **Action Items if Option A:**
-- [ ] Create `auth.clientbridge.app` subdomain
+- [ ] Create `auth.smbgen.com` subdomain
 - [ ] Build OAuth proxy controller
 - [ ] Test redirect flow
 - [ ] Update Google OAuth settings

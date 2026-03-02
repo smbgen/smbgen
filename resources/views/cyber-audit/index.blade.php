@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="flex-1">
-                            <h5 class="text-lg font-semibold mb-0">{{ config('app.company_name', 'CLIENTBRIDGE') }} Cyber Audit Bot</h5>
+                            <h5 class="text-lg font-semibold mb-0">{{ config('app.company_name', 'smbgen') }} Cyber Audit Bot</h5>
                             <small class="opacity-75">Your AI cybersecurity consultant</small>
                         </div>
                         <div class="ml-auto">

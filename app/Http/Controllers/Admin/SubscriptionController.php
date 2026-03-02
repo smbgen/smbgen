@@ -25,8 +25,8 @@ class SubscriptionController extends Controller
      */
     public function plans()
     {
-        $tenant = tenant();
-        
+        $subscription = $this->getSubscriptionData();
+
         $plans = [
             'starter' => [
                 'name' => 'Starter',
@@ -38,7 +38,6 @@ class SubscriptionController extends Controller
                     'Basic CMS features',
                     'Email support',
                     '5 GB storage',
-                    'Default subdomain',
                 ],
             ],
             'professional' => [
@@ -51,7 +50,6 @@ class SubscriptionController extends Controller
                     'Advanced CMS features',
                     'Priority email support',
                     '50 GB storage',
-                    'Custom domain support',
                     'AI content generation',
                     'Booking system',
                 ],
@@ -66,7 +64,6 @@ class SubscriptionController extends Controller
                     'Full CMS features',
                     'Priority phone & email support',
                     '500 GB storage',
-                    'Multiple custom domains',
                     'Advanced AI features',
                     'White-label options',
                     'Dedicated account manager',
@@ -74,7 +71,7 @@ class SubscriptionController extends Controller
             ],
         ];
 
-        return view('admin.subscription.plans', compact('plans', 'tenant'));
+        return view('admin.subscription.plans', compact('plans', 'subscription'));
     }
 
     /**
@@ -86,45 +83,41 @@ class SubscriptionController extends Controller
             'plan' => 'required|in:starter,professional,enterprise',
         ]);
 
-        $tenant = tenant();
         $user = auth()->user();
 
         try {
             // Get or create Stripe customer
-            if (!$tenant->stripe_id) {
+            $stripeCustomerId = BusinessSetting::get('stripe_customer_id');
+
+            if (! $stripeCustomerId) {
                 $customer = Customer::create([
                     'email' => $user->email,
                     'name' => BusinessSetting::get('business_name', $user->name),
-                    'metadata' => [
-                        'tenant_id' => $tenant->id,
-                        'user_id' => $user->id,
-                    ],
                 ]);
-                
-                $tenant->stripe_id = $customer->id;
-                $tenant->save();
+
+                $stripeCustomerId = $customer->id;
+                BusinessSetting::set('stripe_customer_id', $stripeCustomerId);
             }
 
             // Get price ID for the plan
             $priceId = config("services.stripe.plans.{$request->plan}");
 
-            if (!$priceId) {
+            if (! $priceId) {
                 return back()->with('error', 'Invalid plan selected.');
             }
 
             // Create Checkout Session
             $session = Session::create([
-                'customer' => $tenant->stripe_id,
+                'customer' => $stripeCustomerId,
                 'payment_method_types' => ['card'],
                 'line_items' => [[
                     'price' => $priceId,
                     'quantity' => 1,
                 ]],
                 'mode' => 'subscription',
-                'success_url' => route('admin.subscription.success') . '?session_id={CHECKOUT_SESSION_ID}',
+                'success_url' => route('admin.subscription.success').'?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => route('admin.subscription.plans'),
                 'metadata' => [
-                    'tenant_id' => $tenant->id,
                     'plan' => $request->plan,
                 ],
             ]);
@@ -133,12 +126,11 @@ class SubscriptionController extends Controller
 
         } catch (ApiErrorException $e) {
             Log::error('Stripe subscription creation failed', [
-                'tenant_id' => $tenant->id,
                 'plan' => $request->plan,
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->with('error', 'Failed to create subscription: ' . $e->getMessage());
+            return back()->with('error', 'Failed to create subscription: '.$e->getMessage());
         }
     }
 
@@ -149,20 +141,17 @@ class SubscriptionController extends Controller
     {
         $sessionId = $request->get('session_id');
 
-        if (!$sessionId) {
+        if (! $sessionId) {
             return redirect()->route('admin.subscription.plans')
                 ->with('error', 'Invalid session.');
         }
 
         try {
             $session = Session::retrieve($sessionId);
-            $tenant = tenant();
 
-            // Update tenant with subscription details
-            $tenant->stripe_subscription_id = $session->subscription;
-            $tenant->plan = $session->metadata->plan ?? 'professional';
-            $tenant->trial_ends_at = null; // Clear trial
-            $tenant->save();
+            BusinessSetting::set('stripe_subscription_id', $session->subscription);
+            BusinessSetting::set('subscription_plan', $session->metadata->plan ?? 'professional');
+            BusinessSetting::set('trial_ends_at', null);
 
             return redirect()->route('admin.subscription.manage')
                 ->with('success', 'Subscription activated successfully!');
@@ -183,22 +172,22 @@ class SubscriptionController extends Controller
      */
     public function manage()
     {
-        $tenant = tenant();
-        $subscription = null;
+        $subscription = $this->getSubscriptionData();
+        $stripeSubscription = null;
+        $stripeSubscriptionId = BusinessSetting::get('stripe_subscription_id');
 
-        if ($tenant->stripe_subscription_id) {
+        if ($stripeSubscriptionId) {
             try {
-                $subscription = Subscription::retrieve($tenant->stripe_subscription_id);
+                $stripeSubscription = Subscription::retrieve($stripeSubscriptionId);
             } catch (ApiErrorException $e) {
                 Log::error('Failed to retrieve subscription', [
-                    'tenant_id' => $tenant->id,
-                    'subscription_id' => $tenant->stripe_subscription_id,
+                    'subscription_id' => $stripeSubscriptionId,
                     'error' => $e->getMessage(),
                 ]);
             }
         }
 
-        return view('admin.subscription.manage', compact('tenant', 'subscription'));
+        return view('admin.subscription.manage', compact('subscription', 'stripeSubscription'));
     }
 
     /**
@@ -210,47 +199,42 @@ class SubscriptionController extends Controller
             'plan' => 'required|in:starter,professional,enterprise',
         ]);
 
-        $tenant = tenant();
+        $stripeSubscriptionId = BusinessSetting::get('stripe_subscription_id');
 
-        if (!$tenant->stripe_subscription_id) {
+        if (! $stripeSubscriptionId) {
             return back()->with('error', 'No active subscription found.');
         }
 
         try {
-            $subscription = Subscription::retrieve($tenant->stripe_subscription_id);
-            
-            // Get new price ID
+            $stripeSubscription = Subscription::retrieve($stripeSubscriptionId);
+
             $newPriceId = config("services.stripe.plans.{$request->plan}");
 
-            if (!$newPriceId) {
+            if (! $newPriceId) {
                 return back()->with('error', 'Invalid plan selected.');
             }
 
-            // Update subscription
-            Subscription::update($tenant->stripe_subscription_id, [
+            Subscription::update($stripeSubscriptionId, [
                 'items' => [
                     [
-                        'id' => $subscription->items->data[0]->id,
+                        'id' => $stripeSubscription->items->data[0]->id,
                         'price' => $newPriceId,
                     ],
                 ],
                 'proration_behavior' => 'always_invoice',
             ]);
 
-            // Update tenant plan
-            $tenant->plan = $request->plan;
-            $tenant->save();
+            BusinessSetting::set('subscription_plan', $request->plan);
 
             return back()->with('success', 'Plan updated successfully!');
 
         } catch (ApiErrorException $e) {
             Log::error('Failed to update subscription', [
-                'tenant_id' => $tenant->id,
                 'new_plan' => $request->plan,
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->with('error', 'Failed to update plan: ' . $e->getMessage());
+            return back()->with('error', 'Failed to update plan: '.$e->getMessage());
         }
     }
 
@@ -259,33 +243,30 @@ class SubscriptionController extends Controller
      */
     public function cancel(Request $request)
     {
-        $tenant = tenant();
+        $stripeSubscriptionId = BusinessSetting::get('stripe_subscription_id');
 
-        if (!$tenant->stripe_subscription_id) {
+        if (! $stripeSubscriptionId) {
             return back()->with('error', 'No active subscription found.');
         }
 
         try {
-            // Cancel at period end (don't cancel immediately)
-            $subscription = Subscription::update($tenant->stripe_subscription_id, [
+            $stripeSubscription = Subscription::update($stripeSubscriptionId, [
                 'cancel_at_period_end' => true,
             ]);
 
             Log::info('Subscription cancelled', [
-                'tenant_id' => $tenant->id,
-                'subscription_id' => $tenant->stripe_subscription_id,
-                'ends_at' => $subscription->current_period_end,
+                'subscription_id' => $stripeSubscriptionId,
+                'ends_at' => $stripeSubscription->current_period_end,
             ]);
 
             return back()->with('success', 'Subscription will be cancelled at the end of the billing period.');
 
         } catch (ApiErrorException $e) {
             Log::error('Failed to cancel subscription', [
-                'tenant_id' => $tenant->id,
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->with('error', 'Failed to cancel subscription: ' . $e->getMessage());
+            return back()->with('error', 'Failed to cancel subscription: '.$e->getMessage());
         }
     }
 
@@ -294,14 +275,14 @@ class SubscriptionController extends Controller
      */
     public function reactivate(Request $request)
     {
-        $tenant = tenant();
+        $stripeSubscriptionId = BusinessSetting::get('stripe_subscription_id');
 
-        if (!$tenant->stripe_subscription_id) {
+        if (! $stripeSubscriptionId) {
             return back()->with('error', 'No subscription found.');
         }
 
         try {
-            Subscription::update($tenant->stripe_subscription_id, [
+            Subscription::update($stripeSubscriptionId, [
                 'cancel_at_period_end' => false,
             ]);
 
@@ -309,11 +290,10 @@ class SubscriptionController extends Controller
 
         } catch (ApiErrorException $e) {
             Log::error('Failed to reactivate subscription', [
-                'tenant_id' => $tenant->id,
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->with('error', 'Failed to reactivate subscription: ' . $e->getMessage());
+            return back()->with('error', 'Failed to reactivate subscription: '.$e->getMessage());
         }
     }
 
@@ -322,15 +302,15 @@ class SubscriptionController extends Controller
      */
     public function portal()
     {
-        $tenant = tenant();
+        $stripeCustomerId = BusinessSetting::get('stripe_customer_id');
 
-        if (!$tenant->stripe_id) {
+        if (! $stripeCustomerId) {
             return back()->with('error', 'No Stripe customer found.');
         }
 
         try {
             $session = \Stripe\BillingPortal\Session::create([
-                'customer' => $tenant->stripe_id,
+                'customer' => $stripeCustomerId,
                 'return_url' => route('admin.subscription.manage'),
             ]);
 
@@ -338,22 +318,11 @@ class SubscriptionController extends Controller
 
         } catch (ApiErrorException $e) {
             Log::error('Failed to create portal session', [
-                'tenant_id' => $tenant->id,
                 'error' => $e->getMessage(),
             ]);
 
             return back()->with('error', 'Failed to access billing portal.');
         }
-    }
-
-    /**
-     * Dismiss trial banner
-     */
-    public function dismissTrialBanner(Request $request)
-    {
-        BusinessSetting::set('trial_banner_dismissed', true);
-
-        return response()->json(['success' => true]);
     }
 
     /**
@@ -368,7 +337,6 @@ class SubscriptionController extends Controller
         try {
             $event = \Stripe\Webhook::constructEvent($payload, $sigHeader, $webhookSecret);
 
-            // Handle different event types
             switch ($event->type) {
                 case 'customer.subscription.created':
                 case 'customer.subscription.updated':
@@ -393,7 +361,6 @@ class SubscriptionController extends Controller
         } catch (\Exception $e) {
             Log::error('Stripe webhook error', [
                 'error' => $e->getMessage(),
-                'payload' => $payload,
             ]);
 
             return response()->json(['error' => 'Webhook error'], 400);
@@ -401,57 +368,38 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * Handle subscription updated event
+     * Get a plain object representing the current subscription state from BusinessSetting.
      */
+    private function getSubscriptionData(): object
+    {
+        return (object) [
+            'plan' => BusinessSetting::get('subscription_plan'),
+            'stripe_customer_id' => BusinessSetting::get('stripe_customer_id'),
+            'stripe_subscription_id' => BusinessSetting::get('stripe_subscription_id'),
+            'trial_ends_at' => BusinessSetting::get('trial_ends_at'),
+        ];
+    }
+
     private function handleSubscriptionUpdated($subscription)
     {
-        $tenantId = $subscription->metadata->tenant_id ?? null;
+        BusinessSetting::set('stripe_subscription_id', $subscription->id);
+        BusinessSetting::set('subscription_plan', $subscription->metadata->plan ?? 'professional');
 
-        if (!$tenantId) {
-            return;
-        }
-
-        $tenant = \Stancl\Tenancy\Database\Models\Tenant::find($tenantId);
-
-        if ($tenant) {
-            $tenant->stripe_subscription_id = $subscription->id;
-            $tenant->plan = $subscription->metadata->plan ?? 'professional';
-            $tenant->save();
-
-            Log::info('Subscription updated via webhook', [
-                'tenant_id' => $tenantId,
-                'subscription_id' => $subscription->id,
-            ]);
-        }
+        Log::info('Subscription updated via webhook', [
+            'subscription_id' => $subscription->id,
+        ]);
     }
 
-    /**
-     * Handle subscription deleted event
-     */
     private function handleSubscriptionDeleted($subscription)
     {
-        $tenantId = $subscription->metadata->tenant_id ?? null;
+        BusinessSetting::set('stripe_subscription_id', null);
+        BusinessSetting::set('subscription_plan', null);
 
-        if (!$tenantId) {
-            return;
-        }
-
-        $tenant = \Stancl\Tenancy\Database\Models\Tenant::find($tenantId);
-
-        if ($tenant) {
-            $tenant->stripe_subscription_id = null;
-            $tenant->plan = null;
-            $tenant->save();
-
-            Log::info('Subscription deleted via webhook', [
-                'tenant_id' => $tenantId,
-            ]);
-        }
+        Log::info('Subscription deleted via webhook', [
+            'subscription_id' => $subscription->id,
+        ]);
     }
 
-    /**
-     * Handle invoice paid event
-     */
     private function handleInvoicePaid($invoice)
     {
         Log::info('Invoice paid', [
@@ -461,9 +409,6 @@ class SubscriptionController extends Controller
         ]);
     }
 
-    /**
-     * Handle payment failed event
-     */
     private function handlePaymentFailed($invoice)
     {
         Log::error('Payment failed', [
@@ -471,7 +416,5 @@ class SubscriptionController extends Controller
             'amount' => $invoice->amount_due / 100,
             'currency' => $invoice->currency,
         ]);
-
-        // TODO: Send email notification to tenant about failed payment
     }
 }

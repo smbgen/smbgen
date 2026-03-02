@@ -200,7 +200,7 @@ class CmsPageController extends Controller
             'is_sticky' => 'boolean',
             'custom_bg_color' => 'nullable|string|max:20',
             'custom_text_color' => 'nullable|string|max:20',
-            'theme' => 'nullable|string|in:default,clientbridge',
+            'theme' => 'nullable|string|in:default,smbgen',
             'menu_items' => 'nullable|json',
         ]);
 
@@ -271,7 +271,7 @@ class CmsPageController extends Controller
     public function updateCompanyColors(Request $request)
     {
         $validated = $request->validate([
-            'theme_preset' => 'required|string|in:default,clientbridge,modern,nature,corporate',
+            'theme_preset' => 'required|string|in:default,smbgen,modern,nature,corporate',
             'enabled_effects' => 'nullable|array',
             'enabled_effects.*' => 'string|in:hero_animations,floating_icons,hover_effects,smooth_scrolling,gradient_backgrounds',
             'primary_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',

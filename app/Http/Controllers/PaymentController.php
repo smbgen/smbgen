@@ -233,7 +233,7 @@ class PaymentController extends Controller
                 'currency' => 'usd',
                 'customer' => $customerId,
                 'receipt_email' => $validated['email'],
-                'description' => $validated['description'] ?? 'Payment via CLIENTBRIDGE',
+                'description' => $validated['description'] ?? 'Payment via smbgen',
                 'metadata' => [
                     'customer_name' => $validated['name'],
                     'invoice_id' => $invoice->id,

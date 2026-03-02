@@ -70,8 +70,8 @@ class CmsCompanyColors extends Model
                 'text' => '#1f2937',
                 'accent' => '#F59E0B',
             ],
-            'clientbridge' => [
-                'name' => 'CLIENTBRIDGE (Contractor)',
+            'smbgen' => [
+                'name' => 'smbgen (Contractor)',
                 'description' => 'Construction theme with orange accents and animated effects',
                 'primary' => '#FF6B35',
                 'secondary' => '#4A5568',
@@ -698,10 +698,10 @@ CSS;
         }
 
         // Add theme-specific styles
-        if ($theme === 'clientbridge') {
+        if ($theme === 'smbgen') {
             $css .= <<<'CSS'
 
-/* CLIENTBRIDGE Theme Specific */
+/* smbgen Theme Specific */
 :root {
   --contractor-orange: #FF6B35;
   --steel-grey: #4A5568;

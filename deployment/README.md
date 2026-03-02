@@ -1,6 +1,6 @@
 # Deployment Scripts
 
-This folder contains all VPS deployment and debugging scripts for ClientBridge.
+This folder contains all VPS deployment and debugging scripts for smbgen.
 
 ## 📦 Deployment Scripts
 
@@ -10,7 +10,7 @@ Complete deployment automation for VPS.
 **Usage:**
 ```bash
 ssh root@houston1.oldlinecyber.com
-cd /home/alex/clientbridge
+cd /home/alex/smbgen
 bash deployment/vps-deploy.sh
 ```
 
@@ -47,7 +47,7 @@ Comprehensive VPS diagnostics - checks PHP, database, permissions, logs, etc.
 **Usage:**
 ```bash
 ssh root@houston1.oldlinecyber.com
-cd /home/alex/clientbridge
+cd /home/alex/smbgen
 bash deployment/debug-vps.sh
 ```
 
@@ -81,7 +81,7 @@ Manual instructions for IP whitelisting.
 1. **Develop locally** - Make changes, test on Herd
 2. **Commit and push** - `git add -A && git commit -m "..." && git push`
 3. **SSH to VPS** - `ssh root@houston1.oldlinecyber.com`
-4. **Navigate** - `cd /home/alex/clientbridge`
+4. **Navigate** - `cd /home/alex/smbgen`
 5. **Deploy** - `bash deployment/vps-deploy.sh`
 6. **Check logs** - `tail -f storage/logs/laravel.log`
 
@@ -91,11 +91,11 @@ Manual instructions for IP whitelisting.
 
 **Server:** houston1.oldlinecyber.com  
 **User:** root / alex  
-**App Path:** /home/alex/clientbridge  
+**App Path:** /home/alex/smbgen  
 **PHP Version:** 8.4  
 **Web Server:** Nginx + PHP-FPM  
 **Database:** SQLite  
-**Git Remote:** github.com/alexramsey92/clientbridge-laravel
+**Git Remote:** github.com/alexramsey92/smbgen
 
 ---
 

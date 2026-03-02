@@ -17,7 +17,7 @@
 
     <div class="mb-6">
         <h2 class="text-2xl font-bold text-white mb-2">Business Settings</h2>
-        <p class="text-gray-400">Configure {{ config('app.name', 'CLIENTBRIDGE') }} for your business needs</p>
+        <p class="text-gray-400">Configure {{ config('app.name', 'smbgen') }} for your business needs</p>
     </div>
 
     <form method="POST" action="{{ route('admin.business_settings.update') }}" class="space-y-8">
@@ -32,7 +32,7 @@
             <div class="space-y-4">
                 <div>
                     <label for="app_name" class="block text-sm font-medium text-gray-300 mb-1">Application Name</label>
-                    <input id="app_name" type="text" name="app_name" value="{{ old('app_name', $settings['app_name'] ?? config('app.name', 'CLIENTBRIDGE')) }}" class="block w-full rounded-md border border-gray-700 bg-gray-800 text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500" required>
+                    <input id="app_name" type="text" name="app_name" value="{{ old('app_name', $settings['app_name'] ?? config('app.name', 'smbgen')) }}" class="block w-full rounded-md border border-gray-700 bg-gray-800 text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500" required>
                     <p class="text-xs text-gray-400 mt-1">
                         Appears in page titles and navigation. 
                         <span class="text-blue-400">✓ Syncs to <code class="bg-gray-700 px-1 rounded">APP_NAME</code> in .env file.</span>
@@ -44,7 +44,7 @@
 
                 <div>
                     <label for="company_name" class="block text-sm font-medium text-gray-300 mb-1">Company Name</label>
-                    <input id="company_name" type="text" name="company_name" value="{{ old('company_name', $settings['company_name'] ?? config('business.company_name', 'CLIENTBRIDGE')) }}" class="block w-full rounded-md border border-gray-700 bg-gray-800 text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500" required>
+                    <input id="company_name" type="text" name="company_name" value="{{ old('company_name', $settings['company_name'] ?? config('business.company_name', 'smbgen')) }}" class="block w-full rounded-md border border-gray-700 bg-gray-800 text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500" required>
                     <p class="text-xs text-gray-400 mt-1">
                         Your business name used in emails, bookings, and public pages. 
                         <span class="text-blue-400">✓ Syncs to <code class="bg-gray-700 px-1 rounded">BUSINESS_COMPANY_NAME</code> in .env file.</span>

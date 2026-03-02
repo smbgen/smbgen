@@ -236,7 +236,7 @@ Implementing a controlled user invitation system where administrators can create
 - ❌ Must document carefully
 - **Use Case**: Mature team with clear processes
 
-**Recommendation for CLIENTBRIDGE**: **Option A**
+**Recommendation for smbgen**: **Option A**
 - Typical use: Solo entrepreneur or small agency
 - One owner, possibly additional staff admins later
 - Owner needs ultimate control over business settings

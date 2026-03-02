@@ -26,7 +26,7 @@ echo ""
 
 # Check profile files
 echo "📁 Profile Files Status:"
-MARKER="# Laravel Herd aliases (clientbridge)"
+MARKER="# Laravel Herd aliases (smbgen)"
 for profile in "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.profile"; do
     if [[ -f "$profile" ]]; then
         if grep -qxF "$MARKER" "$profile" 2>/dev/null; then

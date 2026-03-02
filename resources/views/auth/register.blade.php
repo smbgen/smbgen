@@ -2,7 +2,7 @@
     <div class="px-4 w-full max-w-md">
         <div class="bg-gray-800/90 border border-gray-700 rounded-xl shadow-xl p-6">
             <h2 class="text-white text-xl font-semibold mb-1">Create your account</h2>
-            <p class="text-gray-400 text-sm mb-4">Join {{ config('app.company_name', 'CLIENTBRIDGE') }}</p>
+            <p class="text-gray-400 text-sm mb-4">Join {{ config('app.company_name', 'smbgen') }}</p>
 
             <form method="POST" action="{{ route('register') }}" class="space-y-4">
                 @csrf

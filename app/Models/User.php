@@ -32,8 +32,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'notify_on_new_leads',
         'notify_on_new_bookings',
-        'tenant_id',
-        'is_super_admin',
         // Note: google_refresh_token and google_calendar_id removed - now using GoogleCredential table
     ];
 
@@ -57,24 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'is_super_admin' => 'boolean',
         ];
-    }
-
-    /**
-     * Get the tenant this user belongs to
-     */
-    public function tenant()
-    {
-        return $this->belongsTo(\Stancl\Tenancy\Database\Models\Tenant::class);
-    }
-
-    /**
-     * Check if user is a super admin
-     */
-    public function isSuperAdmin(): bool
-    {
-        return $this->is_super_admin === true;
     }
 
     /**

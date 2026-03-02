@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - CLIENTBRIDGE</title>
+    <title>Privacy Policy - smbgen</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50">
@@ -17,7 +17,7 @@
             <div class="px-4 py-5 sm:p-6 space-y-6 text-gray-700">
                 <section>
                     <h2 class="text-xl font-semibold text-gray-900 mb-3">1. Introduction</h2>
-                    <p>CLIENTBRIDGE ("we", "our", or "us") respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Service.</p>
+                    <p>smbgen ("we", "our", or "us") respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Service.</p>
                 </section>
 
                 <section>

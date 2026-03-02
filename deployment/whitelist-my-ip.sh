@@ -29,7 +29,7 @@ ssh $VPS_USER@$VPS_HOST << EOF
 echo "=== Adding IP $YOUR_IP to Nginx whitelist ==="
 
 # Backup current nginx config
-NGINX_CONF="/etc/nginx/sites-available/clientbridge"
+NGINX_CONF="/etc/nginx/sites-available/smbgen"
 if [ -f "\$NGINX_CONF" ]; then
     cp "\$NGINX_CONF" "\$NGINX_CONF.backup.\$(date +%Y%m%d_%H%M%S)"
     echo "✅ Backed up Nginx config"

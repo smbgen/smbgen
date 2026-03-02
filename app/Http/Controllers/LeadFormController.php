@@ -42,7 +42,7 @@ class LeadFormController extends Controller
                 }
             } else {
                 // Fallback to config email if no admin users found
-                $adminEmail = config('mail.admin_address', 'admin@clientbridge.app');
+                $adminEmail = config('mail.admin_address', 'admin@smbgen.com');
                 Mail::to($adminEmail)->send(new NewLeadSubmitted($request->all()));
             }
         } catch (\Exception $e) {

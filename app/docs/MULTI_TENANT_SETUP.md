@@ -39,10 +39,10 @@ Add these to your Laravel Cloud environment:
 ```bash
 # Tenancy
 TENANCY_ENABLED=true
-TENANCY_CENTRAL_DOMAINS=clientbridge-laravel-multi-tenant-main-6ymj12.laravel.cloud
+TENANCY_CENTRAL_DOMAINS=smbgen-multi-tenant-main-6ymj12.laravel.cloud
 
 # App URL
-APP_URL=https://clientbridge-laravel-multi-tenant-main-6ymj12.laravel.cloud
+APP_URL=https://smbgen-multi-tenant-main-6ymj12.laravel.cloud
 
 # Database (use what Cloud provides)
 DB_CONNECTION=mysql
@@ -128,7 +128,7 @@ For local testing:
 ```bash
 # Set in .env
 TENANCY_ENABLED=true
-TENANCY_CENTRAL_DOMAINS=127.0.0.1,localhost,clientbridge-laravel.test
+TENANCY_CENTRAL_DOMAINS=127.0.0.1,localhost,smbgen.test
 
 # Run migrations
 php artisan migrate
@@ -140,7 +140,7 @@ $user->is_super_admin = true;
 $user->save();
 
 # Test trial signup
-Visit: http://clientbridge-laravel.test/trial
+Visit: http://smbgen.test/trial
 ```
 
 ---

@@ -1,6 +1,6 @@
-# ClientBridge Documentation
+# smbgen Documentation
 
-Welcome to the ClientBridge documentation. Start here based on your role:
+Welcome to the smbgen documentation. Start here based on your role:
 
 ## 👤 New Developer?
 **Start with:** [DEVELOPER_CONTRIBUTOR_START_HERE.md](DEVELOPER_CONTRIBUTOR_START_HERE.md)
@@ -83,7 +83,7 @@ Visit `/admin` after logging in
 
 ## 📖 What's in This Repository
 
-**ClientBridge** is a multi-tenant SaaS platform for:
+**smbgen** is a multi-tenant SaaS platform for:
 - Appointment booking with Google Calendar sync
 - Content management (CMS)
 - Blog publishing
@@ -117,4 +117,4 @@ Deployments are typically manual (git push → automated tests).
 ---
 
 **Last updated:** January 5, 2026  
-**Maintained by:** ClientBridge Team
+**Maintained by:** smbgen Team

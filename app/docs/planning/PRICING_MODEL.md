@@ -1,4 +1,4 @@
-# ClientBridge Pricing Model & Technical Specifications
+# smbgen Pricing Model & Technical Specifications
 
 **SaaS Subscription Plans with Booking-First Multi-Tenant Offering**
 
@@ -35,7 +35,7 @@ Define a booking-first pricing model that emphasizes a simple, multi-tenant offe
 
 **Eligibility & Target:**
 - Sign up with Google OAuth and an email ending in `gmail.com`
-- Individuals and very small teams testing ClientBridge
+- Individuals and very small teams testing smbgen
 
 **Value Proposition:**
 "Publish a booking page with a simple client area — free for Gmail users"
@@ -63,7 +63,7 @@ Define a booking-first pricing model that emphasizes a simple, multi-tenant offe
 - ❌ Inspection Reports
 - ❌ Phone System integration
 - ❌ API Access
-- ❌ Custom Branding (uses default ClientBridge branding)
+- ❌ Custom Branding (uses default smbgen branding)
 - ❌ Priority Support
 - ❌ Advanced Automations
 
@@ -123,7 +123,7 @@ Define a booking-first pricing model that emphasizes a simple, multi-tenant offe
 - ❌ API Access
 - ❌ Advanced Analytics
 - ❌ Full CMS builder
-- ❌ White-label (ClientBridge branding removed entirely)
+- ❌ White-label (smbgen branding removed entirely)
 
 ### Technical Limits
 
@@ -199,7 +199,7 @@ Define a booking-first pricing model that emphasizes a simple, multi-tenant offe
   - Client lifetime value tracking
   
 - ✅ **White-Label**
-  - Remove all ClientBridge branding
+  - Remove all smbgen branding
   - Custom email templates
   - Fully branded experience
   
@@ -599,7 +599,7 @@ public function create()
 
 | Competitor | Starter | Mid-Tier | Enterprise |
 |------------|---------|----------|------------|
-| **ClientBridge** | $29 | $99 | $299 |
+| **smbgen** | $29 | $99 | $299 |
 | Jobber | $49 | $169 | $349 |
 | Housecall Pro | $49 | $129 | $249 |
 | ServiceTitan | N/A | $200+ | Custom |
@@ -778,7 +778,7 @@ Beyond base plans, consider add-ons for:
 
 # Booking (Multi-Tenant) Plan
 stripe products create \
-  --name "ClientBridge Booking" \
+  --name "smbgen Booking" \
   --description "Booking, landing pages, and basic client area"
 
 stripe prices create \
@@ -795,7 +795,7 @@ stripe prices create \
 
 # Dedicated Professional Plan
 stripe products create \
-  --name "ClientBridge Professional" \
+  --name "smbgen Professional" \
   --description "Everything you need to run a professional service business"
 
 stripe prices create \
@@ -812,7 +812,7 @@ stripe prices create \
 
 # Dedicated Enterprise Plan
 stripe products create \
-  --name "ClientBridge Enterprise" \
+  --name "smbgen Enterprise" \
   --description "Full-featured platform with enterprise-grade support"
 
 stripe prices create \

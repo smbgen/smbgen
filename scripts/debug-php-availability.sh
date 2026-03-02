@@ -71,7 +71,7 @@ echo ""
 
 # Test 4: Profile file checks
 echo "4️⃣  Profile file analysis:"
-MARKER="# Laravel Herd aliases (clientbridge)"
+MARKER="# Laravel Herd aliases (smbgen)"
 for profile in "$HOME/.bash_profile" "$HOME/.bashrc" "$HOME/.profile"; do
     if [[ -f "$profile" ]]; then
         if grep -qxF "$MARKER" "$profile" 2>/dev/null; then

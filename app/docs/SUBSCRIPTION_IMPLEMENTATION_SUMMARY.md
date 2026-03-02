@@ -2,7 +2,7 @@
 
 ## Summary
 
-This implementation adds complete subscription management, trial tracking, and domain management features to the ClientBridge multi-tenant Laravel application.
+This implementation adds complete subscription management, trial tracking, and domain management features to the smbgen multi-tenant Laravel application.
 
 ## Files Created
 
@@ -161,7 +161,7 @@ Handles these Stripe webhook events:
 ### 3. Domain Management
 
 #### Default Domain
-- Every tenant gets `[tenant-id].clientbridge.app` subdomain
+- Every tenant gets `[tenant-id].smbgen.com` subdomain
 - Automatically created on tenant provisioning
 - Cannot be removed
 
@@ -178,7 +178,7 @@ Two connection methods:
 ```
 Type: CNAME
 Name: www
-Value: tenant-slug.clientbridge.app
+Value: tenant-slug.smbgen.com
 TTL: 3600
 ```
 
@@ -450,4 +450,4 @@ APP_SERVER_IP=203.0.113.10
 
 This implementation provides a complete SaaS subscription and domain management system integrated with Stripe. Tenants can self-manage their subscriptions, add custom domains, and receive trial reminders. Super admins have full control over tenant deployments, subscriptions, and domain configurations.
 
-All features follow Laravel best practices, maintain tenant isolation, and integrate seamlessly with the existing ClientBridge architecture.
+All features follow Laravel best practices, maintain tenant isolation, and integrate seamlessly with the existing smbgen architecture.

@@ -3,7 +3,7 @@
         <!-- Company Watermark -->
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
             <div class="text-9xl font-black text-white transform -rotate-12">
-                {{ config('app.name', 'ClientBridge') }}
+                {{ config('app.name', 'smbgen') }}
             </div>
         </div>
 

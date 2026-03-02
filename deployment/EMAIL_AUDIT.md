@@ -5,7 +5,7 @@
 ### Laravel Cloud (rtsenviro.com) - ✅ WORKING
 - **SMTP Server**: rtsenviro.com:465
 - **Encryption**: SSL
-- **Username**: clientbridge@rtsenviro.com
+- **Username**: smbgen@rtsenviro.com
 - **From Address**: noreply@rtsenviro.com
 - **From Name**: RTS Environmental Consulting
 - **Status**: Working correctly
@@ -15,7 +15,7 @@
 - **Encryption**: SSL
 - **Username**: noreply@oldlinecyber.com
 - **From Address**: noreply@oldlinecyber.com
-- **From Name**: CLIENTBRIDGE
+- **From Name**: smbgen
 - **Status**: SSL handshake failing in PHP
 
 ## Root Cause Analysis
@@ -94,7 +94,7 @@ Copy working settings from Laravel Cloud to VPS:
 MAIL_HOST=rtsenviro.com
 MAIL_PORT=465
 MAIL_ENCRYPTION=ssl
-MAIL_USERNAME=clientbridge@rtsenviro.com
+MAIL_USERNAME=smbgen@rtsenviro.com
 MAIL_PASSWORD="B%)Q[9gRcuI8ms&+"
 MAIL_FROM_ADDRESS="noreply@rtsenviro.com"
 MAIL_FROM_NAME="RTS Environmental Consulting"

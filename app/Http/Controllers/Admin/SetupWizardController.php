@@ -80,7 +80,7 @@ class SetupWizardController extends Controller
         $validated = $request->validate([
             'primary_color' => ['required', 'string', 'regex:/^#[0-9A-F]{6}$/i'],
             'secondary_color' => ['nullable', 'string', 'regex:/^#[0-9A-F]{6}$/i'],
-            'preset' => ['nullable', 'string', 'in:default,clientbridge,modern,nature,corporate'],
+            'preset' => ['nullable', 'string', 'in:default,smbgen,modern,nature,corporate'],
         ]);
 
         try {

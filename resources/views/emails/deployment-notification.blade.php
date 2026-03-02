@@ -1,7 +1,7 @@
 @extends('layouts.email')
 
 @section('content')
-    <h2 style="margin-top: 0; color: #1e40af;">CLIENTBRIDGE Deployment Notification</h2>
+    <h2 style="margin-top: 0; color: #1e40af;">smbgen Deployment Notification</h2>
     
     <p style="margin-bottom: 24px;">A new deployment has been completed for <strong>{{ $appName }}</strong>.</p>
 

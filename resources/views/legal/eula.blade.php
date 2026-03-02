@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>End-User License Agreement - CLIENTBRIDGE</title>
+    <title>End-User License Agreement - smbgen</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50">
@@ -17,7 +17,7 @@
             <div class="px-4 py-5 sm:p-6 space-y-6 text-gray-700">
                 <section>
                     <h2 class="text-xl font-semibold text-gray-900 mb-3">1. Agreement to Terms</h2>
-                    <p>By accessing and using CLIENTBRIDGE ("the Service"), you agree to be bound by this End-User License Agreement. If you do not agree to these terms, do not use the Service.</p>
+                    <p>By accessing and using smbgen ("the Service"), you agree to be bound by this End-User License Agreement. If you do not agree to these terms, do not use the Service.</p>
                 </section>
 
                 <section>
@@ -64,7 +64,7 @@
 
                 <section>
                     <h2 class="text-xl font-semibold text-gray-900 mb-3">9. Limitation of Liability</h2>
-                    <p>IN NO EVENT SHALL CLIENTBRIDGE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY.</p>
+                    <p>IN NO EVENT SHALL smbgen BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY.</p>
                 </section>
 
                 <section>

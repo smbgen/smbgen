@@ -4,7 +4,7 @@
 <div class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 flex items-center justify-center p-4">
     <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
-            Welcome to {{ config('app.name', 'CLIENTBRIDGE') }}
+            Welcome to {{ config('app.name', 'smbgen') }}
         </h1>
         
         <p class="text-xl md:text-2xl text-gray-300 mb-8">

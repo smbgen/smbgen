@@ -12,8 +12,8 @@ class BusinessSettingsController extends Controller
     {
         try {
             $settings = [
-                'app_name' => BusinessSetting::get('app_name', config('app.name', 'CLIENTBRIDGE')),
-                'company_name' => BusinessSetting::get('company_name', config('business.company_name', 'CLIENTBRIDGE')),
+                'app_name' => BusinessSetting::get('app_name', config('app.name', 'smbgen')),
+                'company_name' => BusinessSetting::get('company_name', config('business.company_name', 'smbgen')),
             ];
 
             // Get admin users with their notification preferences

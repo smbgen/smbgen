@@ -95,10 +95,10 @@ class LeadFormSeeder extends Seeder
         for ($i = 0; $i < $count && $i < count($moldLeads); $i++) {
             LeadForm::create(array_merge($moldLeads[$i], [
                 'source_site' => 'website',
-                'notification_email' => 'admin@clientbridge.app',
+                'notification_email' => 'admin@smbgen.com',
                 'ip_address' => '127.0.0.1',
                 'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                'referer' => 'https://clientbridge.app/landing',
+                'referer' => 'https://smbgen.com/landing',
             ]));
         }
 
@@ -145,10 +145,10 @@ class LeadFormSeeder extends Seeder
         for ($i = 0; $i < $count && $i < count($graphicsLeads); $i++) {
             LeadForm::create(array_merge($graphicsLeads[$i], [
                 'source_site' => 'website',
-                'notification_email' => 'admin@clientbridge.app',
+                'notification_email' => 'admin@smbgen.com',
                 'ip_address' => '127.0.0.1',
                 'user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-                'referer' => 'https://clientbridge.app/landing',
+                'referer' => 'https://smbgen.com/landing',
             ]));
         }
 

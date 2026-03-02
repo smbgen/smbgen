@@ -2,7 +2,7 @@
 
 ## Overview
 
-ClientBridge includes a flexible CSS variable-based theme system that allows you to switch between light and dark modes globally without code changes.
+smbgen includes a flexible CSS variable-based theme system that allows you to switch between light and dark modes globally without code changes.
 
 ## Configuration
 

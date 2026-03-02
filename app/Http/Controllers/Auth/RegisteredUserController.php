@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
 
         // Send welcome email (listeners automatically handle tracking)
         try {
-            $companyName = config('business.company_name', config('app.company_name', 'CLIENTBRIDGE'));
+            $companyName = config('business.company_name', config('app.company_name', 'smbgen'));
             \Mail::html(
                 view('emails.welcome', ['user' => $user, 'companyName' => $companyName])->render(),
                 function ($message) use ($user, $companyName) {

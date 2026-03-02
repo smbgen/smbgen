@@ -119,6 +119,6 @@ return [
     ],
 
     // Custom admin email for receiving lead form submissions
-    'admin_address' => env('MAIL_ADMIN_ADDRESS', 'admin@clientbridge.app'),
+    'admin_address' => env('MAIL_ADMIN_ADDRESS', 'admin@smbgen.com'),
 
 ];

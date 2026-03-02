@@ -28,14 +28,14 @@ class UserSeederWithPasswordPrompt extends Seeder
 
         // Admin User
         if (confirm('Create Admin User?', true)) {
-            $this->command->info('Enter password for Admin User (admin@clientbridge.app):');
+            $this->command->info('Enter password for Admin User (admin@smbgen.com):');
             $adminPassword = $this->command->secret('Password (min 8 characters)');
 
             if (empty($adminPassword)) {
                 $this->command->error('Password cannot be empty. Skipping admin user.');
             } else {
                 $admin = User::updateOrCreate(
-                    ['email' => 'admin@clientbridge.app'],
+                    ['email' => 'admin@smbgen.com'],
                     [
                         'name' => 'Admin User',
                         'password' => Hash::make($adminPassword),
@@ -51,14 +51,14 @@ class UserSeederWithPasswordPrompt extends Seeder
 
         // Demo Client User
         if (confirm('Create Demo Client User?', true)) {
-            $this->command->info('Enter password for Demo Client (demo@clientbridge.app):');
+            $this->command->info('Enter password for Demo Client (demo@smbgen.com):');
             $demoPassword = $this->command->secret('Password (min 8 characters)');
 
             if (empty($demoPassword)) {
                 $this->command->error('Password cannot be empty. Skipping demo client.');
             } else {
                 $demo = User::updateOrCreate(
-                    ['email' => 'demo@clientbridge.app'],
+                    ['email' => 'demo@smbgen.com'],
                     [
                         'name' => 'Demo Client',
                         'password' => Hash::make($demoPassword),

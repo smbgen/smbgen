@@ -1,4 +1,4 @@
-# CLIENTBRIDGE.app
+# smbgen.com
 
 A modern multi-tenant SaaS platform for service professionals. Built with **Laravel 12**, featuring appointment booking, content management, AI-powered content generation, and comprehensive admin dashboards.
 
@@ -98,8 +98,8 @@ A modern multi-tenant SaaS platform for service professionals. Built with **Lara
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/alexramsey92/CLIENTBRIDGE.app-laravel.git
-cd CLIENTBRIDGE.app-laravel
+git clone https://github.com/alexramsey92/smbgen.git
+cd smbgen
 ```
 
 ### 2. Install Dependencies
@@ -122,7 +122,7 @@ touch database/database.sqlite
 # For MySQL, edit .env:
 # DB_CONNECTION=mysql
 # DB_HOST=127.0.0.1
-# DB_DATABASE=CLIENTBRIDGE.app
+# DB_DATABASE=smbgen.com
 # DB_USERNAME=root
 # DB_PASSWORD=secret
 ```
@@ -143,7 +143,7 @@ npm run dev
 
 **Option A: Using Laravel Herd (Windows, Mac)**
 ```bash
-# Herd auto-serves at: https://CLIENTBRIDGE.app.test
+# Herd auto-serves at: https://smbgen.com.test
 # Just open it in your browser
 ```
 

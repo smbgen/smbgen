@@ -14,30 +14,20 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withProviders(array_filter([
+    ->withProviders([
         \Illuminate\Auth\AuthServiceProvider::class,
         \Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         \Illuminate\Session\SessionServiceProvider::class,
         \Illuminate\Cookie\CookieServiceProvider::class,
         // EmailEventServiceProvider removed - listeners are auto-discovered in Laravel 12
-
-        // Conditionally load Tenancy Service Provider
-        env('TENANCY_ENABLED', false) ? \Stancl\Tenancy\TenancyServiceProvider::class : null,
-    ]))
+    ])
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'auth' => \App\Http\Middleware\Authenticate::class,
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'companyAdministrator' => \App\Http\Middleware\CompanyAdministrator::class,
-            'superAdmin' => \App\Http\Middleware\SuperAdmin::class,
             'cors' => \App\Http\Middleware\HandleCors::class,
         ]);
-
-        // Tenancy middleware - initialize tenant based on path (/{tenant}/...)
-        // Always register the group, but only populate it when tenancy is enabled
-        $middleware->group('tenant', env('TENANCY_ENABLED', false) ? [
-            \Stancl\Tenancy\Middleware\InitializeTenancyByPath::class,
-        ] : []);
     })
     ->withExceptions(function (Illuminate\Foundation\Configuration\Exceptions $exceptions) {
 

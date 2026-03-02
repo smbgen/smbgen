@@ -3,7 +3,7 @@
         <!-- Company watermark background -->
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5 overflow-hidden">
             <div class="text-9xl font-black text-white transform -rotate-12 whitespace-nowrap" style="font-size: clamp(4rem, 15vw, 10rem);">
-                {{ config('app.company_name', 'CLIENTBRIDGE') }}
+                {{ config('app.company_name', 'smbgen') }}
             </div>
         </div>
         

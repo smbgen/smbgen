@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>{{ config('app.name', 'CLIENTBRIDGE') }}</title>
+    <title>{{ config('app.name', 'smbgen') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -56,7 +56,7 @@
               <div id="secureSessionToast" class="bg-gray-800 text-white border border-gray-600 rounded-lg shadow-lg w-full opacity-100 pointer-events-none" role="alert">
                 <div class="bg-gray-700 text-white border-b-0 py-1 px-2 rounded-t-lg flex items-center">
                   <strong class="text-xs">Session protection enabled</strong>
-                  <small class="text-xs ml-auto text-right">    <strong>CLIENTBRIDGE</strong><br> cloud monitoring</small>
+                  <small class="text-xs ml-auto text-right">    <strong>smbgen</strong><br> cloud monitoring</small>
                 </div>
                 <div class="text-xs py-2 px-3 text-white/90">
                   <div>IP: {{ request()->ip() }}</div>
@@ -65,8 +65,8 @@
                 </div>
               </div>
 
-              <a id="sessionPill" href="https://clientbridge.app" target="_blank" rel="noopener noreferrer" aria-label="Open clientbridge.app in a new tab" class="hidden bg-green-600 text-white text-xs rounded-full px-2 py-0.5 shadow-lg mt-2 text-center transform origin-center pointer-events-auto cursor-pointer">
-                <strong>CLIENTBRIDGE</strong>
+              <a id="sessionPill" href="https://smbgen.com" target="_blank" rel="noopener noreferrer" aria-label="Open smbgen.com in a new tab" class="hidden bg-green-600 text-white text-xs rounded-full px-2 py-0.5 shadow-lg mt-2 text-center transform origin-center pointer-events-auto cursor-pointer">
+                <strong>smbgen</strong>
               </a>
             </div>
 
@@ -142,7 +142,7 @@
                 function init() { DPR = Math.max(1, window.devicePixelRatio || 1); resize(); particles.length = 0; for (let i = 0; i < COUNT; i++) particles.push(makeParticle(canvas.width / DPR, canvas.height / DPR)); }
                 function drawFrame(now) { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(59,130,246,0.06)'; ctx.fillRect(0, 0, canvas.width / DPR, canvas.height / DPR); for (let p of particles) { p.phase += 0.018 * p.speed; p.x += p.vx * p.speed + Math.sin(p.phase) * 0.12 + globalVelocity.x; p.y += p.vy * p.speed + Math.cos(p.phase * 0.7) * 0.08 + globalVelocity.y; if (p.x < -10) p.x = canvas.width / DPR + 10; if (p.x > canvas.width / DPR + 10) p.x = -10; if (p.y < -10) p.y = canvas.height / DPR + 10; if (p.y > canvas.height / DPR + 10) p.y = -10; ctx.beginPath(); ctx.fillStyle = `rgba(255,255,255,${p.opacity})`; ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); }
                     for (let i = cursorParticles.length - 1; i >= 0; i--) { const cp = cursorParticles[i]; cp.x += cp.vx * 0.6 + globalVelocity.x * 1.6; cp.y += cp.vy * 0.6 + globalVelocity.y * 1.6; cp.life -= 1; if (cp.life <= 0) { cursorParticles.splice(i, 1); continue; } ctx.beginPath(); ctx.fillStyle = `rgba(255,255,255,${Math.max(0.06, cp.opacity * (cp.life / 120))})`; ctx.arc(cp.x, cp.y, cp.r, 0, Math.PI * 2); ctx.fill(); }
-                    ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'black'; const fontSize = Math.max(40, Math.min(140, (canvas.width / DPR) * 0.09)); ctx.font = `700 ${fontSize}px Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; const textX = (canvas.width / DPR) * 0.72; const textY = (canvas.height / DPR) * 0.88; const companyName = {!! json_encode(config('app.company_name', 'CLIENTBRIDGE')) !!}; ctx.fillText(companyName, textX, textY);
+                    ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'black'; const fontSize = Math.max(40, Math.min(140, (canvas.width / DPR) * 0.09)); ctx.font = `700 ${fontSize}px Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; const textX = (canvas.width / DPR) * 0.72; const textY = (canvas.height / DPR) * 0.88; const companyName = {!! json_encode(config('app.company_name', 'smbgen')) !!}; ctx.fillText(companyName, textX, textY);
                     ctx.restore(); }
                 let animationId = null; if (mediaReduced.matches) { init(); drawFrame(); return; } window.addEventListener('resize', () => { init(); }); init(); animationId = requestAnimationFrame(function loop(now){ drawFrame(now); animationId = requestAnimationFrame(loop); }); document.addEventListener('visibilitychange', () => { if (document.hidden) { if (animationId) cancelAnimationFrame(animationId); } else { animationId = requestAnimationFrame(function loop(now){ drawFrame(now); animationId = requestAnimationFrame(loop); }); } });
             })();

@@ -28,19 +28,19 @@ APP_SERVER_IP=203.0.113.10
 3. Create three products:
 
 #### Starter Plan
-- **Name**: ClientBridge Starter
+- **Name**: smbgen Starter
 - **Description**: Basic features for small businesses
 - **Pricing**: $29/month recurring
 - **Copy the Price ID** to `STRIPE_PRICE_STARTER`
 
 #### Professional Plan
-- **Name**: ClientBridge Professional
+- **Name**: smbgen Professional
 - **Description**: Advanced features with custom domains
 - **Pricing**: $79/month recurring
 - **Copy the Price ID** to `STRIPE_PRICE_PROFESSIONAL`
 
 #### Enterprise Plan
-- **Name**: ClientBridge Enterprise
+- **Name**: smbgen Enterprise
 - **Description**: Full-featured plan with priority support
 - **Pricing**: $199/month recurring
 - **Copy the Price ID** to `STRIPE_PRICE_ENTERPRISE`

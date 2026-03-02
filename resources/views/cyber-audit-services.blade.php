@@ -486,8 +486,8 @@
                 <div class="col-md-4">
                     <div class="feature-card">
                         <div class="feature-icon">🔗</div>
-                        <h4>CLIENTBRIDGE Integration</h4>
-                        <p class="text-muted">Seamlessly integrate with our CLIENTBRIDGE platform for ongoing file sharing, messaging, and collaboration.</p>
+                        <h4>smbgen Integration</h4>
+                        <p class="text-muted">Seamlessly integrate with our smbgen platform for ongoing file sharing, messaging, and collaboration.</p>
                     </div>
                 </div>
             </div>
@@ -661,7 +661,7 @@
                 </div>
                 <div class="col-md-6 text-md-end">
                     <p class="text-muted">
-                        <a href="https://clientbridge.app" target="_blank" class="text-decoration-none">CLIENTBRIDGE.app</a> | 
+                        <a href="https://smbgen.com" target="_blank" class="text-decoration-none">smbgen.com</a> |
                         <a href="/cyber-audit-demo" class="text-decoration-none">Demo</a>
                     </p>
                 </div>

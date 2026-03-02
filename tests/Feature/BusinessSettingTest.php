@@ -11,11 +11,11 @@ beforeEach(function () {
 });
 
 test('can set and get a string value', function () {
-    BusinessSetting::set('app_name', 'CLIENTBRIDGE', 'string');
+    BusinessSetting::set('app_name', 'smbgen', 'string');
 
     $value = BusinessSetting::get('app_name');
 
-    expect($value)->toBe('CLIENTBRIDGE');
+    expect($value)->toBe('smbgen');
 });
 
 test('can set and get an integer value', function () {
@@ -77,14 +77,14 @@ test('does not create duplicate keys', function () {
 });
 
 test('can get all settings', function () {
-    BusinessSetting::set('app_name', 'CLIENTBRIDGE', 'string');
+    BusinessSetting::set('app_name', 'smbgen', 'string');
     BusinessSetting::set('max_clients', 100, 'integer');
     BusinessSetting::set('maintenance_mode', true, 'boolean');
 
     $all = BusinessSetting::getAll();
 
     expect($all)->toHaveKeys(['app_name', 'max_clients', 'maintenance_mode']);
-    expect($all['app_name'])->toBe('CLIENTBRIDGE');
+    expect($all['app_name'])->toBe('smbgen');
     expect($all['max_clients'])->toBe(100);
     expect($all['maintenance_mode'])->toBeTrue();
 });

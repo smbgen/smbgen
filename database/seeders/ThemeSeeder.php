@@ -33,7 +33,7 @@ class ThemeSeeder extends Seeder
     {
         $this->command->newLine();
         $this->command->info('═══════════════════════════════════════════════════════════');
-        $this->command->info('  CLIENTBRIDGE THEME SEEDER');
+        $this->command->info('  smbgen THEME SEEDER');
         $this->command->info('═══════════════════════════════════════════════════════════');
         $this->command->newLine();
 
@@ -92,10 +92,10 @@ class ThemeSeeder extends Seeder
         $this->command->info('═══════════════════════════════════════════════════════════');
         $this->command->newLine();
         $this->command->info('📧 User Accounts Created:');
-        $this->command->info('  Admin: admin@clientbridge.app');
+        $this->command->info('  Admin: admin@smbgen.com');
         $this->command->info('  Password: password');
         $this->command->newLine();
-        $this->command->info('  Demo Client: demo@clientbridge.app');
+        $this->command->info('  Demo Client: demo@smbgen.com');
         $this->command->info('  Password: password');
         $this->command->newLine();
     }
@@ -122,7 +122,7 @@ class ThemeSeeder extends Seeder
         };
 
         $this->admin = User::updateOrCreate(
-            ['email' => 'admin@clientbridge.app'],
+            ['email' => 'admin@smbgen.com'],
             [
                 'name' => $adminName,
                 'password' => Hash::make('password'),
@@ -132,7 +132,7 @@ class ThemeSeeder extends Seeder
         );
 
         $this->demo = User::updateOrCreate(
-            ['email' => 'demo@clientbridge.app'],
+            ['email' => 'demo@smbgen.com'],
             [
                 'name' => 'Demo Client',
                 'password' => Hash::make('password'),
@@ -182,7 +182,7 @@ class ThemeSeeder extends Seeder
 
         // Always add demo client
         $demoClient = Client::updateOrCreate(
-            ['email' => 'demo@clientbridge.app'],
+            ['email' => 'demo@smbgen.com'],
             [
                 'name' => 'Demo Client',
                 'phone' => '555-0999',
@@ -258,7 +258,7 @@ class ThemeSeeder extends Seeder
                 'email' => $email,
                 'message' => $message,
                 'source_site' => fake()->randomElement(['website', 'facebook', 'google', 'referral']),
-                'notification_email' => 'admin@clientbridge.app',
+                'notification_email' => 'admin@smbgen.com',
                 'ip_address' => fake()->ipv4(),
                 'user_agent' => fake()->userAgent(),
                 'referer' => fake()->url(),

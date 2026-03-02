@@ -21,7 +21,7 @@ return [
      * This value is the name of the company using this CRM, which will be used
      * in the UI elements where the company name needs to be displayed.
      */
-    'company_name' => env('COMPANY_NAME', 'CLIENTBRIDGE'),
+    'company_name' => env('COMPANY_NAME', 'smbgen'),
 
     /*
     |--------------------------------------------------------------------------

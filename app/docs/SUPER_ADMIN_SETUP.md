@@ -30,7 +30,7 @@ php artisan db:seed --class=SuperAdminSeeder
 ═══════════════════════════════════════════════════════════
 
 Super Admin Credentials:
-  Email:    superadmin@clientbridge.app
+  Email:    superadmin@smbgen.com
   Password: JUHeKKEcg~y2Z7q9Wd2M9UmqnQ~^ZeQtzP
   Role:     super_admin
 
@@ -82,7 +82,7 @@ use Illuminate\Support\Facades\Hash;
 
 User::create([
     'name' => 'Super Admin',
-    'email' => 'superadmin@clientbridge.app',
+    'email' => 'superadmin@smbgen.com',
     'password' => Hash::make('your-secure-password'),
     'role' => 'super_admin',
     'email_verified_at' => now(),
@@ -176,24 +176,24 @@ When impersonating a tenant admin:
 
 **Local Development:**
 ```env
-SUPER_ADMIN_EMAIL=superadmin@clientbridge.test
+SUPER_ADMIN_EMAIL=superadmin@smbgen.test
 ```
 
 **Staging:**
 ```env
-SUPER_ADMIN_EMAIL=admin@staging.clientbridge.com
+SUPER_ADMIN_EMAIL=admin@staging.smbgen.com
 ```
 
 **Production:**
 ```env
-SUPER_ADMIN_EMAIL=admin@clientbridge.com
+SUPER_ADMIN_EMAIL=admin@smbgen.com
 ```
 
 ## Multi-Tenancy Architecture
 
 ### Central vs Tenant Database
 
-ClientBridge uses Stancl Tenancy for complete data isolation:
+smbgen uses Stancl Tenancy for complete data isolation:
 
 **Central Database** (landlord):
 - Stores `tenants` table
@@ -237,7 +237,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 $admin = User::where('role', 'super_admin')
-    ->where('email', 'superadmin@clientbridge.app')
+    ->where('email', 'superadmin@smbgen.com')
     ->first();
 
 $admin->update([
@@ -252,7 +252,7 @@ echo "Password reset successfully!";
 Run the seeder with a different email:
 
 ```bash
-SUPER_ADMIN_EMAIL=admin2@clientbridge.com \
+SUPER_ADMIN_EMAIL=admin2@smbgen.com \
 SUPER_ADMIN_NAME="Second Admin" \
 php artisan db:seed --class=SuperAdminSeeder
 ```
@@ -286,13 +286,13 @@ php artisan tinker
 **Solution**: Verify the user's role in the database:
 
 ```sql
-SELECT id, email, role FROM users WHERE email = 'superadmin@clientbridge.app';
+SELECT id, email, role FROM users WHERE email = 'superadmin@smbgen.com';
 ```
 
 If role is incorrect, update it:
 
 ```php
-\App\Models\User::where('email', 'superadmin@clientbridge.app')
+\App\Models\User::where('email', 'superadmin@smbgen.com')
     ->update(['role' => 'super_admin']);
 ```
 

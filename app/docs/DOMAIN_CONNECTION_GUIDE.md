@@ -1,23 +1,23 @@
-# Domain Connection Guide for ClientBridge
+# Domain Connection Guide for smbgen
 
-This guide explains how to connect your custom domain to your ClientBridge instance.
+This guide explains how to connect your custom domain to your smbgen instance.
 
 ## Overview
 
-By default, your ClientBridge instance is accessible via a subdomain:
-- **Default Subdomain**: `your-business.clientbridge.app`
+By default, your smbgen instance is accessible via a subdomain:
+- **Default Subdomain**: `your-business.smbgen.com`
 
-You can also connect your own custom domain (e.g., `www.yourbusiness.com`) to your ClientBridge instance.
+You can also connect your own custom domain (e.g., `www.yourbusiness.com`) to your smbgen instance.
 
 ## Prerequisites
 
 - Access to your domain registrar (GoDaddy, Namecheap, Cloudflare, etc.)
-- Admin access to your ClientBridge instance
+- Admin access to your smbgen instance
 - Your custom domain name
 
-## Step 1: Add Domain in ClientBridge
+## Step 1: Add Domain in smbgen
 
-1. Log in to your ClientBridge admin panel
+1. Log in to your smbgen admin panel
 2. Navigate to **Settings → Domains**
 3. Click **Add Custom Domain**
 4. Enter your domain name (e.g., `www.yourbusiness.com` or `yourbusiness.com`)
@@ -36,7 +36,7 @@ If you're using a subdomain like `www.yourbusiness.com`:
 ```
 Type: CNAME
 Name: www (or your subdomain)
-Value: your-business.clientbridge.app
+Value: your-business.smbgen.com
 TTL: 3600 (or Auto)
 ```
 
@@ -48,7 +48,7 @@ If you're using the root domain `yourbusiness.com`:
 ```
 Type: A
 Name: @ (or leave blank for root)
-Value: [IP Address provided by ClientBridge]
+Value: [IP Address provided by smbgen]
 TTL: 3600 (or Auto)
 ```
 
@@ -94,14 +94,14 @@ Most DNS providers have similar interfaces:
 
 ## Step 4: Verify Domain Connection
 
-1. Return to your ClientBridge domain settings
+1. Return to your smbgen domain settings
 2. Click **Verify Domain** next to your domain
 3. Wait for DNS propagation (can take 5 minutes to 48 hours, usually ~15 minutes)
 4. Once verified, you'll see a green checkmark
 
 ## Step 5: Set as Primary Domain (Optional)
 
-1. In ClientBridge domain settings
+1. In smbgen domain settings
 2. Click **Set as Primary** next to your custom domain
 3. This will make your custom domain the default access point
 
@@ -143,7 +143,7 @@ Or use online tools:
 
 - SSL generation takes up to 24 hours after domain verification
 - Ensure your domain is fully verified first
-- Contact ClientBridge support if SSL doesn't activate after 24 hours
+- Contact smbgen support if SSL doesn't activate after 24 hours
 
 ## DNS Record Examples
 
@@ -151,10 +151,10 @@ Or use online tools:
 ```
 Type: CNAME
 Name: www
-Value: franks-lawn-care.clientbridge.app
+Value: franks-lawn-care.smbgen.com
 TTL: 3600
 ```
-Result: `www.frankslawncare.com` → ClientBridge instance
+Result: `www.frankslawncare.com` → smbgen instance
 
 ### Example 2: Root Domain with A Record
 ```
@@ -163,7 +163,7 @@ Name: @
 Value: 203.0.113.10
 TTL: 3600
 ```
-Result: `frankslawncare.com` → ClientBridge instance
+Result: `frankslawncare.com` → smbgen instance
 
 ### Example 3: Both Root and WWW
 ```
@@ -175,7 +175,7 @@ Value: 203.0.113.10
 # WWW subdomain
 Type: CNAME
 Name: www
-Value: franks-lawn-care.clientbridge.app
+Value: franks-lawn-care.smbgen.com
 ```
 Result: Both `frankslawncare.com` and `www.frankslawncare.com` work
 
@@ -183,16 +183,16 @@ Result: Both `frankslawncare.com` and `www.frankslawncare.com` work
 
 **Important**: If you're using email with your domain (e.g., `you@yourbusiness.com`), be careful with DNS changes.
 
-- **Subdomains (www, app, etc.)** → Safe to point to ClientBridge
+- **Subdomains (www, app, etc.)** → Safe to point to smbgen
 - **Root domain** → May affect email delivery
-- **Solution**: Only point www to ClientBridge, keep root for email
+- **Solution**: Only point www to smbgen, keep root for email
 
 ### Safe Configuration for Email Users
 ```
-# Point www to ClientBridge
+# Point www to smbgen
 Type: CNAME
 Name: www
-Value: your-business.clientbridge.app
+Value: your-business.smbgen.com
 
 # Keep email working
 Type: MX
@@ -203,17 +203,17 @@ Value: (your email provider's MX records)
 ## Support
 
 Need help?
-- **Documentation**: Check your ClientBridge admin panel → Documentation
-- **Email Support**: Contact your ClientBridge administrator
+- **Documentation**: Check your smbgen admin panel → Documentation
+- **Email Support**: Contact your smbgen administrator
 - **DNS Propagation**: Wait at least 30 minutes before troubleshooting
 
 ## FAQ
 
 **Q: Can I use multiple domains?**
-A: Yes! Add as many custom domains as needed. Each can point to the same ClientBridge instance.
+A: Yes! Add as many custom domains as needed. Each can point to the same smbgen instance.
 
 **Q: Will my old domain still work?**
-A: Yes, your default `*.clientbridge.app` subdomain will always work.
+A: Yes, your default `*.smbgen.com` subdomain will always work.
 
 **Q: How long does DNS propagation take?**
 A: Typically 15-30 minutes, but can take up to 48 hours in rare cases.
@@ -222,7 +222,7 @@ A: Typically 15-30 minutes, but can take up to 48 hours in rare cases.
 A: Custom domain support is included in Professional and Enterprise plans. Check your plan details.
 
 **Q: Can I use an apex domain without www?**
-A: Yes, use an A record pointing to the IP address provided by ClientBridge.
+A: Yes, use an A record pointing to the IP address provided by smbgen.
 
 **Q: What about wildcard domains?**
 A: Wildcard domains (*.yourdomain.com) are supported on Enterprise plans only.

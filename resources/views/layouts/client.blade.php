@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'CLIENTBRIDGE') }}</title>
+    <title>{{ config('app.name', 'smbgen') }}</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -18,7 +18,7 @@
                 <div class="flex justify-between h-16">
                     <div class="flex">
                         <div class="shrink-0 flex items-center">
-                            <a href="{{ route('dashboard') }}" class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ config('app.company_name', 'CLIENTBRIDGE') }}</a>
+                            <a href="{{ route('dashboard') }}" class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ config('app.company_name', 'smbgen') }}</a>
                         </div>
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             @auth

@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-MARKER="# Laravel Herd aliases (clientbridge)"
+MARKER="# Laravel Herd aliases (smbgen)"
 
 # Determine which profile file to use (Git Bash may use .bash_profile instead of .bashrc)
 PROFILE=""
@@ -53,7 +53,7 @@ else
     echo "📝 Installing aliases to $TARGET_PROFILE..."
     cat >> "$TARGET_PROFILE" <<'BASH'
 
-# Laravel Herd aliases (clientbridge)
+# Laravel Herd aliases (smbgen)
 # Added by scripts/setup-herd-gitbash.sh
 # Use php.bat, herd.bat, laravel.bat, composer.bat when php/herd/laravel/composer are missing
 if ! command -v php >/dev/null 2>&1; then

@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
 
         // Admin user
         $admin = User::firstOrCreate([
-            'email' => 'admin@clientbridge.app',
+            'email' => 'admin@smbgen.com',
         ], [
             'name' => 'Admin User',
             'password' => Hash::make($adminPassword),
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
 
         // Demo client user - will be associated with demo client record
         $demo = User::firstOrCreate([
-            'email' => 'demo@clientbridge.app',
+            'email' => 'demo@smbgen.com',
         ], [
             'name' => 'Demo Client',
             'password' => Hash::make($demoPassword),

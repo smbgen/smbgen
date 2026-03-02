@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
 # Setup Windows Herd Build Project and Run Dev
-# This script sets up the ClientBridge Laravel project on Windows with Herd and starts the dev environment
+# This script sets up the smbgen Laravel project on Windows with Herd and starts the dev environment
 
 set -euo pipefail
 
-PROJECT_NAME="clientbridge-laravel"
+PROJECT_NAME="smbgen"
 DB_FILE="./database/database.sqlite"
 
-echo "🚀 Setting up ClientBridge Laravel project with Herd on Windows..."
+echo "🚀 Setting up smbgen Laravel project with Herd on Windows..."
 
 # Check if we're in the right directory
 if [[ ! -f "composer.json" ]] || [[ ! -f "artisan" ]]; then
     echo "❌ Error: This doesn't appear to be a Laravel project directory."
-    echo "   Please run this script from the root of the ClientBridge Laravel project."
+    echo "   Please run this script from the root of the smbgen Laravel project."
     exit 1
 fi
 
@@ -343,7 +343,7 @@ else
 fi
 
 echo ""
-echo "🎉 Setup complete! Your ClientBridge Laravel project is ready."
+echo "🎉 Setup complete! Your smbgen Laravel project is ready."
 echo ""
 echo "📋 Next steps:"
 echo "   1. Visit your site: $HERD_URL"

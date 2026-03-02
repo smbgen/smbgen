@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>{{ config('app.name', 'CLIENTBRIDGE') }}</title>
+    <title>{{ config('app.name', 'smbgen') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -39,7 +39,7 @@
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             <a href="{{ route('dashboard') }}" class="text-xl font-bold text-gray-100">
-                                {{ config('app.company_name', 'CLIENTBRIDGE') }}
+                                {{ config('app.company_name', 'smbgen') }}
                             </a>
                         </div>
 

@@ -9,7 +9,7 @@ class BusinessHelper
      */
     public static function name(): string
     {
-        return config('business.name', 'CLIENTBRIDGE');
+        return config('business.name', 'smbgen');
     }
 
     /**
@@ -17,7 +17,7 @@ class BusinessHelper
      */
     public static function companyName(): string
     {
-        return config('business.company_name', 'CLIENTBRIDGE');
+        return config('business.company_name', 'smbgen');
     }
 
     /**
@@ -41,7 +41,7 @@ class BusinessHelper
      */
     public static function contactEmail(): string
     {
-        return config('business.contact.email', 'support@clientbridge.app');
+        return config('business.contact.email', 'support@smbgen.com');
     }
 
     /**
@@ -49,7 +49,7 @@ class BusinessHelper
      */
     public static function website(): string
     {
-        return config('business.contact.website', 'https://clientbridge.app');
+        return config('business.contact.website', 'https://smbgen.com');
     }
 
     /**

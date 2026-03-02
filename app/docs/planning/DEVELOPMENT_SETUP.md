@@ -1,5 +1,5 @@
 # Development Setup Guide
-**ClientBridge - Professional Development Workflow**
+**smbgen - Professional Development Workflow**
 
 **Last Updated:** December 28, 2025
 
@@ -25,7 +25,7 @@
 │  ┌────────────────────────────────────────────────────┐    │
 │  │  Windows + Laravel Herd + SQLite                   │    │
 │  │  - Fast local development                          │    │
-│  │  - *.clientbridge.test subdomains                  │    │
+│  │  - *.smbgen.test subdomains                  │    │
 │  │  - Hot module reloading (Vite)                     │    │
 │  │  - Email testing (MailHog/Mailpit)                 │    │
 │  └────────────────────────────────────────────────────┘    │
@@ -38,7 +38,7 @@
 │  ┌────────────────────────────────────────────────────┐    │
 │  │  Laravel Cloud (staging branch)                    │    │
 │  │  - MySQL database                                  │    │
-│  │  - staging.clientbridge.app                        │    │
+│  │  - staging.smbgen.com                        │    │
 │  │  - Real Stripe test mode                           │    │
 │  │  - Real Google OAuth (test credentials)           │    │
 │  └────────────────────────────────────────────────────┘    │
@@ -51,7 +51,7 @@
 │  ┌────────────────────────────────────────────────────┐    │
 │  │  Laravel Cloud (production branch)                 │    │
 │  │  - MySQL database                                  │    │
-│  │  - app.clientbridge.com                            │    │
+│  │  - app.smbgen.com                            │    │
 │  │  - Real Stripe live mode                           │    │
 │  │  - Real Google OAuth (production credentials)      │    │
 │  └────────────────────────────────────────────────────┘    │
@@ -81,8 +81,8 @@
 #### 1. Clone Repository
 ```bash
 cd ~/Herd  # Or your Herd projects directory
-git clone https://github.com/your-org/clientbridge-laravel.git
-cd clientbridge-laravel
+git clone https://github.com/your-org/smbgen.git
+cd smbgen
 ```
 
 #### 2. Install Dependencies
@@ -107,10 +107,10 @@ php artisan key:generate
 
 **Edit `.env` for local development:**
 ```ini
-APP_NAME="ClientBridge Local"
+APP_NAME="smbgen Local"
 APP_ENV=local
 APP_DEBUG=true
-APP_URL=https://clientbridge.test
+APP_URL=https://smbgen.test
 APP_TIMEZONE=UTC
 
 # Database - Use SQLite for local speed
@@ -191,12 +191,12 @@ npm run dev
 # Terminal 2: Start queue worker (if needed)
 php artisan queue:work
 
-# Herd automatically serves at: https://clientbridge.test
+# Herd automatically serves at: https://smbgen.test
 ```
 
 #### 7. Access Application
-- **Main App:** https://clientbridge.test
-- **Admin Panel:** https://clientbridge.test/admin
+- **Main App:** https://smbgen.test
+- **Admin Panel:** https://smbgen.test/admin
 - **Login:** admin@test.com / password
 - **Mailpit (emails):** http://localhost:8025
 
@@ -219,14 +219,14 @@ $tenant1 = \Stancl\Tenancy\Database\Models\Tenant::create([
     'id' => 'acme',
     'data' => ['name' => 'Acme Corp'],
 ]);
-$tenant1->domains()->create(['domain' => 'acme.clientbridge.test']);
+$tenant1->domains()->create(['domain' => 'acme.smbgen.test']);
 
 # Create second tenant
 $tenant2 = \Stancl\Tenancy\Database\Models\Tenant::create([
     'id' => 'globex',
     'data' => ['name' => 'Globex Inc'],
 ]);
-$tenant2->domains()->create(['domain' => 'globex.clientbridge.test']);
+$tenant2->domains()->create(['domain' => 'globex.smbgen.test']);
 
 exit
 ```
@@ -240,8 +240,8 @@ TENANCY_ENABLED=true
 **4. Test Tenant Isolation**
 ```bash
 # Visit different subdomains
-open https://acme.clientbridge.test
-open https://globex.clientbridge.test
+open https://acme.smbgen.test
+open https://globex.smbgen.test
 
 # Each should have separate data
 ```
@@ -342,10 +342,10 @@ npm run lint
 #### 2. Staging Environment Variables
 
 ```ini
-APP_NAME="ClientBridge Staging"
+APP_NAME="smbgen Staging"
 APP_ENV=staging
 APP_DEBUG=true  # Can debug staging issues
-APP_URL=https://staging.clientbridge.app
+APP_URL=https://staging.smbgen.com
 
 # Database - Provided by Laravel Cloud
 DB_CONNECTION=mysql
@@ -362,8 +362,8 @@ MAIL_PORT=587
 MAIL_USERNAME=<your-smtp-username>
 MAIL_PASSWORD=<your-smtp-password>
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS="staging@clientbridge.app"
-MAIL_FROM_NAME="ClientBridge Staging"
+MAIL_FROM_ADDRESS="staging@smbgen.com"
+MAIL_FROM_NAME="smbgen Staging"
 
 # Stripe - TEST MODE
 STRIPE_KEY=pk_test_xxxxx
@@ -716,7 +716,7 @@ php artisan cache:clear
 herd status
 
 # Verify domain
-ping acme.clientbridge.test
+ping acme.smbgen.test
 
 # Restart Herd
 herd restart
@@ -818,15 +818,15 @@ php artisan ide-helper:generate
 
 ### Important URLs (Local)
 
-- **App:** https://clientbridge.test
-- **Admin:** https://clientbridge.test/admin
+- **App:** https://smbgen.test
+- **Admin:** https://smbgen.test/admin
 - **Mailpit:** http://localhost:8025
-- **Telescope:** https://clientbridge.test/telescope
+- **Telescope:** https://smbgen.test/telescope
 
 ### Important URLs (Staging)
 
-- **App:** https://staging.clientbridge.app
-- **Admin:** https://staging.clientbridge.app/admin
+- **App:** https://staging.smbgen.com
+- **Admin:** https://staging.smbgen.com/admin
 
 ---
 

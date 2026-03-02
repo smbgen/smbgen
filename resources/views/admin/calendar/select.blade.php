@@ -66,7 +66,7 @@
         <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded text-blue-800">
             <p class="font-medium mb-2">💡 Tip: Create a Separate "Bookings" Calendar</p>
             <p class="text-sm">
-                You can create a dedicated calendar in Google Calendar called "CLIENTBRIDGE Bookings" to keep your booking events separate from your personal calendar. 
+                You can create a dedicated calendar in Google Calendar called "smbgen Bookings" to keep your booking events separate from your personal calendar. 
                 This makes it easier to share your booking calendar with team members or toggle visibility.
             </p>
         </div>

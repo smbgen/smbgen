@@ -5,7 +5,7 @@
 
 ## Executive Summary
 
-ClientBridge has a functional multi-tenancy foundation using Stancl Tenancy with separate databases per tenant. The super admin infrastructure is complete with tenant management, impersonation, domain management, and subscription controls. However, critical production features are missing: tenant data isolation, automatic tenant resolution, trial expiration handling, and complete Stripe integration.
+smbgen has a functional multi-tenancy foundation using Stancl Tenancy with separate databases per tenant. The super admin infrastructure is complete with tenant management, impersonation, domain management, and subscription controls. However, critical production features are missing: tenant data isolation, automatic tenant resolution, trial expiration handling, and complete Stripe integration.
 
 ---
 
@@ -195,7 +195,7 @@ ClientBridge has a functional multi-tenancy foundation using Stancl Tenancy with
 **Required**:
 1. Enable `InitializeTenancyByDomain` middleware in [bootstrap/app.php](../../bootstrap/app.php)
 2. Configure route middleware groups
-3. Test subdomain detection: `acme.clientbridge.app` → tenant lookup
+3. Test subdomain detection: `acme.smbgen.com` → tenant lookup
 4. Test custom domain detection: `acme.com` → tenant lookup
 
 #### 3. Tenant Database Migrations
@@ -455,11 +455,11 @@ app/docs/
 ### Tenant Resolution Flow
 
 ```
-1. User visits: acme.clientbridge.app
+1. User visits: acme.smbgen.com
            ↓
 2. InitializeTenancyByDomain middleware (❌ NOT ENABLED)
            ↓
-3. Lookup domain "acme.clientbridge.app" in domains table
+3. Lookup domain "acme.smbgen.com" in domains table
            ↓
 4. Find tenant_id associated with domain
            ↓
@@ -638,17 +638,17 @@ app/docs/
 ```env
 # Tenancy
 TENANCY_ENABLED=true
-TENANCY_CENTRAL_DOMAINS=clientbridge.test,localhost,127.0.0.1
+TENANCY_CENTRAL_DOMAINS=smbgen.test,localhost,127.0.0.1
 
 # Super Admin
-SUPER_ADMIN_EMAIL=superadmin@clientbridge.app
+SUPER_ADMIN_EMAIL=superadmin@smbgen.com
 SUPER_ADMIN_NAME="Super Admin"
 
 # Database
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=clientbridge_local
+DB_DATABASE=smbgen_local
 DB_USERNAME=root
 DB_PASSWORD=
 

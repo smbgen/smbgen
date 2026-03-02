@@ -1,6 +1,6 @@
-# Contributing to ClientBridge
+# Contributing to smbgen
 
-Thank you for considering contributing to ClientBridge! This guide will help you get started and ensure smooth collaboration.
+Thank you for considering contributing to smbgen! This guide will help you get started and ensure smooth collaboration.
 
 ---
 
@@ -801,7 +801,7 @@ Look for issues labeled:
 
 ---
 
-**Thank you for contributing to ClientBridge! Every contribution makes a difference.** ❤️
+**Thank you for contributing to smbgen! Every contribution makes a difference.** ❤️
 
 ---
 

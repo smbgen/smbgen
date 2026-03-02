@@ -103,14 +103,14 @@ php artisan test --filter="public user can submit form"
 Since automated tests can't run due to PHP 8.4 issue, verify functionality manually:
 
 1. **Create CMS Page with Form**
-   - Visit `http://clientbridge-laravel.test/admin/cms/create`
+   - Visit `http://smbgen-laravel.test/admin/cms/create`
    - Enable "Form Builder"
    - Verify 5 default fields are populated
    - Set slug to `contact-us`
    - Publish page
 
 2. **Submit Form as Public User**
-   - Visit `http://clientbridge-laravel.test/contact-us`
+   - Visit `http://smbgen-laravel.test/contact-us`
    - Fill out form fields
    - Submit form
    - Verify success message or redirect

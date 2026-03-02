@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'CLIENTBRIDGE') }} - Admin</title>
+    <title>{{ config('app.name', 'smbgen') }} - Admin</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -21,7 +21,7 @@
                         <i class="fas fa-bridge text-white text-lg"></i>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-gray-900 dark:text-white font-bold text-lg leading-tight truncate max-w-40">{{ config('app.company_name', 'CLIENTBRIDGE') }}</span>
+                        <span class="text-gray-900 dark:text-white font-bold text-lg leading-tight truncate max-w-40">{{ config('app.company_name', 'smbgen') }}</span>
                         <span class="text-gray-500 dark:text-gray-400 text-xs">Admin Panel</span>
                     </div>
                 </a>

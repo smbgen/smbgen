@@ -42,7 +42,7 @@ test('navbar is shown on cms pages when enabled', function () {
     $response = $this->get('/'.$page->slug);
 
     $response->assertSuccessful()
-        ->assertSee('CLIENTBRIDGE'); // Default logo text
+        ->assertSee('smbgen'); // Default logo text
 });
 
 test('navbar is not shown on cms pages when disabled', function () {
@@ -85,14 +85,14 @@ test('navbar appears on contact page', function () {
     $response = $this->get('/contact');
 
     $response->assertSuccessful()
-        ->assertSee('CLIENTBRIDGE'); // Should see navbar
+        ->assertSee('smbgen'); // Should see navbar
 });
 
 test('navbar appears on booking page', function () {
     $response = $this->get('/book');
 
     $response->assertSuccessful()
-        ->assertSee('CLIENTBRIDGE'); // Should see navbar
+        ->assertSee('smbgen'); // Should see navbar
 });
 
 test('ordered menu items are returned correctly', function () {

@@ -64,7 +64,7 @@ php artisan tinker
 ### Development
 ```env
 TENANCY_ENABLED=true
-TENANCY_CENTRAL_DOMAINS=127.0.0.1,localhost,clientbridge-laravel.test
+TENANCY_CENTRAL_DOMAINS=127.0.0.1,localhost,smbgen.test
 ```
 
 ### Production (smbgen.com)

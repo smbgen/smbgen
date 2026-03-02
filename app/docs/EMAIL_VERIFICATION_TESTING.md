@@ -21,8 +21,8 @@ Email verification was completely broken. Here's what we fixed:
    MAIL_PORT=2525
    MAIL_USERNAME=your-mailtrap-username
    MAIL_PASSWORD=your-mailtrap-password
-   MAIL_FROM_ADDRESS="noreply@clientbridge.app"
-   MAIL_FROM_NAME="CLIENTBRIDGE"
+   MAIL_FROM_ADDRESS="noreply@smbgen.com"
+   MAIL_FROM_NAME="smbgen"
    ```
 
 2. **Test Email Account**: Use [Mailtrap.io](https://mailtrap.io) or similar for testing

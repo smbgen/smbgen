@@ -24,107 +24,9 @@ use App\Http\Controllers\LeadFormController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboardController;
-use App\Http\Controllers\SuperAdmin\TenantController;
-use App\Http\Controllers\SuperAdmin\UserController as SuperAdminUserController;
-use App\Http\Controllers\TrialSignupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-
-/*
-|--------------------------------------------------------------------------
-| Central Domain Routes (Across all tenants)
-|--------------------------------------------------------------------------
-| These routes run on central domains and are NOT tenant-scoped
-*/
-
-// Super Admin Portal (must be on central domain)
-// Note: Super admins bypass email verification as they're manually created
-Route::middleware(['auth', 'superAdmin'])->prefix('super-admin')->name('super-admin.')->group(function () {
-    Route::get('/', [SuperAdminDashboardController::class, 'index'])->name('dashboard');
-    
-    // Access master tenant as company administrator
-    Route::get('/manage-master-tenant', [SuperAdminDashboardController::class, 'manageMasterTenant'])->name('manage-master-tenant');
-    
-    // Diagnostics & Setup
-    Route::get('/diagnostics', [\App\Http\Controllers\SuperAdmin\DiagnosticsController::class, 'index'])->name('diagnostics');
-    Route::post('/diagnostics/run-migrations', [\App\Http\Controllers\SuperAdmin\DiagnosticsController::class, 'runMigrations'])->name('diagnostics.run-migrations');
-    Route::post('/diagnostics/clear-caches', [\App\Http\Controllers\SuperAdmin\DiagnosticsController::class, 'clearCaches'])->name('diagnostics.clear-caches');
-    Route::post('/diagnostics/create-master-tenant', [\App\Http\Controllers\SuperAdmin\DiagnosticsController::class, 'createMasterTenant'])->name('diagnostics.create-master-tenant');
-    Route::post('/diagnostics/run-tenant-migrations', [\App\Http\Controllers\SuperAdmin\DiagnosticsController::class, 'runTenantMigrations'])->name('diagnostics.run-tenant-migrations');
-
-    // Tenant Management
-    Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
-    Route::get('/tenants/create', [TenantController::class, 'create'])->name('tenants.create');
-    Route::post('/tenants', [TenantController::class, 'store'])->name('tenants.store');
-    Route::get('/tenants/{tenant}', [TenantController::class, 'show'])->name('tenants.show');
-    Route::get('/tenants/{tenant}/edit', [TenantController::class, 'edit'])->name('tenants.edit');
-    Route::put('/tenants/{tenant}', [TenantController::class, 'update'])->name('tenants.update');
-    Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->name('tenants.destroy');
-    Route::post('/tenants/{tenant}/impersonate', [TenantController::class, 'impersonate'])->name('tenants.impersonate');
-    Route::post('/tenants/{tenant}/suspend', [TenantController::class, 'suspend'])->name('tenants.suspend');
-    Route::post('/tenants/{tenant}/activate', [TenantController::class, 'activate'])->name('tenants.activate');
-
-    // Tenant Domain Management
-    Route::post('/tenants/{tenant}/domains', [TenantController::class, 'addDomain'])->name('tenants.domains.add');
-    Route::delete('/tenants/{tenant}/domains/{domain}', [TenantController::class, 'removeDomain'])->name('tenants.domains.remove');
-    Route::post('/tenants/{tenant}/domains/{domain}/primary', [TenantController::class, 'setPrimaryDomain'])->name('tenants.domains.primary');
-
-    // Tenant Subscription Management
-    Route::post('/tenants/{tenant}/upgrade', [TenantController::class, 'upgradePlan'])->name('tenants.upgrade');
-    Route::post('/tenants/{tenant}/extend-trial', [TenantController::class, 'extendTrial'])->name('tenants.extend-trial');
-    Route::post('/tenants/{tenant}/change-tier', [TenantController::class, 'changeTier'])->name('tenants.change-tier');
-
-    // Super Admin User Management
-    Route::resource('users', SuperAdminUserController::class)->names([
-        'index' => 'users.index',
-        'create' => 'users.create',
-        'store' => 'users.store',
-        'edit' => 'users.edit',
-        'update' => 'users.update',
-        'destroy' => 'users.destroy',
-    ]);
-    Route::patch('/users/{user}/password', [SuperAdminUserController::class, 'updatePassword'])->name('users.updatePassword');
-    Route::post('/users/{user}/verify', [SuperAdminUserController::class, 'verify'])->name('users.verify');
-    Route::post('/users/{user}/unverify', [SuperAdminUserController::class, 'unverify'])->name('users.unverify');
-
-    // Diagnostic route to debug 500 errors
-    Route::get('/diagnostics/debug', function() {
-        try {
-            $checks = [
-                'auth_check' => auth()->check(),
-                'user_id' => auth()->id(),
-                'user_email' => auth()->user()?->email,
-                'is_super_admin' => auth()->user()?->is_super_admin,
-                'tenants_table' => \Schema::hasTable('tenants'),
-                'domains_table' => \Schema::hasTable('domains'),
-                'tenant_count' => \Schema::hasTable('tenants') ? \App\Models\Tenant::count() : 'N/A',
-            ];
-
-            return response()->json([
-                'status' => 'ok',
-                'checks' => $checks,
-                'php_version' => PHP_VERSION,
-                'laravel_version' => app()->version(),
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'error' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-                'trace' => explode("\n", $e->getTraceAsString()),
-            ], 500);
-        }
-    })->name('diagnostics.debug');
-});
-
-// Trial signup (public - no auth required, central only)
-Route::get('/trial', [TrialSignupController::class, 'show'])->name('trial.show');
-Route::post('/trial', [TrialSignupController::class, 'register'])->name('trial.register');
-Route::get('/trial/google/redirect', [TrialSignupController::class, 'redirectToGoogle'])->name('trial.google.redirect');
-Route::get('/trial/google/callback', [TrialSignupController::class, 'handleGoogleCallback'])->name('trial.google.callback');
 
 // Email tracking routes (public - no auth required, work on all domains)
 Route::get('/track/email/{id}', [EmailTrackingController::class, 'trackOpen'])->name('email.track.open');
@@ -236,23 +138,9 @@ Route::get('/storage/{path}', function ($path) {
 
 /*
 |--------------------------------------------------------------------------
-| Tenant Routes (Initialized by Path: /{tenant}/...)
+| Application Routes
 |--------------------------------------------------------------------------
-| All routes below are tenant-scoped. The tenant middleware will:
-| 1. Resolve tenant by path prefix (/{tenant-slug}/)
-| 2. Switch to tenant's database
-| 3. Make all queries scoped to this tenant
-|
-| Example URLs:
-| - clientbridge.app/acme-consulting/ (tenant homepage)
-| - clientbridge.app/acme-consulting/admin/dashboard (tenant admin)
-| - clientbridge.app/acme-consulting/login (tenant login)
-|
-| Note: 'tenant' middleware is always registered but only active when TENANCY_ENABLED=true
-| Note: For premium users, deploy dedicated instances with TENANCY_ENABLED=false
 */
-
-Route::middleware('tenant')->group(function () {
 
 // Legal pages
 Route::view('/eula', 'legal.eula')->name('legal.eula');
@@ -378,11 +266,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // CLIENTBRIDGE AI SEO Assistant
+    // AI SEO Assistant
     Route::get('/client/seo-assistant', [AISEOController::class, 'viewTool'])->name('client.seo-assistant');
     Route::post('/client/seo-assistant/query', [AISEOController::class, 'handleQuery'])->name('client.seo-assistant.query');
 
-    // CLIENTBRIDGE Cyber Audit Assistant
+    // Cyber Audit Assistant
     Route::get('/client/cyber-audit', [CyberAuditController::class, 'index'])->name('cyber-audit.index');
     Route::post('/client/cyber-audit/chat', [CyberAuditController::class, 'chat'])->name('cyber-audit.chat');
     Route::post('/client/cyber-audit/clear-history', [CyberAuditController::class, 'clearHistory'])->name('cyber-audit.clear-history');
@@ -562,14 +450,6 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
     Route::post('/setup-wizard/complete', [\App\Http\Controllers\Admin\SetupWizardController::class, 'complete'])->name('admin.setup-wizard.complete');
     Route::post('/setup-wizard/dismiss', [\App\Http\Controllers\Admin\SetupWizardController::class, 'dismiss'])->name('admin.setup-wizard.dismiss');
 
-    // Domain Management (for tenant admins)
-    Route::get('/domains', [\App\Http\Controllers\Admin\DomainController::class, 'index'])->name('admin.domains.index');
-    Route::post('/domains', [\App\Http\Controllers\Admin\DomainController::class, 'store'])->name('admin.domains.store');
-    Route::delete('/domains/{domain}', [\App\Http\Controllers\Admin\DomainController::class, 'destroy'])->name('admin.domains.destroy');
-    Route::post('/domains/{domain}/set-primary', [\App\Http\Controllers\Admin\DomainController::class, 'setPrimary'])->name('admin.domains.set-primary');
-    Route::post('/domains/{domain}/verify', [\App\Http\Controllers\Admin\DomainController::class, 'verify'])->name('admin.domains.verify');
-    Route::get('/domains/setup-guide', [\App\Http\Controllers\Admin\DomainController::class, 'setupGuide'])->name('admin.domains.setup-guide');
-
     // Subscription Management
     Route::get('/subscription/plans', [\App\Http\Controllers\Admin\SubscriptionController::class, 'plans'])->name('admin.subscription.plans');
     Route::post('/subscription/subscribe', [\App\Http\Controllers\Admin\SubscriptionController::class, 'subscribe'])->name('admin.subscription.subscribe');
@@ -579,8 +459,6 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
     Route::post('/subscription/cancel', [\App\Http\Controllers\Admin\SubscriptionController::class, 'cancel'])->name('admin.subscription.cancel');
     Route::post('/subscription/reactivate', [\App\Http\Controllers\Admin\SubscriptionController::class, 'reactivate'])->name('admin.subscription.reactivate');
     Route::get('/subscription/portal', [\App\Http\Controllers\Admin\SubscriptionController::class, 'portal'])->name('admin.subscription.portal');
-    Route::post('/trial-banner/dismiss', [\App\Http\Controllers\Admin\SubscriptionController::class, 'dismissTrialBanner'])->name('admin.trial-banner.dismiss');
-
     // Environment Settings
     Route::get('/environment-settings', [\App\Http\Controllers\Admin\EnvironmentSettingsController::class, 'index'])->name('admin.environment_settings.index');
     Route::patch('/environment-settings', [\App\Http\Controllers\Admin\EnvironmentSettingsController::class, 'update'])->name('admin.environment_settings.update');
@@ -870,4 +748,3 @@ if (config('business.features.cms')) {
         ->name('cms.show')
         ->where('slug', '[a-z0-9\-]+');
 }
-}); // Close tenant middleware group

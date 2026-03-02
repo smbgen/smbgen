@@ -12,8 +12,8 @@ echo "════════════════════════�
 echo ""
 
 # Determine if we're on VPS or local
-if [ -d "/var/www/clientbridge-laravel" ]; then
-    APP_DIR="/var/www/clientbridge-laravel"
+if [ -d "/var/www/smbgen-laravel" ]; then
+    APP_DIR="/var/www/smbgen-laravel"
     IS_VPS=true
     echo "✓ Running on VPS"
 else

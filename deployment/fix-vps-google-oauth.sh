@@ -57,7 +57,7 @@ if [ -z "$GOOGLE_CLIENT_ID" ] || [ -z "$GOOGLE_CLIENT_SECRET" ] || [ -z "$GOOGLE
     echo ""
     echo "2. Make sure these redirect URIs are authorized:"
     echo "   - https://houston1.oldlinecyber.com/google/callback"
-    echo "   - https://clientbridge-laravel.test/google/callback (for local dev)"
+    echo "   - https://smbgen-laravel.test/google/callback (for local dev)"
     echo ""
     echo "3. Add these to your VPS .env file:"
     echo "   GOOGLE_CLIENT_ID=your_client_id_here"

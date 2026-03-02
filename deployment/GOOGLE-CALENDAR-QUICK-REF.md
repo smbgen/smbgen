@@ -27,7 +27,7 @@ GOOGLE_CALENDAR_REDIRECT_URI=https://houston1.oldlinecyber.com/admin/calendar/ca
 
 ### Check Connection Status
 ```bash
-cd /var/www/clientbridge-laravel
+cd /var/www/smbgen
 php artisan calendar:diagnose
 # OR
 bash deployment/check-google-connection.sh
@@ -35,12 +35,12 @@ bash deployment/check-google-connection.sh
 
 ### View Recent Logs
 ```bash
-tail -100 /var/www/clientbridge-laravel/storage/logs/laravel.log | grep -i google
+tail -100 /var/www/smbgen/storage/logs/laravel.log | grep -i google
 ```
 
 ### Clear Cache After Config Changes
 ```bash
-cd /var/www/clientbridge-laravel
+cd /var/www/smbgen
 php artisan config:clear
 php artisan cache:clear
 ```

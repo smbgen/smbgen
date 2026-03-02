@@ -2,7 +2,7 @@
 
 ## Overview
 
-CLIENTBRIDGE uses a **hybrid multi-tenancy model** that allows you to offer both cost-effective shared hosting and premium dedicated instances. This architecture maximizes profitability while providing flexibility for different customer tiers.
+smbgen uses a **hybrid multi-tenancy model** that allows you to offer both cost-effective shared hosting and premium dedicated instances. This architecture maximizes profitability while providing flexibility for different customer tiers.
 
 ---
 
@@ -15,15 +15,15 @@ CLIENTBRIDGE uses a **hybrid multi-tenancy model** that allows you to offer both
 #### Configuration
 ```env
 TENANCY_ENABLED=true
-TENANCY_CENTRAL_DOMAINS=clientbridge.app
-APP_URL=https://clientbridge.app
+TENANCY_CENTRAL_DOMAINS=smbgen.com
+APP_URL=https://smbgen.com
 ```
 
 #### Access Pattern
-- **Tenant Homepage**: `clientbridge.app/acme-consulting/`
-- **Tenant Admin**: `clientbridge.app/acme-consulting/admin/dashboard`
-- **Tenant Login**: `clientbridge.app/acme-consulting/login`
-- **Super Admin**: `clientbridge.app/super-admin` (your control panel)
+- **Tenant Homepage**: `smbgen.com/acme-consulting/`
+- **Tenant Admin**: `smbgen.com/acme-consulting/admin/dashboard`
+- **Tenant Login**: `smbgen.com/acme-consulting/login`
+- **Super Admin**: `smbgen.com/super-admin` (your control panel)
 
 #### Characteristics
 - ✅ Single Laravel Cloud instance serves all tenants
@@ -112,7 +112,7 @@ COMPANY_NAME=Customer Company Name
 
 1. **Super Admin Action** (in central app):
    ```
-   Navigate to: clientbridge.app/super-admin/tenants
+   Navigate to: smbgen.com/super-admin/tenants
    Click: "Create New Tenant"
    Fill in: Tenant slug, company name, admin email
    Select: Subscription tier (Starter, Professional, Standard)
@@ -127,7 +127,7 @@ COMPANY_NAME=Customer Company Name
 
 3. **Customer Access**:
    ```
-   URL: clientbridge.app/{tenant-slug}/
+   URL: smbgen.com/{tenant-slug}/
    Login: As provided by admin
    ```
 
@@ -149,7 +149,7 @@ COMPANY_NAME=Customer Company Name
 2. **Create New Laravel Cloud Project**:
    ```bash
    # In Laravel Cloud dashboard:
-   1. Create new project: "ClientBridge - CustomerName"
+   1. Create new project: "smbgen - CustomerName"
    2. Connect GitHub repo (same codebase)
    3. Set environment variables:
       - TENANCY_ENABLED=false
