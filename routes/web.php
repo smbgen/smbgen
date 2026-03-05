@@ -310,7 +310,6 @@ Route::middleware(['auth'])->group(function () {
 
 // Stripe Webhook routes (no auth required)
 Route::post('/stripe/webhook', [PaymentController::class, 'webhook'])->name('stripe.webhook');
-Route::post('/webhooks/stripe', [\App\Http\Controllers\Admin\SubscriptionController::class, 'webhook'])->name('webhooks.stripe.subscription');
 
 // Simple payment collection (public)
 Route::get('/pay', [PaymentController::class, 'collect'])->name('payment.collect');
@@ -450,15 +449,6 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
     Route::post('/setup-wizard/complete', [\App\Http\Controllers\Admin\SetupWizardController::class, 'complete'])->name('admin.setup-wizard.complete');
     Route::post('/setup-wizard/dismiss', [\App\Http\Controllers\Admin\SetupWizardController::class, 'dismiss'])->name('admin.setup-wizard.dismiss');
 
-    // Subscription Management
-    Route::get('/subscription/plans', [\App\Http\Controllers\Admin\SubscriptionController::class, 'plans'])->name('admin.subscription.plans');
-    Route::post('/subscription/subscribe', [\App\Http\Controllers\Admin\SubscriptionController::class, 'subscribe'])->name('admin.subscription.subscribe');
-    Route::get('/subscription/success', [\App\Http\Controllers\Admin\SubscriptionController::class, 'success'])->name('admin.subscription.success');
-    Route::get('/subscription/manage', [\App\Http\Controllers\Admin\SubscriptionController::class, 'manage'])->name('admin.subscription.manage');
-    Route::post('/subscription/change-plan', [\App\Http\Controllers\Admin\SubscriptionController::class, 'changePlan'])->name('admin.subscription.change-plan');
-    Route::post('/subscription/cancel', [\App\Http\Controllers\Admin\SubscriptionController::class, 'cancel'])->name('admin.subscription.cancel');
-    Route::post('/subscription/reactivate', [\App\Http\Controllers\Admin\SubscriptionController::class, 'reactivate'])->name('admin.subscription.reactivate');
-    Route::get('/subscription/portal', [\App\Http\Controllers\Admin\SubscriptionController::class, 'portal'])->name('admin.subscription.portal');
     // Environment Settings
     Route::get('/environment-settings', [\App\Http\Controllers\Admin\EnvironmentSettingsController::class, 'index'])->name('admin.environment_settings.index');
     Route::patch('/environment-settings', [\App\Http\Controllers\Admin\EnvironmentSettingsController::class, 'update'])->name('admin.environment_settings.update');

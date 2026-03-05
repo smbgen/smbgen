@@ -26,7 +26,6 @@
     </div>
     
     <!-- Flash Messages (ultra-compact) -->
-    <x-trial-status-banner />
     @foreach (['success', 'info', 'warning', 'error'] as $msg)
         @if(session($msg))
             <div class="mt-2 p-2 rounded-lg {{ $msg === 'error' ? 'bg-red-500/10 border border-red-500/30 text-red-300' : 
