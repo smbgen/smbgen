@@ -28,7 +28,7 @@
         <div class="admin-card-body">
 
         <div class="admin-card-body">
-        <form action="{{ route('admin.users.update', $user) }}" method="POST">
+        <form id="user-edit-form" action="{{ route('admin.users.update', $user) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -97,13 +97,10 @@
                     <p class="text-yellow-100 text-sm mb-3">
                         Instantly promote this user to <strong>Company Administrator</strong> with full system access.
                     </p>
-                    <form action="{{ route('admin.users.elevate', $user) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to elevate {{ addslashes($user->name) }} to Administrator? This will grant full system access.');">
-                        @csrf
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition-colors">
-                            <i class="fas fa-level-up-alt mr-2"></i>
-                            Elevate to Administrator
-                        </button>
-                    </form>
+                    <button type="submit" form="elevate-form" class="inline-flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition-colors" onclick="return confirm('Are you sure you want to elevate {{ addslashes($user->name) }} to Administrator? This will grant full system access.');">
+                        <i class="fas fa-level-up-alt mr-2"></i>
+                        Elevate to Administrator
+                    </button>
                 </div>
             @elseif($user->role === 'company_administrator' && $user->id !== auth()->id())
                 <div class="bg-purple-900/20 border border-purple-500 rounded-lg p-4 mb-6">
@@ -173,6 +170,12 @@
                 </div>
             </div>
         </form>
+
+        @if($user->id !== auth()->id() && $user->role !== 'company_administrator')
+            <form id="elevate-form" action="{{ route('admin.users.elevate', $user) }}" method="POST" class="hidden">
+                @csrf
+            </form>
+        @endif
 
         @if($user->id !== auth()->id())
             <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="mt-6">
