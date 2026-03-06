@@ -72,9 +72,11 @@
                     @if($user->id === auth()->id()) disabled title="You cannot change your own role" @endif
                 >
                     <option value="user" {{ old('role', $user->role) === 'user' ? 'selected' : '' }}>User</option>
+                    <option value="client" {{ old('role', $user->role) === 'client' ? 'selected' : '' }}>Client</option>
                     <option value="company_administrator" {{ old('role', $user->role) === 'company_administrator' ? 'selected' : '' }}>Administrator</option>
                 </select>
                 @if($user->id === auth()->id())
+                    <input type="hidden" name="role" value="{{ $user->role }}">
                     <p class="form-help text-yellow-400">
                         <i class="fas fa-info-circle mr-1"></i>You cannot change your own role
                     </p>

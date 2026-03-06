@@ -88,7 +88,7 @@ class UserController extends Controller
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'role' => ['required', 'in:user,company_administrator'],
+            'role' => ['required', 'in:user,client,company_administrator'],
         ];
 
         // Add password validation only if password is provided
