@@ -732,6 +732,11 @@ if (config('business.features.cms')) {
         ->name('cms.form.submit')
         ->where('slug', '[a-z0-9\-]+');
 
+    // Clean Slate — Digital Reputation & Data Suppression landing page
+    Route::get('/clean-slate', function () {
+        return view('clean-slate');
+    })->name('clean-slate');
+
     // CMS page display - CATCH-ALL route (matches any remaining /{slug})
     // Since this is last, all specific routes above will match first
     Route::get('/{slug}', [CmsPagePublicController::class, 'show'])
