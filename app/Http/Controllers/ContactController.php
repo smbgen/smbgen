@@ -85,4 +85,76 @@ class ContactController extends Controller
                 ->with('error', 'Sorry, there was an error submitting your message. Please try again or contact us directly.');
         }
     }
+
+    public function submitCleanSlateIntake(Request $request)
+    {
+        $validated = $request->validate([
+            'name'            => 'required|string|max:255',
+            'email'           => 'required|email|max:255',
+            'phone'           => 'nullable|string|max:20',
+            'message'         => 'nullable|string|max:2000',
+            'engagement_type' => 'nullable|string|in:standard,retainer,unsure',
+        ]);
+
+        $engagementLabels = [
+            'standard' => 'Standard Engagement — $1,500',
+            'retainer' => 'Annual Retainer — Let\'s talk',
+            'unsure'   => 'Not sure yet',
+        ];
+
+        $messageBody = ($validated['message'] ?? 'No details provided.') . "\n\n"
+            . 'Phone: ' . ($validated['phone'] ?? 'Not provided') . "\n"
+            . 'Engagement type: ' . ($engagementLabels[$validated['engagement_type'] ?? 'unsure'] ?? 'Not specified');
+
+        try {
+            $lead = LeadForm::create([
+                'name'               => $validated['name'],
+                'email'              => $validated['email'],
+                'message'            => $messageBody,
+                'source_site'        => 'Clean Slate Landing Page',
+                'notification_email' => config('business.contact.email'),
+                'ip_address'         => $request->ip(),
+                'user_agent'         => $request->userAgent(),
+                'referer'            => $request->header('referer'),
+            ]);
+
+            try {
+                Mail::to($validated['email'])
+                    ->send(new ContactInquiryReceived(
+                        name: $validated['name'],
+                        companyName: 'Clean Slate by L7 Media Labs',
+                    ));
+            } catch (\Exception $e) {
+                Log::warning('Clean Slate: failed to send customer confirmation', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
+            }
+
+            $businessEmail = config('business.contact.email');
+            if ($businessEmail) {
+                try {
+                    Mail::to($businessEmail)
+                        ->send(new NewContactInquiry(
+                            name: $validated['name'],
+                            email: $validated['email'],
+                            phone: $validated['phone'] ?? null,
+                            preferredContact: null,
+                            message: $messageBody,
+                            submittedAt: now()->format('F j, Y \a\t g:i A'),
+                            replyToEmail: $validated['email'],
+                            replyToName: $validated['name'],
+                        ));
+                } catch (\Exception $e) {
+                    Log::warning('Clean Slate: failed to send admin notification', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
+                }
+            }
+
+            return redirect()->to(route('clean-slate') . '#intake')
+                ->with('success', "Thanks {$validated['name']} — we've received your request and will be in touch within one business day.");
+        } catch (\Exception $e) {
+            Log::error('Clean Slate intake submission failed', ['error' => $e->getMessage()]);
+
+            return redirect()->to(route('clean-slate') . '#intake')
+                ->withInput()
+                ->with('error', 'Something went wrong. Please try again or email us directly at chat@l7medialabs.com.');
+        }
+    }
 }

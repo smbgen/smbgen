@@ -352,15 +352,30 @@
 
             <div class="intake-card rounded-2xl p-8">
                 @if(session('success'))
-                    <div class="mb-6 p-4 bg-green-500/10 border border-green-500/30 text-green-400 rounded-xl text-sm flex items-center gap-3">
+                    <div class="p-5 bg-green-500/10 border border-green-500/30 rounded-xl flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-green-400 mb-1">Request received</p>
+                            <p class="text-green-300 text-sm">{{ session('success') }}</p>
+                            <p class="mt-2 text-green-600 text-xs">Check your inbox — a confirmation has been sent to your email address.</p>
+                        </div>
+                    </div>
+                @else
+
+                @if(session('error'))
+                    <div class="mb-5 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-sm flex items-center gap-3">
                         <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                         </svg>
-                        {{ session('success') }}
+                        {{ session('error') }}
                     </div>
                 @endif
 
-                <form action="{{ route('contact') }}" method="POST" class="space-y-5">
+                <form action="{{ route('clean-slate.intake') }}" method="POST" class="space-y-5">
                     @csrf
 
                     <div class="grid sm:grid-cols-2 gap-5">
@@ -411,6 +426,7 @@
                         All information is kept strictly confidential and will never be shared with any third party.
                     </p>
                 </form>
+                @endif
             </div>
         </div>
     </section>

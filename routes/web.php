@@ -737,6 +737,9 @@ if (config('business.features.cms')) {
         return view('clean-slate');
     })->name('clean-slate');
 
+    // Clean Slate intake form submission
+    Route::post('/clean-slate/intake', [App\Http\Controllers\ContactController::class, 'submitCleanSlateIntake'])->name('clean-slate.intake');
+
     // CMS page display - CATCH-ALL route (matches any remaining /{slug})
     // Since this is last, all specific routes above will match first
     Route::get('/{slug}', [CmsPagePublicController::class, 'show'])
