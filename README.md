@@ -313,6 +313,9 @@ routes/
 - **Mac:** Laravel Valet or Herd
 - **Linux:** PHP + Composer + Node.js manually
 
+### Laravel Boost https://laravel.com/docs/12.x/boost
+Follow instructions to install Laravel boost ^
+
 ### Production
 Deployment scripts available in `deployment/` folder for VPS setups.
 

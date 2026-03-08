@@ -1,20 +1,24 @@
 {
     "mcpServers": {
         "laravel-boost": {
-            "command": "C:/Users/alexr/.config/herd/bin/php84.bat",
+            "command": "php",
             "args": [
                 "artisan",
                 "boost:mcp"
             ]
         },
         "herd": {
-            "command": "C:/Users/alexr/.config/herd/bin/php84.bat",
+            "command": "php",
             "args": [
                 "C:/Users/alexr/.config/herd/bin/herd-mcp.phar"
             ],
             "env": {
-                "SITE_PATH": "C:\\Users\\alexr\\Herd\\smbgen"
+                "SITE_PATH": "C:\\Users\\alexr\\Herd\\prtl7-app"
             }
+        },
+        "nightwatch": {
+            "type": "http",
+            "url": "https://nightwatch.laravel.com/mcp"
         }
     }
 }
