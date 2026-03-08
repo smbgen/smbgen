@@ -665,7 +665,7 @@ if (config('app.debug')) {
             return view('debug.switch-user', compact('usersByRole'));
         })->name('debug.switch-user');
 
-        Route::post('/switch-user/{user}', function (\App\Models\User $user) {
+        Route::get('/switch-user/{user}', function (\App\Models\User $user) {
             \Illuminate\Support\Facades\Auth::login($user);
 
             $redirect = match ($user->role) {
