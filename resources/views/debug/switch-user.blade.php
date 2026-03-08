@@ -36,7 +36,7 @@
 
             <div class="space-y-2">
                 @foreach($users as $user)
-                <form action="{{ route('debug.switch-user', $user) }}" method="POST">
+                <form action="{{ route('debug.switch-user.post', $user) }}" method="POST">
                     @csrf
                     <button type="submit"
                         class="w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all text-left group
