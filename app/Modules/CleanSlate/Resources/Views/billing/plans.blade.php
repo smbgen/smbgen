@@ -3,7 +3,7 @@
 @section('title', 'Choose a Plan')
 
 @section('content')
-<div class="max-w-5xl mx-auto px-6 py-16">
+<div class="max-w-5xl mx-auto px-6 py-16" x-data="{ selected: 'professional' }">
 
     <div class="text-center mb-12">
         <h1 class="text-3xl font-extrabold text-white mb-3">Choose Your Plan</h1>
@@ -19,10 +19,19 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             @foreach ($tiers as $tier)
-            <label class="relative cursor-pointer group">
-                <input type="radio" name="tier" value="{{ $tier->value }}" class="peer sr-only" required
-                    {{ $tier->value === 'professional' ? 'checked' : '' }}>
-                <div class="h-full p-6 rounded-2xl border border-white/10 bg-white/5 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/5 transition-all hover:border-white/20 relative">
+            <label
+                class="relative cursor-pointer"
+                @click="selected = '{{ $tier->value }}'">
+
+                <input type="radio" name="tier" value="{{ $tier->value }}"
+                    x-bind:checked="selected === '{{ $tier->value }}'"
+                    class="sr-only">
+
+                <div class="h-full p-6 rounded-2xl border transition-all relative"
+                    :class="selected === '{{ $tier->value }}'
+                        ? 'border-cyan-500 bg-cyan-500/5'
+                        : 'border-white/10 bg-white/5 hover:border-white/20'">
+
                     @if($tier->value === 'professional')
                         <div class="absolute -top-3 left-1/2 -translate-x-1/2">
                             <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-cyan-500 to-violet-500 text-white">Most Popular</span>
@@ -56,8 +65,11 @@
                         @endif
                     </ul>
 
-                    <div class="w-5 h-5 rounded-full border-2 border-gray-600 peer-checked:border-cyan-500 transition-colors flex items-center justify-center mx-auto">
-                        <div class="w-2.5 h-2.5 rounded-full bg-cyan-500 opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+                    {{-- Selection indicator --}}
+                    <div class="w-5 h-5 rounded-full border-2 transition-colors flex items-center justify-center mx-auto"
+                        :class="selected === '{{ $tier->value }}' ? 'border-cyan-500' : 'border-gray-600'">
+                        <div class="w-2.5 h-2.5 rounded-full bg-cyan-500 transition-opacity"
+                            :class="selected === '{{ $tier->value }}' ? 'opacity-100' : 'opacity-0'"></div>
                     </div>
                 </div>
             </label>
