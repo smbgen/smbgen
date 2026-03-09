@@ -655,6 +655,26 @@ if (config('app.debug')) {
         Route::get('/design', function () {
             return view('debug.design');
         })->name('debug.design');
+
+        // Dev User Switcher — log in as any user without a password
+        Route::get('/switch-user', function () {
+            $usersByRole = \App\Models\User::orderBy('name')
+                ->get()
+                ->groupBy('role');
+
+            return view('debug.switch-user', compact('usersByRole'));
+        })->name('debug.switch-user');
+
+        Route::get('/switch-user/{user}', function (\App\Models\User $user) {
+            \Illuminate\Support\Facades\Auth::login($user);
+
+            $redirect = match ($user->role) {
+                'company_administrator' => route('admin.dashboard'),
+                default                 => route('dashboard'),
+            };
+
+            return redirect($redirect)->with('status', "Logged in as {$user->name} ({$user->role})");
+        })->name('debug.switch-user.post');
     });
 }
 

@@ -17,8 +17,12 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
+        if (config('app.debug')) {
+            return redirect()->route('debug.switch-user');
+        }
+
         return view('auth.login');
     }
 
