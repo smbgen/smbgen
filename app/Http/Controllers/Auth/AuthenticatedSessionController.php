@@ -8,7 +8,9 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -136,8 +138,9 @@ class AuthenticatedSessionController extends Controller
                 [
                     'name' => $googleUser->getName(),
                     'google_id' => $googleUser->getId(),
-                    'role' => 'client', // default role
-                    'email_verified_at' => now(), // Google emails are verified
+                    'role' => 'client',
+                    'email_verified_at' => now(), // Google verifies email ownership
+                    'password' => Hash::make(Str::random(32)), // unguessable; user signs in via Google
                 ]
             );
 
