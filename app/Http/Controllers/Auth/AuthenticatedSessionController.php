@@ -128,7 +128,7 @@ class AuthenticatedSessionController extends Controller
         try {
             // Check if Socialite is working
             Log::info('Attempting to get Google user...');
-            $googleUser = Socialite::driver('google')->stateless()->user();
+            $googleUser = Socialite::driver('google')->user();
             Log::info('Google User object', ['email' => $googleUser->getEmail(), 'name' => $googleUser->getName(), 'id' => $googleUser->getId()]);
 
             // Check if User model exists and has required fields
