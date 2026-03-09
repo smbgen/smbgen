@@ -12,7 +12,7 @@ class EnsureSubscribed
     {
         $user = $request->user();
 
-        if (! $user || ! $user->subscribed()) {
+        if (! $user || ! $user->subscribed('cleanslate')) {
             return redirect()->route('cleanslate.billing.plans')
                 ->with('error', 'An active subscription is required to access this area.');
         }

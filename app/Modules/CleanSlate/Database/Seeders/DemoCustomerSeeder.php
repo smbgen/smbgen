@@ -26,6 +26,28 @@ class DemoCustomerSeeder extends Seeder
         $customers = [
             [
                 'user' => [
+                    'name'               => 'Demo Client',
+                    'email'              => 'demo@smbgen.com',
+                    'role'               => 'client',
+                    'email_verified_at'  => now(),
+                ],
+                'subscription_tier' => 'professional',
+                'profile' => [
+                    'first_name'         => 'Demo',
+                    'last_name'          => 'Client',
+                    'date_of_birth'      => '1988-06-15',
+                    'emails'             => ['demo@smbgen.com'],
+                    'phones'             => ['555-555-0100'],
+                    'addresses'          => [
+                        ['street' => '123 Demo Street', 'city' => 'Washington', 'state' => 'DC', 'zip' => '20001'],
+                    ],
+                    'onboarding_complete' => true,
+                    'exposure_score'     => 55,
+                ],
+                'scenario' => 'high_exposure',
+            ],
+            [
+                'user' => [
                     'name'               => 'Sarah Mitchell',
                     'email'              => 'sarah.mitchell@demo.test',
                     'role'               => 'user',
@@ -104,7 +126,7 @@ class DemoCustomerSeeder extends Seeder
 
             // Create a fake Cashier subscription (no real Stripe call)
             DB::table('subscriptions')->updateOrInsert(
-                ['user_id' => $user->id, 'type' => 'default'],
+                ['user_id' => $user->id, 'type' => 'cleanslate'],
                 [
                     'stripe_id'     => 'sub_demo_' . Str::random(14),
                     'stripe_status' => 'active',

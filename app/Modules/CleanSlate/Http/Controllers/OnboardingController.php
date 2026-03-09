@@ -45,14 +45,21 @@ class OnboardingController extends Controller
     {
         $data = $request->validate([
             'emails'   => ['required', 'array', 'min:1'],
-            'emails.*' => ['email'],
+            'emails.*' => ['nullable', 'email'],
             'phones'   => ['nullable', 'array'],
-            'phones.*' => ['string', 'max:20'],
+            'phones.*' => ['nullable', 'string', 'max:20'],
         ]);
+
+        $emails = array_values(array_filter($data['emails'] ?? [], fn ($e) => ! empty($e)));
+        $phones = array_values(array_filter($data['phones'] ?? [], fn ($p) => ! empty($p)));
+
+        if (empty($emails)) {
+            return back()->withErrors(['emails' => 'At least one email address is required.'])->withInput();
+        }
 
         $request->user()->profile()->updateOrCreate(
             ['user_id' => $request->user()->id],
-            ['emails' => $data['emails'], 'phones' => $data['phones'] ?? []]
+            ['emails' => $emails, 'phones' => $phones]
         );
 
         return redirect()->route('cleanslate.onboarding.addresses');

@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
     {
         // Use the specified password for admin user
         $adminPassword = 'JUHeKKEcg~y2Z7q9Wd2M9UmqnQ~^ZeQtzP';
-        $demoPassword = Str::password(32);
+        $demoPassword  = 'demo-password-local-only';
 
         // Admin user
         $admin = User::firstOrCreate([
