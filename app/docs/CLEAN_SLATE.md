@@ -5,11 +5,50 @@
 
 ---
 
-## Overview
+## Team Briefing
 
-Clean Slate is a self-contained Laravel module that allows customers to subscribe to an ongoing data broker monitoring and opt-out service. Customers provide their personal information (name, DOB, emails, phone numbers, addresses), and the system tracks opt-out submission attempts across a curated list of data brokers.
+### What It Is
 
-It is embedded within the Portal 7 platform but architecturally isolated — own routes, controllers, middleware, models, views, jobs, migrations, and seeders — under `app/Modules/CleanSlate/`.
+Clean Slate is a **data broker opt-out / digital reputation suppression service** embedded as a module within the Portal 7 platform. Customers subscribe, provide their personal info, and the system tracks opt-out requests submitted to data brokers on their behalf. Each subscriber gets a personal opt-out specialist and ongoing monitoring for new listings that appear after initial removal.
+
+### What Is Built
+
+**Public-Facing**
+- Marketing landing page with hero, features, how-it-works, and a 3-tier pricing section
+- Interactive plan selection page routing directly into Stripe Checkout
+- Intake/contact fallback form for prospects not ready to subscribe — lands as a lead in the admin dashboard
+
+**Subscription and Billing**
+- Stripe Checkout integration via Laravel Cashier
+- Checkout session ID passed back on success so the subscription activates without needing a webhook forwarded locally
+- Webhooks sync in production as a secondary path
+
+**Onboarding (post-subscription, 4 steps)**
+1. Profile — name, date of birth
+2. Contact — email addresses, phone numbers
+3. Addresses — past/current addresses for broker searches
+4. Confirm and Launch — reviews data, kicks off initial scan job
+
+**Customer Dashboard**
+- Scan job status per data broker
+- Removal request tracking (pending / submitted / confirmed / failed)
+- Exposure score
+
+**Admin Panel**
+- `/admin/clean-slate` — view all customers, profiles, scan status
+- Broker management — toggle brokers active/inactive, update metadata
+- Debug view for dev inspection
+
+**Dev and Seeding**
+- `DemoCustomerSeeder` seeds 4 demo users with realistic scan/removal data for UI development
+- Three exposure scenarios: low, high, very high
+- Fake Cashier subscriptions — no real Stripe calls needed for local dev
+
+### Architecture Notes
+- Self-contained module at `app/Modules/CleanSlate/` — own routes, controllers, middleware, models, views, jobs, migrations, and seeders
+- Same `User` model as the rest of the platform — a CleanSlate customer is just a user with a `cleanslate` Cashier subscription and a `Profile` record. No separate auth or user table.
+- Two middleware guards: `EnsureSubscribed` (active Cashier subscription) and `EnsureOnboardingComplete` (profile data filled in)
+- Jobs: `DispatchInitialScanJob` fires on onboarding completion; `ProcessScanJob` and `SubmitRemovalJob` handle broker interactions (currently stubbed)
 
 ---
 
@@ -160,7 +199,7 @@ php artisan db:seed --class="App\Modules\CleanSlate\Database\Seeders\DemoCustome
 ## Open Questions and Pre-Launch Considerations
 
 ### 1. Broker Automation — What Is Actually Implemented?
-The scan/removal jobs exist as Laravel jobs but the actual broker interaction logic is stubbed. The team needs to define the submission mechanism per broker: web scraping, email template, certified mail, API (where available), or a mix. This is the largest open implementation gap.
+The scan/removal jobs (`ProcessScanJob`, `SubmitRemovalJob`) exist as Laravel jobs but the actual broker interaction logic is stubbed. The team needs to define the submission mechanism per broker: web scraping, email template, certified mail, API (where available), or a mix. This is the largest open implementation gap.
 
 ### 2. Human vs. Automated Workflow
 The Executive tier advertises "manual removals" and a "dedicated specialist." Is there a staff-facing workflow (task queue, assignment, internal notes) that needs to be built, or is that tier label aspirational at launch?
