@@ -14,10 +14,23 @@
             @csrf
 
             <!-- Email Address -->
-            <div>
+            <div x-data="{ isGmail: {{ old('email') && preg_match('/@(gmail\.|googlemail\.)/i', old('email')) ? 'true' : 'false' }} }"
+                 @input.capture="isGmail = /\@(gmail\.|googlemail\.)/i.test($event.target.value)">
                 <x-input-label for="email" :value="__('Email')" class="text-gray-300" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
+                {{-- Gmail hint --}}
+                <div x-show="isGmail"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 -translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     class="mt-2 flex items-start gap-2 rounded-lg bg-blue-900/40 border border-blue-700/60 px-3 py-2 text-xs text-blue-300">
+                    <svg class="mt-0.5 h-3.5 w-3.5 shrink-0 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z"/>
+                    </svg>
+                    <span>Gmail accounts sign in with Google — no password needed. Use <a href="{{ route('auth.google.redirect') }}" class="font-semibold text-blue-200 underline hover:text-white">Continue with Google</a> below instead.</span>
+                </div>
             </div>
 
             <div class="flex items-center justify-end mt-4">
