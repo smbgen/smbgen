@@ -13,6 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
+        then: function () {
+            // MCP routes use the api middleware stack (stateless, no CSRF)
+            // so they work correctly when called from the Node.js MCP server
+            // both locally and on production (Forge).
+            \Illuminate\Support\Facades\Route::middleware('api')
+                ->group(base_path('routes/mcp.php'));
+        },
     )
     ->withProviders([
         \Illuminate\Auth\AuthServiceProvider::class,
@@ -28,6 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'companyAdministrator' => \App\Http\Middleware\CompanyAdministrator::class,
             'cors' => \App\Http\Middleware\HandleCors::class,
+            'mcp.auth' => \App\Http\Middleware\McpTokenAuth::class,
             // Clean Slate
             'subscribed'           => \App\Modules\CleanSlate\Http\Middleware\EnsureSubscribed::class,
             'onboarding.complete'  => \App\Modules\CleanSlate\Http\Middleware\EnsureOnboardingComplete::class,

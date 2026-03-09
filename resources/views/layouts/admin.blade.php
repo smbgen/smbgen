@@ -215,6 +215,10 @@
                             <span>AI Assistant</span>
                         </a>
                     @endif
+                    <a href="{{ route('admin.mcp.index') }}" class="sidebar-link {{ request()->routeIs('admin.mcp.*') ? 'active' : '' }}">
+                        <i class="fas fa-plug text-lg"></i>
+                        <span>Claude Code MCP</span>
+                    </a>
                 </div>
                 @endif
 

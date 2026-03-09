@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'mcp_secret' => env('MCP_SECRET'),
+
     /*
      * Company Name
      *

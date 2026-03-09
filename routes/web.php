@@ -734,6 +734,13 @@ if (config('business.features.blog')) {
             Route::patch('/settings', [\App\Http\Controllers\Admin\AISettingsController::class, 'update'])->name('admin.ai.settings.update');
             Route::post('/fetch-models', [\App\Http\Controllers\Admin\AISettingsController::class, 'fetchModels'])->name('admin.ai.fetch-models');
         });
+
+        // MCP Server Admin
+        Route::prefix('mcp')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\McpAdminController::class, 'index'])->name('admin.mcp.index');
+            Route::get('/download', [\App\Http\Controllers\Admin\McpAdminController::class, 'downloadConfig'])->name('admin.mcp.download');
+            Route::post('/rotate-token', [\App\Http\Controllers\Admin\McpAdminController::class, 'rotateToken'])->name('admin.mcp.rotate');
+        });
     });
 }
 
