@@ -20,9 +20,9 @@ enum SubscriptionTier: string
     public function priceMonthly(): int
     {
         return match ($this) {
-            self::Basic        => 9900,
-            self::Professional => 24900,
-            self::Executive    => 49900,
+            self::Basic        => 30000,
+            self::Professional => 75000,
+            self::Executive    => 150000,
         };
     }
 
