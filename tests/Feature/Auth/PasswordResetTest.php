@@ -47,6 +47,22 @@ class PasswordResetTest extends TestCase
         });
     }
 
+    public function test_google_only_account_is_told_to_use_google_on_password_reset(): void
+    {
+        Notification::fake();
+
+        $user = User::factory()->create(['google_id' => '123456789']);
+
+        $response = $this->post('/forgot-password', ['email' => $user->email]);
+
+        Notification::assertNothingSent();
+        $response->assertSessionHasErrors('email');
+        $this->assertStringContainsString(
+            'Google',
+            session('errors')->get('email')[0]
+        );
+    }
+
     public function test_password_can_be_reset_with_valid_token(): void
     {
         Notification::fake();
