@@ -8,7 +8,7 @@
             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style="background-color: {{ \App\Models\CmsCompanyColors::getSettings()->primary_color }};">
                 <i class="fas fa-dollar-sign text-white text-2xl"></i>
             </div>
-            <h2 class="text-4xl font-bold mb-3" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }};">Receive Payment</h2>
+            <h2 class="text-4xl font-bold mb-3" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }};">Process Credit Card Payment</h2>
             <p class="text-lg" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}99;">Simple and secure payment collection powered by Stripe</p>
         </div>
 
@@ -89,18 +89,33 @@
 
                 <!-- Card Element -->
                 <div class="mt-8">
-                    <label class="block text-sm font-medium mb-3" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }};">
-                        <i class="fas fa-credit-card mr-2" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->primary_color }};"></i>Card Information
-                    </label>
+                    <div class="flex items-center justify-between mb-3">
+                        <label class="block text-sm font-medium" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }};">
+                            <i class="fas fa-credit-card mr-2" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->primary_color }};"></i>Card Details
+                        </label>
+                        <span class="text-xs flex items-center gap-1" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}80;">
+                            <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            Entered directly into Stripe — never touches our servers
+                        </span>
+                    </div>
                     <div id="card-element" class="p-5 rounded-xl" style="background-color: #ffffff; border: 2px solid {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}20;"></div>
                     <div id="card-errors" class="mt-3 text-sm text-red-600 font-medium"></div>
                 </div>
 
+                <!-- What happens next -->
+                <div class="rounded-xl p-4 text-sm" style="background-color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}08; border: 1px solid {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}15;">
+                    <p class="font-medium mb-1" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }};">What happens when you click Pay Now:</p>
+                    <ol class="space-y-1 list-decimal list-inside" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}80;">
+                        <li>Your card is charged the amount shown above</li>
+                        <li>A payment receipt is sent by Stripe to your email</li>
+                    </ol>
+                </div>
+
                 <!-- Submit Button -->
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     id="submit-button"
-                    class="mt-8 w-full font-bold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 hover:opacity-90"
+                    class="w-full font-bold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 hover:opacity-90"
                     style="background-color: {{ \App\Models\CmsCompanyColors::getSettings()->primary_color }}; color: #ffffff;"
                 >
                     <svg class="animate-spin -ml-1 mr-3 h-6 w-6 text-white hidden" id="loading-spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

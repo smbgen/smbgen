@@ -43,13 +43,8 @@ return [
     ],
 
     'stripe' => [
-        'api_key' => env('OPENAI_API_KEY'),
-        'base_uri' => env('OPENAI_BASE_URI', 'https://api.openai.com/v1/'),
-    ],
-
-    'stripe' => [
-        'key' => env('STRIPE_PUBLIC_KEY'),
-        'secret' => env('STRIPE_SECRET_KEY'),
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
         'plans' => [
             'starter' => env('STRIPE_PRICE_STARTER'),
