@@ -60,7 +60,7 @@
                 <a href="#how-it-works" class="hidden md:block text-gray-400 hover:text-white text-sm transition-colors">How It Works</a>
                 <a href="#pricing" class="hidden md:block text-gray-400 hover:text-white text-sm transition-colors">Pricing</a>
                 <a href="#faq" class="hidden md:block text-gray-400 hover:text-white text-sm transition-colors">FAQ</a>
-                <a href="#intake" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-white text-sm font-medium transition-colors">
+                <a href="{{ route('cleanslate.billing.plans') }}" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-white text-sm font-medium transition-colors">
                     Get Started
                 </a>
             </div>
@@ -89,8 +89,8 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#intake" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-semibold text-base transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:-translate-y-0.5">
-                    Start Your Engagement — $1,500
+                <a href="{{ route('cleanslate.billing.plans') }}" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-semibold text-base transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:-translate-y-0.5">
+                    View Plans & Get Started
                 </a>
                 <a href="#how-it-works" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/10 hover:border-white/20 text-gray-300 hover:text-white font-medium text-base transition-all">
                     See How It Works
@@ -243,7 +243,7 @@
                         </li>
                         @endforeach
                     </ul>
-                    <a href="#intake" class="block text-center w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-semibold text-sm transition-all">
+                    <a href="{{ route('cleanslate.billing.plans') }}" class="block text-center w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-semibold text-sm transition-all">
                         Start Engagement
                     </a>
                 </div>
@@ -345,9 +345,9 @@
     <section id="intake" class="py-20 border-t border-white/5">
         <div class="max-w-2xl mx-auto px-6">
             <div class="text-center mb-10">
-                <p class="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-3">Get Started</p>
-                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Ready to start your engagement?</h2>
-                <p class="text-gray-400 text-sm">Fill out the form below and a member of our team will reach out within one business day to confirm scope and next steps.</p>
+                <p class="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-3">Questions?</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Not sure where to start?</h2>
+                <p class="text-gray-400 text-sm">Send us a message and we'll reach out within one business day. Or, if you're ready, <a href="{{ route('cleanslate.billing.plans') }}" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2">go straight to plans</a>.</p>
             </div>
 
             <div class="intake-card rounded-2xl p-8">
@@ -444,7 +444,7 @@
             </div>
             <div class="flex items-center gap-6">
                 <a href="mailto:chat@l7medialabs.com" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">chat@l7medialabs.com</a>
-                <a href="#intake" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Get Started</a>
+                <a href="{{ route('cleanslate.billing.plans') }}" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Get Started</a>
             </div>
             <p class="text-gray-700 text-xs">© {{ date('Y') }} L7 Labs, LLC. All rights reserved.</p>
         </div>
