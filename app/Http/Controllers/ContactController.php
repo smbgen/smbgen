@@ -116,6 +116,10 @@ class ContactController extends Controller
                 'ip_address'         => $request->ip(),
                 'user_agent'         => $request->userAgent(),
                 'referer'            => $request->header('referer'),
+                'form_data'          => [
+                    'phone'           => $validated['phone'] ?? null,
+                    'engagement_type' => $validated['engagement_type'] ?? null,
+                ],
             ]);
 
             try {
