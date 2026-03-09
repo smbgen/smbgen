@@ -54,8 +54,12 @@ class BillingController extends Controller
         return redirect($url);
     }
 
-    public function success(): RedirectResponse
+    public function success(Request $request): RedirectResponse
     {
+        if ($sessionId = $request->query('session_id')) {
+            $this->subscriptionService->syncFromCheckoutSession($request->user(), $sessionId);
+        }
+
         return redirect()->route('cleanslate.onboarding.profile')
             ->with('success', 'Subscription activated! Let\'s set up your profile.');
     }
