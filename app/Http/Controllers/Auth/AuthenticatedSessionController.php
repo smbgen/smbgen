@@ -64,8 +64,6 @@ class AuthenticatedSessionController extends Controller
 
         if ($user->role === 'company_administrator') {
             return redirect()->route('admin.dashboard');
-        } elseif ($user->role === 'super_admin') {
-            return redirect()->route('super-admin.dashboard');
         } else {
             return redirect()->route('dashboard');
         }
@@ -165,8 +163,6 @@ class AuthenticatedSessionController extends Controller
             // Redirect based on user role
             if ($user->role === 'company_administrator') {
                 return redirect()->intended('/admin/dashboard');
-            } elseif ($user->role === 'super_admin') {
-                return redirect()->intended('/super-admin');
             } else {
                 return redirect()->intended('/dashboard');
             }
