@@ -41,7 +41,7 @@ class BusinessHelper
      */
     public static function contactEmail(): string
     {
-        return config('business.contact.email', 'support@smbgen.com');
+        return config('business.contact.email', '');
     }
 
     /**
@@ -49,7 +49,7 @@ class BusinessHelper
      */
     public static function website(): string
     {
-        return config('business.contact.website', 'https://smbgen.com');
+        return config('business.contact.website', config('app.url', ''));
     }
 
     /**

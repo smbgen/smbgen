@@ -19,7 +19,7 @@ class SuperAdminSeeder extends Seeder
         // Generate a secure random password
         $password = Str::password(32);
 
-        $email = env('ADMIN_EMAIL', 'admin@smbgen.com');
+        $email = env('ADMIN_EMAIL', 'admin@example.com');
         $name = env('ADMIN_NAME', 'Admin');
 
         $admin = User::updateOrCreate(
