@@ -56,7 +56,7 @@
               <div id="secureSessionToast" class="bg-gray-800 text-white border border-gray-600 rounded-lg shadow-lg w-full opacity-100 pointer-events-none" role="alert">
                 <div class="bg-gray-700 text-white border-b-0 py-1 px-2 rounded-t-lg flex items-center">
                   <strong class="text-xs">Session protection enabled</strong>
-                  <small class="text-xs ml-auto text-right">    <strong>smbgen</strong><br> cloud monitoring</small>
+                  <small class="text-xs ml-auto text-right">    <strong>{{ config('app.name') }}</strong><br> cloud monitoring</small>
                 </div>
                 <div class="text-xs py-2 px-3 text-white/90">
                   <div>IP: {{ request()->ip() }}</div>
@@ -65,8 +65,8 @@
                 </div>
               </div>
 
-              <a id="sessionPill" href="https://smbgen.com" target="_blank" rel="noopener noreferrer" aria-label="Open smbgen.com in a new tab" class="hidden bg-green-600 text-white text-xs rounded-full px-2 py-0.5 shadow-lg mt-2 text-center transform origin-center pointer-events-auto cursor-pointer">
-                <strong>smbgen</strong>
+              <a id="sessionPill" href="{{ config('app.url') }}" target="_blank" rel="noopener noreferrer" aria-label="Open {{ config('app.name') }} in a new tab" class="hidden bg-green-600 text-white text-xs rounded-full px-2 py-0.5 shadow-lg mt-2 text-center transform origin-center pointer-events-auto cursor-pointer">
+                <strong>{{ config('app.name') }}</strong>
               </a>
             </div>
 
