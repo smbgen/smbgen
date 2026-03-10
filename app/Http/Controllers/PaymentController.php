@@ -136,7 +136,9 @@ class PaymentController extends Controller
      */
     public function collect()
     {
-        return view('payment.collect');
+        return view('payment.collect', [
+            'stripeEnabled' => ! empty(config('services.stripe.key')),
+        ]);
     }
 
     /**

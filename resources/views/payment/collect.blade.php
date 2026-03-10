@@ -12,6 +12,23 @@
             <p class="text-lg" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}99;">Simple and secure payment collection powered by Stripe</p>
         </div>
 
+        @if(! $stripeEnabled)
+        <!-- Service Unavailable -->
+        <div class="rounded-2xl shadow-2xl p-10 text-center" style="background-color: {{ \App\Models\CmsCompanyColors::getSettings()->body_background_color }}; border: 1px solid {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}20;">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full mb-5 bg-yellow-100">
+                <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }};">Payment Service Unavailable</h3>
+            <p class="text-sm" style="color: {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}80;">Online payments are not currently available. Please contact us directly to arrange payment.</p>
+            @if(config('business.contact.email'))
+            <a href="mailto:{{ config('business.contact.email') }}" class="inline-block mt-6 px-6 py-3 rounded-lg font-semibold text-white text-sm" style="background-color: {{ \App\Models\CmsCompanyColors::getSettings()->primary_color }};">
+                <i class="fas fa-envelope mr-2"></i>Contact Us
+            </a>
+            @endif
+        </div>
+        @else
         <!-- Payment Form -->
         <div class="rounded-2xl shadow-2xl p-8 lg:p-10" style="background-color: {{ \App\Models\CmsCompanyColors::getSettings()->body_background_color }}; border: 1px solid {{ \App\Models\CmsCompanyColors::getSettings()->text_color }}20;">
             <form id="payment-form" class="space-y-6">
@@ -144,6 +161,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <!-- Security & Info Section -->
         <div class="mt-8 space-y-4">
@@ -168,6 +186,7 @@
     </div>
 </div>
 
+@if($stripeEnabled)
 @push('scripts')
 <script src="https://js.stripe.com/v3/"></script>
 <script>
@@ -290,4 +309,5 @@
     });
 </script>
 @endpush
+@endif
 @endsection
