@@ -8,15 +8,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .hero-bg {
-            background: radial-gradient(ellipse at 60% 0%, rgba(99,102,241,0.15) 0%, transparent 60%),
-                        radial-gradient(ellipse at 10% 80%, rgba(236,72,153,0.10) 0%, transparent 50%),
+            background: radial-gradient(ellipse at 60% 0%, rgba(220,38,38,0.12) 0%, transparent 60%),
+                        radial-gradient(ellipse at 10% 80%, rgba(239,68,68,0.07) 0%, transparent 50%),
                         #060d1a;
         }
         .card-glow:hover {
-            box-shadow: 0 0 0 1px rgba(99,102,241,0.3), 0 8px 32px rgba(99,102,241,0.08);
+            box-shadow: 0 0 0 1px rgba(220,38,38,0.25), 0 8px 32px rgba(220,38,38,0.07);
         }
         .gradient-text {
-            background: linear-gradient(135deg, #6366f1, #ec4899);
+            background: linear-gradient(135deg, #f87171, #fbbf24);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -25,8 +25,8 @@
             border-bottom: 1px solid rgba(255,255,255,0.07);
         }
         .intake-card {
-            background: linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(236,72,153,0.06) 100%);
-            border: 1px solid rgba(99,102,241,0.2);
+            background: linear-gradient(135deg, rgba(220,38,38,0.05) 0%, rgba(239,68,68,0.03) 100%);
+            border: 1px solid rgba(220,38,38,0.2);
         }
         .code-block {
             background: rgba(255,255,255,0.03);
@@ -75,8 +75,8 @@
     {{-- HERO --}}
     <section class="hero-bg min-h-[90vh] flex items-center">
         <div class="max-w-6xl mx-auto px-6 py-24 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-xs font-medium mb-8">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-600/30 bg-red-600/10 text-red-400 text-xs font-medium mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
                 Lovable — but for Laravel
             </div>
 
@@ -93,12 +93,12 @@
                 No more boilerplate. No more generic starters. Get a real codebase you own, structured the Laravel way, ready to customise and deploy.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#start" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-base transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 hover:-translate-y-0.5">
-                    Start Building — Free
-                </a>
-                <a href="{{ route('extreme.demo') }}" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/10 hover:border-white/20 text-gray-300 hover:text-white font-medium text-base transition-all">
-                    Try Live Demo →
+            <div class="flex items-center justify-center">
+                <a href="{{ route('extreme.demo') }}"
+                   class="inline-flex items-center gap-3 px-12 py-4 rounded-xl bg-red-700 hover:bg-red-600 text-white font-black uppercase tracking-widest text-xl transition-all shadow-xl shadow-red-900/50 hover:-translate-y-0.5 border border-red-600/40"
+                   style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    LAUNCH
                 </a>
             </div>
 
@@ -113,13 +113,13 @@
                     <span class="ml-2 text-gray-600 text-xs">extreme — prompt</span>
                 </div>
                 <p class="text-gray-500 text-sm mb-3">$ extreme generate</p>
-                <p class="text-indigo-300 text-sm mb-1">
+                <p class="text-red-300 text-sm mb-1">
                     <span class="text-gray-600">›</span> Build me a multi-tenant SaaS for personal trainers. Clients can book sessions,
                 </p>
-                <p class="text-indigo-300 text-sm mb-1 pl-4">
+                <p class="text-red-300 text-sm mb-1 pl-4">
                     trainers manage their schedule, and subscriptions are handled through Stripe.
                 </p>
-                <p class="text-indigo-300 text-sm mb-4 pl-4">
+                <p class="text-red-300 text-sm mb-4 pl-4">
                     Auth via Google. Dark mode. Mobile-first.
                 </p>
                 <div class="border-t border-white/5 pt-4 space-y-1">
@@ -138,7 +138,7 @@
     <section class="py-20 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14">
-                <p class="text-indigo-400 text-sm font-medium uppercase tracking-widest mb-3">Why Extreme</p>
+                <p class="text-red-500 text-sm font-medium uppercase tracking-widest mb-3">Why Extreme</p>
                 <h2 class="text-3xl sm:text-4xl font-bold">Built for developers who ship Laravel</h2>
                 <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm">Other AI builders generate toy apps or lock you into a platform. Extreme generates real, idiomatic Laravel that you own outright.</p>
             </div>
@@ -190,7 +190,7 @@
     <section id="how-it-works" class="py-20 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
-                <p class="text-indigo-400 text-sm font-medium uppercase tracking-widest mb-3">Process</p>
+                <p class="text-red-500 text-sm font-medium uppercase tracking-widest mb-3">Process</p>
                 <h2 class="text-3xl sm:text-4xl font-bold">From prompt to production in minutes</h2>
             </div>
 
@@ -236,7 +236,7 @@
     <section id="stack" class="py-20 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14">
-                <p class="text-indigo-400 text-sm font-medium uppercase tracking-widest mb-3">Stack</p>
+                <p class="text-red-500 text-sm font-medium uppercase tracking-widest mb-3">Stack</p>
                 <h2 class="text-3xl sm:text-4xl font-bold">Every app ships with the modern Laravel stack</h2>
                 <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm">No choices to make. No configuration. Just the stack the Laravel ecosystem settled on.</p>
             </div>
@@ -273,7 +273,7 @@
     <section class="py-20 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14">
-                <p class="text-pink-400 text-sm font-medium uppercase tracking-widest mb-3">Examples</p>
+                <p class="text-red-500 text-sm font-medium uppercase tracking-widest mb-3">Examples</p>
                 <h2 class="text-3xl sm:text-4xl font-bold">What can you build?</h2>
             </div>
 
@@ -308,7 +308,7 @@
                     <p class="text-gray-300 text-sm leading-relaxed mb-4 italic">"{{ $example['prompt'] }}"</p>
                     <div class="flex flex-wrap gap-2">
                         @foreach($example['tags'] as $tag)
-                        <span class="px-2 py-0.5 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs">{{ $tag }}</span>
+                        <span class="px-2 py-0.5 rounded-md bg-red-600/10 border border-red-600/20 text-red-400 text-xs">{{ $tag }}</span>
                         @endforeach
                     </div>
                 </div>
@@ -321,7 +321,7 @@
     <section id="pricing" class="py-20 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
-                <p class="text-indigo-400 text-sm font-medium uppercase tracking-widest mb-3">Pricing</p>
+                <p class="text-red-500 text-sm font-medium uppercase tracking-widest mb-3">Pricing</p>
                 <h2 class="text-3xl sm:text-4xl font-bold">Simple, honest pricing</h2>
                 <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm">Cancel anytime. Every plan includes full source code, no watermarks, no code expiry.</p>
             </div>
@@ -345,7 +345,7 @@
                             'Community support',
                         ] as $feat)
                         <li class="flex items-center gap-3 text-sm text-gray-300">
-                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <svg class="w-4 h-4 text-red-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                             {{ $feat }}
@@ -358,8 +358,8 @@
                 </div>
 
                 {{-- Pro --}}
-                <div class="p-8 rounded-2xl border border-indigo-500/40 bg-indigo-500/5 relative overflow-hidden">
-                    <div class="absolute top-4 right-4 px-2 py-0.5 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-medium">
+                <div class="p-8 rounded-2xl border border-red-600/40 bg-red-600/5 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 px-2 py-0.5 rounded-full bg-red-600/20 border border-red-600/30 text-red-300 text-xs font-medium">
                         Most Popular
                     </div>
                     <p class="text-gray-400 text-sm font-medium mb-2">Pro</p>
@@ -378,20 +378,20 @@
                             'Priority support',
                         ] as $feat)
                         <li class="flex items-center gap-3 text-sm text-gray-300">
-                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <svg class="w-4 h-4 text-red-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                             {{ $feat }}
                         </li>
                         @endforeach
                     </ul>
-                    <a href="{{ route('cleanslate.billing.plans') }}" class="block text-center w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all">
+                    <a href="{{ route('cleanslate.billing.plans') }}" class="block text-center w-full py-3 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold uppercase tracking-wide text-sm transition-all border border-red-600/40">
                         Get Started
                     </a>
                 </div>
 
                 {{-- Agency --}}
-                <div class="p-8 rounded-2xl border border-pink-500/30 bg-pink-500/5">
+                <div class="p-8 rounded-2xl border border-red-700/30 bg-red-700/5">
                     <p class="text-gray-400 text-sm font-medium mb-2">Agency</p>
                     <div class="flex items-end gap-2 mb-1">
                         <span class="text-5xl font-bold text-white">$399</span>
@@ -408,14 +408,14 @@
                             'Dedicated support channel',
                         ] as $feat)
                         <li class="flex items-center gap-3 text-sm text-gray-300">
-                            <svg class="w-4 h-4 text-pink-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <svg class="w-4 h-4 text-red-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                             {{ $feat }}
                         </li>
                         @endforeach
                     </ul>
-                    <a href="{{ route('cleanslate.billing.plans') }}" class="block text-center w-full py-3 rounded-xl border border-pink-500/40 hover:border-pink-400 text-pink-300 hover:text-pink-200 font-semibold text-sm transition-all">
+                    <a href="{{ route('cleanslate.billing.plans') }}" class="block text-center w-full py-3 rounded-xl border border-red-600/40 hover:border-red-500 text-red-300 hover:text-red-200 font-semibold text-sm transition-all">
                         Get Started
                     </a>
                 </div>
@@ -431,7 +431,7 @@
     <section id="faq" class="py-20 border-t border-white/5">
         <div class="max-w-3xl mx-auto px-6">
             <div class="text-center mb-16">
-                <p class="text-indigo-400 text-sm font-medium uppercase tracking-widest mb-3">FAQ</p>
+                <p class="text-red-500 text-sm font-medium uppercase tracking-widest mb-3">FAQ</p>
                 <h2 class="text-3xl sm:text-4xl font-bold">Questions answered</h2>
             </div>
 
@@ -467,7 +467,7 @@
                         @click="open = !open"
                         class="w-full flex items-center justify-between py-5 text-left group"
                     >
-                        <span class="text-white font-medium group-hover:text-indigo-300 transition-colors pr-4">{{ $faq['q'] }}</span>
+                        <span class="text-white font-medium group-hover:text-red-400 transition-colors pr-4">{{ $faq['q'] }}</span>
                         <svg
                             class="w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-200"
                             :class="{ 'rotate-45': open }"
@@ -485,87 +485,27 @@
         </div>
     </section>
 
-    {{-- INTAKE / WAITLIST FORM --}}
-    <section id="start" class="py-20 border-t border-white/5">
-        <div class="max-w-2xl mx-auto px-6">
-            <div class="text-center mb-10">
-                <p class="text-indigo-400 text-sm font-medium uppercase tracking-widest mb-3">Get Early Access</p>
-                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Join the waitlist</h2>
-                <p class="text-gray-400 text-sm">Extreme is in active development. Leave your details and we'll reach out when you can start building.</p>
+    {{-- CTA --}}
+    <section id="start" class="py-28 border-t border-white/5">
+        <div class="max-w-2xl mx-auto px-6 text-center">
+            <div class="relative w-16 h-16 mx-auto mb-8">
+                <div class="absolute inset-0 rounded-2xl bg-red-600 opacity-25 blur-md"></div>
+                <div class="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-red-900 border border-red-500/40 flex items-center justify-center shadow-xl shadow-red-900/50">
+                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
             </div>
-
-            <div class="intake-card rounded-2xl p-8">
-                @if(session('success'))
-                    <div class="p-5 bg-green-500/10 border border-green-500/30 rounded-xl flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-green-400 mb-1">You're on the list!</p>
-                            <p class="text-green-300 text-sm">{{ session('success') }}</p>
-                        </div>
-                    </div>
-                @else
-
-                @if(session('error'))
-                    <div class="mb-5 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-sm flex items-center gap-3">
-                        <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                        </svg>
-                        {{ session('error') }}
-                    </div>
-                @endif
-
-                <form action="{{ route('extreme.intake') }}" method="POST" class="space-y-5">
-                    @csrf
-
-                    <div class="grid sm:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Name <span class="text-red-400">*</span></label>
-                            <input type="text" name="name" required value="{{ old('name') }}"
-                                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30 text-white placeholder-gray-600 text-sm outline-none transition-all"
-                                placeholder="Alex Ramsey">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Email <span class="text-red-400">*</span></label>
-                            <input type="email" name="email" required value="{{ old('email') }}"
-                                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30 text-white placeholder-gray-600 text-sm outline-none transition-all"
-                                placeholder="alex@example.com">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">What would you build first?</label>
-                        <textarea name="message" rows="4"
-                            class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30 text-white placeholder-gray-600 text-sm outline-none transition-all resize-none"
-                            placeholder="Describe the app you'd generate with Extreme — the type, features, integrations you'd want...">{{ old('message') }}</textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">I'm a…</label>
-                        <select name="engagement_type"
-                            class="w-full px-4 py-3 rounded-xl bg-[#0a1628] border border-white/10 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30 text-gray-300 text-sm outline-none transition-all">
-                            <option value="freelancer">Freelance Laravel developer</option>
-                            <option value="agency">Agency or consultancy</option>
-                            <option value="founder">Founder building a product</option>
-                            <option value="internal">Internal developer / startup employee</option>
-                            <option value="unsure">Not sure yet</option>
-                        </select>
-                    </div>
-
-                    <button type="submit"
-                        class="w-full py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 hover:-translate-y-0.5">
-                        Request Early Access
-                    </button>
-
-                    <p class="text-center text-gray-600 text-xs">
-                        No spam. We'll reach out personally when your spot is ready.
-                    </p>
-                </form>
-                @endif
-            </div>
+            <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white mb-4"
+                style="text-shadow: 0 0 40px rgba(220,38,38,0.3);">Ready to build?</h2>
+            <p class="text-gray-500 text-base mb-10">Describe your Laravel app in plain English and watch it get built — live.</p>
+            <a href="{{ route('extreme.demo') }}"
+               class="inline-flex items-center gap-3 px-14 py-5 rounded-2xl bg-red-700 hover:bg-red-600 text-white font-black uppercase tracking-widest text-xl transition-all shadow-2xl shadow-red-900/50 hover:-translate-y-1 border border-red-600/40"
+               style="text-shadow: 0 1px 6px rgba(0,0,0,0.4);">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                LAUNCH
+            </a>
+            <p class="mt-8 text-gray-700 text-xs">Laravel 12 &nbsp;·&nbsp; Livewire 3 &nbsp;·&nbsp; Tailwind CSS 3 &nbsp;·&nbsp; Pest Tests &nbsp;·&nbsp; Ready to deploy</p>
         </div>
     </section>
 
@@ -583,7 +523,7 @@
             <div class="flex items-center gap-6">
                 <a href="{{ route('extreme') }}" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Home</a>
                 <a href="#pricing" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Pricing</a>
-                <a href="#start" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Get Access</a>
+                <a href="{{ route('extreme.demo') }}" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Launch</a>
             </div>
             <p class="text-gray-700 text-xs">© {{ date('Y') }} smbgen. All rights reserved.</p>
         </div>

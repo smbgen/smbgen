@@ -134,11 +134,21 @@
             </button>
 
             {{-- Mobile done CTA --}}
-            <div x-show="phase === 'done'" class="lg:hidden p-4 rounded-2xl bg-red-900/10 border border-red-900/30 text-center">
-                <p class="text-white font-semibold text-sm mb-3">Your app is ready — sign up to claim it.</p>
-                <a href="{{ route('extreme') }}#start" class="block w-full py-3 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold uppercase tracking-wide text-sm transition-all border border-red-600/40">
-                    Join Waitlist to Download →
-                </a>
+            <div x-show="phase === 'done'" class="lg:hidden p-4 rounded-2xl bg-red-900/10 border border-red-900/30">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                    <span class="text-white font-semibold text-sm" x-text="appName + ' is ready'"></span>
+                </div>
+                <div class="flex gap-2">
+                    <a href="https://github.com/smbgen/core-app" target="_blank" rel="noopener"
+                       class="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold text-xs uppercase tracking-wide transition-all border border-red-600/40">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Push to GitHub
+                    </a>
+                    <button @click="generate()" class="px-3 py-2.5 rounded-xl border border-white/10 text-gray-400 hover:text-white text-xs transition-colors">
+                        Reset
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -244,28 +254,30 @@
                             <span x-text="dbChoice.toUpperCase()"></span> &nbsp;·&nbsp; ready to deploy
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <button disabled title="Join waitlist to unlock"
-                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-white/10 text-gray-500 text-xs cursor-not-allowed">
-                                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                            <button disabled title="Full generation coming soon"
+                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-white/10 text-gray-600 text-xs cursor-not-allowed">
+                                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
                                 Download ZIP
+                                <span class="text-gray-700 ml-0.5">· soon</span>
                             </button>
-                            <button disabled title="Join waitlist to unlock"
-                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-white/10 text-gray-500 text-xs cursor-not-allowed">
-                                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                            <a href="https://forge.laravel.com/" target="_blank" rel="noopener"
+                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-white/10 text-gray-400 hover:text-white hover:border-white/20 text-xs transition-colors">
+                                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" /></svg>
                                 Deploy to Forge
-                            </button>
-                            <button disabled title="Join waitlist to unlock"
-                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-white/10 text-gray-500 text-xs cursor-not-allowed">
-                                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                            </a>
+                            <a href="https://github.com/smbgen/core-app" target="_blank" rel="noopener"
+                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-red-700/50 bg-red-900/20 text-red-300 hover:bg-red-900/40 hover:text-white text-xs font-medium transition-colors">
+                                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                                 Push to GitHub
-                            </button>
+                            </a>
                         </div>
                     </div>
-                    <a href="{{ route('extreme') }}#start"
-                        class="flex-shrink-0 inline-flex flex-col items-center px-5 py-3 rounded-xl bg-red-700 hover:bg-red-600 text-white font-black uppercase tracking-wide text-sm transition-all text-center border border-red-600/50 shadow-lg shadow-red-900/40">
-                        Join Waitlist
-                        <span class="text-red-200 text-xs font-normal normal-case mt-0.5">to unlock your app →</span>
-                    </a>
+                    <div class="flex-shrink-0 text-right">
+                        <p class="text-gray-600 text-xs font-mono mb-2">Generate another?</p>
+                        <button @click="generate()" class="text-red-500 hover:text-red-400 text-xs underline underline-offset-2 transition-colors">
+                            Reset →
+                        </button>
+                    </div>
                 </div>
             </div>
 
