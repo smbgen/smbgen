@@ -1,5 +1,50 @@
 @extends('layouts.admin')
 
+@push('styles')
+<style>
+.prose-dark h1,.prose-dark h2,.prose-dark h3,.prose-dark h4 {
+    color: #f3f4f6; font-weight: 700; margin-top: 1.5em; margin-bottom: 0.5em; line-height: 1.3;
+}
+.prose-dark h1 { font-size: 1.75rem; border-bottom: 1px solid #374151; padding-bottom: 0.4em; }
+.prose-dark h2 { font-size: 1.35rem; border-bottom: 1px solid #374151; padding-bottom: 0.3em; }
+.prose-dark h3 { font-size: 1.1rem; }
+.prose-dark p  { color: #d1d5db; line-height: 1.8; margin-bottom: 1em; }
+.prose-dark a  { color: #60a5fa; text-decoration: underline; }
+.prose-dark strong { color: #f9fafb; font-weight: 600; }
+.prose-dark em { color: #e5e7eb; font-style: italic; }
+.prose-dark code {
+    background: #1f2937; color: #a5f3fc; padding: 0.15em 0.4em;
+    border-radius: 4px; font-size: 0.875em; font-family: ui-monospace, monospace;
+}
+.prose-dark pre {
+    background: #111827; border: 1px solid #374151; border-radius: 8px;
+    padding: 1rem 1.25rem; overflow-x: auto; margin-bottom: 1.25em;
+}
+.prose-dark pre code { background: none; color: #a5f3fc; padding: 0; font-size: 0.85rem; }
+.prose-dark blockquote {
+    border-left: 3px solid #4b5563; padding-left: 1rem; color: #9ca3af;
+    font-style: italic; margin: 1em 0;
+}
+.prose-dark ul,.prose-dark ol { color: #d1d5db; padding-left: 1.5rem; margin-bottom: 1em; }
+.prose-dark ul { list-style-type: disc; }
+.prose-dark ol { list-style-type: decimal; }
+.prose-dark li { margin-bottom: 0.3em; line-height: 1.7; }
+.prose-dark table {
+    width: 100%; border-collapse: collapse; margin-bottom: 1.25em; font-size: 0.9rem;
+}
+.prose-dark th {
+    background: #1f2937; color: #f3f4f6; font-weight: 600;
+    padding: 0.6em 0.9em; text-align: left; border: 1px solid #374151;
+}
+.prose-dark td {
+    color: #d1d5db; padding: 0.5em 0.9em;
+    border: 1px solid #374151;
+}
+.prose-dark tr:nth-child(even) td { background: #1a2030; }
+.prose-dark hr { border-color: #374151; margin: 1.5em 0; }
+</style>
+@endpush
+
 @section('content')
 <div class="py-6 space-y-6" x-data="packageDetail()">
 
@@ -271,8 +316,8 @@
         </div>
     </div>
 
-    {{-- HTML/PDF iframe --}}
-    <template x-if="previewType === 'HTML_PRESENTATION' || previewType === 'HTML_EMAIL' || previewType === 'PDF_DOCUMENT'">
+    {{-- HTML iframe (sandboxed) --}}
+    <template x-if="previewType === 'HTML_PRESENTATION' || previewType === 'HTML_EMAIL'">
         <iframe :src="previewUrl"
             class="flex-1 w-full border-0"
             sandbox="allow-scripts allow-same-origin"
@@ -280,10 +325,26 @@
         </iframe>
     </template>
 
-    {{-- Markdown / JSON code viewer --}}
-    <template x-if="previewType === 'MARKDOWN_RESEARCH' || previewType === 'JSON_DATA'">
+    {{-- PDF — no sandbox, browser native renderer --}}
+    <template x-if="previewType === 'PDF_DOCUMENT'">
+        <iframe :src="previewUrl"
+            class="flex-1 w-full border-0">
+        </iframe>
+    </template>
+
+    {{-- Markdown rendered view --}}
+    <template x-if="previewType === 'MARKDOWN_RESEARCH'">
+        <div class="flex-1 overflow-auto">
+            <div class="max-w-4xl mx-auto px-8 py-10">
+                <div class="prose-dark" x-html="renderedMarkdown"></div>
+            </div>
+        </div>
+    </template>
+
+    {{-- JSON code viewer --}}
+    <template x-if="previewType === 'JSON_DATA'">
         <div class="flex-1 overflow-auto p-6">
-            <pre class="text-sm text-gray-200 font-mono whitespace-pre-wrap bg-gray-900 rounded-lg p-4 border border-gray-700"
+            <pre class="text-sm text-green-300 font-mono whitespace-pre-wrap bg-gray-900 rounded-lg p-6 border border-gray-700 leading-relaxed"
                 x-text="previewContent"></pre>
         </div>
     </template>
@@ -292,6 +353,7 @@
 </div>{{-- end x-data wrapper --}}
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
 function packageDetail() {
     return {
@@ -301,20 +363,28 @@ function packageDetail() {
         previewType: '',
         previewUrl: '',
         previewContent: '',
+        renderedMarkdown: '',
 
         async previewFile(fileId, title, type) {
             this.previewTitle = title;
             this.previewType = type;
             this.previewOpen = true;
+            this.renderedMarkdown = '';
 
             if (type === 'MARKDOWN_RESEARCH' || type === 'JSON_DATA') {
                 this.previewContent = 'Loading…';
+                this.renderedMarkdown = '<p class="text-gray-400">Loading…</p>';
                 try {
                     const res = await fetch(`{{ route('admin.packages.show', $package) }}/files/${fileId}/content`);
                     const data = await res.json();
-                    this.previewContent = data.content || '(empty)';
+                    const raw = data.content || '';
+                    this.previewContent = raw;
+                    if (type === 'MARKDOWN_RESEARCH') {
+                        this.renderedMarkdown = marked.parse(raw);
+                    }
                 } catch (e) {
                     this.previewContent = 'Error loading file.';
+                    this.renderedMarkdown = '<p class="text-red-400">Error loading file.</p>';
                 }
             } else {
                 this.previewUrl = `{{ route('admin.packages.show', $package) }}/files/${fileId}/preview`;
