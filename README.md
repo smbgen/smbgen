@@ -1,6 +1,5 @@
-# adapted from the intellectual property of Alexander Ramsey
+# smbgen
 # AlexanderRamsey.com and smbgen.com
-# prtl7 is a clone of clientbridge.app/smbgen v1
 
 A modern multi-tenant SaaS platform for service professionals. Built with **Laravel 12**, featuring appointment booking, content management, AI-powered content generation, and comprehensive admin dashboards.
 
@@ -115,7 +114,7 @@ npm install
 cp .env.example .env
 php artisan key:generate
 # set company name and app name inside the env
-# set app url to reflect herd for local testing eg APP_URL=http://prtl7-app.test
+# set app url to reflect herd for local testing eg APP_URL=http://smbgen.test
 ```
 
 ### 4. Configure Database
