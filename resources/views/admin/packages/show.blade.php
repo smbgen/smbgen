@@ -240,8 +240,6 @@
         @endif
     </div>
 
-</div>
-
 {{-- Preview Modal --}}
 <div x-show="previewOpen" x-cloak
     class="fixed inset-0 z-50 flex flex-col bg-gray-950/95"
@@ -249,11 +247,25 @@
 
     {{-- Modal toolbar --}}
     <div class="flex items-center justify-between px-4 py-3 bg-gray-900 border-b border-gray-700 shrink-0">
-        <span class="text-gray-100 font-medium" x-text="previewTitle"></span>
         <div class="flex items-center gap-3">
-            <span class="text-xs text-gray-400" x-text="previewType"></span>
             <button @click="previewOpen = false"
-                class="text-gray-400 hover:text-gray-100 p-1 rounded hover:bg-gray-700 transition-colors">
+                class="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 hover:border-gray-500">
+                <i class="fas fa-arrow-left"></i>
+                Back
+            </button>
+            <span class="text-gray-100 font-medium" x-text="previewTitle"></span>
+            <span class="text-xs px-2 py-0.5 rounded bg-gray-700 text-gray-400 border border-gray-600" x-text="previewType"></span>
+        </div>
+        <div class="flex items-center gap-2">
+            <a :href="previewUrl" target="_blank"
+                x-show="previewType === 'HTML_PRESENTATION' || previewType === 'HTML_EMAIL' || previewType === 'PDF_DOCUMENT'"
+                class="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 hover:border-gray-500">
+                <i class="fas fa-external-link-alt"></i>
+                Open in tab
+            </a>
+            <button @click="previewOpen = false"
+                class="text-gray-400 hover:text-gray-100 p-2 rounded-lg hover:bg-gray-700 transition-colors"
+                title="Close (Esc)">
                 <i class="fas fa-times text-lg"></i>
             </button>
         </div>
@@ -276,7 +288,8 @@
         </div>
     </template>
 
-</div>
+</div>{{-- end modal --}}
+</div>{{-- end x-data wrapper --}}
 
 @push('scripts')
 <script>
