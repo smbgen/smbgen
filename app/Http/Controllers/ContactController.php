@@ -85,4 +85,79 @@ class ContactController extends Controller
                 ->with('error', 'Sorry, there was an error submitting your message. Please try again or contact us directly.');
         }
     }
+
+    public function submitCleanSlateIntake(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'nullable|string|max:2000',
+            'engagement_type' => 'nullable|string|in:freelancer,agency,founder,internal,unsure',
+        ]);
+
+        $engagementLabels = [
+            'freelancer' => 'Freelance Laravel developer',
+            'agency' => 'Agency or consultancy',
+            'founder' => 'Founder building a product',
+            'internal' => 'Internal developer / startup employee',
+            'unsure' => 'Not sure yet',
+        ];
+
+        $messageBody = ($validated['message'] ?? 'No details provided.')."\n\n"
+            .'Role: '.($engagementLabels[$validated['engagement_type'] ?? 'unsure'] ?? 'Not specified');
+
+        try {
+            $lead = LeadForm::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'message' => $messageBody,
+                'source_site' => 'Extreme Landing Page',
+                'notification_email' => config('business.contact.email'),
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'referer' => $request->header('referer'),
+                'form_data' => [
+                    'engagement_type' => $validated['engagement_type'] ?? null,
+                ],
+            ]);
+
+            try {
+                Mail::to($validated['email'])
+                    ->send(new ContactInquiryReceived(
+                        name: $validated['name'],
+                        companyName: 'Extreme by smbgen',
+                    ));
+            } catch (\Exception $e) {
+                Log::warning('Extreme: failed to send customer confirmation', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
+            }
+
+            $businessEmail = config('business.contact.email');
+            if ($businessEmail) {
+                try {
+                    Mail::to($businessEmail)
+                        ->send(new NewContactInquiry(
+                            name: $validated['name'],
+                            email: $validated['email'],
+                            phone: $validated['phone'] ?? null,
+                            preferredContact: null,
+                            message: $messageBody,
+                            submittedAt: now()->format('F j, Y \a\t g:i A'),
+                            replyToEmail: $validated['email'],
+                            replyToName: $validated['name'],
+                        ));
+                } catch (\Exception $e) {
+                    Log::warning('Extreme: failed to send admin notification', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
+                }
+            }
+
+            return redirect()->to(route('extreme').'#intake')
+                ->with('success', "You're on the list, {$validated['name']}! We'll reach out personally when your early access spot is ready.");
+        } catch (\Exception $e) {
+            Log::error('Extreme intake submission failed', ['error' => $e->getMessage()]);
+
+            return redirect()->to(route('extreme').'#intake')
+                ->withInput()
+                ->with('error', 'Something went wrong. Please try again or email us directly.');
+        }
+    }
 }

@@ -21,7 +21,7 @@
     </div>
     
     <div class="text-center mb-6">
-        <a href="mailto:support@smbgen.com" class="btn-primary">
+        <a href="mailto:{{ config('business.contact.email', config('mail.admin_address')) }}" class="btn-primary">
             <i class="fas fa-envelope mr-2"></i>Request Access
         </a>
     </div>

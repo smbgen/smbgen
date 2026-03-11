@@ -6,11 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use Billable, HasFactory, Notifiable;
 
     // Role constants
     const ROLE_USER = 'user';
@@ -178,5 +179,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function blogPosts()
     {
         return $this->hasMany(\App\Models\BlogPost::class, 'author_id');
+    }
+
+    /**
+     * Extreme profile for this user
+     */
+    public function profile()
+    {
+        return $this->hasOne(\App\Modules\CleanSlate\Models\Profile::class);
     }
 }

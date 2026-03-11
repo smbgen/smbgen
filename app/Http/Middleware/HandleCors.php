@@ -14,7 +14,6 @@ class HandleCors
         // Allow specific domains
         $allowedOrigins = [
             'https://houston1.oldlinecyber.com',
-            'https://smbgen.com',
             env('APP_URL'), // Allow the current app URL
         ];
 

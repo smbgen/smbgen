@@ -11,7 +11,7 @@ class ClientSeeder extends Seeder
     {
         // Create demo client record that matches the demo user
         Client::firstOrCreate([
-            'email' => 'demo@smbgen.com',
+            'email' => 'demo@example.com',
         ], [
             'name' => 'Demo Client Company',
             'phone' => '(555) 123-4567',
