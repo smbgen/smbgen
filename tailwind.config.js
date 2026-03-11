@@ -6,6 +6,7 @@ export default {
     "./resources/**/*.js",
     "./resources/**/*.vue",
     "./app/Livewire/**/*.php",
+    "./app/Modules/**/*.blade.php",
     "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
   ],
   safelist: [

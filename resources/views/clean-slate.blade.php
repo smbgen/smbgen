@@ -60,7 +60,7 @@
                 <a href="#how-it-works" class="hidden md:block text-gray-400 hover:text-white text-sm transition-colors">How It Works</a>
                 <a href="#pricing" class="hidden md:block text-gray-400 hover:text-white text-sm transition-colors">Pricing</a>
                 <a href="#faq" class="hidden md:block text-gray-400 hover:text-white text-sm transition-colors">FAQ</a>
-                <a href="#intake" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-white text-sm font-medium transition-colors">
+                <a href="{{ route('cleanslate.billing.plans') }}" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-white text-sm font-medium transition-colors">
                     Get Started
                 </a>
             </div>
@@ -89,8 +89,8 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#intake" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-semibold text-base transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:-translate-y-0.5">
-                    Start Your Engagement — $1,500
+                <a href="{{ route('cleanslate.billing.plans') }}" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-semibold text-base transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:-translate-y-0.5">
+                    View Plans & Get Started
                 </a>
                 <a href="#how-it-works" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/10 hover:border-white/20 text-gray-300 hover:text-white font-medium text-base transition-all">
                     See How It Works
@@ -214,26 +214,24 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
                 <p class="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-3">Pricing</p>
-                <h2 class="text-3xl sm:text-4xl font-bold">Simple, flat-rate engagements</h2>
+                <h2 class="text-3xl sm:text-4xl font-bold">Monthly plans, cancel anytime</h2>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
 
-                {{-- Standard Engagement --}}
+                {{-- Basic --}}
                 <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-                    <p class="text-gray-400 text-sm font-medium mb-2">Standard Engagement</p>
+                    <p class="text-gray-400 text-sm font-medium mb-2">Basic</p>
                     <div class="flex items-end gap-2 mb-6">
-                        <span class="text-5xl font-bold text-white">$1,500</span>
-                        <span class="text-gray-500 mb-2">/ person</span>
+                        <span class="text-5xl font-bold text-white">$300</span>
+                        <span class="text-gray-500 mb-2">/mo</span>
                     </div>
                     <ul class="space-y-3 mb-8">
                         @foreach([
-                            '4-week active engagement',
-                            'One dedicated point of contact',
-                            'Up to 5 removal actions',
-                            'Up to 3 attempts per listing',
-                            'Full documentation + final report',
-                            'Identity verification coordination',
+                            '18 top data brokers',
+                            'Monthly scans',
+                            'Web form opt-outs',
+                            'Email support',
                         ] as $feat)
                         <li class="flex items-center gap-3 text-sm text-gray-300">
                             <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -243,28 +241,54 @@
                         </li>
                         @endforeach
                     </ul>
-                    <a href="#intake" class="block text-center w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-semibold text-sm transition-all">
-                        Start Engagement
+                    <a href="{{ route('cleanslate.billing.plans') }}" class="block text-center w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold text-sm transition-all">
+                        Get Started
                     </a>
                 </div>
 
-                {{-- Retainer --}}
-                <div class="p-8 rounded-2xl border border-violet-500/30 bg-violet-500/5 relative overflow-hidden">
-                    <div class="absolute top-4 right-4 px-2 py-0.5 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-300 text-xs font-medium">
-                        Ongoing
+                {{-- Professional --}}
+                <div class="p-8 rounded-2xl border border-cyan-500/40 bg-cyan-500/5 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 px-2 py-0.5 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-medium">
+                        Most Popular
                     </div>
-                    <p class="text-gray-400 text-sm font-medium mb-2">Annual Retainer</p>
-                    <div class="flex items-end gap-2 mb-2">
-                        <span class="text-5xl font-bold text-white">Custom</span>
+                    <p class="text-gray-400 text-sm font-medium mb-2">Professional</p>
+                    <div class="flex items-end gap-2 mb-6">
+                        <span class="text-5xl font-bold text-white">$750</span>
+                        <span class="text-gray-500 mb-2">/mo</span>
                     </div>
-                    <p class="text-gray-500 text-xs mb-6">Starting from $1,500/yr · Specialized projects up to $10k</p>
                     <ul class="space-y-3 mb-8">
                         @foreach([
-                            'Ongoing monitoring & re-removal',
-                            'Priority response on new exposures',
-                            'Expanded scope beyond initial engagement',
-                            'Specialized reputation management projects',
-                            'Dedicated advisor relationship',
+                            '24 data brokers',
+                            'Weekly scans',
+                            'Email opt-outs included',
+                            'Priority support',
+                        ] as $feat)
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                            {{ $feat }}
+                        </li>
+                        @endforeach
+                    </ul>
+                    <a href="{{ route('cleanslate.billing.plans') }}" class="block text-center w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white font-semibold text-sm transition-all">
+                        Get Started
+                    </a>
+                </div>
+
+                {{-- Executive --}}
+                <div class="p-8 rounded-2xl border border-violet-500/30 bg-violet-500/5 relative overflow-hidden">
+                    <p class="text-gray-400 text-sm font-medium mb-2">Executive</p>
+                    <div class="flex items-end gap-2 mb-6">
+                        <span class="text-5xl font-bold text-white">$1,500</span>
+                        <span class="text-gray-500 mb-2">/mo</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        @foreach([
+                            'All 25 brokers',
+                            'Continuous monitoring',
+                            'Manual removals',
+                            'Dedicated specialist',
                         ] as $feat)
                         <li class="flex items-center gap-3 text-sm text-gray-300">
                             <svg class="w-4 h-4 text-violet-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -274,15 +298,15 @@
                         </li>
                         @endforeach
                     </ul>
-                    <a href="#intake" class="block text-center w-full py-3 rounded-xl border border-violet-500/40 hover:border-violet-400 text-violet-300 hover:text-violet-200 font-semibold text-sm transition-all">
-                        Let's Talk Retainer
+                    <a href="{{ route('cleanslate.billing.plans') }}" class="block text-center w-full py-3 rounded-xl border border-violet-500/40 hover:border-violet-400 text-violet-300 hover:text-violet-200 font-semibold text-sm transition-all">
+                        Get Started
                     </a>
                 </div>
 
             </div>
 
             <p class="text-center text-gray-600 text-xs mt-8">
-                Payment due before work begins &nbsp;·&nbsp; Wire transfer, ACH, or cash equivalent accepted
+                Cancel anytime &nbsp;·&nbsp; Billed monthly via Stripe
             </p>
         </div>
     </section>
@@ -345,22 +369,37 @@
     <section id="intake" class="py-20 border-t border-white/5">
         <div class="max-w-2xl mx-auto px-6">
             <div class="text-center mb-10">
-                <p class="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-3">Get Started</p>
-                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Ready to start your engagement?</h2>
-                <p class="text-gray-400 text-sm">Fill out the form below and a member of our team will reach out within one business day to confirm scope and next steps.</p>
+                <p class="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-3">Questions?</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Not sure where to start?</h2>
+                <p class="text-gray-400 text-sm">Send us a message and we'll reach out within one business day. Or, if you're ready, <a href="{{ route('cleanslate.billing.plans') }}" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2">go straight to plans</a>.</p>
             </div>
 
             <div class="intake-card rounded-2xl p-8">
                 @if(session('success'))
-                    <div class="mb-6 p-4 bg-green-500/10 border border-green-500/30 text-green-400 rounded-xl text-sm flex items-center gap-3">
+                    <div class="p-5 bg-green-500/10 border border-green-500/30 rounded-xl flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-green-400 mb-1">Request received</p>
+                            <p class="text-green-300 text-sm">{{ session('success') }}</p>
+                            <p class="mt-2 text-green-600 text-xs">Check your inbox — a confirmation has been sent to your email address.</p>
+                        </div>
+                    </div>
+                @else
+
+                @if(session('error'))
+                    <div class="mb-5 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-sm flex items-center gap-3">
                         <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                         </svg>
-                        {{ session('success') }}
+                        {{ session('error') }}
                     </div>
                 @endif
 
-                <form action="{{ route('contact') }}" method="POST" class="space-y-5">
+                <form action="{{ route('clean-slate.intake') }}" method="POST" class="space-y-5">
                     @csrf
 
                     <div class="grid sm:grid-cols-2 gap-5">
@@ -411,6 +450,7 @@
                         All information is kept strictly confidential and will never be shared with any third party.
                     </p>
                 </form>
+                @endif
             </div>
         </div>
     </section>
@@ -428,7 +468,7 @@
             </div>
             <div class="flex items-center gap-6">
                 <a href="mailto:chat@l7medialabs.com" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">chat@l7medialabs.com</a>
-                <a href="#intake" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Get Started</a>
+                <a href="{{ route('cleanslate.billing.plans') }}" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Get Started</a>
             </div>
             <p class="text-gray-700 text-xs">© {{ date('Y') }} L7 Labs, LLC. All rights reserved.</p>
         </div>
