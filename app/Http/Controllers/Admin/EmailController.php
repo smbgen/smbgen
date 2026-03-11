@@ -5,45 +5,98 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Client;
+use App\Models\Package;
+use App\Models\PackageFile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class EmailController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            // Get all users and clients for recipient selection
             $users = User::orderBy('name')->get();
             $clients = Client::orderBy('name')->get();
-
-            // Get email history (last 50 sent emails from logs)
             $emailHistory = $this->getRecentEmailsFromLogs();
 
-            return view('admin.email.index', compact('users', 'clients', 'emailHistory'));
+            // Pre-fill from a package HTML_EMAIL template
+            $prefill = null;
+            if ($request->filled('package_file_id')) {
+                $prefill = $this->buildPrefill(
+                    (int) $request->package_file_id,
+                    $request->filled('client_id') ? (int) $request->client_id : null
+                );
+            }
+
+            return view('admin.email.index', compact('users', 'clients', 'emailHistory', 'prefill'));
         } catch (\Exception $e) {
             \Log::error('Failed to load email composer', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
 
-            // Return view with empty data on failure
             return view('admin.email.index', [
-                'users' => collect(),
-                'clients' => collect(),
+                'users'        => collect(),
+                'clients'      => collect(),
                 'emailHistory' => [],
+                'prefill'      => null,
             ])->with('error', 'Unable to load email composer data. Please try again later.');
         }
+    }
+
+    private function buildPrefill(int $fileId, ?int $clientId): ?array
+    {
+        $file = PackageFile::with('package.client')->find($fileId);
+        if (! $file || $file->type !== 'HTML_EMAIL') {
+            return null;
+        }
+
+        $content = Storage::disk($file->storage_disk ?: 'private')->get($file->storage_path);
+        if ($content === null) {
+            return null;
+        }
+
+        // Parse <title> tag for subject
+        $subject = $file->display_name;
+        if (preg_match('/<title[^>]*>(.*?)<\/title>/si', $content, $m)) {
+            $parsed = trim(strip_tags($m[1]));
+            if ($parsed !== '') {
+                $subject = $parsed;
+            }
+        }
+
+        // Recipient: explicit client_id, or fall back to the package's client
+        $recipient = '';
+        $clientRecord = $clientId
+            ? Client::find($clientId)
+            : $file->package?->client;
+        if ($clientRecord) {
+            $recipient = $clientRecord->email;
+        }
+
+        return [
+            'file_id'      => $file->id,
+            'file_name'    => $file->display_name,
+            'package_id'   => $file->package_id,
+            'package_name' => $file->package?->name,
+            'subject'      => $subject,
+            'body'         => $content,
+            'is_html'      => true,
+            'recipient'    => $recipient,
+            'client_name'  => $clientRecord?->name,
+        ];
     }
 
     public function send(Request $request)
     {
         $validated = $request->validate([
-            'recipients' => 'required|string',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string',
+            'recipients'     => 'required|string',
+            'subject'        => 'required|string|max:255',
+            'message'        => 'required|string',
             'include_signature' => 'boolean',
+            'is_html_body'   => 'boolean',
         ]);
 
         // Parse recipients (comma or semicolon separated)
@@ -58,15 +111,21 @@ class EmailController extends Controller
             }
         }
 
-        // Add signature if requested
         $message = $validated['message'];
-        if ($request->has('include_signature')) {
-            $signature = "\n\n---\n".auth()->user()->name."\n".config('mail.from.address');
-            $message .= $signature;
-        }
+        $isHtml  = $request->boolean('is_html_body', false);
 
-        // Convert plain text to HTML
-        $htmlMessage = nl2br(e($message));
+        if ($isHtml) {
+            // Raw HTML body — send as-is (signature not applicable)
+            $htmlMessage = $message;
+        } else {
+            // Add signature if requested
+            if ($request->has('include_signature')) {
+                $signature = "\n\n---\n".auth()->user()->name."\n".config('mail.from.address');
+                $message .= $signature;
+            }
+            // Convert plain text to HTML
+            $htmlMessage = nl2br(e($message));
+        }
 
         $successCount = 0;
         $failedEmails = [];
