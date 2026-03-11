@@ -8,7 +8,9 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -64,8 +66,6 @@ class AuthenticatedSessionController extends Controller
 
         if ($user->role === 'company_administrator') {
             return redirect()->route('admin.dashboard');
-        } elseif ($user->role === 'super_admin') {
-            return redirect()->route('super-admin.dashboard');
         } else {
             return redirect()->route('dashboard');
         }
@@ -128,7 +128,7 @@ class AuthenticatedSessionController extends Controller
         try {
             // Check if Socialite is working
             Log::info('Attempting to get Google user...');
-            $googleUser = Socialite::driver('google')->stateless()->user();
+            $googleUser = Socialite::driver('google')->user();
             Log::info('Google User object', ['email' => $googleUser->getEmail(), 'name' => $googleUser->getName(), 'id' => $googleUser->getId()]);
 
             // Check if User model exists and has required fields
@@ -138,8 +138,9 @@ class AuthenticatedSessionController extends Controller
                 [
                     'name' => $googleUser->getName(),
                     'google_id' => $googleUser->getId(),
-                    'role' => 'client', // default role
-                    'email_verified_at' => now(), // Google emails are verified
+                    'role' => 'client',
+                    'email_verified_at' => now(), // Google verifies email ownership
+                    'password' => Hash::make(Str::random(32)), // unguessable; user signs in via Google
                 ]
             );
 
@@ -165,8 +166,6 @@ class AuthenticatedSessionController extends Controller
             // Redirect based on user role
             if ($user->role === 'company_administrator') {
                 return redirect()->intended('/admin/dashboard');
-            } elseif ($user->role === 'super_admin') {
-                return redirect()->intended('/super-admin');
             } else {
                 return redirect()->intended('/dashboard');
             }
