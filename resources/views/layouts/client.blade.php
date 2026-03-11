@@ -58,6 +58,10 @@
                     @auth
                         <a href="{{ route('dashboard') }}" class="mobile-nav-link block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Dashboard</a>
                         <a href="{{ route('messages.index') }}" class="mobile-nav-link block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Messages</a>
+                        <form method="POST" action="{{ route('logout') }}" class="mt-2">
+                            @csrf
+                            <button type="submit" class="mobile-nav-link block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-red-400 hover:text-white hover:bg-red-700">Logout</button>
+                        </form>
                     @else
                         <a href="{{ route('login') }}" class="mobile-nav-link block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Login</a>
                     @endauth

@@ -21,6 +21,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/.mcp.json
 
 # Ignore compiled Blade views
 storage/framework/views

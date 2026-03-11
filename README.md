@@ -1,4 +1,6 @@
-# smbgen.com
+# adapted from the intellectual property of Alexander Ramsey
+# AlexanderRamsey.com and smbgen.com
+# prtl7 is a clone of clientbridge.app/smbgen v1
 
 A modern multi-tenant SaaS platform for service professionals. Built with **Laravel 12**, featuring appointment booking, content management, AI-powered content generation, and comprehensive admin dashboards.
 
@@ -112,6 +114,8 @@ npm install
 ```bash
 cp .env.example .env
 php artisan key:generate
+# set company name and app name inside the env
+# set app url to reflect herd for local testing eg APP_URL=http://prtl7-app.test
 ```
 
 ### 4. Configure Database
@@ -127,9 +131,13 @@ touch database/database.sqlite
 # DB_PASSWORD=secret
 ```
 
-### 5. Run Migrations
+### 5. Run Migrations and add users
 ```bash
 php artisan migrate
+php artisan db:seed --class=UserSeeder
+# note these creds
+# creates demo and admin user
+# use password mgr locally with local url
 ```
 
 ### 6. Build Assets
@@ -304,6 +312,9 @@ routes/
 - **Windows:** Laravel Herd (recommended, auto-installs everything)
 - **Mac:** Laravel Valet or Herd
 - **Linux:** PHP + Composer + Node.js manually
+
+### Laravel Boost https://laravel.com/docs/12.x/boost
+Follow instructions to install Laravel boost ^
 
 ### Production
 Deployment scripts available in `deployment/` folder for VPS setups.

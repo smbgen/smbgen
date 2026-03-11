@@ -655,6 +655,26 @@ if (config('app.debug')) {
         Route::get('/design', function () {
             return view('debug.design');
         })->name('debug.design');
+
+        // Dev User Switcher — log in as any user without a password
+        Route::get('/switch-user', function () {
+            $usersByRole = \App\Models\User::orderBy('name')
+                ->get()
+                ->groupBy('role');
+
+            return view('debug.switch-user', compact('usersByRole'));
+        })->name('debug.switch-user');
+
+        Route::get('/switch-user/{user}', function (\App\Models\User $user) {
+            \Illuminate\Support\Facades\Auth::login($user);
+
+            $redirect = match ($user->role) {
+                'company_administrator' => route('admin.dashboard'),
+                default                 => route('dashboard'),
+            };
+
+            return redirect($redirect)->with('status', "Logged in as {$user->name} ({$user->role})");
+        })->name('debug.switch-user.post');
     });
 }
 
@@ -731,6 +751,11 @@ if (config('business.features.cms')) {
         ->middleware('throttle:15,1')
         ->name('cms.form.submit')
         ->where('slug', '[a-z0-9\-]+');
+
+    // Clean Slate — Digital Reputation & Data Suppression landing page
+    Route::get('/clean-slate', function () {
+        return view('clean-slate');
+    })->name('clean-slate');
 
     // CMS page display - CATCH-ALL route (matches any remaining /{slug})
     // Since this is last, all specific routes above will match first
