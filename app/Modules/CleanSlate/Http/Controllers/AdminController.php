@@ -21,10 +21,10 @@ class AdminController extends Controller
             ->paginate(25);
 
         $stats = [
-            'total_customers'   => Profile::count(),
-            'active_scans'      => \App\Modules\CleanSlate\Models\ScanJob::whereIn('status', ['pending', 'running'])->count(),
-            'pending_removals'  => \App\Modules\CleanSlate\Models\RemovalRequest::where('status', 'pending')->count(),
-            'confirmed_removals'=> \App\Modules\CleanSlate\Models\RemovalRequest::where('status', 'confirmed')->count(),
+            'total_customers' => Profile::count(),
+            'active_scans' => \App\Modules\CleanSlate\Models\ScanJob::whereIn('status', ['pending', 'running'])->count(),
+            'pending_removals' => \App\Modules\CleanSlate\Models\RemovalRequest::where('status', 'pending')->count(),
+            'confirmed_removals' => \App\Modules\CleanSlate\Models\RemovalRequest::where('status', 'confirmed')->count(),
         ];
 
         return view('cleanslate::admin.index', compact('profiles', 'stats'));
@@ -32,23 +32,23 @@ class AdminController extends Controller
 
     public function debug(): View
     {
-        // Collect all Clean Slate routes
+        // Collect all Extreme routes
         $routes = collect(Route::getRoutes()->getRoutes())
-            ->filter(fn ($r) => str_starts_with($r->getName() ?? '', 'cleanslate.') || str_starts_with($r->getName() ?? '', 'admin.cleanslate.') || $r->getName() === 'clean-slate' || $r->getName() === 'clean-slate.intake')
+            ->filter(fn ($r) => str_starts_with($r->getName() ?? '', 'cleanslate.') || str_starts_with($r->getName() ?? '', 'admin.cleanslate.') || $r->getName() === 'extreme' || $r->getName() === 'extreme.intake')
             ->map(fn ($r) => [
-                'name'       => $r->getName(),
-                'methods'    => implode('|', $r->methods()),
-                'uri'        => $r->uri(),
+                'name' => $r->getName(),
+                'methods' => implode('|', $r->methods()),
+                'uri' => $r->uri(),
                 'middleware' => implode(', ', $r->gatherMiddleware()),
-                'action'     => $r->getActionName(),
+                'action' => $r->getActionName(),
             ])
             ->values();
 
         $dbStats = [
-            'profiles'         => Profile::count(),
-            'brokers_total'    => DataBroker::count(),
-            'brokers_active'   => DataBroker::where('active', true)->count(),
-            'scan_jobs'        => ScanJob::count(),
+            'profiles' => Profile::count(),
+            'brokers_total' => DataBroker::count(),
+            'brokers_active' => DataBroker::where('active', true)->count(),
+            'scan_jobs' => ScanJob::count(),
             'removal_requests' => RemovalRequest::count(),
         ];
 
@@ -63,7 +63,7 @@ class AdminController extends Controller
             'CASHIER_MODEL',
         ];
         $envValues = collect($envKeys)->mapWithKeys(fn ($k) => [
-            $k => env($k) ? (str_contains($k, 'SECRET') || str_contains($k, 'KEY') ? substr(env($k), 0, 8) . '…' : env($k)) : null,
+            $k => env($k) ? (str_contains($k, 'SECRET') || str_contains($k, 'KEY') ? substr(env($k), 0, 8).'…' : env($k)) : null,
         ]);
 
         return view('cleanslate::admin.debug', compact('routes', 'dbStats', 'brokersByTier', 'envValues'));
@@ -91,7 +91,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'active' => ['required', 'boolean'],
-            'tier'      => ['required', 'integer', 'min:1', 'max:3'],
+            'tier' => ['required', 'integer', 'min:1', 'max:3'],
         ]);
 
         $broker->update($request->only('active', 'tier'));

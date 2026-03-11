@@ -3,7 +3,7 @@
 @section('content')
 <div class="mb-6 flex items-center justify-between">
     <div>
-        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Clean Slate — Debug</h1>
+        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Extreme — Debug</h1>
         <p class="text-xs text-gray-500 mt-1">Routes, environment, database stats, and quick links</p>
     </div>
     <a href="{{ route('admin.cleanslate.index') }}" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">
@@ -16,9 +16,9 @@
     <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Quick Links</h2>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         @foreach([
-            ['label' => 'Landing Page',       'route' => 'clean-slate',                    'icon' => 'fa-globe',          'color' => 'text-cyan-400'],
+            ['label' => 'Landing Page',       'route' => 'extreme',                    'icon' => 'fa-globe',          'color' => 'text-cyan-400'],
             ['label' => 'Pricing (public)',    'route' => 'cleanslate.billing.plans',       'icon' => 'fa-tag',            'color' => 'text-cyan-400'],
-            ['label' => 'Intake Form',         'route' => 'clean-slate',                    'icon' => 'fa-file-lines',     'color' => 'text-cyan-400', 'hash' => '#intake'],
+            ['label' => 'Intake Form',         'route' => 'extreme',                    'icon' => 'fa-file-lines',     'color' => 'text-cyan-400', 'hash' => '#intake'],
             ['label' => 'Customer Entry',      'route' => 'cleanslate.entry',               'icon' => 'fa-door-open',      'color' => 'text-violet-400'],
             ['label' => 'Onboarding Step 1',   'route' => 'cleanslate.onboarding.profile',  'icon' => 'fa-user',           'color' => 'text-violet-400'],
             ['label' => 'Onboarding Step 2',   'route' => 'cleanslate.onboarding.contact',  'icon' => 'fa-envelope',       'color' => 'text-violet-400'],
@@ -126,7 +126,7 @@
             @foreach($routes->sortBy('uri') as $route)
             @php
                 $isAdmin  = str_starts_with($route['name'] ?? '', 'admin.cleanslate.');
-                $isPublic = in_array($route['name'], ['clean-slate', 'clean-slate.intake', 'cleanslate.billing.plans']);
+                $isPublic = in_array($route['name'], ['extreme', 'extreme.intake', 'cleanslate.billing.plans']);
             @endphp
             <div class="grid grid-cols-12 gap-2 px-4 py-2.5 items-start hover:bg-gray-700/20 transition-colors">
                 <div class="col-span-2">

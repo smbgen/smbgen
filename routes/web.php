@@ -670,7 +670,7 @@ if (config('app.debug')) {
 
             $redirect = match ($user->role) {
                 'company_administrator' => route('admin.dashboard'),
-                default                 => route('dashboard'),
+                default => route('dashboard'),
             };
 
             return redirect($redirect)->with('status', "Logged in as {$user->name} ({$user->role})");
@@ -752,13 +752,18 @@ if (config('business.features.cms')) {
         ->name('cms.form.submit')
         ->where('slug', '[a-z0-9\-]+');
 
-    // Clean Slate — Digital Reputation & Data Suppression landing page
-    Route::get('/clean-slate', function () {
-        return view('clean-slate');
-    })->name('clean-slate');
+    // Extreme — Laravel full-stack app generator landing page
+    Route::get('/extreme', function () {
+        return view('extreme');
+    })->name('extreme');
 
-    // Clean Slate intake form submission
-    Route::post('/clean-slate/intake', [App\Http\Controllers\ContactController::class, 'submitCleanSlateIntake'])->name('clean-slate.intake');
+    // Extreme — interactive smoke-and-mirrors demo
+    Route::get('/extreme/demo', function () {
+        return view('extreme-demo');
+    })->name('extreme.demo');
+
+    // Extreme intake form submission
+    Route::post('/extreme/intake', [App\Http\Controllers\ContactController::class, 'submitCleanSlateIntake'])->name('extreme.intake');
 
     // CMS page display - CATCH-ALL route (matches any remaining /{slug})
     // Since this is last, all specific routes above will match first

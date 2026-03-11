@@ -89,35 +89,34 @@ class ContactController extends Controller
     public function submitCleanSlateIntake(Request $request)
     {
         $validated = $request->validate([
-            'name'            => 'required|string|max:255',
-            'email'           => 'required|email|max:255',
-            'phone'           => 'nullable|string|max:20',
-            'message'         => 'nullable|string|max:2000',
-            'engagement_type' => 'nullable|string|in:standard,retainer,unsure',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'nullable|string|max:2000',
+            'engagement_type' => 'nullable|string|in:freelancer,agency,founder,internal,unsure',
         ]);
 
         $engagementLabels = [
-            'standard' => 'Standard Engagement — $1,500',
-            'retainer' => 'Annual Retainer — Let\'s talk',
-            'unsure'   => 'Not sure yet',
+            'freelancer' => 'Freelance Laravel developer',
+            'agency' => 'Agency or consultancy',
+            'founder' => 'Founder building a product',
+            'internal' => 'Internal developer / startup employee',
+            'unsure' => 'Not sure yet',
         ];
 
-        $messageBody = ($validated['message'] ?? 'No details provided.') . "\n\n"
-            . 'Phone: ' . ($validated['phone'] ?? 'Not provided') . "\n"
-            . 'Engagement type: ' . ($engagementLabels[$validated['engagement_type'] ?? 'unsure'] ?? 'Not specified');
+        $messageBody = ($validated['message'] ?? 'No details provided.')."\n\n"
+            .'Role: '.($engagementLabels[$validated['engagement_type'] ?? 'unsure'] ?? 'Not specified');
 
         try {
             $lead = LeadForm::create([
-                'name'               => $validated['name'],
-                'email'              => $validated['email'],
-                'message'            => $messageBody,
-                'source_site'        => 'Clean Slate Landing Page',
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'message' => $messageBody,
+                'source_site' => 'Extreme Landing Page',
                 'notification_email' => config('business.contact.email'),
-                'ip_address'         => $request->ip(),
-                'user_agent'         => $request->userAgent(),
-                'referer'            => $request->header('referer'),
-                'form_data'          => [
-                    'phone'           => $validated['phone'] ?? null,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'referer' => $request->header('referer'),
+                'form_data' => [
                     'engagement_type' => $validated['engagement_type'] ?? null,
                 ],
             ]);
@@ -126,10 +125,10 @@ class ContactController extends Controller
                 Mail::to($validated['email'])
                     ->send(new ContactInquiryReceived(
                         name: $validated['name'],
-                        companyName: 'Clean Slate by L7 Media Labs',
+                        companyName: 'Extreme by smbgen',
                     ));
             } catch (\Exception $e) {
-                Log::warning('Clean Slate: failed to send customer confirmation', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
+                Log::warning('Extreme: failed to send customer confirmation', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
             }
 
             $businessEmail = config('business.contact.email');
@@ -147,18 +146,18 @@ class ContactController extends Controller
                             replyToName: $validated['name'],
                         ));
                 } catch (\Exception $e) {
-                    Log::warning('Clean Slate: failed to send admin notification', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
+                    Log::warning('Extreme: failed to send admin notification', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
                 }
             }
 
-            return redirect()->to(route('clean-slate') . '#intake')
-                ->with('success', "Thanks {$validated['name']} — we've received your request and will be in touch within one business day.");
+            return redirect()->to(route('extreme').'#intake')
+                ->with('success', "You're on the list, {$validated['name']}! We'll reach out personally when your early access spot is ready.");
         } catch (\Exception $e) {
-            Log::error('Clean Slate intake submission failed', ['error' => $e->getMessage()]);
+            Log::error('Extreme intake submission failed', ['error' => $e->getMessage()]);
 
-            return redirect()->to(route('clean-slate') . '#intake')
+            return redirect()->to(route('extreme').'#intake')
                 ->withInput()
-                ->with('error', 'Something went wrong. Please try again or email us directly at chat@l7medialabs.com.');
+                ->with('error', 'Something went wrong. Please try again or email us directly.');
         }
     }
 }

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             MessageSeeder::class,
         ]);
 
-        // Clean Slate demo data — local/staging only
+        // Extreme demo data — local/staging only
         if (! app()->isProduction()) {
             $this->call([
                 \App\Modules\CleanSlate\Database\Seeders\DataBrokerSeeder::class,

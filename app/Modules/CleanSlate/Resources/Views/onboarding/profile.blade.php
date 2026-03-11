@@ -1,4 +1,4 @@
-@extends('layouts.clean-slate')
+@extends('layouts.extreme')
 
 @section('title', 'Setup — Step 1')
 
@@ -6,7 +6,7 @@
 <div class="max-w-lg mx-auto px-6 py-16">
 
     <div class="mb-8">
-        <h1 class="text-2xl font-extrabold text-white mb-1">Clean Slate Setup</h1>
+        <h1 class="text-2xl font-extrabold text-white mb-1">Extreme Setup</h1>
         <p class="text-sm text-gray-500">Step 1 of 4 — Your Profile</p>
     </div>
 

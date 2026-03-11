@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Clean Slate') — Digital Reputation & Data Suppression</title>
-    <meta name="description" content="A personal, done-for-you service that identifies and pursues removal of your data from public broker sites.">
+    <title>@yield('title', 'Extreme') — Laravel Full-Stack App Generator</title>
+    <meta name="description" content="Extreme by smbgen — describe your app in plain English, get a production-ready Laravel full-stack codebase back.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .cs-hero-bg {
@@ -26,14 +26,14 @@
     {{-- ─── NAV ─────────────────────────────────────────────────── --}}
     <nav class="sticky top-0 z-50 border-b border-white/5 backdrop-blur-md bg-[#060d1a]/80">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="{{ route('clean-slate') }}" class="flex items-center gap-3">
+            <a href="{{ route('extreme') }}" class="flex items-center gap-3">
                 <div class="w-7 h-7 rounded-md bg-gradient-to-br from-cyan-500 to-violet-500 flex items-center justify-center">
                     <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.955 11.955 0 003 10c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286z" />
                     </svg>
                 </div>
-                <span class="text-white font-semibold text-lg tracking-tight">Clean Slate</span>
-                <span class="hidden sm:block text-gray-500 text-sm">by L7 Media Labs</span>
+                <span class="text-white font-semibold text-lg tracking-tight">Extreme</span>
+                <span class="hidden sm:block text-gray-500 text-sm">by smbgen</span>
             </a>
             <div class="flex items-center gap-4">
                 @auth
@@ -78,12 +78,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.955 11.955 0 003 10c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286z" />
                     </svg>
                 </div>
-                <span class="text-gray-400 text-sm">Clean Slate by <span class="text-white">L7 Media Labs</span></span>
+                <span class="text-gray-400 text-sm">Extreme by <span class="text-white">smbgen</span></span>
             </div>
             <div class="flex items-center gap-6">
-                <a href="mailto:chat@l7medialabs.com" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">chat@l7medialabs.com</a>
+                <a href="{{ route('extreme') }}#start" class="text-gray-500 hover:text-gray-300 text-sm transition-colors">Get Early Access</a>
             </div>
-            <p class="text-gray-700 text-xs">© {{ date('Y') }} L7 Labs, LLC. All rights reserved.</p>
+            <p class="text-gray-700 text-xs">© {{ date('Y') }} smbgen. All rights reserved.</p>
         </div>
     </footer>
 

@@ -28,9 +28,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'companyAdministrator' => \App\Http\Middleware\CompanyAdministrator::class,
             'cors' => \App\Http\Middleware\HandleCors::class,
-            // Clean Slate
-            'subscribed'           => \App\Modules\CleanSlate\Http\Middleware\EnsureSubscribed::class,
-            'onboarding.complete'  => \App\Modules\CleanSlate\Http\Middleware\EnsureOnboardingComplete::class,
+            // Extreme
+            'subscribed' => \App\Modules\CleanSlate\Http\Middleware\EnsureSubscribed::class,
+            'onboarding.complete' => \App\Modules\CleanSlate\Http\Middleware\EnsureOnboardingComplete::class,
         ]);
     })
     ->withExceptions(function (Illuminate\Foundation\Configuration\Exceptions $exceptions) {

@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Route;
 
 // ─── PUBLIC ───────────────────────────────────────────────────────────────────
 // 'web' must be explicit — loadRoutesFrom() runs outside the web middleware group
-Route::middleware(['web'])->prefix('clean-slate')->name('cleanslate.')->group(function () {
+Route::middleware(['web'])->prefix('extreme')->name('cleanslate.')->group(function () {
     Route::get('/plans', [BillingController::class, 'plans'])->name('billing.plans');
 });
 
 // ─── CUSTOMER (auth required) ─────────────────────────────────────────────────
-Route::middleware(['web', 'auth', 'verified'])->prefix('clean-slate')->name('cleanslate.')->group(function () {
+Route::middleware(['web', 'auth', 'verified'])->prefix('extreme')->name('cleanslate.')->group(function () {
 
     // Smart entry — redirects based on subscription/onboarding state
     Route::get('/start', [BillingController::class, 'entry'])->name('entry');
@@ -25,14 +25,14 @@ Route::middleware(['web', 'auth', 'verified'])->prefix('clean-slate')->name('cle
 
     // Onboarding (requires active subscription)
     Route::middleware('subscribed')->prefix('onboarding')->name('onboarding.')->group(function () {
-        Route::get('/profile',    [OnboardingController::class, 'profile'])->name('profile');
-        Route::post('/profile',   [OnboardingController::class, 'storeProfile']);
-        Route::get('/contact',    [OnboardingController::class, 'contact'])->name('contact');
-        Route::post('/contact',   [OnboardingController::class, 'storeContact']);
-        Route::get('/addresses',  [OnboardingController::class, 'addresses'])->name('addresses');
+        Route::get('/profile', [OnboardingController::class, 'profile'])->name('profile');
+        Route::post('/profile', [OnboardingController::class, 'storeProfile']);
+        Route::get('/contact', [OnboardingController::class, 'contact'])->name('contact');
+        Route::post('/contact', [OnboardingController::class, 'storeContact']);
+        Route::get('/addresses', [OnboardingController::class, 'addresses'])->name('addresses');
         Route::post('/addresses', [OnboardingController::class, 'storeAddresses']);
-        Route::get('/confirm',    [OnboardingController::class, 'confirm'])->name('confirm');
-        Route::post('/launch',    [OnboardingController::class, 'launch'])->name('launch');
+        Route::get('/confirm', [OnboardingController::class, 'confirm'])->name('confirm');
+        Route::post('/launch', [OnboardingController::class, 'launch'])->name('launch');
     });
 
     // Dashboard (requires subscription + completed onboarding)
@@ -43,12 +43,12 @@ Route::middleware(['web', 'auth', 'verified'])->prefix('clean-slate')->name('cle
 
 // ─── ADMIN ────────────────────────────────────────────────────────────────────
 Route::middleware(['web', 'auth', 'verified', 'companyAdministrator'])
-    ->prefix('admin/clean-slate')
+    ->prefix('admin/extreme')
     ->name('admin.cleanslate.')
     ->group(function () {
-        Route::get('/',                    [AdminController::class, 'index'])->name('index');
-        Route::get('/debug',               [AdminController::class, 'debug'])->name('debug');
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('/debug', [AdminController::class, 'debug'])->name('debug');
         Route::get('/customers/{profile}', [AdminController::class, 'show'])->name('customers.show');
-        Route::get('/brokers',             [AdminController::class, 'brokers'])->name('brokers');
-        Route::patch('/brokers/{broker}',  [AdminController::class, 'updateBroker'])->name('brokers.update');
+        Route::get('/brokers', [AdminController::class, 'brokers'])->name('brokers');
+        Route::patch('/brokers/{broker}', [AdminController::class, 'updateBroker'])->name('brokers.update');
     });

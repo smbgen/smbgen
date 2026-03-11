@@ -103,10 +103,10 @@
                     @endif -->
                 </div>
 
-                <!-- Clean Slate Section -->
+                <!-- Extreme Section -->
                 @if(\Route::has('cleanslate.billing.plans'))
                 <div class="mb-6 space-y-1">
-                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">Clean Slate — Admin</div>
+                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">Extreme — Admin</div>
                     <a href="{{ route('admin.cleanslate.index') }}" class="sidebar-link {{ request()->routeIs('admin.cleanslate.*') ? 'active' : '' }}">
                         <i class="fas fa-users text-lg"></i>
                         <span>Customers</span>
@@ -121,7 +121,7 @@
                     </a>
                 </div>
                 <div class="mb-6 space-y-1">
-                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">Clean Slate — My Account</div>
+                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">Extreme — My Account</div>
                     <a href="{{ route('cleanslate.entry') }}" class="sidebar-link {{ request()->routeIs('cleanslate.*') ? 'active' : '' }}">
                         <i class="fas fa-shield-halved text-lg"></i>
                         <span>My Dashboard</span>

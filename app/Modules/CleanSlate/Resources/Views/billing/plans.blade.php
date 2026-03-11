@@ -1,4 +1,4 @@
-@extends('layouts.clean-slate')
+@extends('layouts.extreme')
 
 @section('title', 'Choose a Plan')
 

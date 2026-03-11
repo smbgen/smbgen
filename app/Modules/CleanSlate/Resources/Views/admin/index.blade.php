@@ -3,7 +3,7 @@
 @section('content')
 <div class="mb-6 flex items-center justify-between">
     <div>
-        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Clean Slate — Admin</h1>
+        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Extreme — Admin</h1>
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">All customers and removal activity</p>
     </div>
     <a href="{{ route('admin.cleanslate.brokers') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-700 hover:bg-gray-600 rounded-lg text-white text-xs font-medium transition-all">

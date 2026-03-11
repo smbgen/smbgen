@@ -11,7 +11,7 @@ use Laravel\Cashier\Billable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, Billable;
+    use Billable, HasFactory, Notifiable;
 
     // Role constants
     const ROLE_USER = 'user';
@@ -182,7 +182,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Clean Slate profile for this user
+     * Extreme profile for this user
      */
     public function profile()
     {

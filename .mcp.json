@@ -6,7 +6,7 @@
                 "C:/Users/alexr/.config/herd/bin/herd-mcp.phar"
             ],
             "env": {
-                "SITE_PATH": "C:\\Users\\alexr\\Herd\\prtl7-app"
+                "SITE_PATH": "C:\\Users\\alexr\\Herd\\smbgen"
             }
         },
         "nightwatch": {
