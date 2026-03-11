@@ -44,6 +44,10 @@
                         <span>Clients</span>
                         <span class="ml-auto bg-primary-600/20 text-primary-400 text-xs font-semibold px-2 py-0.5 rounded-full">{{ \App\Models\Client::count() }}</span>
                     </a>
+                    <a href="{{ route('admin.packages.index') }}" class="sidebar-link {{ request()->routeIs('admin.packages.*') ? 'active' : '' }}">
+                        <i class="fas fa-box-open text-lg"></i>
+                        <span>Packages</span>
+                    </a>
                     @if(config('business.features.file_management'))
                         <a href="{{ route('admin.clients.files.overview') }}" class="sidebar-link {{ request()->routeIs('admin.clients.files.overview') ? 'active' : '' }}">
                             <i class="fas fa-folder text-lg"></i>

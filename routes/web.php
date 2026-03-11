@@ -586,6 +586,28 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
         ->name('admin.users.verify');
     Route::post('/users/{user}/unverify', [\App\Http\Controllers\Admin\UserController::class, 'unverify'])
         ->name('admin.users.unverify');
+
+    // Presentations — Packages
+    Route::get('/packages', [\App\Http\Controllers\Admin\PackageController::class, 'index'])
+        ->name('admin.packages.index');
+    Route::get('/packages/create', [\App\Http\Controllers\Admin\PackageController::class, 'create'])
+        ->name('admin.packages.create');
+    Route::post('/packages/review', [\App\Http\Controllers\Admin\PackageController::class, 'review'])
+        ->name('admin.packages.review');
+    Route::post('/packages', [\App\Http\Controllers\Admin\PackageController::class, 'store'])
+        ->name('admin.packages.store');
+    Route::get('/packages/{package}', [\App\Http\Controllers\Admin\PackageController::class, 'show'])
+        ->name('admin.packages.show');
+    Route::patch('/packages/{package}/status', [\App\Http\Controllers\Admin\PackageController::class, 'updateStatus'])
+        ->name('admin.packages.status');
+    Route::patch('/packages/{package}/toggle-portal', [\App\Http\Controllers\Admin\PackageController::class, 'togglePortal'])
+        ->name('admin.packages.toggle-portal');
+    Route::patch('/packages/{package}/files/{file}/promote', [\App\Http\Controllers\Admin\PackageController::class, 'togglePromote'])
+        ->name('admin.packages.files.promote');
+    Route::get('/packages/{package}/files/{file}/preview', [\App\Http\Controllers\Admin\PackageController::class, 'previewFile'])
+        ->name('admin.packages.files.preview');
+    Route::get('/packages/{package}/files/{file}/content', [\App\Http\Controllers\Admin\PackageController::class, 'fileContent'])
+        ->name('admin.packages.files.content');
 });
 
 // Public consume route for magic links
