@@ -27,13 +27,13 @@
     @if($hasAccount ?? false)
         <div style="text-align: center; margin: 32px 0;">
             <a href="{{ $messageUrl ?? $messagesUrl ?? '#' }}" style="display: inline-block; background-color: #3b82f6; color: #ffffff !important; padding: 14px 36px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);">
-                📨 View Message in smbgen
+                📨 View Message in {{ config('app.name') }}
             </a>
         </div>
         
         <div style="margin-top: 24px; padding: 16px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #3b82f6;">
             <p style="margin: 0; color: #1e40af; font-size: 14px; line-height: 1.6;">
-                💡 <strong>Tip:</strong> Log in to your <a href="{{ $loginUrl ?? '#' }}" style="color: #2563eb; text-decoration: none; font-weight: 600;">smbgen account</a> to reply and view your complete message history.
+                💡 <strong>Tip:</strong> Log in to your <a href="{{ $loginUrl ?? '#' }}" style="color: #2563eb; text-decoration: none; font-weight: 600;">{{ config('app.name') }} account</a> to reply and view your complete message history.
             </p>
         </div>
     @else

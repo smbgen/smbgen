@@ -53,6 +53,15 @@ A modern multi-tenant SaaS platform for service professionals. Built with **Lara
 - ✅ Per-tenant configuration
 - ✅ Tenant admin impersonation for support
 
+### Authentication & Security
+- ✅ Email/password registration and login
+- ✅ Google OAuth (sign in **and** sign up with Google)
+- ✅ Email verification flow
+- ✅ Password reset via email
+- ✅ Role-based redirects (client → dashboard, admin → admin dashboard, super admin → super-admin)
+- ✅ Stateful Google OAuth (CSRF state verification enforced on callback)
+- ✅ Unified guest layout across all six auth views
+
 ### Admin Dashboard
 - ✅ Comprehensive dashboard with widgets
 - ✅ User and tenant management
@@ -342,24 +351,29 @@ For detailed instructions, see `deployment/README.md`.
 
 ## 📋 Current Branch Status
 
-**Branch:** `feature/subscription-trial-domain-management`
+**Branch:** `feature/auth-hardening`
 
 **Latest Updates:**
-- ✅ Multi-tenant domain management UI enhanced
-- ✅ AI settings controller with comprehensive error handling
-- ✅ PostgreSQL BusinessSetting type casting fixed
-- ✅ Environment naming simplified (COMPANY_NAME as primary)
-- ✅ Documentation reorganized and cleaned up
-- ✅ Redundant guides consolidated
-- ✅ Developer onboarding guide created
-- ✅ Feature flags verified and documented
+- ✅ Unified all six auth views to `@extends('layouts.guest')` — eliminated broken `<x-guest-layout>` component references
+- ✅ Google OAuth "Continue with Google" button added to `/register` page (was missing, only existed on login)
+- ✅ Removed all hardcoded `smbgen` branding fallbacks from auth views — now uses `config('app.name')`
+- ✅ Login footer links and session toast de-branded from smbgen.com
+- ✅ Removed `stateless()` from Google OAuth callback — stateful flow now enforces CSRF state verification
+- ✅ Removed duplicate `@push('styles')` block from login view
+- ✅ `.env.example` documents that Mailtrap is local-only and Google OAuth needs real credentials for production
+- ✅ MCP server added for Claude Cowork / Claude Desktop integration
+
+**Action Required Before Production:**
+- Set real SMTP credentials (`MAIL_HOST`, `MAIL_USERNAME`, `MAIL_PASSWORD`) — currently set to Mailtrap which does not deliver to real inboxes
+- Set real Google OAuth credentials (`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI`)
+- Run end-to-end email verification and password reset flows against live SMTP
 
 **Known Status:**
 - Feature flags: FEATURE_BOOKING, FEATURE_BILLING, FEATURE_MESSAGES, FEATURE_CMS, FEATURE_BLOG
 - Multi-tenancy: Fully functional with domain management
 - AI: Claude integration active per-tenant
 - Billing: Stripe integration with trial support
-- Development: Windows/Mac/Linux setup guides included
+- Auth: Google OAuth + email/password, unified layout, role-based redirects
 
 ---
 

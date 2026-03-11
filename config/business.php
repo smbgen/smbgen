@@ -23,9 +23,9 @@ return [
 
     // Contact Information
     'contact' => [
-        'email' => env('BUSINESS_EMAIL', 'support@smbgen.com'),
+        'email' => env('BUSINESS_EMAIL', ''),
         'phone' => env('BUSINESS_PHONE', ''),
-        'website' => env('BUSINESS_WEBSITE', 'https://smbgen.com'),
+        'website' => env('BUSINESS_WEBSITE', env('APP_URL', '')),
         'address' => env('BUSINESS_ADDRESS', ''),
     ],
 

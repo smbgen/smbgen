@@ -136,7 +136,9 @@ class PaymentController extends Controller
      */
     public function collect()
     {
-        return view('payment.collect');
+        return view('payment.collect', [
+            'stripeEnabled' => ! empty(config('services.stripe.key')),
+        ]);
     }
 
     /**
@@ -233,7 +235,7 @@ class PaymentController extends Controller
                 'currency' => 'usd',
                 'customer' => $customerId,
                 'receipt_email' => $validated['email'],
-                'description' => $validated['description'] ?? 'Payment via smbgen',
+                'description' => $validated['description'] ?? ('Payment via ' . config('app.name')),
                 'metadata' => [
                     'customer_name' => $validated['name'],
                     'invoice_id' => $invoice->id,

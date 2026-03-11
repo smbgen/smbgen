@@ -31,7 +31,7 @@ class ClientPortalAccessMail extends Mailable
      */
     public function build()
     {
-        $companyName = config('business.company_name') ?: config('app.company_name', 'smbgen');
+        $companyName = config('business.company_name') ?: config('app.company_name', config('app.name'));
 
         return $this->subject('Account Setup for '.$companyName)
             ->view('emails.client_portal_access');
