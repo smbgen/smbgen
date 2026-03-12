@@ -308,6 +308,12 @@
                 <i class="fas fa-external-link-alt"></i>
                 Open in tab
             </a>
+            <a :href="downloadUrl" download
+                x-show="previewType === 'WORD_DOCUMENT' || previewType === 'POWERPOINT'"
+                class="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 hover:border-gray-500">
+                <i class="fas fa-download"></i>
+                Download
+            </a>
             <button @click="previewOpen = false"
                 class="text-gray-400 hover:text-gray-100 p-2 rounded-lg hover:bg-gray-700 transition-colors"
                 title="Close (Esc)">
@@ -349,11 +355,49 @@
         </div>
     </template>
 
+    {{-- Word document rendered via mammoth.js --}}
+    <template x-if="previewType === 'WORD_DOCUMENT'">
+        <div class="flex-1 overflow-auto">
+            <div class="max-w-4xl mx-auto px-8 py-10">
+                <template x-if="wordLoading">
+                    <p class="text-gray-400 text-center py-20">
+                        <i class="fas fa-spinner fa-spin mr-2"></i>Converting document…
+                    </p>
+                </template>
+                <template x-if="wordError">
+                    <div class="text-center py-20 space-y-4">
+                        <i class="fas fa-exclamation-triangle text-yellow-400 text-3xl"></i>
+                        <p class="text-gray-300" x-text="wordError"></p>
+                        <a :href="downloadUrl" class="btn-secondary inline-flex items-center gap-2">
+                            <i class="fas fa-download"></i> Download to view
+                        </a>
+                    </div>
+                </template>
+                <div class="prose-dark" x-html="renderedWord"></div>
+            </div>
+        </div>
+    </template>
+
+    {{-- PowerPoint — no browser preview, offer download --}}
+    <template x-if="previewType === 'POWERPOINT'">
+        <div class="flex-1 flex items-center justify-center">
+            <div class="text-center space-y-4">
+                <i class="fas fa-file-powerpoint text-orange-400 text-5xl"></i>
+                <p class="text-gray-300 text-lg font-medium" x-text="previewTitle"></p>
+                <p class="text-gray-500 text-sm">PowerPoint files can't be previewed in the browser.</p>
+                <a :href="downloadUrl" class="btn-primary inline-flex items-center gap-2">
+                    <i class="fas fa-download"></i> Download to view
+                </a>
+            </div>
+        </div>
+    </template>
+
 </div>{{-- end modal --}}
 </div>{{-- end x-data wrapper --}}
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script>
 function packageDetail() {
     return {
@@ -364,18 +408,29 @@ function packageDetail() {
         previewUrl: '',
         previewContent: '',
         renderedMarkdown: '',
+        renderedWord: '',
+        wordLoading: false,
+        wordError: '',
+        downloadUrl: '',
 
         async previewFile(fileId, title, type) {
             this.previewTitle = title;
             this.previewType = type;
             this.previewOpen = true;
             this.renderedMarkdown = '';
+            this.renderedWord = '';
+            this.wordError = '';
+            this.wordLoading = false;
+
+            const baseUrl = `{{ route('admin.packages.show', $package) }}/files/${fileId}`;
+            this.previewUrl  = `${baseUrl}/preview`;
+            this.downloadUrl = `${baseUrl}/preview`;
 
             if (type === 'MARKDOWN_RESEARCH' || type === 'JSON_DATA') {
                 this.previewContent = 'Loading…';
                 this.renderedMarkdown = '<p class="text-gray-400">Loading…</p>';
                 try {
-                    const res = await fetch(`{{ route('admin.packages.show', $package) }}/files/${fileId}/content`);
+                    const res = await fetch(`${baseUrl}/content`);
                     const data = await res.json();
                     const raw = data.content || '';
                     this.previewContent = raw;
@@ -386,8 +441,19 @@ function packageDetail() {
                     this.previewContent = 'Error loading file.';
                     this.renderedMarkdown = '<p class="text-red-400">Error loading file.</p>';
                 }
-            } else {
-                this.previewUrl = `{{ route('admin.packages.show', $package) }}/files/${fileId}/preview`;
+            } else if (type === 'WORD_DOCUMENT') {
+                this.wordLoading = true;
+                try {
+                    const res = await fetch(this.previewUrl);
+                    if (!res.ok) throw new Error('Failed to fetch file');
+                    const arrayBuffer = await res.arrayBuffer();
+                    const result = await mammoth.convertToHtml({ arrayBuffer });
+                    this.renderedWord = result.value || '<p class="text-gray-400">Document appears to be empty.</p>';
+                } catch (e) {
+                    this.wordError = 'Could not render document. Download it to view.';
+                } finally {
+                    this.wordLoading = false;
+                }
             }
         },
 

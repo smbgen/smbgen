@@ -225,11 +225,11 @@ class PackageIngestService
             return 'JSON_DATA';
         }
 
-        if ($ext === 'pptx') {
+        if (in_array($ext, ['pptx', 'ppt'])) {
             return 'POWERPOINT';
         }
 
-        if ($ext === 'docx') {
+        if (in_array($ext, ['docx', 'doc'])) {
             return 'WORD_DOCUMENT';
         }
 

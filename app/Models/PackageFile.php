@@ -78,6 +78,8 @@ class PackageFile extends Model
             'PDF_DOCUMENT'       => 'fa-file-pdf',
             'MARKDOWN_RESEARCH'  => 'fa-file-alt',
             'JSON_DATA'          => 'fa-code',
+            'WORD_DOCUMENT'      => 'fa-file-word',
+            'POWERPOINT'         => 'fa-file-powerpoint',
             default              => 'fa-file',
         };
     }
