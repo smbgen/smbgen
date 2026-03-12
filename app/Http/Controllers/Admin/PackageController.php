@@ -243,12 +243,18 @@ class PackageController extends Controller
             'PDF_DOCUMENT'      => 'application/pdf',
             'MARKDOWN_RESEARCH' => 'text/plain',
             'JSON_DATA'         => 'application/json',
+            'WORD_DOCUMENT'     => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'POWERPOINT'        => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
         ];
         $mime = $mimeMap[$file->type] ?? 'application/octet-stream';
 
+        $disposition = in_array($file->type, ['WORD_DOCUMENT', 'POWERPOINT'])
+            ? 'attachment'
+            : 'inline';
+
         return response($contents, 200)
             ->header('Content-Type', $mime)
-            ->header('Content-Disposition', 'inline; filename="'.addslashes($file->original_name).'"');
+            ->header('Content-Disposition', $disposition.'; filename="'.addslashes($file->original_name).'"');
     }
 
     /**

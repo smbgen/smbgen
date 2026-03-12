@@ -62,6 +62,8 @@
                                                 'PDF_DOCUMENT' => 'fa-file-pdf text-red-400',
                                                 'MARKDOWN_RESEARCH' => 'fa-file-alt text-green-400',
                                                 'JSON_DATA' => 'fa-code text-yellow-400',
+                                                'WORD_DOCUMENT' => 'fa-file-word text-blue-300',
+                                                'POWERPOINT' => 'fa-file-powerpoint text-orange-400',
                                                 default => 'fa-file text-gray-400',
                                             };
                                         @endphp
