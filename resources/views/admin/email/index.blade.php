@@ -5,6 +5,27 @@
 @section('content')
 <div class="container mx-auto px-4 py-6">
     <div class="max-w-6xl mx-auto">
+
+        {{-- Package template banner --}}
+        @if($prefill)
+        <div class="mb-5 flex items-center justify-between bg-blue-900/30 border border-blue-700 rounded-lg px-4 py-3">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-envelope text-blue-400"></i>
+                <div>
+                    <span class="text-blue-200 font-medium">{{ $prefill['file_name'] }}</span>
+                    <span class="text-gray-400 text-sm ml-2">from package <span class="text-gray-200">{{ $prefill['package_name'] }}</span></span>
+                    @if($prefill['client_name'])
+                        <span class="text-gray-400 text-sm ml-1">→ <span class="text-gray-200">{{ $prefill['client_name'] }}</span></span>
+                    @endif
+                </div>
+            </div>
+            <a href="{{ route('admin.packages.show', $prefill['package_id']) }}"
+                class="text-xs text-gray-400 hover:text-gray-200 flex items-center gap-1">
+                <i class="fas fa-arrow-left"></i> Back to package
+            </a>
+        </div>
+        @endif
+
         <div class="mb-6 flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold text-white mb-2">📧 Email Composer</h1>
@@ -37,6 +58,9 @@
                 <div class="bg-gray-800 rounded-lg shadow-lg p-6">
                     <form action="{{ route('admin.email.send') }}" method="POST" id="emailForm">
                         @csrf
+                        @if(!empty($prefill['is_html']))
+                            <input type="hidden" name="is_html_body" value="1">
+                        @endif
 
                         <!-- Recipients -->
                         <div class="mb-6 relative">
@@ -46,7 +70,7 @@
                             <textarea name="recipients" id="recipients" rows="2" required
                                       class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
                                       placeholder="Start typing name or email... (clients, users, bookings)"
-                                      autocomplete="off">{{ old('recipients') }}</textarea>
+                                      autocomplete="off">{{ old('recipients', $prefill['recipient'] ?? '') }}</textarea>
                             
                             <!-- Autocomplete Dropdown -->
                             <div id="emailAutocomplete" class="hidden absolute z-10 w-full mt-1 bg-gray-700 border border-gray-600 rounded-lg shadow-lg max-h-60 overflow-y-auto">
@@ -98,7 +122,7 @@
                                 Subject <span class="text-red-400">*</span>
                             </label>
                             <input type="text" name="subject" id="subject" required
-                                   value="{{ old('subject') }}"
+                                   value="{{ old('subject', $prefill['subject'] ?? '') }}"
                                    class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
                                    placeholder="Email subject">
                             @error('subject')
@@ -107,25 +131,60 @@
                         </div>
 
                         <!-- Message -->
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-300 mb-2">
-                                Message <span class="text-red-400">*</span>
-                            </label>
-                            <textarea name="message" id="message" rows="12" required
-                                      class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
-                                      placeholder="Write your message here...">{{ old('message') }}</textarea>
+                        <div class="mb-6" id="messageBlock">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="block text-sm font-medium text-gray-300">
+                                    Message <span class="text-red-400">*</span>
+                                </label>
+                                @if(!empty($prefill['is_html']))
+                                <div class="flex items-center gap-1 bg-gray-700 rounded-lg p-1">
+                                    <button type="button" id="tabSource"
+                                        onclick="showTab('source')"
+                                        class="text-xs px-3 py-1 rounded-md bg-gray-600 text-white transition-colors">
+                                        <i class="fas fa-code mr-1"></i>HTML Source
+                                    </button>
+                                    <button type="button" id="tabPreview"
+                                        onclick="showTab('preview')"
+                                        class="text-xs px-3 py-1 rounded-md text-gray-400 hover:text-white transition-colors">
+                                        <i class="fas fa-eye mr-1"></i>Preview
+                                    </button>
+                                </div>
+                                @endif
+                            </div>
+
+                            <div id="sourcePane">
+                                <textarea name="message" id="message" rows="16" required
+                                          class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+                                          placeholder="Write your message here...">{{ old('message', $prefill['body'] ?? '') }}</textarea>
+                            </div>
+
+                            @if(!empty($prefill['is_html']))
+                            <div id="previewPane" class="hidden">
+                                <iframe id="htmlPreviewFrame"
+                                    class="w-full rounded-lg border border-gray-600 bg-white"
+                                    style="height: 480px"
+                                    sandbox="allow-scripts">
+                                </iframe>
+                                <p class="text-xs text-gray-500 mt-1">
+                                    <i class="fas fa-info-circle mr-1"></i>Preview only — edit in HTML Source tab
+                                </p>
+                            </div>
+                            @endif
+
                             @error('message')
                                 <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Options -->
+                        <!-- Options (hidden for HTML templates — signature not applicable) -->
+                        @if(empty($prefill['is_html']))
                         <div class="mb-6">
                             <label class="flex items-center text-gray-300">
                                 <input type="checkbox" name="include_signature" value="1" class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500 mr-2">
                                 <span class="text-sm">Include email signature</span>
                             </label>
                         </div>
+                        @endif
 
                         <!-- Actions -->
                         <div class="flex gap-3">
@@ -250,6 +309,31 @@
 </div>
 
 <script>
+// HTML template tab switching
+function showTab(tab) {
+    const source  = document.getElementById('sourcePane');
+    const preview = document.getElementById('previewPane');
+    const tabS    = document.getElementById('tabSource');
+    const tabP    = document.getElementById('tabPreview');
+    if (!source || !preview) return;
+
+    if (tab === 'preview') {
+        source.classList.add('hidden');
+        preview.classList.remove('hidden');
+        tabS.className = 'text-xs px-3 py-1 rounded-md text-gray-400 hover:text-white transition-colors';
+        tabP.className = 'text-xs px-3 py-1 rounded-md bg-gray-600 text-white transition-colors';
+        // Render current textarea content into iframe
+        const frame = document.getElementById('htmlPreviewFrame');
+        const html  = document.getElementById('message').value;
+        frame.srcdoc = html;
+    } else {
+        preview.classList.add('hidden');
+        source.classList.remove('hidden');
+        tabS.className = 'text-xs px-3 py-1 rounded-md bg-gray-600 text-white transition-colors';
+        tabP.className = 'text-xs px-3 py-1 rounded-md text-gray-400 hover:text-white transition-colors';
+    }
+}
+
 // Clean up recipients field before submission
 document.getElementById('emailForm').addEventListener('submit', function(e) {
     const recipientsField = document.getElementById('recipients');
