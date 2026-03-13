@@ -1,90 +1,65 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
-<div class="mb-6 flex items-center justify-between">
-    <div>
-        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Extreme — Admin</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">All customers and removal activity</p>
-    </div>
-    <a href="{{ route('admin.cleanslate.brokers') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-700 hover:bg-gray-600 rounded-lg text-white text-xs font-medium transition-all">
-        <i class="fas fa-database text-[10px]"></i> Manage Brokers
-    </a>
-</div>
+<div class="max-w-6xl mx-auto px-6 py-10">
 
-@if(session('success'))
-    <div class="mb-4 px-4 py-3 rounded-lg text-sm font-medium bg-green-500/10 text-green-400 border border-green-500/20">
-        {{ session('success') }}
-    </div>
-@endif
-
-{{-- Stats --}}
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-    <div class="bg-gray-800/50 border border-gray-700 rounded-xl p-4 text-center">
-        <p class="text-2xl font-extrabold text-white">{{ $stats['total_customers'] }}</p>
-        <p class="text-xs text-gray-500 mt-1">Customers</p>
-    </div>
-    <div class="bg-gray-800/50 border border-gray-700 rounded-xl p-4 text-center">
-        <p class="text-2xl font-extrabold text-blue-400">{{ $stats['active_scans'] }}</p>
-        <p class="text-xs text-gray-500 mt-1">Active Scans</p>
-    </div>
-    <div class="bg-gray-800/50 border border-gray-700 rounded-xl p-4 text-center">
-        <p class="text-2xl font-extrabold text-yellow-400">{{ $stats['pending_removals'] }}</p>
-        <p class="text-xs text-gray-500 mt-1">Pending Removals</p>
-    </div>
-    <div class="bg-gray-800/50 border border-gray-700 rounded-xl p-4 text-center">
-        <p class="text-2xl font-extrabold text-green-400">{{ $stats['confirmed_removals'] }}</p>
-        <p class="text-xs text-gray-500 mt-1">Confirmed Removals</p>
-    </div>
-</div>
-
-{{-- Customer Table --}}
-<div class="bg-gray-800/50 border border-gray-700 rounded-xl overflow-hidden">
-    <div class="px-5 py-4 border-b border-gray-700">
-        <h2 class="text-sm font-semibold text-white">Customers</h2>
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Extreme — Admin</h1>
+        <p class="text-gray-500 text-sm mt-1">Subscriber overview</p>
     </div>
 
-    @if($profiles->isEmpty())
-        <div class="px-5 py-10 text-center text-gray-500 text-sm">No customers yet.</div>
-    @else
-        <div class="divide-y divide-gray-700/50">
-            @foreach($profiles as $profile)
-            <div class="flex items-center justify-between px-5 py-3 hover:bg-gray-700/30 transition-colors">
-                <div class="min-w-0">
-                    <div class="flex items-center gap-2">
-                        <p class="text-sm font-medium text-white truncate">{{ $profile->fullName() }}</p>
-                        @if(! $profile->onboarding_complete)
-                            <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-yellow-500/10 text-yellow-400">Setup incomplete</span>
-                        @endif
-                    </div>
-                    <p class="text-xs text-gray-500 truncate">{{ $profile->user?->email }}</p>
-                </div>
-                <div class="flex items-center gap-5 shrink-0 ml-4">
-                    <div class="text-center hidden sm:block">
-                        <p class="text-sm font-semibold text-white">{{ $profile->scanJobs->count() }}</p>
-                        <p class="text-[10px] text-gray-500">scans</p>
-                    </div>
-                    <div class="text-center hidden sm:block">
-                        <p class="text-sm font-semibold {{ $profile->removalRequests->where('status.value', 'pending')->count() > 0 ? 'text-yellow-400' : 'text-white' }}">
-                            {{ $profile->removalRequests->count() }}
-                        </p>
-                        <p class="text-[10px] text-gray-500">removals</p>
-                    </div>
-                    <div class="text-center hidden sm:block">
-                        <p class="text-sm font-semibold {{ ($profile->exposure_score ?? 0) > 50 ? 'text-red-400' : 'text-green-400' }}">
-                            {{ $profile->exposure_score ?? '—' }}
-                        </p>
-                        <p class="text-[10px] text-gray-500">exposure</p>
-                    </div>
-                    <a href="{{ route('admin.cleanslate.customers.show', $profile) }}" class="text-xs text-primary-400 hover:text-primary-300 font-medium transition-colors">
-                        View <i class="fas fa-arrow-right text-[10px]"></i>
-                    </a>
-                </div>
-            </div>
-            @endforeach
+    {{-- Stats --}}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        @foreach([
+            ['label' => 'Total Subscribers', 'value' => $stats['total_subscribers']],
+            ['label' => 'Total Generations', 'value' => $stats['total_generations']],
+            ['label' => 'This Month', 'value' => $stats['generations_this_month']],
+            ['label' => 'Active Subscriptions', 'value' => $stats['active_subscriptions']],
+        ] as $stat)
+        <div class="p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10">
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stat['value'] }}</p>
+            <p class="text-gray-500 text-xs mt-1">{{ $stat['label'] }}</p>
         </div>
-        <div class="px-5 py-3 border-t border-gray-700">
-            {{ $profiles->links() }}
-        </div>
-    @endif
+        @endforeach
+    </div>
+
+    {{-- Customer table --}}
+    <div class="rounded-xl border border-gray-200 dark:border-white/10 overflow-hidden">
+        <table class="w-full text-sm">
+            <thead class="bg-gray-50 dark:bg-white/5">
+                <tr>
+                    <th class="text-left px-4 py-3 text-gray-500 font-medium">User</th>
+                    <th class="text-left px-4 py-3 text-gray-500 font-medium">Plan</th>
+                    <th class="text-left px-4 py-3 text-gray-500 font-medium">Generations</th>
+                    <th class="text-left px-4 py-3 text-gray-500 font-medium">Joined</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 dark:divide-white/5">
+                @forelse($subscribers as $subscriber)
+                <tr class="hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors">
+                    <td class="px-4 py-3">
+                        <p class="font-medium text-gray-900 dark:text-white">{{ $subscriber->name }}</p>
+                        <p class="text-gray-500 text-xs">{{ $subscriber->email }}</p>
+                    </td>
+                    <td class="px-4 py-3 text-gray-600 dark:text-gray-400">
+                        {{ $subscriber->extreme_tier ?? '—' }}
+                    </td>
+                    <td class="px-4 py-3 text-gray-600 dark:text-gray-400">
+                        {{ $subscriber->generations_count }}
+                    </td>
+                    <td class="px-4 py-3 text-gray-500 text-xs">
+                        {{ $subscriber->created_at->format('M j, Y') }}
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="4" class="px-4 py-8 text-center text-gray-500">No subscribers yet.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    {{ $subscribers->links() }}
 </div>
 @endsection
