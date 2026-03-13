@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Extreme — Laravel Full-Stack App Generator</title>
-    <meta name="description" content="Describe your app in plain English. Get a production-ready Laravel full-stack application — Livewire, Tailwind, auth, database, and all. Built to ship.">
+    <title>Extreme — Full-Stack App Generator</title>
+    <meta name="description" content="Describe your app in plain English. Get a production-ready full-stack application — reactive UI, styling, auth, database, and all. Built to ship.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .hero-bg {
@@ -77,20 +77,20 @@
         <div class="max-w-6xl mx-auto px-6 py-24 text-center">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-600/30 bg-red-600/10 text-red-400 text-xs font-medium mb-8">
                 <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-                Lovable — but for Laravel
+                Full Stack Instant Generation
             </div>
 
             <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
                 Describe your app.<br>
-                <span class="gradient-text">Ship production Laravel.</span>
+                <span class="gradient-text">Ship production code.</span>
             </h1>
 
             <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
-                Extreme turns a plain-English prompt into a fully-wired, production-ready Laravel application — Livewire components, Tailwind UI, authentication, database migrations, and API scaffolding included.
+                Extreme turns a plain-English prompt into a fully-wired, production-ready full-stack application — reactive components, styled UI, authentication, database migrations, and API scaffolding included.
             </p>
 
             <p class="text-gray-500 text-sm max-w-xl mx-auto mb-10">
-                No more boilerplate. No more generic starters. Get a real codebase you own, structured the Laravel way, ready to customise and deploy.
+                No more boilerplate. No more generic starters. Get a real codebase you own, structured the right way, ready to customise and deploy.
             </p>
 
             <div class="flex items-center justify-center">
@@ -102,7 +102,7 @@
                 </a>
             </div>
 
-            <p class="mt-6 text-gray-600 text-xs">Laravel 12 &nbsp;·&nbsp; Livewire 3 &nbsp;·&nbsp; Tailwind CSS 3 &nbsp;·&nbsp; Pest Tests &nbsp;·&nbsp; Ready to deploy</p>
+            <p class="mt-6 text-gray-600 text-xs">Full-Stack Framework &nbsp;·&nbsp; Reactive UI &nbsp;·&nbsp; Styled &amp; Tested &nbsp;·&nbsp; Ready to deploy</p>
 
             {{-- Prompt demo --}}
             <div class="mt-16 max-w-3xl mx-auto code-block rounded-2xl p-6 text-left">
@@ -117,17 +117,17 @@
                     <span class="text-gray-600">›</span> Build me a multi-tenant SaaS for personal trainers. Clients can book sessions,
                 </p>
                 <p class="text-red-300 text-sm mb-1 pl-4">
-                    trainers manage their schedule, and subscriptions are handled through Stripe.
+                    trainers manage their schedule, and subscriptions are handled via billing.
                 </p>
                 <p class="text-red-300 text-sm mb-4 pl-4">
-                    Auth via Google. Dark mode. Mobile-first.
+                    OAuth login. Dark mode. Mobile-first.
                 </p>
                 <div class="border-t border-white/5 pt-4 space-y-1">
                     <p class="text-green-400 text-xs">✓ Scaffolding models: User, Trainer, Client, Session, Subscription</p>
                     <p class="text-green-400 text-xs">✓ Generating 14 migrations…</p>
-                    <p class="text-green-400 text-xs">✓ Creating Livewire components: BookingCalendar, SubscriptionManager, TrainerDashboard…</p>
-                    <p class="text-green-400 text-xs">✓ Wiring Stripe Cashier + Google Socialite…</p>
-                    <p class="text-green-400 text-xs">✓ Writing 38 Pest tests…</p>
+                    <p class="text-green-400 text-xs">✓ Creating reactive components: BookingCalendar, SubscriptionManager, TrainerDashboard…</p>
+                    <p class="text-green-400 text-xs">✓ Wiring billing + OAuth providers…</p>
+                    <p class="text-green-400 text-xs">✓ Writing 38 automated tests…</p>
                     <p class="text-emerald-300 text-xs font-semibold mt-2">→ Your app is ready. Download or deploy.</p>
                 </div>
             </div>
@@ -139,31 +139,31 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14">
                 <p class="text-red-500 text-sm font-medium uppercase tracking-widest mb-3">Why Extreme</p>
-                <h2 class="text-3xl sm:text-4xl font-bold">Built for developers who ship Laravel</h2>
-                <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm">Other AI builders generate toy apps or lock you into a platform. Extreme generates real, idiomatic Laravel that you own outright.</p>
+                <h2 class="text-3xl sm:text-4xl font-bold">Built for developers who ship</h2>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm">Other AI builders generate toy apps or lock you into a platform. Extreme generates real, idiomatic code that you own outright.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
                 @foreach([
                     [
                         'icon' => '🧱',
-                        'title' => 'Real Laravel. Not a wrapper.',
-                        'desc' => 'Every file follows Laravel conventions — controllers, form requests, policies, factories, seeders. No proprietary abstractions. Open the project in PhpStorm and it just makes sense.',
+                        'title' => 'Real code. Not a wrapper.',
+                        'desc' => 'Every file follows established conventions — controllers, form requests, policies, factories, seeders. No proprietary abstractions. Open the project in your editor and it just makes sense.',
                     ],
                     [
                         'icon' => '⚡',
-                        'title' => 'Livewire-first UI',
-                        'desc' => 'Reactive components wired with Livewire 3, Alpine.js, and Tailwind out of the box. No React, no Vue, no context switching — just Blade and Livewire the way the Laravel ecosystem intends.',
+                        'title' => 'Reactive-first UI',
+                        'desc' => 'Reactive components wired with a modern UI stack out of the box. No context switching — just clean, server-driven interactivity the way modern full-stack development intends.',
                     ],
                     [
                         'icon' => '🔒',
                         'title' => 'You own the code',
-                        'desc' => "Download a clean zip or push directly to your GitHub repo. No vendor lock-in. No platform dependency. The generated code is yours — host it wherever, modify it however.",
+                        'desc' => "Download a clean zip or push directly to your own repo. No vendor lock-in. No platform dependency. The generated code is yours — host it wherever, modify it however.",
                     ],
                     [
                         'icon' => '🧪',
                         'title' => 'Tests included',
-                        'desc' => 'Every generated app ships with a Pest test suite — feature tests for routes, unit tests for business logic, and factory-seeded test data ready to run.',
+                        'desc' => 'Every generated app ships with a full test suite — feature tests for routes, unit tests for business logic, and factory-seeded test data ready to run.',
                     ],
                     [
                         'icon' => '🏗️',
@@ -173,7 +173,7 @@
                     [
                         'icon' => '🔌',
                         'title' => 'Integrations on demand',
-                        'desc' => 'Mention Stripe, Google OAuth, Mailgun, S3, Twilio or any major service in your prompt. Extreme wires the package, config, and integration layer automatically.',
+                        'desc' => 'Mention billing, OAuth, email delivery, file storage, or SMS in your prompt. Extreme wires the package, config, and integration layer automatically.',
                     ],
                 ] as $feat)
                 <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.07] card-glow transition-all">
@@ -205,19 +205,19 @@
                     [
                         'step' => '02',
                         'title' => 'Extreme plans it',
-                        'desc' => 'Extreme maps your prompt to routes, models, relationships, Livewire components, and third-party integrations before writing a single line.',
+                        'desc' => 'Extreme maps your prompt to routes, models, relationships, reactive components, and integrations before writing a single line.',
                         'icon' => '🗺️',
                     ],
                     [
                         'step' => '03',
                         'title' => 'Code is generated',
-                        'desc' => 'A complete Laravel project is scaffolded — migrations, controllers, views, tests, config, and seed data — following Laravel conventions throughout.',
+                        'desc' => 'A complete project is scaffolded — migrations, controllers, views, tests, config, and seed data — following best practices throughout.',
                         'icon' => '⚙️',
                     ],
                     [
                         'step' => '04',
                         'title' => 'Download & ship',
-                        'desc' => 'Download a zip, clone from your GitHub repo, or deploy to Forge or Vapor. The app runs with one `composer install`.',
+                        'desc' => 'Download a zip, clone from your own repo, or deploy to your preferred host. The app runs with one install command.',
                         'icon' => '🚀',
                     ],
                 ] as $s)
@@ -237,28 +237,28 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14">
                 <p class="text-red-500 text-sm font-medium uppercase tracking-widest mb-3">Stack</p>
-                <h2 class="text-3xl sm:text-4xl font-bold">Every app ships with the modern Laravel stack</h2>
-                <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm">No choices to make. No configuration. Just the stack the Laravel ecosystem settled on.</p>
+                <h2 class="text-3xl sm:text-4xl font-bold">Every app ships with a modern, proven stack</h2>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm">No choices to make. No configuration. Just the stack modern full-stack development settled on.</p>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                 @foreach([
-                    ['name' => 'Laravel 12', 'detail' => 'Framework'],
-                    ['name' => 'PHP 8.4', 'detail' => 'Runtime'],
-                    ['name' => 'Livewire 3', 'detail' => 'Reactive UI'],
-                    ['name' => 'Tailwind CSS 3', 'detail' => 'Styling'],
-                    ['name' => 'Alpine.js 3', 'detail' => 'JS interactivity'],
-                    ['name' => 'Pest 3', 'detail' => 'Testing'],
-                    ['name' => 'Laravel Pint', 'detail' => 'Code style'],
-                    ['name' => 'Vite', 'detail' => 'Asset bundling'],
-                    ['name' => 'Eloquent ORM', 'detail' => 'Database'],
-                    ['name' => 'Laravel Breeze', 'detail' => 'Auth scaffold'],
-                    ['name' => 'Sanctum / Passport', 'detail' => 'API auth'],
+                    ['name' => 'Full-Stack Framework', 'detail' => 'Framework'],
+                    ['name' => 'Modern PHP', 'detail' => 'Runtime'],
+                    ['name' => 'Reactive UI', 'detail' => 'Reactive UI'],
+                    ['name' => 'Utility CSS', 'detail' => 'Styling'],
+                    ['name' => 'JS Interactivity', 'detail' => 'JS interactivity'],
+                    ['name' => 'Test Suite', 'detail' => 'Testing'],
+                    ['name' => 'Code Style', 'detail' => 'Code style'],
+                    ['name' => 'Asset Bundling', 'detail' => 'Asset bundling'],
+                    ['name' => 'ORM', 'detail' => 'Database'],
+                    ['name' => 'Auth Scaffold', 'detail' => 'Auth scaffold'],
+                    ['name' => 'API Auth', 'detail' => 'API auth'],
                     ['name' => 'Queues & Jobs', 'detail' => 'Background work'],
-                    ['name' => 'Stancl/Tenancy', 'detail' => 'Multi-tenancy'],
-                    ['name' => 'Stripe Cashier', 'detail' => 'Billing'],
-                    ['name' => 'Laravel Socialite', 'detail' => 'OAuth'],
-                    ['name' => 'Laravel Nightwatch', 'detail' => 'Monitoring'],
+                    ['name' => 'Multi-tenancy', 'detail' => 'Multi-tenancy'],
+                    ['name' => 'Billing', 'detail' => 'Billing'],
+                    ['name' => 'OAuth', 'detail' => 'OAuth'],
+                    ['name' => 'Monitoring', 'detail' => 'Monitoring'],
                 ] as $tech)
                 <div class="tech-badge flex flex-col p-4 rounded-xl">
                     <span class="text-white text-sm font-medium">{{ $tech['name'] }}</span>
@@ -280,8 +280,8 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach([
                     [
-                        'prompt' => 'A client portal for a law firm — secure document sharing, appointment booking via Google Calendar, invoice tracking with Stripe, and a client messaging thread.',
-                        'tags' => ['Multi-auth', 'Stripe', 'Google Calendar', 'Document uploads'],
+                        'prompt' => 'A client portal for a law firm — secure document sharing, appointment booking via calendar integration, invoice tracking with billing, and a client messaging thread.',
+                        'tags' => ['Multi-auth', 'Billing', 'Calendar integration', 'Document uploads'],
                     ],
                     [
                         'prompt' => 'A multi-tenant SaaS where each company gets their own subdomain, admin dashboard, and blog. Super-admin can impersonate any tenant.',
@@ -292,16 +292,16 @@
                         'tags' => ['Multi-role auth', 'Queues', 'Email notifications', 'Search'],
                     ],
                     [
-                        'prompt' => 'An internal ops tool for a small team — task management, file attachments, time tracking, and a Slack webhook for status changes.',
+                        'prompt' => 'An internal ops tool for a small team — task management, file attachments, time tracking, and a webhook for status changes.',
                         'tags' => ['Internal admin', 'File uploads', 'Webhooks', 'API'],
                     ],
                     [
-                        'prompt' => 'A subscription newsletter platform where writers publish posts and readers subscribe via Stripe. Paid posts are gated behind subscription.',
-                        'tags' => ['Stripe Cashier', 'Subscriptions', 'Content gating', 'WYSIWYG'],
+                        'prompt' => 'A subscription newsletter platform where writers publish posts and readers subscribe via billing. Paid posts are gated behind subscription.',
+                        'tags' => ['Billing', 'Subscriptions', 'Content gating', 'WYSIWYG'],
                     ],
                     [
-                        'prompt' => 'An e-commerce MVP — product catalogue, cart, Stripe Checkout, order management, and email receipts. Admin can manage stock and orders.',
-                        'tags' => ['Stripe Checkout', 'Admin panel', 'Cart', 'Orders', 'Emails'],
+                        'prompt' => 'An e-commerce MVP — product catalogue, cart, checkout, order management, and email receipts. Admin can manage stock and orders.',
+                        'tags' => ['Checkout', 'Admin panel', 'Cart', 'Orders', 'Emails'],
                     ],
                 ] as $example)
                 <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.07] card-glow transition-all">
@@ -340,7 +340,7 @@
                         @foreach([
                             'Up to 3 generations/mo',
                             'Full source code download',
-                            'Standard Laravel stack',
+                            'Standard full-stack',
                             'Basic integrations (auth, DB)',
                             'Community support',
                         ] as $feat)
@@ -371,10 +371,10 @@
                     <ul class="space-y-3 mb-8">
                         @foreach([
                             'Unlimited app generations',
-                            'GitHub push on generation',
+                            'Repo push on generation',
                             'Full integration library',
                             'Multi-tenancy scaffolding',
-                            'Stripe, OAuth, queues',
+                            'Billing, OAuth, queues',
                             'Priority support',
                         ] as $feat)
                         <li class="flex items-center gap-3 text-sm text-gray-300">
@@ -404,7 +404,7 @@
                             '5 team member seats',
                             'White-label output',
                             'Custom tech stack presets',
-                            'Deploy-to-Forge integration',
+                            'One-click deploy integration',
                             'Dedicated support channel',
                         ] as $feat)
                         <li class="flex items-center gap-3 text-sm text-gray-300">
@@ -422,7 +422,7 @@
             </div>
 
             <p class="text-center text-gray-600 text-xs mt-8">
-                Cancel anytime &nbsp;·&nbsp; Billed monthly via Stripe &nbsp;·&nbsp; All code is yours, no royalties
+                Cancel anytime &nbsp;·&nbsp; Billed monthly &nbsp;·&nbsp; All code is yours, no royalties
             </p>
         </div>
     </section>
@@ -439,27 +439,27 @@
                 @foreach([
                     [
                         'q' => 'Is the generated code actually production-quality?',
-                        'a' => "Yes — that's the whole point. Extreme generates idiomatic Laravel. Models use Eloquent relationships, controllers use Form Requests, routes are named and grouped properly, and every app ships with a Pest test suite. It's structured the way an experienced Laravel developer would build it.",
+                        'a' => "Yes — that's the whole point. Extreme generates idiomatic, well-structured code. Models use proper relationships, controllers use validated request objects, routes are named and grouped correctly, and every app ships with a full test suite. It's structured the way an experienced developer would build it.",
                     ],
                     [
                         'q' => 'Can I edit the generated code?',
-                        'a' => "Absolutely. You own the code outright. Download it, push it to your own repo, open it in any editor. There's no runtime dependency on Extreme — once you have the code, it's just a standard Laravel project.",
+                        'a' => "Absolutely. You own the code outright. Download it, push it to your own repo, open it in any editor. There's no runtime dependency on Extreme — once you have the code, it's a standard project.",
                     ],
                     [
                         'q' => 'How accurate is it for complex prompts?',
                         'a' => "Very good for well-defined apps. The more specific your prompt — roles, integrations, UI expectations — the better the output. For highly complex or unusual requirements, Extreme generates the right scaffold and structure; you fill in the bespoke business logic.",
                     ],
                     [
-                        'q' => 'Does it work with existing Laravel projects?',
-                        'a' => "Currently Extreme generates new projects from scratch. We're building an extend mode that adds modules, Livewire components, and integrations into an existing codebase — coming in a future release.",
+                        'q' => 'Does it work with existing projects?',
+                        'a' => "Currently Extreme generates new projects from scratch. We're building an extend mode that adds modules, reactive components, and integrations into an existing codebase — coming in a future release.",
                     ],
                     [
                         'q' => 'What databases does it support?',
-                        'a' => "MySQL, PostgreSQL, and SQLite out of the box. Migrations are generated for the database type you specify in your prompt. MongoDB support is on the roadmap.",
+                        'a' => "MySQL, PostgreSQL, and SQLite out of the box. Migrations are generated for the database type you specify in your prompt. Additional database support is on the roadmap.",
                     ],
                     [
-                        'q' => 'How does this compare to Lovable or Bolt?',
-                        'a' => "Lovable and Bolt generate React frontends and generic backends. Extreme is laser-focused on Laravel — Livewire components, Blade with Tailwind, proper Eloquent models, queue workers, the Artisan workflow. If you're a PHP developer who builds with Laravel, this is built for you.",
+                        'q' => 'How does this compare to other AI app builders?',
+                        'a' => "Most AI builders generate generic frontends and shallow backends. Extreme is laser-focused on generating production-quality, full-stack applications — reactive components, server-driven UI, proper data models, queue workers, and a complete test suite. If you're a developer who wants code you can actually own and ship, this is built for you.",
                     ],
                 ] as $faq)
                 <div class="faq-border" x-data="{ open: false }">
@@ -498,14 +498,14 @@
             </div>
             <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white mb-4"
                 style="text-shadow: 0 0 40px rgba(220,38,38,0.3);">Ready to build?</h2>
-            <p class="text-gray-500 text-base mb-10">Describe your Laravel app in plain English and watch it get built — live.</p>
+            <p class="text-gray-500 text-base mb-10">Describe your app in plain English and watch it get built — live.</p>
             <a href="{{ route('extreme.demo') }}"
                class="inline-flex items-center gap-3 px-14 py-5 rounded-2xl bg-red-700 hover:bg-red-600 text-white font-black uppercase tracking-widest text-xl transition-all shadow-2xl shadow-red-900/50 hover:-translate-y-1 border border-red-600/40"
                style="text-shadow: 0 1px 6px rgba(0,0,0,0.4);">
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 LAUNCH
             </a>
-            <p class="mt-8 text-gray-700 text-xs">Laravel 12 &nbsp;·&nbsp; Livewire 3 &nbsp;·&nbsp; Tailwind CSS 3 &nbsp;·&nbsp; Pest Tests &nbsp;·&nbsp; Ready to deploy</p>
+            <p class="mt-8 text-gray-700 text-xs">Full-Stack Framework &nbsp;·&nbsp; Reactive UI &nbsp;·&nbsp; Styled &amp; Tested &nbsp;·&nbsp; Ready to deploy</p>
         </div>
     </section>
 
