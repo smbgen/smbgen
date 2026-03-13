@@ -1,6 +1,6 @@
 @extends('layouts.extreme')
 
-@section('title', 'Demo — Build a Laravel App')
+@section('title', 'Demo — Build an App')
 
 @push('styles')
 <style>
@@ -29,7 +29,7 @@
                     </svg>
                 </div>
             </div>
-            <h1 class="text-xl font-black uppercase tracking-wider text-white demo-glow">Laravel App Generator</h1>
+            <h1 class="text-xl font-black uppercase tracking-wider text-white demo-glow">App Generator</h1>
         </div>
         <p class="text-gray-600 text-sm ml-10">Describe your app and watch it get built — live.</p>
     </div>
@@ -69,7 +69,7 @@
                     :disabled="phase === 'building'"
                     rows="5"
                     class="w-full px-3 py-2.5 rounded-xl bg-black/30 border border-white/10 focus:border-red-800/60 focus:ring-1 focus:ring-red-900/30 text-white placeholder-gray-700 text-sm outline-none transition-all disabled:opacity-50 resize-none"
-                    placeholder="A client portal for a law firm — document sharing, Google Calendar booking, Stripe invoicing, and a messaging thread per client…"
+                    placeholder="A client portal for a law firm — document sharing, calendar booking, invoice tracking, and a messaging thread per client…"
                 ></textarea>
                 <p class="text-gray-700 text-xs mt-1.5 text-right"><span x-text="prompt.length"></span> / 500</p>
             </div>
@@ -93,7 +93,7 @@
                 <div>
                     <p class="text-gray-600 text-xs mb-2">Auth scaffold</p>
                     <div class="space-y-1.5">
-                        @foreach([['breeze','Laravel Breeze'],['fortify','Laravel Fortify'],['none','None']] as [$v,$l])
+                        @foreach([['breeze','Auth Starter'],['fortify','Auth Core'],['none','None']] as [$v,$l])
                         <label class="flex items-center gap-2.5 cursor-pointer group">
                             <input type="radio" value="{{ $v }}" x-model="authType" :disabled="phase === 'building'" class="accent-red-600">
                             <span class="text-gray-300 text-sm group-hover:text-white transition-colors">{{ $l }}</span>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="space-y-2 pt-2 border-t border-white/5">
-                    @foreach([['stripe','Stripe billing'],['oauth','OAuth (Google)'],['multiTenant','Multi-tenancy']] as [$v,$l])
+                    @foreach([['stripe','Billing'],['oauth','OAuth login'],['multiTenant','Multi-tenancy']] as [$v,$l])
                     <label class="flex items-center gap-2.5 cursor-pointer group">
                         <input type="checkbox" x-model="{{ $v }}" :disabled="phase === 'building'" class="accent-red-600 rounded">
                         <span class="text-gray-300 text-sm group-hover:text-white transition-colors">{{ $l }}</span>
@@ -143,7 +143,7 @@
                     <a href="https://github.com/smbgen/core-app" target="_blank" rel="noopener"
                        class="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold text-xs uppercase tracking-wide transition-all border border-red-600/40">
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        Push to GitHub
+                        Push to Repo
                     </a>
                     <button @click="generate()" class="px-3 py-2.5 rounded-xl border border-white/10 text-gray-400 hover:text-white text-xs transition-colors">
                         Reset
@@ -250,7 +250,7 @@
                         </div>
                         <p class="text-gray-500 text-xs mb-4">
                             <span x-text="fileCount"></span> files &nbsp;·&nbsp;
-                            <span x-text="testsPassed"></span> Pest tests &nbsp;·&nbsp;
+                            <span x-text="testsPassed"></span> automated tests &nbsp;·&nbsp;
                             <span x-text="dbChoice.toUpperCase()"></span> &nbsp;·&nbsp; ready to deploy
                         </p>
                         <div class="flex flex-wrap gap-2">
@@ -260,15 +260,16 @@
                                 Download ZIP
                                 <span class="text-gray-700 ml-0.5">· soon</span>
                             </button>
-                            <a href="https://forge.laravel.com/" target="_blank" rel="noopener"
-                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-white/10 text-gray-400 hover:text-white hover:border-white/20 text-xs transition-colors">
+                            <button disabled title="Deploy integration coming soon"
+                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-white/10 text-gray-600 text-xs cursor-not-allowed">
                                 <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" /></svg>
-                                Deploy to Forge
-                            </a>
+                                Deploy
+                                <span class="text-gray-700 ml-0.5">· soon</span>
+                            </button>
                             <a href="https://github.com/smbgen/core-app" target="_blank" rel="noopener"
                                 class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-red-700/50 bg-red-900/20 text-red-300 hover:bg-red-900/40 hover:text-white text-xs font-medium transition-colors">
                                 <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                Push to GitHub
+                                Push to Repo
                             </a>
                         </div>
                     </div>
@@ -307,9 +308,9 @@ document.addEventListener('alpine:init', () => {
 
         examples: [
             'A job board where employers post listings and candidates apply. Employers can review applications and a queue sends email notifications on events. Include an admin dashboard.',
-            'A multi-tenant SaaS for fitness trainers. Each trainer gets their own subdomain, clients book sessions via Google Calendar, and Stripe handles monthly subscriptions.',
-            'A subscription newsletter platform. Writers publish posts and readers subscribe via Stripe. Paid posts are gated behind subscription tiers. Dark mode, mobile-first.',
-            'An e-commerce store with a product catalogue, shopping cart, Stripe Checkout, order management, email receipts, and an admin panel to manage stock.',
+            'A multi-tenant SaaS for fitness trainers. Each trainer gets their own subdomain, clients book sessions via calendar integration, and subscriptions are handled via billing.',
+            'A subscription newsletter platform. Writers publish posts and readers subscribe via billing. Paid posts are gated behind subscription tiers. Dark mode, mobile-first.',
+            'An e-commerce store with a product catalogue, shopping cart, checkout, order management, email receipts, and an admin panel to manage stock.',
         ],
 
         get appName() {
@@ -371,7 +372,7 @@ document.addEventListener('alpine:init', () => {
             const hasJobs     = /job.board|job listing|candidate|employer|applicant/.test(p);
             const hasOAuth    = this.oauth || /google|oauth|social/.test(p);
             const authLib     = this.authType !== 'none'
-                ? (this.authType === 'breeze' ? 'Laravel Breeze' : 'Laravel Fortify')
+                ? (this.authType === 'breeze' ? 'Auth Starter' : 'Auth Core')
                 : null;
 
             const models = ['User'];
@@ -399,13 +400,13 @@ document.addEventListener('alpine:init', () => {
 
             const integrations = [];
             if (authLib)   integrations.push(authLib);
-            if (hasStripe) integrations.push('Stripe Cashier');
-            if (hasOAuth)  integrations.push('Laravel Socialite');
-            if (hasMulti)  integrations.push('Stancl/Tenancy');
+            if (hasStripe) integrations.push('Billing');
+            if (hasOAuth)  integrations.push('OAuth');
+            if (hasMulti)  integrations.push('Multi-tenancy');
             if (integrations.length) {
                 await this.ln(`  ✓ Integrations: ${integrations.join(', ')}`, 'success', 340);
             }
-            await this.ln(`  ✓ Plan: ${migCount} migrations · ${compCount} Livewire components · ${testCount} Pest tests`, 'success', 360);
+            await this.ln(`  ✓ Plan: ${migCount} migrations · ${compCount} reactive components · ${testCount} automated tests`, 'success', 360);
             await this.ln('', 'blank', 80);
             this.prog(15);
 
@@ -450,7 +451,7 @@ document.addEventListener('alpine:init', () => {
             if (authLib) {
                 await this.f('app/Http/Controllers/Auth/AuthenticatedSessionController.php', 'php', 38);
                 await this.f('app/Http/Controllers/Auth/RegisteredUserController.php', 'php', 38);
-                if (hasOAuth) await this.f('app/Http/Controllers/Auth/SocialiteController.php', 'php', 38);
+                if (hasOAuth) await this.f('app/Http/Controllers/Auth/OAuthController.php', 'php', 38);
             }
             await this.f('app/Http/Controllers/DashboardController.php', 'php', 38);
             await this.ln('  ✓ Controllers & Form Requests', 'success', 100);
@@ -469,8 +470,8 @@ document.addEventListener('alpine:init', () => {
             this.prog(58);
 
             // ── Phase 4: Frontend ──────────────────────────────────────────
-            this.statusText = 'Building Livewire components…';
-            await this.ln('  Building Livewire components & views…', 'section', 160);
+            this.statusText = 'Building reactive components…';
+            await this.ln('  Building reactive components & views…', 'section', 160);
 
             const comps = ['Dashboard'];
             if (hasBooking) comps.push('BookingCalendar', 'AppointmentList');
@@ -484,8 +485,8 @@ document.addEventListener('alpine:init', () => {
 
             for (const comp of finalComps) {
                 const blade = comp.replace(/([A-Z])/g, (c, l, i) => (i ? '-' : '') + l.toLowerCase());
-                await this.f(`app/Livewire/${comp}.php`, 'livewire', 52);
-                await this.f(`resources/views/livewire/${blade}.blade.php`, 'blade', 38);
+                await this.f(`app/Components/${comp}.php`, 'livewire', 52);
+                await this.f(`resources/views/components/${blade}.blade.php`, 'blade', 38);
             }
             await this.f('resources/views/layouts/app.blade.php', 'blade', 38);
             await this.f('resources/views/layouts/guest.blade.php', 'blade', 38);
@@ -493,13 +494,13 @@ document.addEventListener('alpine:init', () => {
             await this.f('resources/css/app.css', 'css', 38);
             await this.f('tailwind.config.js', 'config', 38);
             await this.f('vite.config.js', 'config', 38);
-            await this.ln(`  ✓ ${finalComps.length} Livewire components + views`, 'success', 100);
+            await this.ln(`  ✓ ${finalComps.length} reactive components + views`, 'success', 100);
 
             if (hasStripe) {
                 await this.f('app/Services/BillingService.php', 'php', 52);
-                await this.ln('  ✓ Stripe Cashier wired', 'success', 80);
+                await this.ln('  ✓ Billing wired', 'success', 80);
             }
-            if (hasOAuth) { await this.ln('  ✓ Google OAuth via Socialite wired', 'success', 80); }
+            if (hasOAuth) { await this.ln('  ✓ OAuth provider wired', 'success', 80); }
             if (hasMulti) {
                 await this.f('app/Http/Middleware/InitializeTenancy.php', 'php', 52);
                 await this.ln('  ✓ Multi-tenancy + subdomain routing wired', 'success', 80);
@@ -512,7 +513,7 @@ document.addEventListener('alpine:init', () => {
             await this.ln('  Writing config & environment…', 'dim', 120);
             await this.f('config/app.php', 'config', 42);
             await this.f('config/database.php', 'config', 42);
-            if (hasStripe) await this.f('config/cashier.php', 'config', 42);
+            if (hasStripe) await this.f('config/billing.php', 'config', 42);
             await this.f('.env.example', 'config', 42);
             await this.f('composer.json', 'config', 42);
             await this.f('package.json', 'config', 42);
@@ -521,8 +522,8 @@ document.addEventListener('alpine:init', () => {
             this.prog(84);
 
             // ── Phase 6: Tests ─────────────────────────────────────────────
-            this.statusText = 'Writing Pest test suite…';
-            await this.ln('  Writing Pest test suite…', 'section', 140);
+            this.statusText = 'Writing test suite…';
+            await this.ln('  Writing test suite…', 'section', 140);
             for (const m of models.filter(x => x !== 'User')) {
                 await this.f(`tests/Feature/${m}Test.php`, 'test', 50);
             }
@@ -537,7 +538,7 @@ document.addEventListener('alpine:init', () => {
 
             // ── Phase 7: Quality checks ────────────────────────────────────
             this.statusText = 'Running quality checks…';
-            await this.ln('  Running Laravel Pint…', 'dim', 380);
+            await this.ln('  Running code formatter…', 'dim', 380);
             await this.ln('  ✓ 0 style violations', 'success', 520);
             await this.ln('  Running test suite…', 'dim', 320);
             await this.wait(280);
