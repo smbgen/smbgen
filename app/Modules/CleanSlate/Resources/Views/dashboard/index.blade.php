@@ -3,113 +3,95 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="max-w-5xl mx-auto px-6 py-12">
+<div class="max-w-6xl mx-auto px-6 py-12">
 
     {{-- Header --}}
-    <div class="flex items-start justify-between mb-10">
+    <div class="flex items-center justify-between mb-10">
         <div>
-            <h1 class="text-2xl font-extrabold text-white">Your Dashboard</h1>
-            <p class="text-sm text-gray-500 mt-1">
-                Plan: <span class="text-cyan-400 font-semibold">{{ $tier?->label() ?? '—' }}</span>
-            </p>
+            <h1 class="text-2xl font-black uppercase tracking-tight text-white">Dashboard</h1>
+            <p class="text-gray-600 text-sm mt-1">{{ $tier?->label() ?? 'Free' }} plan</p>
         </div>
-        <a href="{{ route('cleanslate.billing.plans') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 hover:border-white/20 bg-white/5 text-gray-300 hover:text-white text-xs font-medium transition-all">
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
-            Manage Plan
+        <a href="{{ route('extreme.demo') }}"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold uppercase tracking-wide text-sm transition-all border border-red-600/40 shadow-lg shadow-red-900/30">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            New Generation
         </a>
     </div>
 
-    {{-- Stats --}}
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
-            <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Exposure Score</p>
-            <p class="text-5xl font-extrabold {{ ($profile?->exposure_score ?? 0) > 50 ? 'text-red-400' : 'text-cyan-400' }}">
-                {{ $profile?->exposure_score ?? 0 }}
-            </p>
-            <p class="text-xs text-gray-500 mt-1.5">{{ ($profile?->exposure_score ?? 0) > 50 ? 'High exposure' : 'Low exposure' }}</p>
+    {{-- Quota bar (Starter only) --}}
+    @if($monthlyLimit !== null)
+    <div class="mb-8 p-4 rounded-2xl bg-white/[0.03] border border-white/[0.07]">
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-400 text-sm">Generations this month</span>
+            <span class="text-white text-sm font-semibold">{{ $usedThisMonth }} / {{ $monthlyLimit }}</span>
         </div>
-
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
-            <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Brokers Scanned</p>
-            <p class="text-5xl font-extrabold text-white">{{ $scanJobs->count() }}</p>
-            <p class="text-xs text-gray-500 mt-1.5">{{ $scanJobs->where('status.value', 'completed')->count() }} completed</p>
+        <div class="h-1.5 rounded-full bg-white/5 overflow-hidden">
+            <div class="h-full rounded-full bg-red-600 transition-all"
+                 style="width: {{ min(100, ($usedThisMonth / $monthlyLimit) * 100) }}%"></div>
         </div>
-
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
-            <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Removals</p>
-            <p class="text-5xl font-extrabold text-white">{{ $removalRequests->count() }}</p>
-            <p class="text-xs text-gray-500 mt-1.5">{{ $removalRequests->where('status.value', 'confirmed')->count() }} confirmed</p>
-        </div>
-    </div>
-
-    {{-- Scan Results --}}
-    <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden mb-6">
-        <div class="px-6 py-4 border-b border-white/10 flex items-center justify-between">
-            <h2 class="text-sm font-semibold text-white">Scan Results</h2>
-            <span class="text-xs text-gray-500">{{ $scanJobs->count() }} brokers</span>
-        </div>
-
-        @if($scanJobs->isEmpty())
-            <div class="px-6 py-12 text-center text-gray-600 text-sm">
-                <svg class="w-8 h-8 mx-auto mb-3 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803 7.5 7.5 0 0015.803 15.803z" /></svg>
-                No scans run yet — results will appear here shortly after launch.
-            </div>
-        @else
-            <div class="divide-y divide-white/5">
-                @foreach($scanJobs as $job)
-                <div class="flex items-center justify-between px-6 py-3.5">
-                    <div>
-                        <p class="text-sm font-medium text-white">{{ $job->dataBroker->name }}</p>
-                        <p class="text-xs text-gray-600">{{ $job->dataBroker->domain }}</p>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        @if($job->listings_found > 0)
-                            <span class="text-xs font-semibold text-red-400">{{ $job->listings_found }} listing{{ $job->listings_found !== 1 ? 's' : '' }}</span>
-                        @endif
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                            {{ $job->status->value === 'completed' ? 'bg-cyan-500/10 text-cyan-400' :
-                               ($job->status->value === 'running' ? 'bg-violet-500/10 text-violet-400' :
-                               ($job->status->value === 'failed' ? 'bg-red-500/10 text-red-400' : 'bg-white/5 text-gray-500')) }}">
-                            {{ ucfirst($job->status->value) }}
-                        </span>
-                    </div>
-                </div>
-                @endforeach
-            </div>
+        @if($usedThisMonth >= $monthlyLimit)
+        <p class="text-red-400 text-xs mt-2">Limit reached. <a href="{{ route('cleanslate.billing.plans') }}" class="underline">Upgrade to Pro</a> for unlimited generations.</p>
         @endif
     </div>
+    @endif
 
-    {{-- Removal Requests --}}
-    <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-        <div class="px-6 py-4 border-b border-white/10 flex items-center justify-between">
-            <h2 class="text-sm font-semibold text-white">Removal Requests</h2>
-            <span class="text-xs text-gray-500">{{ $removalRequests->count() }} total</span>
-        </div>
-
-        @if($removalRequests->isEmpty())
-            <div class="px-6 py-12 text-center text-gray-600 text-sm">
-                <svg class="w-8 h-8 mx-auto mb-3 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" /></svg>
-                Removal requests will appear here once listings are found.
-            </div>
-        @else
-            <div class="divide-y divide-white/5">
-                @foreach($removalRequests as $req)
-                <div class="flex items-center justify-between px-6 py-3.5">
-                    <div>
-                        <p class="text-sm font-medium text-white">{{ $req->dataBroker->name }}</p>
-                        <p class="text-xs text-gray-600">{{ $req->submitted_at?->diffForHumans() ?? 'Not yet submitted' }}</p>
-                    </div>
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                        {{ $req->status->value === 'confirmed' ? 'bg-cyan-500/10 text-cyan-400' :
-                           ($req->status->value === 'submitted' ? 'bg-violet-500/10 text-violet-400' :
-                           ($req->status->value === 'failed' ? 'bg-red-500/10 text-red-400' : 'bg-white/5 text-gray-500')) }}">
-                        {{ ucfirst($req->status->value) }}
-                    </span>
-                </div>
-                @endforeach
-            </div>
-        @endif
+    {{-- Flash --}}
+    @if(session('success'))
+    <div class="mb-6 px-4 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm">
+        {{ session('success') }}
     </div>
+    @endif
+
+    {{-- Generations list --}}
+    @if($generations->isEmpty())
+    <div class="text-center py-24 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+        <svg class="w-10 h-10 text-gray-700 mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        <p class="text-gray-500 text-sm mb-6">No apps generated yet.</p>
+        <a href="{{ route('extreme.demo') }}"
+           class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold uppercase tracking-wide text-sm transition-all border border-red-600/40">
+            Build your first app
+        </a>
+    </div>
+    @else
+    <div class="space-y-3">
+        @foreach($generations as $gen)
+        <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.07] flex items-start justify-between gap-6">
+            <div class="min-w-0">
+                <p class="text-white text-sm font-medium truncate mb-1">{{ Str::limit($gen->prompt, 100) }}</p>
+                <div class="flex items-center gap-3 text-xs text-gray-600">
+                    <span>{{ $gen->created_at->diffForHumans() }}</span>
+                    @if($gen->file_count > 0)
+                    <span>·</span>
+                    <span>{{ $gen->file_count }} files</span>
+                    @endif
+                    @if($gen->test_count > 0)
+                    <span>·</span>
+                    <span>{{ $gen->test_count }} tests</span>
+                    @endif
+                </div>
+            </div>
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <span class="px-2 py-0.5 rounded-md text-xs font-medium border
+                    @if($gen->status === 'complete') bg-green-500/10 border-green-500/20 text-green-400
+                    @elseif($gen->status === 'generating') bg-red-500/10 border-red-500/20 text-red-400
+                    @elseif($gen->status === 'failed') bg-red-900/20 border-red-900/30 text-red-600
+                    @else bg-white/5 border-white/10 text-gray-500
+                    @endif">
+                    {{ ucfirst($gen->status) }}
+                </span>
+                @if($gen->zip_path)
+                <a href="{{ route('cleanslate.generation.download', $gen) }}"
+                   class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-xs transition-colors">
+                    Download
+                </a>
+                @endif
+            </div>
+        </div>
+        @endforeach
+    </div>
+    @endif
 
 </div>
 @endsection

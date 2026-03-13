@@ -188,4 +188,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(\App\Modules\CleanSlate\Models\Profile::class);
     }
+
+    /**
+     * Extreme app generations for this user
+     */
+    public function generations()
+    {
+        return $this->hasMany(\App\Modules\CleanSlate\Models\Generation::class);
+    }
 }

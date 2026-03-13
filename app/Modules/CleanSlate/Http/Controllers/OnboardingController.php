@@ -3,7 +3,6 @@
 namespace App\Modules\CleanSlate\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\CleanSlate\Jobs\DispatchInitialScanJob;
 use App\Modules\CleanSlate\Models\Profile;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,95 +12,21 @@ class OnboardingController extends Controller
 {
     public function profile(Request $request): View
     {
-        $profile = $request->user()->profile ?? new Profile();
-
-        return view('cleanslate::onboarding.profile', compact('profile'));
+        return view('cleanslate::onboarding.profile', [
+            'user' => $request->user(),
+        ]);
     }
 
     public function storeProfile(Request $request): RedirectResponse
     {
-        $data = $request->validate([
-            'first_name'    => ['required', 'string', 'max:100'],
-            'last_name'     => ['required', 'string', 'max:100'],
-            'date_of_birth' => ['required', 'date', 'before:today'],
-        ]);
+        $user = $request->user();
 
         Profile::updateOrCreate(
-            ['user_id' => $request->user()->id],
-            $data
+            ['user_id' => $user->id],
+            ['onboarding_complete' => true],
         );
-
-        return redirect()->route('cleanslate.onboarding.contact');
-    }
-
-    public function contact(Request $request): View
-    {
-        $profile = $request->user()->profile ?? new Profile();
-
-        return view('cleanslate::onboarding.contact', compact('profile'));
-    }
-
-    public function storeContact(Request $request): RedirectResponse
-    {
-        $data = $request->validate([
-            'emails'   => ['required', 'array', 'min:1'],
-            'emails.*' => ['nullable', 'email'],
-            'phones'   => ['nullable', 'array'],
-            'phones.*' => ['nullable', 'string', 'max:20'],
-        ]);
-
-        $emails = array_values(array_filter($data['emails'] ?? [], fn ($e) => ! empty($e)));
-        $phones = array_values(array_filter($data['phones'] ?? [], fn ($p) => ! empty($p)));
-
-        if (empty($emails)) {
-            return back()->withErrors(['emails' => 'At least one email address is required.'])->withInput();
-        }
-
-        $request->user()->profile()->updateOrCreate(
-            ['user_id' => $request->user()->id],
-            ['emails' => $emails, 'phones' => $phones]
-        );
-
-        return redirect()->route('cleanslate.onboarding.addresses');
-    }
-
-    public function addresses(Request $request): View
-    {
-        $profile = $request->user()->profile ?? new Profile();
-
-        return view('cleanslate::onboarding.addresses', compact('profile'));
-    }
-
-    public function storeAddresses(Request $request): RedirectResponse
-    {
-        $data = $request->validate([
-            'addresses'             => ['required', 'array', 'min:1'],
-            'addresses.*.street'    => ['required', 'string'],
-            'addresses.*.city'      => ['required', 'string'],
-            'addresses.*.state'     => ['required', 'string', 'size:2'],
-            'addresses.*.zip'       => ['required', 'string', 'max:10'],
-        ]);
-
-        $request->user()->profile->update(['addresses' => $data['addresses']]);
-
-        return redirect()->route('cleanslate.onboarding.confirm');
-    }
-
-    public function confirm(Request $request): View
-    {
-        $profile = $request->user()->profile;
-
-        return view('cleanslate::onboarding.confirm', compact('profile'));
-    }
-
-    public function launch(Request $request): RedirectResponse
-    {
-        $profile = $request->user()->profile;
-        $profile->update(['onboarding_complete' => true]);
-
-        DispatchInitialScanJob::dispatch($request->user());
 
         return redirect()->route('cleanslate.dashboard')
-            ->with('success', 'Scan launched! We\'ll notify you as results come in.');
+            ->with('success', 'Welcome to Extreme! Start building your first app.');
     }
 }
