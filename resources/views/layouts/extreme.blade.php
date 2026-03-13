@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Extreme') — Laravel Full-Stack App Generator</title>
-    <meta name="description" content="Extreme by smbgen — describe your app in plain English, get a production-ready Laravel full-stack codebase back.">
+    <title>@yield('title', 'Extreme') — Full-Stack App Generator</title>
+    <meta name="description" content="Extreme by smbgen — describe your app in plain English, get a production-ready full-stack codebase back.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .cs-hero-bg {
