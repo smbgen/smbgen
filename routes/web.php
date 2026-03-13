@@ -787,6 +787,9 @@ if (config('business.features.cms')) {
     // Extreme intake form submission
     Route::post('/extreme/intake', [App\Http\Controllers\ContactController::class, 'submitCleanSlateIntake'])->name('extreme.intake');
 
+    // Extreme — pricing / plans page
+    Route::get('/extreme/plans', [\App\Modules\CleanSlate\Http\Controllers\BillingController::class, 'plans'])->name('cleanslate.billing.plans');
+
     // CMS page display - CATCH-ALL route (matches any remaining /{slug})
     // Since this is last, all specific routes above will match first
     Route::get('/{slug}', [CmsPagePublicController::class, 'show'])
