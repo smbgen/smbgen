@@ -115,14 +115,7 @@
                         <i class="fas fa-users text-lg"></i>
                         <span>Customers</span>
                     </a>
-                    <a href="{{ route('admin.cleanslate.brokers') }}" class="sidebar-link {{ request()->routeIs('admin.cleanslate.brokers*') ? 'active' : '' }}">
-                        <i class="fas fa-database text-lg"></i>
-                        <span>Data Brokers</span>
-                    </a>
-                    <a href="{{ route('admin.cleanslate.debug') }}" class="sidebar-link {{ request()->routeIs('admin.cleanslate.debug') ? 'active' : '' }}">
-                        <i class="fas fa-bug text-lg"></i>
-                        <span>Debug</span>
-                    </a>
+
                 </div>
                 <div class="mb-6 space-y-1">
                     <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">Extreme — My Account</div>
