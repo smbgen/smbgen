@@ -11,18 +11,18 @@ enum SubscriptionTier: string
     public function label(): string
     {
         return match ($this) {
-            self::Basic        => 'Basic',
-            self::Professional => 'Professional',
-            self::Executive    => 'Executive',
+            self::Basic        => 'Starter',
+            self::Professional => 'Pro',
+            self::Executive    => 'Agency',
         };
     }
 
     public function priceMonthly(): int
     {
         return match ($this) {
-            self::Basic        => 30000,
-            self::Professional => 75000,
-            self::Executive    => 150000,
+            self::Basic        => 4900,
+            self::Professional => 14900,
+            self::Executive    => 39900,
         };
     }
 
