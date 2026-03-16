@@ -26,7 +26,14 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.packages.review') }}" enctype="multipart/form-data">
+    {{-- Client-side errors --}}
+    <div x-show="clientError" x-cloak class="alert alert-error">
+        <i class="fas fa-exclamation-circle"></i>
+        <span x-text="clientError"></span>
+    </div>
+
+    <form method="POST" action="{{ route('admin.packages.review') }}" enctype="multipart/form-data"
+          @submit="handleSubmit($event)">
         @csrf
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -95,7 +102,7 @@
                             <label class="btn-secondary cursor-pointer">
                                 <i class="fas fa-folder-open mr-2"></i>Browse
                                 <input type="file" name="zip_file" accept=".zip" class="hidden"
-                                    @change="zipFileName = $event.target.files[0]?.name">
+                                    @change="handleZipPick($event)">
                             </label>
                         </div>
                     </div>
@@ -127,7 +134,7 @@
                             <label class="btn-secondary cursor-pointer">
                                 <i class="fas fa-folder-open mr-2"></i>Browse Files
                                 <input type="file" name="files[]" multiple class="hidden" id="multi-file-input"
-                                    @change="multiFileNames = Array.from($event.target.files).map(f => f.name)">
+                                    @change="handleMultiPick($event)">
                             </label>
                         </div>
                     </div>
@@ -139,7 +146,7 @@
         {{-- Submit --}}
         <div class="flex justify-end gap-3 mt-6">
             <a href="{{ route('admin.packages.index') }}" class="btn-secondary">Cancel</a>
-            <button type="submit" class="btn-primary" :disabled="uploading" @click="uploading = true">
+            <button type="submit" class="btn-primary" :disabled="uploading">
                 <i class="fas mr-2" :class="uploading ? 'fa-spinner fa-spin' : 'fa-magic'"></i>
                 <span x-text="uploading ? 'Processing…' : 'Analyse & Review'"></span>
             </button>
@@ -150,34 +157,132 @@
 
 @push('scripts')
 <script>
+const MAX_BYTES = 50 * 1024 * 1024;
+
+function fmtMb(bytes) {
+    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+}
+
 function uploadForm() {
     return {
         uploadType: 'zip',
         zipFileName: null,
         multiFileNames: [],
         uploading: false,
+        clientError: null,
+        _uploadTimeout: null,
+
+        validate() {
+            const clientId = document.querySelector('select[name="client_id"]').value;
+            if (!clientId) {
+                this.clientError = 'Please select a client before uploading.';
+                return false;
+            }
+
+            if (this.uploadType === 'zip') {
+                const input = document.querySelector('input[name="zip_file"]');
+                if (!input.files.length) {
+                    this.clientError = 'Please select a ZIP file to upload.';
+                    return false;
+                }
+                const file = input.files[0];
+                if (!file.name.toLowerCase().endsWith('.zip')) {
+                    this.clientError = 'Only .zip files are accepted.';
+                    return false;
+                }
+                if (file.size > MAX_BYTES) {
+                    this.clientError = `"${file.name}" is ${fmtMb(file.size)} — exceeds the 50 MB limit.`;
+                    return false;
+                }
+            } else {
+                const input = document.getElementById('multi-file-input');
+                if (!input.files.length) {
+                    this.clientError = 'Please select at least one file to upload.';
+                    return false;
+                }
+                const oversized = Array.from(input.files).find(f => f.size > MAX_BYTES);
+                if (oversized) {
+                    this.clientError = `"${oversized.name}" is ${fmtMb(oversized.size)} — exceeds the 50 MB limit.`;
+                    return false;
+                }
+            }
+
+            this.clientError = null;
+            return true;
+        },
+
+        handleSubmit(e) {
+            if (!this.validate()) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            this.uploading = true;
+            // Safety net: reset button if the server never responds
+            this._uploadTimeout = setTimeout(() => {
+                this.uploading = false;
+                this.clientError = 'Upload is taking longer than expected. Please check your connection and try again.';
+            }, 5 * 60 * 1000);
+        },
 
         handleZipDrop(e) {
             const file = e.dataTransfer.files[0];
             if (!file) return;
+            if (!file.name.toLowerCase().endsWith('.zip')) {
+                this.clientError = 'Only .zip files are accepted here.';
+                return;
+            }
+            if (file.size > MAX_BYTES) {
+                this.clientError = `"${file.name}" is ${fmtMb(file.size)} — exceeds the 50 MB limit.`;
+                return;
+            }
+            this.clientError = null;
             this.zipFileName = file.name;
-            // Update the file input
             const dt = new DataTransfer();
             dt.items.add(file);
             document.querySelector('input[name="zip_file"]').files = dt.files;
         },
 
+        handleZipPick(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.size > MAX_BYTES) {
+                this.clientError = `"${file.name}" is ${fmtMb(file.size)} — exceeds the 50 MB limit.`;
+                e.target.value = '';
+                return;
+            }
+            this.clientError = null;
+            this.zipFileName = file.name;
+        },
+
         handleMultiDrop(e) {
             const files = Array.from(e.dataTransfer.files);
+            const oversized = files.find(f => f.size > MAX_BYTES);
+            if (oversized) {
+                this.clientError = `"${oversized.name}" is ${fmtMb(oversized.size)} — exceeds the 50 MB limit.`;
+                return;
+            }
+            this.clientError = null;
             this.multiFileNames = files.map(f => f.name);
             const dt = new DataTransfer();
             files.forEach(f => dt.items.add(f));
             document.getElementById('multi-file-input').files = dt.files;
         },
+
+        handleMultiPick(e) {
+            const files = Array.from(e.target.files);
+            const oversized = files.find(f => f.size > MAX_BYTES);
+            if (oversized) {
+                this.clientError = `"${oversized.name}" is ${fmtMb(oversized.size)} — exceeds the 50 MB limit.`;
+                e.target.value = '';
+                this.multiFileNames = [];
+                return;
+            }
+            this.clientError = null;
+            this.multiFileNames = files.map(f => f.name);
+        },
     };
 }
-
-// uploading state is managed via @click on the submit button
 </script>
 @endpush
 @endsection
