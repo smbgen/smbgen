@@ -14,7 +14,7 @@
         </a>
     </div>
 
-    {{-- Validation errors --}}
+    {{-- Server-side validation errors --}}
     @if($errors->any())
         <div class="alert alert-error">
             <i class="fas fa-exclamation-circle"></i>
@@ -33,7 +33,7 @@
     </div>
 
     <form method="POST" action="{{ route('admin.packages.review') }}" enctype="multipart/form-data"
-          @submit="handleSubmit($event)">
+          @submit="startUpload($event)">
         @csrf
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -147,8 +147,12 @@
         <div class="flex justify-end gap-3 mt-6">
             <a href="{{ route('admin.packages.index') }}" class="btn-secondary">Cancel</a>
             <button type="submit" class="btn-primary" :disabled="uploading">
-                <i class="fas mr-2" :class="uploading ? 'fa-spinner fa-spin' : 'fa-magic'"></i>
-                <span x-text="uploading ? 'Processing…' : 'Analyse & Review'"></span>
+                <template x-if="!uploading">
+                    <span><i class="fas fa-magic mr-2"></i>Analyse & Review</span>
+                </template>
+                <template x-if="uploading">
+                    <span><i class="fas fa-spinner fa-spin mr-2"></i>Processing…</span>
+                </template>
             </button>
         </div>
 
@@ -157,7 +161,7 @@
 
 @push('scripts')
 <script>
-const MAX_BYTES = 50 * 1024 * 1024;
+const UPLOAD_MAX_BYTES = 50 * 1024 * 1024;
 
 function fmtMb(bytes) {
     return (bytes / 1024 / 1024).toFixed(1) + ' MB';
@@ -170,58 +174,36 @@ function uploadForm() {
         multiFileNames: [],
         uploading: false,
         clientError: null,
-        _uploadTimeout: null,
 
-        validate() {
-            const clientId = document.querySelector('select[name="client_id"]').value;
-            if (!clientId) {
-                this.clientError = 'Please select a client before uploading.';
-                return false;
-            }
-
+        startUpload(e) {
+            // Block submit if no file selected (everything else the server validates)
             if (this.uploadType === 'zip') {
                 const input = document.querySelector('input[name="zip_file"]');
-                if (!input.files.length) {
+                if (!input?.files?.length) {
+                    e.preventDefault();
                     this.clientError = 'Please select a ZIP file to upload.';
-                    return false;
-                }
-                const file = input.files[0];
-                if (!file.name.toLowerCase().endsWith('.zip')) {
-                    this.clientError = 'Only .zip files are accepted.';
-                    return false;
-                }
-                if (file.size > MAX_BYTES) {
-                    this.clientError = `"${file.name}" is ${fmtMb(file.size)} — exceeds the 50 MB limit.`;
-                    return false;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
                 }
             } else {
                 const input = document.getElementById('multi-file-input');
-                if (!input.files.length) {
+                if (!input?.files?.length) {
+                    e.preventDefault();
                     this.clientError = 'Please select at least one file to upload.';
-                    return false;
-                }
-                const oversized = Array.from(input.files).find(f => f.size > MAX_BYTES);
-                if (oversized) {
-                    this.clientError = `"${oversized.name}" is ${fmtMb(oversized.size)} — exceeds the 50 MB limit.`;
-                    return false;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
                 }
             }
 
             this.clientError = null;
-            return true;
-        },
-
-        handleSubmit(e) {
-            if (!this.validate()) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
-            }
             this.uploading = true;
-            // Safety net: reset button if the server never responds
-            this._uploadTimeout = setTimeout(() => {
-                this.uploading = false;
-                this.clientError = 'Upload is taking longer than expected. Please check your connection and try again.';
+
+            // Safety net: reset button if server never responds
+            setTimeout(() => {
+                if (this.uploading) {
+                    this.uploading = false;
+                    this.clientError = 'Upload is taking longer than expected. Please check your connection and try again.';
+                }
             }, 5 * 60 * 1000);
         },
 
@@ -232,7 +214,7 @@ function uploadForm() {
                 this.clientError = 'Only .zip files are accepted here.';
                 return;
             }
-            if (file.size > MAX_BYTES) {
+            if (file.size > UPLOAD_MAX_BYTES) {
                 this.clientError = `"${file.name}" is ${fmtMb(file.size)} — exceeds the 50 MB limit.`;
                 return;
             }
@@ -246,9 +228,10 @@ function uploadForm() {
         handleZipPick(e) {
             const file = e.target.files[0];
             if (!file) return;
-            if (file.size > MAX_BYTES) {
+            if (file.size > UPLOAD_MAX_BYTES) {
                 this.clientError = `"${file.name}" is ${fmtMb(file.size)} — exceeds the 50 MB limit.`;
                 e.target.value = '';
+                this.zipFileName = null;
                 return;
             }
             this.clientError = null;
@@ -257,7 +240,7 @@ function uploadForm() {
 
         handleMultiDrop(e) {
             const files = Array.from(e.dataTransfer.files);
-            const oversized = files.find(f => f.size > MAX_BYTES);
+            const oversized = files.find(f => f.size > UPLOAD_MAX_BYTES);
             if (oversized) {
                 this.clientError = `"${oversized.name}" is ${fmtMb(oversized.size)} — exceeds the 50 MB limit.`;
                 return;
@@ -271,7 +254,7 @@ function uploadForm() {
 
         handleMultiPick(e) {
             const files = Array.from(e.target.files);
-            const oversized = files.find(f => f.size > MAX_BYTES);
+            const oversized = files.find(f => f.size > UPLOAD_MAX_BYTES);
             if (oversized) {
                 this.clientError = `"${oversized.name}" is ${fmtMb(oversized.size)} — exceeds the 50 MB limit.`;
                 e.target.value = '';
