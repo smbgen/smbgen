@@ -29,7 +29,7 @@
         <div class="admin-card-body">
             <form method="GET" action="{{ route('admin.packages.index') }}" class="flex flex-wrap items-end gap-4">
                 <div class="flex-1 min-w-48">
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Client</label>
+                    <label class="block text-xs font-medium text-gray-400 mb-1 uppercase tracking-wider">Client</label>
                     <select name="client_id" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">All clients</option>
                         @foreach($clients as $c)
@@ -37,9 +37,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Status</label>
-                    <select name="status" class="px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="min-w-36">
+                    <label class="block text-xs font-medium text-gray-400 mb-1 uppercase tracking-wider">Status</label>
+                    <select name="status" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">All statuses</option>
                         <option value="draft"  @selected(request('status') === 'draft')>Draft</option>
                         <option value="ready"  @selected(request('status') === 'ready')>Ready</option>
@@ -47,9 +47,13 @@
                     </select>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="submit" class="btn-primary">Filter</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-filter mr-1.5"></i>Filter
+                    </button>
                     @if(request()->hasAny(['client_id', 'status']))
-                        <a href="{{ route('admin.packages.index') }}" class="btn-secondary">Clear</a>
+                        <a href="{{ route('admin.packages.index') }}" class="btn-secondary">
+                            <i class="fas fa-times mr-1.5"></i>Clear
+                        </a>
                     @endif
                 </div>
             </form>
@@ -61,56 +65,90 @@
         <div class="admin-card">
             <div class="admin-card-body text-center py-16">
                 <i class="fas fa-box-open text-4xl text-gray-600 mb-4"></i>
-                <p class="text-gray-400 text-lg mb-4">No packages yet.</p>
-                <a href="{{ route('admin.packages.create') }}" class="btn-primary">
-                    <i class="fas fa-plus mr-2"></i>Create your first package
-                </a>
+                <p class="text-gray-400 text-lg mb-2">
+                    @if(request()->hasAny(['client_id', 'status']))
+                        No packages match your filters.
+                    @else
+                        No packages yet.
+                    @endif
+                </p>
+                @if(!request()->hasAny(['client_id', 'status']))
+                    <a href="{{ route('admin.packages.create') }}" class="btn-primary mt-2">
+                        <i class="fas fa-plus mr-2"></i>Create your first package
+                    </a>
+                @endif
             </div>
         </div>
     @else
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             @foreach($packages as $package)
-            <div class="admin-card hover:border-gray-500 transition-colors cursor-pointer" onclick="window.location='{{ route('admin.packages.show', $package) }}'">
+            @php
+                $delivCount  = $package->deliverable_count;
+                $researchCount = $package->research_and_data_count;
+                $emailCount  = $package->email_template_count;
+                $total       = $package->total_file_count;
+            @endphp
+            <a href="{{ route('admin.packages.show', $package) }}"
+                class="admin-card hover:border-gray-500 transition-colors group block">
                 <div class="admin-card-body">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-gray-100 font-semibold text-base leading-tight">{{ $package->name }}</h3>
-                        <span class="text-xs px-2 py-1 rounded-full font-medium {{ $package->status_badge_class }}">
+
+                    {{-- Name + status --}}
+                    <div class="flex justify-between items-start gap-3 mb-2">
+                        <h3 class="text-gray-100 font-semibold text-base leading-tight group-hover:text-white transition-colors flex-1">
+                            {{ $package->name }}
+                        </h3>
+                        <span class="text-xs px-2 py-0.5 rounded-full font-medium shrink-0 {{ $package->status_badge_class }}">
                             {{ ucfirst($package->status) }}
                         </span>
                     </div>
 
-                    <p class="text-sm text-gray-400 mb-3">
-                        <i class="fas fa-user mr-1"></i>{{ $package->client->name ?? '—' }}
+                    {{-- Client --}}
+                    <p class="text-sm text-gray-400 mb-3 flex items-center gap-1.5">
+                        <i class="fas fa-user text-gray-600 text-xs"></i>
+                        {{ $package->client->name ?? '—' }}
                     </p>
 
-                    {{-- File summary --}}
-                    <div class="flex flex-wrap gap-2 mb-3 text-xs text-gray-400">
-                        @if($package->deliverable_count > 0)
-                            <span><i class="fas fa-desktop mr-1 text-purple-400"></i>{{ $package->deliverable_count }} deliverable{{ $package->deliverable_count !== 1 ? 's' : '' }}</span>
+                    {{-- File type breakdown --}}
+                    <div class="flex items-center gap-3 mb-4 text-xs">
+                        @if($delivCount > 0)
+                            <span class="flex items-center gap-1 text-purple-300">
+                                <i class="fas fa-desktop text-purple-400"></i>
+                                {{ $delivCount }}
+                            </span>
                         @endif
-                        @if($package->research_count > 0)
-                            <span><i class="fas fa-file-alt mr-1 text-green-400"></i>{{ $package->research_count }} research</span>
+                        @if($researchCount > 0)
+                            <span class="flex items-center gap-1 text-green-300">
+                                <i class="fas fa-file-alt text-green-400"></i>
+                                {{ $researchCount }}
+                            </span>
                         @endif
-                        @if($package->email_template_count > 0)
-                            <span><i class="fas fa-envelope mr-1 text-blue-400"></i>{{ $package->email_template_count }} email{{ $package->email_template_count !== 1 ? 's' : '' }}</span>
+                        @if($emailCount > 0)
+                            <span class="flex items-center gap-1 text-blue-300">
+                                <i class="fas fa-envelope text-blue-400"></i>
+                                {{ $emailCount }}
+                            </span>
+                        @endif
+                        @if($total === 0)
+                            <span class="text-gray-600">No files</span>
+                        @else
+                            <span class="text-gray-500 ml-auto">{{ $total }} total</span>
                         @endif
                     </div>
 
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-gray-500">{{ $package->created_at->format('M j, Y') }}</span>
-                        <div class="flex items-center gap-2">
-                            @if($package->portal_enabled)
-                                <span class="text-xs px-2 py-0.5 rounded bg-green-900/30 text-green-400 border border-green-700">
-                                    <i class="fas fa-globe mr-1"></i>Portal on
-                                </span>
-                            @endif
-                            <a href="{{ route('admin.packages.show', $package) }}" class="text-xs text-blue-400 hover:text-blue-300" onclick="event.stopPropagation()">
-                                View <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
+                    {{-- Footer: date + portal badge --}}
+                    <div class="flex items-center justify-between pt-3 border-t border-gray-700/50">
+                        <span class="text-xs text-gray-500">
+                            <i class="fas fa-calendar mr-1"></i>{{ $package->created_at->format('M j, Y') }}
+                        </span>
+                        @if($package->portal_enabled)
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-green-900/30 text-green-400 border border-green-700/50">
+                                <i class="fas fa-globe mr-1"></i>Portal on
+                            </span>
+                        @endif
                     </div>
+
                 </div>
-            </div>
+            </a>
             @endforeach
         </div>
 

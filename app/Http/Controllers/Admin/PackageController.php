@@ -190,6 +190,58 @@ class PackageController extends Controller
     }
 
     /**
+     * Update package name.
+     */
+    public function update(Request $request, Package $package)
+    {
+        $request->validate(['name' => 'required|string|max:255']);
+        $package->update(['name' => $request->name]);
+
+        return back()->with('success', 'Package name updated.');
+    }
+
+    /**
+     * Update a file's display_name.
+     */
+    public function updateFile(Request $request, Package $package, PackageFile $file)
+    {
+        abort_if($file->package_id !== $package->id, 403);
+        $request->validate(['display_name' => 'required|string|max:255']);
+        $file->update(['display_name' => $request->display_name]);
+
+        return response()->json(['success' => true, 'display_name' => $file->display_name]);
+    }
+
+    /**
+     * Remove a file from the package.
+     */
+    public function destroyFile(Package $package, PackageFile $file)
+    {
+        abort_if($file->package_id !== $package->id, 403);
+        $displayName = $file->display_name;
+        Storage::disk($file->storage_disk ?: 'private')->delete($file->storage_path);
+        $file->delete();
+        $this->ingest->refreshManifest($package);
+
+        return back()->with('success', "File \"{$displayName}\" removed.");
+    }
+
+    /**
+     * Add files to an existing package.
+     */
+    public function addFiles(Request $request, Package $package)
+    {
+        $request->validate([
+            'files'   => 'required|array|min:1',
+            'files.*' => 'required|file|max:51200',
+        ]);
+
+        $added = $this->ingest->addFilesToPackage($package, $request->file('files'));
+
+        return back()->with('success', count($added).' file(s) added to package.');
+    }
+
+    /**
      * Update package status.
      */
     public function updateStatus(Request $request, Package $package)

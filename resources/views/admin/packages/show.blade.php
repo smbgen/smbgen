@@ -58,7 +58,27 @@
                 <span class="text-gray-600">/</span>
                 <span class="text-gray-300 text-sm">{{ $package->client->name }}</span>
             </div>
-            <h1 class="text-2xl font-bold text-gray-100">{{ $package->name }}</h1>
+            <div class="flex items-center gap-2" x-data="{ editingName: false }">
+                <h1 x-show="!editingName" class="text-2xl font-bold text-gray-100">{{ $package->name }}</h1>
+                <button x-show="!editingName"
+                    @click="editingName = true; $nextTick(() => $refs.nameInput.focus())"
+                    class="text-gray-500 hover:text-gray-300 transition-colors" title="Edit package name">
+                    <i class="fas fa-pencil-alt text-sm"></i>
+                </button>
+                <form x-show="editingName" x-cloak method="POST"
+                    action="{{ route('admin.packages.update', $package) }}"
+                    class="flex items-center gap-2">
+                    @csrf
+                    <input type="hidden" name="_method" value="PATCH">
+                    <input type="text" name="name" x-ref="nameInput" value="{{ $package->name }}"
+                        @keydown.escape="editingName = false"
+                        class="bg-gray-800 border border-gray-600 rounded-lg px-3 py-1.5 text-xl font-bold text-gray-100 focus:outline-none focus:border-blue-500 w-72"
+                        required>
+                    <button type="submit" class="btn-primary text-sm py-1 px-3">Save</button>
+                    <button type="button" @click="editingName = false"
+                        class="btn-secondary text-sm py-1 px-3">Cancel</button>
+                </form>
+            </div>
         </div>
         <div class="flex items-center gap-3 flex-wrap">
             {{-- Status badge + changer --}}
@@ -84,6 +104,13 @@
                 </div>
             </div>
 
+            {{-- Add Files toggle --}}
+            <button @click="addingFiles = !addingFiles"
+                :class="addingFiles ? 'bg-blue-900/40 text-blue-300 border-blue-700' : 'bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600'"
+                class="text-xs px-3 py-1.5 rounded-full font-medium border transition-colors">
+                <i class="fas fa-plus mr-1"></i>Add Files
+            </button>
+
             {{-- Portal toggle --}}
             <form method="POST" action="{{ route('admin.packages.toggle-portal', $package) }}">
                 @csrf @method('PATCH')
@@ -107,15 +134,45 @@
         </div>
     @endif
 
+    {{-- Add Files Panel --}}
+    <div x-show="addingFiles" x-cloak class="admin-card border border-blue-700/50">
+        <div class="admin-card-body">
+            <h3 class="text-sm font-medium text-gray-200 mb-3">
+                <i class="fas fa-upload mr-2 text-blue-400"></i>Add Files to Package
+            </h3>
+            <form method="POST" action="{{ route('admin.packages.files.add', $package) }}"
+                enctype="multipart/form-data">
+                @csrf
+                <div class="flex items-center gap-3 flex-wrap">
+                    <input type="file" name="files[]" multiple
+                        class="flex-1 text-sm text-gray-300 file:mr-3 file:py-1.5 file:px-4 file:rounded file:border-0 file:text-sm file:font-medium file:bg-gray-700 file:text-gray-300 hover:file:bg-gray-600 cursor-pointer min-w-0">
+                    <button type="submit" class="btn-primary text-sm whitespace-nowrap">
+                        <i class="fas fa-upload mr-1"></i>Upload &amp; Add
+                    </button>
+                    <button type="button" @click="addingFiles = false" class="btn-secondary text-sm">
+                        Cancel
+                    </button>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">Files are auto-classified by type. You can rename them after upload.</p>
+            </form>
+        </div>
+    </div>
+
     {{-- Meta row --}}
-    <div class="flex flex-wrap gap-6 text-sm text-gray-400">
-        <span><i class="fas fa-user mr-1"></i>{{ $package->client->name }}</span>
-        <span><i class="fas fa-calendar mr-1"></i>{{ $package->created_at->format('M j, Y') }}</span>
-        <span><i class="fas fa-user-shield mr-1"></i>{{ $package->createdBy->name ?? 'Unknown' }}</span>
-        <span><i class="fas fa-source mr-1"></i>{{ str_replace('_', ' ', $package->source) }}</span>
-        @if($package->original_filename)
-            <span><i class="fas fa-file-archive mr-1"></i>{{ $package->original_filename }}</span>
+    <div class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-gray-400">
+        <span><i class="fas fa-user mr-1.5 text-gray-500"></i>{{ $package->client->name }}</span>
+        <span><i class="fas fa-calendar mr-1.5 text-gray-500"></i>{{ $package->created_at->format('M j, Y') }}</span>
+        <span><i class="fas fa-user-shield mr-1.5 text-gray-500"></i>{{ $package->createdBy->name ?? 'Unknown' }}</span>
+        @if($package->source === 'zip_upload')
+            <span><i class="fas fa-file-archive mr-1.5 text-yellow-500/70"></i>ZIP Upload
+                @if($package->original_filename)
+                    &mdash; <span class="font-mono text-xs">{{ $package->original_filename }}</span>
+                @endif
+            </span>
+        @else
+            <span><i class="fas fa-copy mr-1.5 text-green-500/70"></i>Multi-file upload</span>
         @endif
+        <span class="text-gray-500">{{ $package->total_file_count }} file{{ $package->total_file_count !== 1 ? 's' : '' }}</span>
     </div>
 
     {{-- Tabs --}}
@@ -156,15 +213,25 @@
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 @foreach($deliverables as $file)
-                <div class="admin-card group">
+                <div class="admin-card group"
+                    x-data="fileCard({{ $file->id }}, {{ Js::from($file->display_name) }}, '{{ route('admin.packages.files.update', [$package, $file]) }}')">
                     <div class="admin-card-body">
                         <div class="flex items-start justify-between mb-3">
-                            <div class="flex items-center gap-2">
-                                <i class="fas {{ $file->type_icon }} text-xl
-                                    {{ $file->type === 'HTML_PRESENTATION' ? 'text-purple-400' : 'text-red-400' }}"></i>
-                                <div>
-                                    <h4 class="text-gray-100 font-medium leading-tight">{{ $file->display_name }}</h4>
-                                    <p class="text-xs text-gray-500 font-mono">{{ $file->original_name }}</p>
+                            <div class="flex items-center gap-2 flex-1 min-w-0 mr-2">
+                                <i class="fas {{ $file->type_icon }} text-xl shrink-0 {{ $file->type_icon_color }}"></i>
+                                <div class="min-w-0">
+                                    <div x-show="!renaming">
+                                        <h4 class="text-gray-100 font-medium leading-tight truncate" x-text="name"></h4>
+                                    </div>
+                                    <div x-show="renaming" class="flex items-center gap-1">
+                                        <input type="text" x-model="name" x-ref="ri"
+                                            @keydown.enter="saveRename()"
+                                            @keydown.escape="cancelRename()"
+                                            class="bg-gray-800 border border-gray-600 rounded px-2 py-0.5 text-sm text-gray-100 focus:outline-none focus:border-blue-500 w-36">
+                                        <button @click="saveRename()" class="text-green-400 hover:text-green-300 px-1"><i class="fas fa-check text-xs"></i></button>
+                                        <button @click="cancelRename()" class="text-gray-500 hover:text-gray-300 px-1"><i class="fas fa-times text-xs"></i></button>
+                                    </div>
+                                    <p class="text-xs text-gray-500 font-mono truncate">{{ $file->original_name }}</p>
                                 </div>
                             </div>
                             {{-- Portal promoted toggle --}}
@@ -172,7 +239,7 @@
                                 @click="togglePromote({{ $file->id }}, $el)"
                                 data-promoted="{{ $file->portal_promoted ? 'true' : 'false' }}"
                                 title="{{ $file->portal_promoted ? 'Remove from portal' : 'Add to portal' }}"
-                                class="text-xs px-2 py-1 rounded border transition-colors
+                                class="text-xs px-2 py-1 rounded border transition-colors shrink-0
                                     {{ $file->portal_promoted
                                         ? 'bg-green-900/40 text-green-300 border-green-700'
                                         : 'bg-gray-700 text-gray-400 border-gray-600 hover:border-green-700 hover:text-green-400' }}">
@@ -182,14 +249,34 @@
                         </div>
 
                         <div class="flex items-center justify-between text-xs text-gray-400 mb-3">
-                            <span class="{{ $file->type_badge_class }} px-2 py-0.5 rounded text-xs">{{ $file->type }}</span>
-                            <span>{{ $file->formatted_size }}</span>
+                            <span class="{{ $file->type_badge_class }} px-2 py-0.5 rounded-full text-xs font-medium">{{ $file->type_label }}</span>
+                            <span class="text-gray-500">{{ $file->formatted_size }}</span>
                         </div>
 
-                        <button @click="previewFile({{ $file->id }}, '{{ addslashes($file->display_name) }}', '{{ $file->type }}')"
-                            class="w-full btn-secondary text-sm">
-                            <i class="fas fa-eye mr-2"></i>Preview
-                        </button>
+                        <div class="flex items-center justify-between mt-1 pt-3 border-t border-gray-700/50">
+                            <button @click="previewFile({{ $file->id }}, name, '{{ $file->type }}')"
+                                class="btn-secondary text-xs py-1.5 flex-1 mr-2">
+                                <i class="fas fa-eye mr-1.5"></i>Preview
+                            </button>
+                            <div class="flex items-center gap-1">
+                                <button x-show="!renaming"
+                                    @click="renaming = true; $nextTick(() => $refs.ri?.focus())"
+                                    title="Rename"
+                                    class="text-gray-500 hover:text-gray-300 p-1.5 rounded hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-pencil-alt text-xs"></i>
+                                </button>
+                                <form method="POST"
+                                    action="{{ route('admin.packages.files.destroy', [$package, $file]) }}"
+                                    @submit.prevent="if(confirm('Remove this file?')) $el.submit()">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" title="Remove"
+                                        class="text-gray-500 hover:text-red-400 p-1.5 rounded hover:bg-gray-700 transition-colors">
+                                        <i class="fas fa-trash text-xs"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @endforeach
@@ -209,34 +296,56 @@
         @else
             <div class="space-y-3">
                 @foreach($researchFiles as $file)
-                <div class="admin-card">
+                <div class="admin-card"
+                    x-data="fileCard({{ $file->id }}, {{ Js::from($file->display_name) }}, '{{ route('admin.packages.files.update', [$package, $file]) }}')">
                     <div class="admin-card-body">
                         <div class="flex items-center justify-between flex-wrap gap-3">
                             <div class="flex items-center gap-3">
-                                <i class="fas {{ $file->type_icon }} text-lg
-                                    {{ $file->type === 'MARKDOWN_RESEARCH' ? 'text-green-400' : 'text-yellow-400' }}"></i>
+                                <i class="fas {{ $file->type_icon }} text-lg {{ $file->type_icon_color }}"></i>
                                 <div>
-                                    <h4 class="text-gray-100 font-medium flex items-center gap-2">
-                                        {{ $file->display_name }}
+                                    <div x-show="!renaming" class="flex items-center gap-2">
+                                        <h4 class="text-gray-100 font-medium" x-text="name"></h4>
                                         @if($file->isIndexFile())
                                             <span class="text-xs px-1.5 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-700">Index</span>
                                         @endif
-                                    </h4>
+                                    </div>
+                                    <div x-show="renaming" class="flex items-center gap-1">
+                                        <input type="text" x-model="name" x-ref="ri"
+                                            @keydown.enter="saveRename()"
+                                            @keydown.escape="cancelRename()"
+                                            class="bg-gray-800 border border-gray-600 rounded px-2 py-0.5 text-sm text-gray-100 focus:outline-none focus:border-blue-500 w-48">
+                                        <button @click="saveRename()" class="text-green-400 hover:text-green-300 px-1"><i class="fas fa-check text-xs"></i></button>
+                                        <button @click="cancelRename()" class="text-gray-500 hover:text-gray-300 px-1"><i class="fas fa-times text-xs"></i></button>
+                                    </div>
                                     <p class="text-xs text-gray-500 font-mono">{{ $file->original_name }}</p>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="{{ $file->type_badge_class }} px-2 py-0.5 rounded text-xs">{{ $file->type }}</span>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="{{ $file->type_badge_class }} px-2 py-0.5 rounded-full text-xs font-medium">{{ $file->type_label }}</span>
                                 <span class="text-xs text-gray-400">{{ $file->formatted_size }}</span>
                                 @if($file->group_label)
                                     <span class="text-xs px-2 py-0.5 rounded bg-gray-700 text-gray-400 border border-gray-600">
                                         <i class="fas fa-folder mr-1"></i>{{ $file->group_label }}
                                     </span>
                                 @endif
-                                <button @click="previewFile({{ $file->id }}, '{{ addslashes($file->display_name) }}', '{{ $file->type }}')"
+                                <button @click="previewFile({{ $file->id }}, name, '{{ $file->type }}')"
                                     class="btn-secondary text-xs">
                                     <i class="fas fa-eye mr-1"></i>View
                                 </button>
+                                <button x-show="!renaming"
+                                    @click="renaming = true; $nextTick(() => $refs.ri?.focus())"
+                                    class="btn-secondary text-xs">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                                <form method="POST"
+                                    action="{{ route('admin.packages.files.destroy', [$package, $file]) }}"
+                                    @submit.prevent="if(confirm('Remove this file?')) $el.submit()">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn-secondary text-xs text-red-400 hover:text-red-300">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -258,21 +367,46 @@
         @else
             <div class="space-y-3">
                 @foreach($emailTemplates as $file)
-                <div class="admin-card">
+                <div class="admin-card"
+                    x-data="fileCard({{ $file->id }}, {{ Js::from($file->display_name) }}, '{{ route('admin.packages.files.update', [$package, $file]) }}')">
                     <div class="admin-card-body flex items-center justify-between flex-wrap gap-3">
                         <div class="flex items-center gap-3">
                             <i class="fas fa-envelope text-lg text-blue-400"></i>
                             <div>
-                                <h4 class="text-gray-100 font-medium">{{ $file->display_name }}</h4>
+                                <div x-show="!renaming">
+                                    <h4 class="text-gray-100 font-medium" x-text="name"></h4>
+                                </div>
+                                <div x-show="renaming" class="flex items-center gap-1">
+                                    <input type="text" x-model="name" x-ref="ri"
+                                        @keydown.enter="saveRename()"
+                                        @keydown.escape="cancelRename()"
+                                        class="bg-gray-800 border border-gray-600 rounded px-2 py-0.5 text-sm text-gray-100 focus:outline-none focus:border-blue-500 w-48">
+                                    <button @click="saveRename()" class="text-green-400 hover:text-green-300 px-1"><i class="fas fa-check text-xs"></i></button>
+                                    <button @click="cancelRename()" class="text-gray-500 hover:text-gray-300 px-1"><i class="fas fa-times text-xs"></i></button>
+                                </div>
                                 <p class="text-xs text-gray-500 font-mono">{{ $file->original_name }}</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 flex-wrap">
                             <span class="text-xs text-gray-400">{{ $file->formatted_size }}</span>
-                            <button @click="previewFile({{ $file->id }}, '{{ addslashes($file->display_name) }}', '{{ $file->type }}')"
+                            <button @click="previewFile({{ $file->id }}, name, '{{ $file->type }}')"
                                 class="btn-secondary text-xs">
                                 <i class="fas fa-eye mr-1"></i>Preview
                             </button>
+                            <button x-show="!renaming"
+                                @click="renaming = true; $nextTick(() => $refs.ri?.focus())"
+                                class="btn-secondary text-xs">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <form method="POST"
+                                action="{{ route('admin.packages.files.destroy', [$package, $file]) }}"
+                                @submit.prevent="if(confirm('Remove this file?')) $el.submit()">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn-secondary text-xs text-red-400 hover:text-red-300">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
                             <a href="{{ route('admin.email.index', ['package_file_id' => $file->id, 'client_id' => $package->client_id]) }}"
                                 class="btn-primary text-xs">
                                 <i class="fas fa-paper-plane mr-1"></i>Use in Compose
@@ -399,9 +533,41 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script>
+function fileCard(fileId, initialName, renameUrl) {
+    return {
+        renaming: false,
+        name: initialName,
+        _original: initialName,
+        async saveRename() {
+            const res = await fetch(renameUrl, {
+                method: 'PATCH',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ display_name: this.name }),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                this.name = data.display_name;
+                this._original = data.display_name;
+                this.renaming = false;
+            } else {
+                alert('Failed to rename file.');
+            }
+        },
+        cancelRename() {
+            this.name = this._original;
+            this.renaming = false;
+        },
+    };
+}
+
 function packageDetail() {
     return {
         activeTab: 'deliverables',
+        addingFiles: false,
         previewOpen: false,
         previewTitle: '',
         previewType: '',

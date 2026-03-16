@@ -602,6 +602,14 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
         ->name('admin.packages.status');
     Route::patch('/packages/{package}/toggle-portal', [\App\Http\Controllers\Admin\PackageController::class, 'togglePortal'])
         ->name('admin.packages.toggle-portal');
+    Route::patch('/packages/{package}', [\App\Http\Controllers\Admin\PackageController::class, 'update'])
+        ->name('admin.packages.update');
+    Route::post('/packages/{package}/files', [\App\Http\Controllers\Admin\PackageController::class, 'addFiles'])
+        ->name('admin.packages.files.add');
+    Route::patch('/packages/{package}/files/{file}', [\App\Http\Controllers\Admin\PackageController::class, 'updateFile'])
+        ->name('admin.packages.files.update');
+    Route::delete('/packages/{package}/files/{file}', [\App\Http\Controllers\Admin\PackageController::class, 'destroyFile'])
+        ->name('admin.packages.files.destroy');
     Route::patch('/packages/{package}/files/{file}/promote', [\App\Http\Controllers\Admin\PackageController::class, 'togglePromote'])
         ->name('admin.packages.files.promote');
     Route::get('/packages/{package}/files/{file}/preview', [\App\Http\Controllers\Admin\PackageController::class, 'previewFile'])

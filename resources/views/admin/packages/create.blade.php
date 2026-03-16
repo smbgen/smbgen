@@ -139,13 +139,9 @@
         {{-- Submit --}}
         <div class="flex justify-end gap-3 mt-6">
             <a href="{{ route('admin.packages.index') }}" class="btn-secondary">Cancel</a>
-            <button type="submit" class="btn-primary" :disabled="uploading">
-                <template x-if="!uploading">
-                    <span><i class="fas fa-magic mr-2"></i>Analyse & Review</span>
-                </template>
-                <template x-if="uploading">
-                    <span><i class="fas fa-spinner fa-spin mr-2"></i>Processing…</span>
-                </template>
+            <button type="submit" class="btn-primary" :disabled="uploading" @click="uploading = true">
+                <i class="fas mr-2" :class="uploading ? 'fa-spinner fa-spin' : 'fa-magic'"></i>
+                <span x-text="uploading ? 'Processing…' : 'Analyse & Review'"></span>
             </button>
         </div>
 
@@ -181,12 +177,7 @@ function uploadForm() {
     };
 }
 
-document.querySelector('form').addEventListener('submit', function () {
-    Alpine.store && Alpine.store('uploadForm') && (Alpine.store('uploadForm').uploading = true);
-    // Fallback for component-scoped data
-    document.querySelector('[x-data]')._x_dataStack?.[0] &&
-        (document.querySelector('[x-data]')._x_dataStack[0].uploading = true);
-});
+// uploading state is managed via @click on the submit button
 </script>
 @endpush
 @endsection

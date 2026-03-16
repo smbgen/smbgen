@@ -77,8 +77,18 @@ class Package extends Model
         return $this->files->where('role', 'research')->count();
     }
 
+    public function getResearchAndDataCountAttribute(): int
+    {
+        return $this->files->whereIn('role', ['research', 'data'])->count();
+    }
+
     public function getEmailTemplateCountAttribute(): int
     {
         return $this->files->where('role', 'email_template')->count();
+    }
+
+    public function getTotalFileCountAttribute(): int
+    {
+        return $this->files->count();
     }
 }

@@ -141,6 +141,59 @@ class PackageIngestService
         return $package->fresh(['files', 'client']);
     }
 
+    /**
+     * Add uploaded files to an existing package (auto-classifies, stores, creates records).
+     *
+     * @param  UploadedFile[]  $uploadedFiles
+     * @return PackageFile[]
+     */
+    public function addFilesToPackage(Package $package, array $uploadedFiles): array
+    {
+        $packageDir = "packages/{$package->client_id}/{$package->id}";
+        $nextSort   = $package->files()->max('sort_order') ?? 0;
+        $added      = [];
+
+        foreach ($uploadedFiles as $i => $file) {
+            $classification = $this->classifyUploadedFile($file, null);
+            $role           = $classification['role'];
+            $subDir         = $this->subDirForRole($role);
+            $originalName   = $file->getClientOriginalName();
+            $storagePath    = "{$packageDir}/{$subDir}/{$originalName}";
+            $disk           = 'private';
+
+            Storage::disk($disk)->put($storagePath, file_get_contents($file->getPathname()));
+
+            $added[] = PackageFile::create([
+                'package_id'      => $package->id,
+                'original_name'   => $originalName,
+                'display_name'    => $classification['display_name'],
+                'type'            => $classification['type'],
+                'role'            => $role,
+                'group_label'     => null,
+                'storage_path'    => $storagePath,
+                'storage_disk'    => $disk,
+                'size_bytes'      => $file->getSize(),
+                'portal_promoted' => false,
+                'sort_order'      => $nextSort + $i + 1,
+            ]);
+        }
+
+        $package->load('files');
+        $this->writeManifest($package, $packageDir);
+
+        return $added;
+    }
+
+    /**
+     * Regenerate the manifest.json for an existing package.
+     */
+    public function refreshManifest(Package $package): void
+    {
+        $packageDir = "packages/{$package->client_id}/{$package->id}";
+        $package->load('files');
+        $this->writeManifest($package, $packageDir);
+    }
+
     // -------------------------------------------------------------------------
 
     private function scanDirectory(string $baseDir, string $currentDir, string $relativeBase = ''): array

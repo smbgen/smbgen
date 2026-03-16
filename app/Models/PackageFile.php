@@ -84,6 +84,45 @@ class PackageFile extends Model
         };
     }
 
+    public function getTypeIconColorAttribute(): string
+    {
+        return match ($this->type) {
+            'HTML_PRESENTATION'  => 'text-purple-400',
+            'HTML_EMAIL'         => 'text-blue-400',
+            'PDF_DOCUMENT'       => 'text-red-400',
+            'MARKDOWN_RESEARCH'  => 'text-green-400',
+            'JSON_DATA'          => 'text-yellow-400',
+            'WORD_DOCUMENT'      => 'text-blue-300',
+            'POWERPOINT'         => 'text-orange-400',
+            default              => 'text-gray-400',
+        };
+    }
+
+    public function getTypeLabelAttribute(): string
+    {
+        return match ($this->type) {
+            'HTML_PRESENTATION'  => 'Presentation',
+            'HTML_EMAIL'         => 'Email HTML',
+            'PDF_DOCUMENT'       => 'PDF',
+            'MARKDOWN_RESEARCH'  => 'Markdown',
+            'JSON_DATA'          => 'JSON',
+            'WORD_DOCUMENT'      => 'Word',
+            'POWERPOINT'         => 'PowerPoint',
+            default              => 'File',
+        };
+    }
+
+    public function getRoleLabelAttribute(): string
+    {
+        return match ($this->role) {
+            'deliverable'    => 'Deliverable',
+            'research'       => 'Research',
+            'data'           => 'Data',
+            'email_template' => 'Email Template',
+            default          => ucfirst($this->role),
+        };
+    }
+
     public function isIndexFile(): bool
     {
         return str_contains(strtolower($this->original_name), '-index.')
