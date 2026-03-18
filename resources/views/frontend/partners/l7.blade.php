@@ -148,18 +148,6 @@
                             @endforeach
                         </div>
 
-                        {{-- Portfolio brands --}}
-                        <div class="pt-5" style="border-top: 1px solid rgba(34,197,94,0.1);">
-                            <div class="text-green-700 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Portfolio brands on Portal7</div>
-                            <div class="flex flex-wrap gap-2">
-                                @foreach(['Spatio', 'The Illustrated Live', 'Military Talent Pipeline', '+ more'] as $brand)
-                                    <span class="text-[11px] font-semibold text-green-300/70 px-3 py-1 rounded-lg"
-                                          style="background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.15);">
-                                        {{ $brand }}
-                                    </span>
-                                @endforeach
-                            </div>
-                        </div>
                     </div>
 
                     {{-- Floating AI tag --}}
