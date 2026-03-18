@@ -513,12 +513,12 @@
                         <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 font-black text-lg text-green-400"
                              style="background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3);">L7</div>
                         <div>
-                            <div class="text-white font-black text-base">L7 Media Labs</div>
+                            <div class="text-white font-black text-base">L7 Labs</div>
                             <div class="text-green-600 text-xs font-medium tracking-widest uppercase">Atlanta, GA &bull; Portal7</div>
                         </div>
                     </div>
                     <p class="text-slate-400 text-base leading-relaxed mb-6 font-light">
-                        L7 Media Labs uses Portal7 — their dedicated smbgen instance — to distribute brand identities,
+                        L7 Labs uses Portal7 — their dedicated smbgen instance — to distribute brand identities,
                         automate social, run email sequences, and manage their entire client portfolio from one platform.
                     </p>
                     <div class="flex flex-wrap gap-2">

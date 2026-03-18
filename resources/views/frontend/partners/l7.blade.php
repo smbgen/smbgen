@@ -63,7 +63,7 @@
                         <span class="text-green-400 font-black text-xl tracking-tighter">L7</span>
                     </div>
                     <div>
-                        <div class="text-white font-black text-lg tracking-wide">L7 Media Labs</div>
+                        <div class="text-white font-black text-lg tracking-wide">L7 Labs</div>
                         <div class="text-green-500/70 text-xs font-medium tracking-widest uppercase">Atlanta, GA &mdash; Synthesizing Brand DNA</div>
                     </div>
                 </div>
@@ -442,7 +442,7 @@
                  style="background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25);">JD</div>
             <div class="text-left">
                 <div class="text-white font-bold text-sm">James Du Rell</div>
-                <div class="text-green-700 text-xs">Founder &amp; Creative Director, L7 Media Labs</div>
+                <div class="text-green-700 text-xs">Founder &amp; Creative Director, L7 Labs</div>
             </div>
         </div>
         <p class="text-gray-600 text-sm mt-8 max-w-xl mx-auto leading-relaxed">
