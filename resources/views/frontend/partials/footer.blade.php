@@ -73,7 +73,7 @@
                 <div>
                     <h4 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">Partners</h4>
                     <div class="flex flex-col gap-2.5 text-slate-500">
-                        <a href="{{ route('partners.l7') }}" class="hover:text-white transition-colors">L7 Media Labs</a>
+                        <a href="{{ route('partners.l7') }}" class="hover:text-white transition-colors">L7 Labs</a>
                     </div>
                 </div>
 
