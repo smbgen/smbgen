@@ -176,6 +176,7 @@ Route::get('/', fn () => view('frontend.home-platform'))->name('home');
 Route::get('/platform', fn () => view('frontend.home-platform'))->name('home.platform');
 Route::get('/services', fn () => view('frontend.home-services'))->name('home.services');
 Route::get('/solutions', fn () => view('frontend.solutions'))->name('solutions');
+Route::get('/partners/l7', fn () => view('frontend.partners.l7'))->name('partners.l7');
 
 // Contact page - CMS overridable, fallback to built-in contact page
 Route::get('/contact', function () {
