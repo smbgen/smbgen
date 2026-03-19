@@ -106,11 +106,13 @@ class TenancyServiceProvider extends ServiceProvider
         }
     }
 
-    protected function mapRoutes()
+    protected function mapRoutes(): void
     {
         $this->app->booted(function () {
             if (file_exists(base_path('routes/tenant.php'))) {
+                $centralDomain = parse_url(config('app.url'), PHP_URL_HOST);
                 Route::namespace(static::$controllerNamespace)
+                    ->domain('{tenant}.'.$centralDomain)
                     ->group(base_path('routes/tenant.php'));
             }
         });
