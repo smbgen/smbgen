@@ -19,6 +19,10 @@ return new class extends Migration
     public function up(): void
     {
         foreach ($this->tables as $table) {
+            if (Schema::hasColumn($table, 'tenant_id')) {
+                continue;
+            }
+
             Schema::table($table, function (Blueprint $blueprint) use ($table) {
                 $blueprint->string('tenant_id')->nullable()->after('id');
                 $blueprint->foreign('tenant_id')

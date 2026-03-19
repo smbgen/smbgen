@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasColumn('clients', 'lead_score')) {
+            return;
+        }
+
         Schema::table('clients', function (Blueprint $table) {
             $table->unsignedSmallInteger('lead_score')->default(0)->after('notes');
         });

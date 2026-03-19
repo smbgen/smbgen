@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('agency_portals')) {
+            return;
+        }
+
         Schema::create('agency_portals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner_user_id')->constrained('users')->cascadeOnDelete();
