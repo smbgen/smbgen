@@ -218,6 +218,13 @@
                 <!-- Settings Section -->
                 @if(auth()->user()->isAdministrator())
                 <div class="mb-6 space-y-1">
+                    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-3">Platform</div>
+                    <a href="{{ route('admin.tenants.index') }}" class="sidebar-link {{ request()->routeIs('admin.tenants.*') ? 'active' : '' }}">
+                        <i class="fas fa-sitemap text-lg"></i>
+                        <span>Tenants</span>
+                    </a>
+                </div>
+                <div class="mb-6 space-y-1">
                     <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-3">Settings</div>
                     <a href="{{ route('admin.business_settings.index') }}" class="sidebar-link {{ request()->routeIs('admin.business_settings.*') ? 'active' : '' }}">
                         <i class="fas fa-building text-lg"></i>

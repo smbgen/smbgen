@@ -7,11 +7,12 @@ use App\Enums\SocialPostStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class SocialPost extends Model
 {
     /** @use HasFactory<\Database\Factories\SocialPostFactory> */
-    use HasFactory;
+    use BelongsToTenant, HasFactory;
 
     protected $fillable = [
         'client_id',

@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         \Illuminate\Cookie\CookieServiceProvider::class,
         // EmailEventServiceProvider removed - listeners are auto-discovered in Laravel 12
         \App\Modules\CleanSlate\CleanSlateServiceProvider::class,
+        \App\Providers\TenancyServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([

@@ -618,6 +618,11 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
     Route::get('/agency', [\App\Http\Controllers\Admin\AgencyController::class, 'index'])->name('admin.agency.index');
     Route::post('/agency', [\App\Http\Controllers\Admin\AgencyController::class, 'store'])->name('admin.agency.store');
     Route::delete('/agency/{portal}', [\App\Http\Controllers\Admin\AgencyController::class, 'destroy'])->name('admin.agency.destroy');
+
+    // White-label Tenant Management
+    Route::get('/tenants', [\App\Http\Controllers\Admin\TenantController::class, 'index'])->name('admin.tenants.index');
+    Route::post('/tenants', [\App\Http\Controllers\Admin\TenantController::class, 'store'])->name('admin.tenants.store');
+    Route::delete('/tenants/{tenant}', [\App\Http\Controllers\Admin\TenantController::class, 'destroy'])->name('admin.tenants.destroy');
 });
 
 // Public consume route for magic links
