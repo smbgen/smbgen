@@ -64,7 +64,7 @@ class AuthenticatedSessionController extends Controller
             }
         }
 
-        if ($user->role === 'company_administrator') {
+        if (in_array($user->role, ['company_administrator', 'super_admin'], true)) {
             return redirect()->route('admin.dashboard');
         } else {
             return redirect()->route('dashboard');
@@ -93,9 +93,9 @@ class AuthenticatedSessionController extends Controller
         \Log::info('Initiating Google Login OAuth redirect', [
             'configured_base_redirect' => config('services.google.redirect'),
             'app_url' => config('app.url'),
-            'client_id_configured' => !empty(config('services.google.client_id')),
+            'client_id_configured' => ! empty(config('services.google.client_id')),
             'client_id_value' => config('services.google.client_id'),
-            'client_secret_configured' => !empty(config('services.google.client_secret')),
+            'client_secret_configured' => ! empty(config('services.google.client_secret')),
             'request_url' => request()->url(),
             'request_full_url' => request()->fullUrl(),
         ]);
@@ -103,12 +103,12 @@ class AuthenticatedSessionController extends Controller
         try {
             $redirectResponse = Socialite::driver('google')->redirect();
             $actualRedirectUrl = $redirectResponse->getTargetUrl();
-            
+
             \Log::info('Google Login OAuth redirect URL generated', [
                 'full_redirect_url' => $actualRedirectUrl,
                 'url_length' => strlen($actualRedirectUrl),
             ]);
-            
+
             return $redirectResponse;
         } catch (\Exception $e) {
             \Log::error('Failed to generate Google Login OAuth redirect', [
@@ -164,7 +164,7 @@ class AuthenticatedSessionController extends Controller
             );
 
             // Redirect based on user role
-            if ($user->role === 'company_administrator') {
+            if (in_array($user->role, ['company_administrator', 'super_admin'], true)) {
                 return redirect()->intended('/admin/dashboard');
             } else {
                 return redirect()->intended('/dashboard');

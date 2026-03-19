@@ -706,7 +706,7 @@ if (config('app.debug')) {
             \Illuminate\Support\Facades\Auth::login($user);
 
             $redirect = match ($user->role) {
-                'company_administrator' => route('admin.dashboard'),
+                'company_administrator', 'super_admin' => route('admin.dashboard'),
                 default => route('dashboard'),
             };
 

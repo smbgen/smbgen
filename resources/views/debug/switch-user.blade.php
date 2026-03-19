@@ -24,7 +24,8 @@
         <div class="mb-8">
             <div class="flex items-center gap-3 mb-3">
                 <span class="text-xs font-semibold uppercase tracking-widest
-                    @if($role === 'company_administrator') text-violet-400
+                    @if($role === 'super_admin') text-amber-400
+                    @elseif($role === 'company_administrator') text-violet-400
                     @elseif($role === 'client') text-cyan-400
                     @else text-gray-400
                     @endif">
@@ -38,13 +39,15 @@
                 @foreach($users as $user)
                 <a href="{{ route('debug.switch-user.post', $user) }}"
                     class="flex items-center justify-between px-4 py-3 rounded-xl border transition-all group
-                        @if($role === 'company_administrator') border-violet-500/20 bg-violet-500/5 hover:border-violet-500/40 hover:bg-violet-500/10
+                        @if($role === 'super_admin') border-amber-500/20 bg-amber-500/5 hover:border-amber-500/40 hover:bg-amber-500/10
+                        @elseif($role === 'company_administrator') border-violet-500/20 bg-violet-500/5 hover:border-violet-500/40 hover:bg-violet-500/10
                         @elseif($role === 'client') border-cyan-500/20 bg-cyan-500/5 hover:border-cyan-500/40 hover:bg-cyan-500/10
                         @else border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.06]
                         @endif">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold
-                            @if($role === 'company_administrator') bg-violet-500/20 text-violet-300
+                            @if($role === 'super_admin') bg-amber-500/20 text-amber-300
+                            @elseif($role === 'company_administrator') bg-violet-500/20 text-violet-300
                             @elseif($role === 'client') bg-cyan-500/20 text-cyan-300
                             @else bg-gray-500/20 text-gray-300
                             @endif">

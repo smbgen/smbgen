@@ -20,6 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     const ROLE_ADMINISTRATOR = 'company_administrator';
 
+    const ROLE_SUPER_ADMIN = 'super_admin';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -126,11 +128,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Check if user is an administrator
+     * Check if user is a super admin (platform-level access)
+     */
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === 'super_admin';
+    }
+
+    /**
+     * Check if user is an administrator (or super admin)
      */
     public function isAdministrator(): bool
     {
-        return $this->role === 'company_administrator';
+        return in_array($this->role, ['company_administrator', 'super_admin'], true);
     }
 
     /**
