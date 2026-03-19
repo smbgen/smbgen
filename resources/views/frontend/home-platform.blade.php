@@ -236,6 +236,7 @@
             ['Lead Management', false],
             ['AI Content Engine', false],
             ['Document &amp; File Management', false],
+            ['Client Payments', false],
         ] as [$cap, $active])
             <div class="flex items-center gap-2 text-xs font-black uppercase tracking-widest whitespace-nowrap {{ $active ? 'text-white' : 'text-white/65' }}">
                 <span class="text-blue-200">&#10022;</span>

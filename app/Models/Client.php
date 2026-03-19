@@ -25,6 +25,7 @@ class Client extends Model
         'last_login_at',
         'google_id',
         'google_linked_at',
+        'lead_score',
     ];
 
     protected $casts = [
@@ -49,6 +50,11 @@ class Client extends Model
     public function files()
     {
         return $this->hasMany(\App\Models\ClientFile::class);
+    }
+
+    public function deals()
+    {
+        return $this->hasMany(\App\Models\Deal::class);
     }
 
     /**

@@ -138,7 +138,7 @@
                     From landing pages to full product sites — designed to win attention and turn visitors into leads.
                 </p>
                 <div class="flex flex-col gap-1.5 mb-6">
-                    @foreach(['Brand identity & design systems', 'Custom landing pages & full sites', 'CMS-powered content management', 'Mobile-first, performance-tuned'] as $item)
+                    @foreach(['Brand identity & design systems', 'Custom landing pages & full sites', 'CMS-powered content management', 'Mobile-first, performance-tuned', 'Integrated client payment page'] as $item)
                         <div class="flex items-center gap-2 text-blue-200 text-xs font-medium">
                             <span class="w-4 h-4 bg-blue-600/60 rounded flex items-center justify-center text-blue-200 shrink-0">&#10003;</span>
                             {{ $item }}

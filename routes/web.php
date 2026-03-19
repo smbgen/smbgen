@@ -591,6 +591,33 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
         ->name('admin.packages.files.preview');
     Route::get('/packages/{package}/files/{file}/content', [\App\Http\Controllers\Admin\PackageController::class, 'fileContent'])
         ->name('admin.packages.files.content');
+
+    // SIGNAL — Social Automation
+    Route::get('/signal', [\App\Http\Controllers\Admin\SignalController::class, 'index'])->name('admin.signal.index');
+    Route::post('/signal', [\App\Http\Controllers\Admin\SignalController::class, 'store'])->name('admin.signal.store');
+    Route::delete('/signal/{post}', [\App\Http\Controllers\Admin\SignalController::class, 'destroy'])->name('admin.signal.destroy');
+
+    // RELAY — Email Sequences
+    Route::get('/relay', [\App\Http\Controllers\Admin\RelayController::class, 'index'])->name('admin.relay.index');
+    Route::post('/relay', [\App\Http\Controllers\Admin\RelayController::class, 'store'])->name('admin.relay.store');
+    Route::post('/relay/{sequence}/enroll', [\App\Http\Controllers\Admin\RelayController::class, 'enroll'])->name('admin.relay.enroll');
+    Route::delete('/relay/{sequence}', [\App\Http\Controllers\Admin\RelayController::class, 'destroy'])->name('admin.relay.destroy');
+
+    // SURGE — Deal Pipeline
+    Route::get('/surge', [\App\Http\Controllers\Admin\SurgeController::class, 'index'])->name('admin.surge.index');
+    Route::post('/surge', [\App\Http\Controllers\Admin\SurgeController::class, 'store'])->name('admin.surge.store');
+    Route::patch('/surge/{deal}', [\App\Http\Controllers\Admin\SurgeController::class, 'update'])->name('admin.surge.update');
+    Route::delete('/surge/{deal}', [\App\Http\Controllers\Admin\SurgeController::class, 'destroy'])->name('admin.surge.destroy');
+
+    // CAST — Managed Sites
+    Route::get('/cast', [\App\Http\Controllers\Admin\CastController::class, 'index'])->name('admin.cast.index');
+    Route::post('/cast', [\App\Http\Controllers\Admin\CastController::class, 'store'])->name('admin.cast.store');
+    Route::delete('/cast/{site}', [\App\Http\Controllers\Admin\CastController::class, 'destroy'])->name('admin.cast.destroy');
+
+    // Agency Portals
+    Route::get('/agency', [\App\Http\Controllers\Admin\AgencyController::class, 'index'])->name('admin.agency.index');
+    Route::post('/agency', [\App\Http\Controllers\Admin\AgencyController::class, 'store'])->name('admin.agency.store');
+    Route::delete('/agency/{portal}', [\App\Http\Controllers\Admin\AgencyController::class, 'destroy'])->name('admin.agency.destroy');
 });
 
 // Public consume route for magic links

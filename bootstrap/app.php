@@ -93,6 +93,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 return null;
             }
 
+            // Don't intercept HTTP exceptions (403, 404, etc.) — let Laravel render them with the correct status
+            if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
+                return null;
+            }
+
             // Send email notification for 500 errors
             if ($e->getCode() >= 500 || $e instanceof \Symfony\Component\HttpKernel\Exception\HttpException && $e->getStatusCode() >= 500) {
                 try {

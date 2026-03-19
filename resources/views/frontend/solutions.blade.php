@@ -378,7 +378,7 @@
                         every pixel intentional, every CTA wired.
                     </p>
                     <div class="flex flex-col gap-2 mb-9">
-                        @foreach(['Brand identity & full design systems', 'Conversion-optimised landing pages & sites', 'CMS-powered — edit anything, no developer needed', 'Performance-tuned, mobile-first, SEO-ready from day one'] as $point)
+                        @foreach(['Brand identity & full design systems', 'Conversion-optimised landing pages & sites', 'CMS-powered — edit anything, no developer needed', 'Performance-tuned, mobile-first, SEO-ready from day one', 'Integrated payment page — accept client payments online'] as $point)
                             <div class="flex items-center gap-2.5 text-gray-300 text-sm">
                                 <span class="w-4 h-4 rounded bg-emerald-600/20 border border-emerald-600/40 flex items-center justify-center text-emerald-400 text-[10px] shrink-0">&#10003;</span>
                                 {{ $point }}
@@ -401,19 +401,21 @@
                             <div class="flex-1 mx-3 px-3 py-1 rounded text-[10px] text-gray-600" style="background: rgba(255,255,255,0.04);">yoursite.com</div>
                             <span class="text-emerald-600 text-[10px] font-bold">LIVE</span>
                         </div>
-                        {{-- Fake page content --}}
-                        <div class="p-6" style="background: rgba(0,0,0,0.4);">
-                            <div class="h-3 rounded bg-emerald-600/30 w-1/3 mb-3"></div>
-                            <div class="h-8 rounded bg-white/5 w-4/5 mb-2"></div>
-                            <div class="h-8 rounded bg-white/5 w-3/5 mb-4"></div>
-                            <div class="h-3 rounded bg-white/5 w-full mb-1.5"></div>
-                            <div class="h-3 rounded bg-white/5 w-5/6 mb-5"></div>
-                            <div class="inline-block h-9 w-32 rounded-lg bg-emerald-600/70 mb-5"></div>
-                            <div class="grid grid-cols-3 gap-2 mt-2">
-                                <div class="h-16 rounded-lg bg-white/5"></div>
-                                <div class="h-16 rounded-lg bg-white/5"></div>
-                                <div class="h-16 rounded-lg bg-white/5"></div>
-                            </div>
+                        {{-- Site package routes --}}
+                        <div class="p-5" style="background: rgba(0,0,0,0.4);">
+                            <p class="text-emerald-700 text-[9px] font-black uppercase tracking-[0.2em] mb-4">Your site package</p>
+                            @foreach([
+                                ['/', 'Home', 'Your homepage &amp; hero'],
+                                ['/blog', 'SEO Blog', 'AI-generated, search-optimised'],
+                                ['/contact', 'Contact', 'Lead capture form'],
+                                ['/pay', 'Payments', 'Accept client payments online'],
+                            ] as [$route, $label, $desc])
+                                <div class="flex items-center gap-3 rounded-lg px-3 py-2.5 mb-2 last:mb-0" style="background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.15);">
+                                    <span class="text-emerald-500 font-mono text-[10px] w-14 shrink-0">{{ $route }}</span>
+                                    <span class="text-white text-[10px] font-bold">{{ $label }}</span>
+                                    <span class="text-gray-600 text-[9px] ml-auto text-right">{!! $desc !!}</span>
+                                </div>
+                            @endforeach
                         </div>
                         <div class="px-6 py-3 flex justify-between items-center" style="background: rgba(16,185,129,0.06); border-top: 1px solid rgba(16,185,129,0.1);">
                             <span class="text-emerald-600 text-[10px] font-mono">PageSpeed: 98</span>
