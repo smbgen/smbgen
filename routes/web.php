@@ -172,28 +172,11 @@ Route::view('/privacy', 'legal.privacy')->name('legal.privacy');
 | dynamic CMS content, and authenticated user experiences.
 |
 */
-Route::get('/', function () {
-    // Try to load CMS home page if CMS is enabled
-    if (config('business.features.cms')) {
-        $landingPage = \App\Models\CmsPage::where('slug', 'home')
-            ->where('is_published', true)
-            ->first();
-
-        if ($landingPage) {
-            return view('cms.show', ['page' => $landingPage]);
-        }
-    }
-
-    // Redirect non-authenticated users to login
-    if (! auth()->check()) {
-        return redirect()->route('login');
-    }
-
-    // Redirect authenticated users to their dashboards
-    return auth()->user()->role === 'company_administrator'
-        ? redirect()->route('admin.dashboard')
-        : redirect()->route('dashboard');
-});
+Route::get('/', fn () => view('frontend.home-platform'))->name('home');
+Route::get('/platform', fn () => view('frontend.home-platform'))->name('home.platform');
+Route::get('/services', fn () => view('frontend.home-services'))->name('home.services');
+Route::get('/solutions', fn () => view('frontend.solutions'))->name('solutions');
+Route::get('/partners/l7', fn () => view('frontend.partners.l7'))->name('partners.l7');
 
 // Contact page - CMS overridable, fallback to built-in contact page
 Route::get('/contact', function () {
