@@ -16,7 +16,7 @@
             <div class="text-white text-3xl font-bold">{{ $formSubmissionsCount }}</div>
         </div>
         <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-            <div class="text-white/80 text-sm mb-1">Published Pages</div>
+            <div class="text-white/80 text-sm mb-1">CMS Pages</div>
             <div class="text-white text-3xl font-bold">{{ $pagesCount }}</div>
         </div>
     </div>

@@ -7,10 +7,13 @@ use App\Models\Client;
 use App\Models\LeadForm;
 use App\Models\LoginAttempt;
 use App\Models\User;
+use App\Services\DashboardWidgetService;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
 {
+    public function __construct(protected DashboardWidgetService $dashboardWidgetService) {}
+
     public function dashboard()
     {
         // Show the latest 5 clients for a dashboard summary
@@ -29,7 +32,39 @@ class AdminDashboardController extends Controller
         $stripeService = app(\App\Services\StripeService::class);
         $stripeBalance = $stripeService->testConnection();
 
-        return view('admin.dashboard', compact('clients', 'leads', 'invoices', 'invoiceCount', 'bookings', 'bookingCount', 'stripeBalance'));
+        $widgets = $this->dashboardWidgetService->getWidgets();
+        $bookingData = $this->dashboardWidgetService->getBookingManagerData();
+        $emailData = $this->dashboardWidgetService->getEmailAnalytics();
+        $cmsData = $this->dashboardWidgetService->getCmsManagementData();
+        $quickLinks = $this->dashboardWidgetService->getQuickLinks();
+
+        $connectedCalendarUser = null;
+
+        if ($bookingData['googleConnected']) {
+            if (auth()->user()->googleCredential?->refresh_token) {
+                $connectedCalendarUser = auth()->user();
+            } else {
+                $connectedCalendarUser = User::whereHas('googleCredential', function ($query) {
+                    $query->whereNotNull('refresh_token');
+                })->with('googleCredential')->first();
+            }
+        }
+
+        return view('admin.dashboard', compact(
+            'clients',
+            'leads',
+            'invoices',
+            'invoiceCount',
+            'bookings',
+            'bookingCount',
+            'stripeBalance',
+            'widgets',
+            'bookingData',
+            'emailData',
+            'cmsData',
+            'quickLinks',
+            'connectedCalendarUser',
+        ));
     }
 
     public function googleOAuth()

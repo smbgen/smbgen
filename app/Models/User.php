@@ -20,6 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     const ROLE_ADMINISTRATOR = 'company_administrator';
 
+    const ROLE_ADMINISTRATOR_LEGACY = 'administrator';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -130,7 +132,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAdministrator(): bool
     {
-        return $this->role === 'company_administrator';
+        return in_array($this->role, [self::ROLE_ADMINISTRATOR, self::ROLE_ADMINISTRATOR_LEGACY], true);
     }
 
     /**
