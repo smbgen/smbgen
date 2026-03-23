@@ -22,7 +22,7 @@ it('renders the solutions page with simple smbgen core explanation pages', funct
     $response = $this->get(route('solutions'));
 
     $response->assertOk();
-    $response->assertSee('smbgen-core product offering');
+    $response->assertSee('Portal access. CRM. CMS.');
     $response->assertSee('A superior contact form.');
     $response->assertSee('A CRM your team will actually use.');
 });

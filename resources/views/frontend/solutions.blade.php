@@ -28,18 +28,16 @@
     <div class="max-w-5xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-gray-400 text-xs font-bold uppercase tracking-widest mb-10">
             <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse inline-block"></span>
-            smbgen-core product offering
+            smbgen-core
         </div>
 
         <h1 class="text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-7">
-            Clear product pages.<br>
-            <span class="text-blue-400">No internal names.</span>
-            Just the capabilities customers need.
+            Contact. Booking. Payments.<br>
+            <span class="text-blue-400">Portal access. CRM. CMS.</span>
         </h1>
 
         <p class="text-gray-400 text-xl max-w-3xl mx-auto mb-12 font-light leading-relaxed">
-            smbgen-core is explained through the six things people immediately understand:
-            Contact, Book, Pay, Client Portal, CRM, and CMS. Each page explains the job, the outcome, and the next step.
+            Six connected parts of the same system.
         </p>
 
         <div class="flex flex-wrap justify-center gap-3 mb-4">

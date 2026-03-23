@@ -5,316 +5,6 @@
 
 @section('content')
 
-{{-- ── HERO ──────────────────────────────────────────────────────────── --}}
-<section class="bg-slate-950 py-20 md:py-28 px-6 relative overflow-hidden">
-
-    {{-- Ambient glow --}}
-    <div class="absolute top-0 left-1/4 w-[600px] h-[400px] bg-blue-600/8 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute inset-0 opacity-[0.025]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 48px 48px;"></div>
-
-    <div class="max-w-6xl mx-auto relative">
-        <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-            {{-- ── Left: copy ──────────────────────────────────────────── --}}
-            <div>
-                <div class="inline-flex items-center gap-2 bg-blue-600/15 text-blue-400 text-xs font-bold px-3.5 py-1.5 rounded-full mb-10 border border-blue-500/25 tracking-widest uppercase">
-                    <span class="w-1.5 h-1.5 bg-blue-400 rounded-full inline-block animate-pulse"></span>
-                    smbgen-core &bull; customer-facing operating layer
-                </div>
-
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight mb-7">
-                    The product layer<br>
-                    <span class="text-blue-400">your customers use</span><br>
-                    every day.
-                </h1>
-
-                <p class="text-lg text-slate-400 max-w-lg mb-11 font-light leading-relaxed">
-                    smbgen-core turns your website into a working business system: better contact capture,
-                    booking, payments, a real client portal, CRM visibility, and a CMS your team can use.
-                </p>
-
-                <div class="flex flex-wrap items-center gap-4 mb-14">
-                    <a href="{{ route('solutions') }}#contact-core" class="bg-blue-600 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-blue-500 transition-all text-base shadow-lg shadow-blue-900/30">
-                        Explore smbgen-core &rarr;
-                    </a>
-                    <a href="#start-here" class="text-slate-400 font-semibold hover:text-white transition-colors text-base flex items-center gap-2">
-                        See the six core pages <span>&darr;</span>
-                    </a>
-                </div>
-
-                {{-- Social proof --}}
-                <div class="pt-8 border-t border-slate-800 grid grid-cols-2 gap-5">
-                    @foreach([
-                        ['Contact to Close',     'Capture, book, bill, and serve from one system'],
-                        ['Client-Ready UX',      'Simple paths customers understand immediately'],
-                        ['Connected Operations', 'Portal, CRM, CMS, and payments stay in sync'],
-                        ['Built to Grow',        'A clear core product with services layered around it'],
-                    ] as [$title, $sub])
-                        <div>
-                            <div class="text-white text-sm font-bold">{{ $title }}</div>
-                            <div class="text-slate-600 text-xs mt-0.5">{{ $sub }}</div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- ── Right: platform fabric SVG ──────────────────────────── --}}
-            <div class="hidden md:flex items-center justify-center">
-                <div class="relative w-full max-w-[480px] aspect-square" x-data="platformFabric()" x-init="init()">
-
-                    {{-- SVG fabric --}}
-                    <svg viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                        <defs>
-                            {{-- Edge gradients --}}
-                            <linearGradient id="eg-rb" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.6"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.6"/></linearGradient>
-                            <linearGradient id="eg-vb" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.6"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.6"/></linearGradient>
-                            <linearGradient id="eg-cb" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4" stop-opacity="0.6"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.6"/></linearGradient>
-                            <linearGradient id="eg-ob" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f97316" stop-opacity="0.6"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.6"/></linearGradient>
-                            <linearGradient id="eg-em" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#10b981" stop-opacity="0.6"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.6"/></linearGradient>
-                            <linearGradient id="eg-ib" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.6"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.6"/></linearGradient>
-                            {{-- Node glows --}}
-                            <filter id="glow-blue"   x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                            <filter id="glow-center" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                        </defs>
-
-                        {{-- ── Edges (spokes from center to each product, plus ring) --}}
-                        {{-- Centre → EXTREME (top-left) --}}
-                        <line x1="240" y1="240" x2="108" y2="108" stroke="url(#eg-rb)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-                        {{-- Centre → SIGNAL (top-right) --}}
-                        <line x1="240" y1="240" x2="372" y2="108" stroke="url(#eg-vb)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-                        {{-- Centre → RELAY (right) --}}
-                        <line x1="240" y1="240" x2="420" y2="240" stroke="url(#eg-cb)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-                        {{-- Centre → SURGE (bottom-right) --}}
-                        <line x1="240" y1="240" x2="372" y2="372" stroke="url(#eg-ob)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-                        {{-- Centre → CAST (bottom-left) --}}
-                        <line x1="240" y1="240" x2="108" y2="372" stroke="url(#eg-em)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-                        {{-- Centre → VAULT (left) --}}
-                        <line x1="240" y1="240" x2="60" y2="240" stroke="url(#eg-ib)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-
-                        {{-- Ring edges between adjacent products --}}
-                        <line x1="108" y1="108" x2="372" y2="108" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 6"/>
-                        <line x1="372" y1="108" x2="420" y2="240" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 6"/>
-                        <line x1="420" y1="240" x2="372" y2="372" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 6"/>
-                        <line x1="372" y1="372" x2="108" y2="372" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 6"/>
-                        <line x1="108" y1="372" x2="60"  y2="240" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 6"/>
-                        <line x1="60"  y1="240" x2="108" y2="108" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 6"/>
-
-                        {{-- Cross-links for density --}}
-                        <line x1="108" y1="108" x2="420" y2="240" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3 8"/>
-                        <line x1="372" y1="108" x2="60"  y2="240" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3 8"/>
-                        <line x1="108" y1="108" x2="372" y2="372" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3 8"/>
-                        <line x1="372" y1="108" x2="108" y2="372" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3 8"/>
-
-                        {{-- ── Animated data pulses (SVG circles on paths) --}}
-                        {{-- EXTREME pulse --}}
-                        <circle r="3" fill="#ef4444" opacity="0.9">
-                            <animateMotion dur="2.8s" repeatCount="indefinite" begin="0s">
-                                <mpath href="#path-extreme"/>
-                            </animateMotion>
-                            <animate attributeName="opacity" values="0;0.9;0" dur="2.8s" repeatCount="indefinite" begin="0s"/>
-                        </circle>
-                        {{-- SIGNAL pulse --}}
-                        <circle r="3" fill="#8b5cf6" opacity="0.9">
-                            <animateMotion dur="3.2s" repeatCount="indefinite" begin="0.6s">
-                                <mpath href="#path-signal"/>
-                            </animateMotion>
-                            <animate attributeName="opacity" values="0;0.9;0" dur="3.2s" repeatCount="indefinite" begin="0.6s"/>
-                        </circle>
-                        {{-- RELAY pulse --}}
-                        <circle r="3" fill="#06b6d4" opacity="0.9">
-                            <animateMotion dur="2.5s" repeatCount="indefinite" begin="1.1s">
-                                <mpath href="#path-relay"/>
-                            </animateMotion>
-                            <animate attributeName="opacity" values="0;0.9;0" dur="2.5s" repeatCount="indefinite" begin="1.1s"/>
-                        </circle>
-                        {{-- SURGE pulse --}}
-                        <circle r="3" fill="#f97316" opacity="0.9">
-                            <animateMotion dur="3.0s" repeatCount="indefinite" begin="0.3s">
-                                <mpath href="#path-surge"/>
-                            </animateMotion>
-                            <animate attributeName="opacity" values="0;0.9;0" dur="3.0s" repeatCount="indefinite" begin="0.3s"/>
-                        </circle>
-                        {{-- CAST pulse --}}
-                        <circle r="3" fill="#10b981" opacity="0.9">
-                            <animateMotion dur="2.7s" repeatCount="indefinite" begin="1.8s">
-                                <mpath href="#path-cast"/>
-                            </animateMotion>
-                            <animate attributeName="opacity" values="0;0.9;0" dur="2.7s" repeatCount="indefinite" begin="1.8s"/>
-                        </circle>
-                        {{-- VAULT pulse --}}
-                        <circle r="3" fill="#6366f1" opacity="0.9">
-                            <animateMotion dur="3.4s" repeatCount="indefinite" begin="0.9s">
-                                <mpath href="#path-vault"/>
-                            </animateMotion>
-                            <animate attributeName="opacity" values="0;0.9;0" dur="3.4s" repeatCount="indefinite" begin="0.9s"/>
-                        </circle>
-
-                        {{-- Hidden paths for animateMotion --}}
-                        <path id="path-extreme" d="M240,240 L108,108" visibility="hidden"/>
-                        <path id="path-signal"  d="M240,240 L372,108" visibility="hidden"/>
-                        <path id="path-relay"   d="M240,240 L420,240" visibility="hidden"/>
-                        <path id="path-surge"   d="M240,240 L372,372" visibility="hidden"/>
-                        <path id="path-cast"    d="M240,240 L108,372" visibility="hidden"/>
-                        <path id="path-vault"   d="M240,240 L60,240"  visibility="hidden"/>
-
-                        {{-- ── Centre node (smbgen) --}}
-                        <circle cx="240" cy="240" r="28" fill="rgba(59,130,246,0.12)" stroke="rgba(59,130,246,0.35)" stroke-width="1.5" filter="url(#glow-center)"/>
-                        <circle cx="240" cy="240" r="18" fill="rgba(59,130,246,0.2)" stroke="rgba(59,130,246,0.5)" stroke-width="1">
-                            <animate attributeName="r" values="18;21;18" dur="3s" repeatCount="indefinite"/>
-                            <animate attributeName="stroke-opacity" values="0.5;0.9;0.5" dur="3s" repeatCount="indefinite"/>
-                        </circle>
-                        <text x="240" y="237" text-anchor="middle" fill="white" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="1" opacity="0.9">smb</text>
-                        <text x="240" y="247" text-anchor="middle" fill="#60a5fa" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="1" opacity="0.9">gen</text>
-
-                        {{-- ── Product nodes --}}
-
-                        {{-- EXTREME — top-left (108,108) --}}
-                        <circle cx="108" cy="108" r="36" fill="rgba(239,68,68,0.07)" stroke="rgba(239,68,68,0.0)" stroke-width="0"/>
-                        <circle cx="108" cy="108" r="24" fill="rgba(15,10,10,0.8)" stroke="rgba(239,68,68,0.45)" stroke-width="1.5">
-                            <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="0s"/>
-                        </circle>
-                        <text x="108" y="108" text-anchor="middle" fill="#f87171" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">CONTACT</text>
-                        <text x="108" y="140" text-anchor="middle" fill="rgba(239,68,68,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Lead&nbsp;intake</text>
-
-                        {{-- SIGNAL — top-right (372,108) --}}
-                        <circle cx="372" cy="108" r="36" fill="rgba(139,92,246,0.07)" stroke="rgba(139,92,246,0.0)" stroke-width="0"/>
-                        <circle cx="372" cy="108" r="24" fill="rgba(10,8,18,0.8)" stroke="rgba(139,92,246,0.45)" stroke-width="1.5">
-                            <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="0.7s"/>
-                        </circle>
-                        <text x="372" y="108" text-anchor="middle" fill="#c4b5fd" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">BOOK</text>
-                        <text x="372" y="140" text-anchor="middle" fill="rgba(139,92,246,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Scheduling</text>
-
-                        {{-- RELAY — right (420,240) --}}
-                        <circle cx="420" cy="240" r="36" fill="rgba(6,182,212,0.07)" stroke="rgba(6,182,212,0.0)" stroke-width="0"/>
-                        <circle cx="420" cy="240" r="24" fill="rgba(2,14,18,0.8)" stroke="rgba(6,182,212,0.45)" stroke-width="1.5">
-                            <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="1.4s"/>
-                        </circle>
-                        <text x="420" y="240" text-anchor="middle" fill="#67e8f9" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">PAY</text>
-                        <text x="420" y="272" text-anchor="middle" fill="rgba(6,182,212,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Invoices</text>
-
-                        {{-- SURGE — bottom-right (372,372) --}}
-                        <circle cx="372" cy="372" r="36" fill="rgba(249,115,22,0.07)" stroke="rgba(249,115,22,0.0)" stroke-width="0"/>
-                        <circle cx="372" cy="372" r="24" fill="rgba(14,6,0,0.8)" stroke="rgba(249,115,22,0.45)" stroke-width="1.5">
-                            <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="2.1s"/>
-                        </circle>
-                        <text x="372" y="369" text-anchor="middle" fill="#fdba74" font-size="6" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">PORTAL</text>
-                        <text x="372" y="404" text-anchor="middle" fill="rgba(249,115,22,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Client&nbsp;access</text>
-
-                        {{-- CAST — bottom-left (108,372) --}}
-                        <circle cx="108" cy="372" r="36" fill="rgba(16,185,129,0.07)" stroke="rgba(16,185,129,0.0)" stroke-width="0"/>
-                        <circle cx="108" cy="372" r="24" fill="rgba(2,14,8,0.8)" stroke="rgba(16,185,129,0.45)" stroke-width="1.5">
-                            <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="2.8s"/>
-                        </circle>
-                        <text x="108" y="372" text-anchor="middle" fill="#6ee7b7" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">CMS</text>
-                        <text x="108" y="404" text-anchor="middle" fill="rgba(16,185,129,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Content&nbsp;ops</text>
-
-                        {{-- VAULT — left (60,240) --}}
-                        <circle cx="60" cy="240" r="36" fill="rgba(99,102,241,0.07)" stroke="rgba(99,102,241,0.0)" stroke-width="0"/>
-                        <circle cx="60" cy="240" r="24" fill="rgba(5,6,15,0.8)" stroke="rgba(99,102,241,0.45)" stroke-width="1.5">
-                            <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="3.5s"/>
-                        </circle>
-                        <text x="60" y="240" text-anchor="middle" fill="#a5b4fc" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">CRM</text>
-                        <text x="60" y="272" text-anchor="middle" fill="rgba(99,102,241,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Pipeline</text>
-                    </svg>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-{{-- ── START HERE ───────────────────────────────────────────────────── --}}
-<section id="start-here" class="bg-white py-20 px-6">
-    <div class="max-w-6xl mx-auto">
-        <div class="max-w-3xl mb-12">
-            <span class="text-blue-600 text-xs font-black uppercase tracking-[0.2em] mb-4 block">smbgen-core</span>
-            <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-5">
-                Six explanation pages people instantly understand.
-            </h2>
-            <p class="text-gray-600 text-lg leading-relaxed">
-                No jargon. No internal product names. Start with the exact job people need done, in the exact order they naturally think about it.
-            </p>
-        </div>
-
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            @php
-                $startHereItems = [
-                    [
-                        'step' => '01',
-                        'title' => 'Contact',
-                        'body' => 'A superior contact experience with structured intake, clearer qualification, and smarter routing than a generic form page.',
-                        'href' => route('solutions') . '#contact-core',
-                        'cta' => 'See contact page',
-                        'pillClass' => 'bg-blue-100 text-blue-700',
-                        'ctaClass' => 'group-hover:text-blue-700',
-                    ],
-                    [
-                        'step' => '02',
-                        'title' => 'Book',
-                        'body' => 'Scheduling that removes friction with availability, confirmations, reminders, and a smoother path from interest to appointment.',
-                        'href' => route('solutions') . '#book-core',
-                        'cta' => 'See booking page',
-                        'pillClass' => 'bg-violet-100 text-violet-700',
-                        'ctaClass' => 'group-hover:text-violet-700',
-                    ],
-                    [
-                        'step' => '03',
-                        'title' => 'Pay',
-                        'body' => 'A simpler payment experience that feels trustworthy and fast, with a cleaner handoff from approval to invoice to paid.',
-                        'href' => route('solutions') . '#pay-core',
-                        'cta' => 'See payments page',
-                        'pillClass' => 'bg-emerald-100 text-emerald-700',
-                        'ctaClass' => 'group-hover:text-emerald-700',
-                    ],
-                    [
-                        'step' => '04',
-                        'title' => 'Client Portal',
-                        'body' => 'One clear place for clients to log in, view files, track progress, manage billing, and stay aligned without extra back-and-forth.',
-                        'href' => route('solutions') . '#portal-core',
-                        'cta' => 'See portal page',
-                        'pillClass' => 'bg-orange-100 text-orange-700',
-                        'ctaClass' => 'group-hover:text-orange-700',
-                    ],
-                    [
-                        'step' => '05',
-                        'title' => 'CRM',
-                        'body' => 'Track leads, conversations, deals, follow-ups, and customer history in one place so nothing falls through the cracks.',
-                        'href' => route('solutions') . '#crm-core',
-                        'cta' => 'See CRM',
-                        'pillClass' => 'bg-indigo-100 text-indigo-700',
-                        'ctaClass' => 'group-hover:text-indigo-700',
-                    ],
-                    [
-                        'step' => '06',
-                        'title' => 'CMS',
-                        'body' => 'Update pages, publish offers, and manage content without turning every site change into a development ticket.',
-                        'href' => route('solutions') . '#cms-core',
-                        'cta' => 'See CMS',
-                        'pillClass' => 'bg-cyan-100 text-cyan-700',
-                        'ctaClass' => 'group-hover:text-cyan-700',
-                    ],
-                ];
-            @endphp
-
-            @foreach($startHereItems as $item)
-                <a href="{{ $item['href'] }}" class="group rounded-3xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:border-gray-300">
-                    <div class="mb-5 flex items-center justify-between">
-                        <span class="text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">{{ $item['step'] }}</span>
-                        <span class="rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] {{ $item['pillClass'] }}">{{ $item['title'] }}</span>
-                    </div>
-                    <h3 class="mb-3 text-2xl font-black tracking-tight text-gray-900">{{ $item['title'] }}</h3>
-                    <p class="mb-6 text-sm leading-relaxed text-gray-600">{{ $item['body'] }}</p>
-                    <div class="inline-flex items-center gap-2 text-sm font-bold text-gray-900 transition-colors {{ $item['ctaClass'] }}">
-                        {{ $item['cta'] }}
-                        <span>&rarr;</span>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-    </div>
-</section>
-
 {{-- ── PLATFORM OVERVIEW ─────────────────────────────────────────────── --}}
 <section id="platform" class="bg-indigo-700 py-24 px-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
@@ -371,6 +61,159 @@
             </div>
         </div>
 
+    </div>
+</section>
+
+<section id="start-here" class="bg-white px-6 py-12 md:py-16">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            @php
+                $startHereItems = [
+                    [
+                        'step' => '01',
+                        'title' => 'Contact',
+                        'body' => 'A superior contact experience with structured intake, clearer qualification, and smarter routing than a generic form page.',
+                        'href' => route('solutions') . '#contact-core',
+                        'cta' => 'See contact page',
+                        'pillClass' => 'bg-blue-100 text-blue-700',
+                        'ctaClass' => 'group-hover:text-blue-700',
+                        'demo' => 'contact',
+                    ],
+                    [
+                        'step' => '02',
+                        'title' => 'Book',
+                        'body' => 'Scheduling that removes friction with availability, confirmations, reminders, and a smoother path from interest to appointment.',
+                        'href' => route('solutions') . '#book-core',
+                        'cta' => 'See booking page',
+                        'pillClass' => 'bg-violet-100 text-violet-700',
+                        'ctaClass' => 'group-hover:text-violet-700',
+                        'demo' => 'book',
+                    ],
+                    [
+                        'step' => '03',
+                        'title' => 'Pay',
+                        'body' => 'A simpler payment experience that feels trustworthy and fast, with a cleaner handoff from approval to invoice to paid.',
+                        'href' => route('solutions') . '#pay-core',
+                        'cta' => 'See payments page',
+                        'pillClass' => 'bg-emerald-100 text-emerald-700',
+                        'ctaClass' => 'group-hover:text-emerald-700',
+                        'demo' => 'pay',
+                    ],
+                    [
+                        'step' => '04',
+                        'title' => 'Client Portal',
+                        'body' => 'One clear place for clients to log in, view files, track progress, manage billing, and stay aligned without extra back-and-forth.',
+                        'href' => route('solutions') . '#portal-core',
+                        'cta' => 'See portal page',
+                        'pillClass' => 'bg-orange-100 text-orange-700',
+                        'ctaClass' => 'group-hover:text-orange-700',
+                        'demo' => 'portal',
+                    ],
+                    [
+                        'step' => '05',
+                        'title' => 'CRM',
+                        'body' => 'Track leads, conversations, deals, follow-ups, and customer history in one place so nothing falls through the cracks.',
+                        'href' => route('solutions') . '#crm-core',
+                        'cta' => 'See CRM',
+                        'pillClass' => 'bg-indigo-100 text-indigo-700',
+                        'ctaClass' => 'group-hover:text-indigo-700',
+                        'demo' => 'crm',
+                    ],
+                    [
+                        'step' => '06',
+                        'title' => 'CMS',
+                        'body' => 'Update pages, publish offers, and manage content without turning every site change into a development ticket.',
+                        'href' => route('solutions') . '#cms-core',
+                        'cta' => 'See CMS',
+                        'pillClass' => 'bg-cyan-100 text-cyan-700',
+                        'ctaClass' => 'group-hover:text-cyan-700',
+                        'demo' => 'cms',
+                    ],
+                ];
+            @endphp
+
+            @foreach($startHereItems as $item)
+                <a href="{{ $item['href'] }}" class="group rounded-3xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:border-gray-300">
+                    <div class="mb-5 flex items-center justify-between">
+                        <span class="text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">{{ $item['step'] }}</span>
+                        <span class="rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] {{ $item['pillClass'] }}">{{ $item['title'] }}</span>
+                    </div>
+                    <h3 class="mb-3 text-2xl font-black tracking-tight text-gray-900">{{ $item['title'] }}</h3>
+                    <p class="mb-6 text-sm leading-relaxed text-gray-600">{{ $item['body'] }}</p>
+
+                    <div class="mb-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
+                        @if($item['demo'] === 'contact')
+                            <div class="space-y-2">
+                                <div class="h-8 rounded-lg bg-white border border-gray-200"></div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="h-8 rounded-lg bg-white border border-gray-200"></div>
+                                    <div class="h-8 rounded-lg bg-white border border-gray-200"></div>
+                                </div>
+                                <div class="flex items-center justify-between rounded-lg bg-blue-50 border border-blue-100 px-3 py-2 text-[11px] text-blue-700">
+                                    <span>Qualified routing</span>
+                                    <span class="inline-block h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
+                                </div>
+                            </div>
+                        @elseif($item['demo'] === 'book')
+                            <div class="space-y-2">
+                                <div class="grid grid-cols-3 gap-2 text-[10px] font-bold text-violet-700">
+                                    <div class="rounded-lg bg-violet-100 py-1.5 text-center">Mon</div>
+                                    <div class="rounded-lg bg-violet-100 py-1.5 text-center">Tue</div>
+                                    <div class="rounded-lg bg-violet-100 py-1.5 text-center">Wed</div>
+                                </div>
+                                <div class="flex items-center justify-between rounded-lg bg-white border border-gray-200 px-3 py-2 text-[11px]">
+                                    <span>11:30 AM</span>
+                                    <span class="text-violet-700 font-semibold">Available</span>
+                                </div>
+                            </div>
+                        @elseif($item['demo'] === 'pay')
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-xs font-semibold text-gray-700">
+                                    <span>Invoice #1048</span>
+                                    <span>$1,250.00</span>
+                                </div>
+                                <div class="h-8 rounded-lg bg-white border border-gray-200"></div>
+                                <div class="rounded-lg bg-emerald-600 text-white text-xs font-bold py-2 text-center animate-pulse">Pay now</div>
+                            </div>
+                        @elseif($item['demo'] === 'portal')
+                            <div class="space-y-2 text-[11px]">
+                                @foreach(['Files', 'Messages', 'Billing'] as $portalItem)
+                                    <div class="flex items-center justify-between rounded-lg bg-white border border-gray-200 px-3 py-2">
+                                        <span>{{ $portalItem }}</span>
+                                        <span class="text-orange-700 font-semibold">Open</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @elseif($item['demo'] === 'crm')
+                            <div class="space-y-2 text-[11px]">
+                                <div class="flex items-center justify-between rounded-lg bg-indigo-50 border border-indigo-100 px-3 py-2">
+                                    <span>New lead</span>
+                                    <span class="font-semibold text-indigo-700">High intent</span>
+                                </div>
+                                <div class="h-2 rounded-full bg-indigo-100 overflow-hidden">
+                                    <div class="h-2 w-2/3 bg-indigo-500 animate-pulse"></div>
+                                </div>
+                            </div>
+                        @else
+                            <div class="space-y-2">
+                                <div class="h-8 rounded-lg bg-white border border-gray-200"></div>
+                                <div class="h-16 rounded-lg bg-white border border-gray-200"></div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="h-10 rounded-lg bg-cyan-100"></div>
+                                    <div class="h-10 rounded-lg bg-cyan-100"></div>
+                                    <div class="h-10 rounded-lg bg-cyan-100"></div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="inline-flex items-center gap-2 text-sm font-bold text-gray-900 transition-colors {{ $item['ctaClass'] }}">
+                        {{ $item['cta'] }}
+                        <span>&rarr;</span>
+                    </div>
+                </a>
+            @endforeach
+        </div>
     </div>
 </section>
 
