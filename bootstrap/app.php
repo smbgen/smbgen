@@ -88,8 +88,11 @@ return Application::configure(basePath: dirname(__DIR__))
         });
 
         $exceptions->render(function (\Throwable $e, Request $request) {
-            // Don't handle ValidationException here - let Laravel handle it normally
+            // Let Laravel handle these natively with correct status codes
             if ($e instanceof \Illuminate\Validation\ValidationException) {
+                return null;
+            }
+            if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
                 return null;
             }
 

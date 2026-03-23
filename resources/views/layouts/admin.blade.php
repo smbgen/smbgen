@@ -142,6 +142,15 @@
                     </x-navigation.collapsible-section>
                 @endif
 
+                {{-- Social Media Section --}}
+                @if(config('business.features.social_media'))
+                    <x-navigation.collapsible-section id="nav_social" label="Social Media">
+                        <x-navigation.sidebar-link :href="route('admin.linkedin.index')" :active="request()->routeIs('admin.linkedin.index')" icon="fab fa-linkedin" label="LinkedIn" />
+                        <x-navigation.sidebar-link :href="route('admin.linkedin.posts.index')" :active="request()->routeIs('admin.linkedin.posts.*')" icon="fas fa-newspaper" label="Posts" />
+                        <x-navigation.sidebar-link :href="route('admin.linkedin.posts.create')" :active="request()->routeIs('admin.linkedin.posts.create')" icon="fas fa-pen" label="New Post" />
+                    </x-navigation.collapsible-section>
+                @endif
+
                 <!-- Settings Section (Collapsible) -->
                 @if(auth()->user()->isAdministrator())
                     <x-navigation.collapsible-section id="nav_settings" label="Settings">

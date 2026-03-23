@@ -69,6 +69,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(\App\Models\SocialAccount::class);
     }
 
+    public function socialPosts()
+    {
+        return $this->hasMany(\App\Models\SocialPost::class);
+    }
+
     /**
      * Get the client record associated with this user (for client users)
      */

@@ -570,6 +570,23 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
     Route::post('/calendar/update', [\App\Http\Controllers\Admin\CalendarController::class, 'updateCalendar'])->name('admin.calendar.update');
     Route::post('/calendar/disconnect', [\App\Http\Controllers\Admin\CalendarController::class, 'disconnect'])->name('admin.calendar.disconnect');
 
+    // LinkedIn Social Media Module
+    Route::prefix('linkedin')->name('admin.linkedin.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\LinkedInController::class, 'index'])->name('index');
+        Route::get('/auth/redirect', [\App\Http\Controllers\Admin\LinkedInController::class, 'redirectToLinkedIn'])->name('auth.redirect');
+        Route::get('/auth/callback', [\App\Http\Controllers\Admin\LinkedInController::class, 'handleCallback'])->name('auth.callback');
+        Route::delete('/{account}/disconnect', [\App\Http\Controllers\Admin\LinkedInController::class, 'disconnect'])->name('disconnect');
+
+        // Posts
+        Route::get('/posts', [\App\Http\Controllers\Admin\LinkedInController::class, 'postsIndex'])->name('posts.index');
+        Route::get('/posts/create', [\App\Http\Controllers\Admin\LinkedInController::class, 'postsCreate'])->name('posts.create');
+        Route::post('/posts', [\App\Http\Controllers\Admin\LinkedInController::class, 'postsStore'])->name('posts.store');
+        Route::get('/posts/{post}/edit', [\App\Http\Controllers\Admin\LinkedInController::class, 'postsEdit'])->name('posts.edit');
+        Route::put('/posts/{post}', [\App\Http\Controllers\Admin\LinkedInController::class, 'postsUpdate'])->name('posts.update');
+        Route::delete('/posts/{post}', [\App\Http\Controllers\Admin\LinkedInController::class, 'postsDestroy'])->name('posts.destroy');
+        Route::get('/posts/{post}/publish', [\App\Http\Controllers\Admin\LinkedInController::class, 'postsPublish'])->name('posts.publish');
+    });
+
     // Elevate a user to company administrator
     Route::post('/users/{user}/elevate', [\App\Http\Controllers\Admin\UserController::class, 'elevate'])
         ->name('admin.users.elevate');

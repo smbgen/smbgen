@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Schedule;
 
 // Clean up expired password reset tokens daily at 2 AM
 Schedule::command('auth:clear-resets')->dailyAt('02:00');
+
+// Publish scheduled LinkedIn posts every minute
+Schedule::command('linkedin:publish-scheduled')->everyMinute();
