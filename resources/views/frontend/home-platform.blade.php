@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'smbgen — The Distributed AI Platform for Growing Businesses')
-@section('description', 'smbgen is a next-generation, AI-native platform for small and mid-market businesses. Rapid app development, cloud delivery, social automation, email marketing, lead management, and document management — unified and intelligent.')
+@section('title', 'smbgen-core — Contact, Book, Pay, Client Portal, CRM, CMS')
+@section('description', 'smbgen-core is the simple operating layer for growing businesses: contact capture, booking, payments, client portal access, CRM, and CMS in one connected product.')
 
 @section('content')
 
@@ -19,36 +19,36 @@
             <div>
                 <div class="inline-flex items-center gap-2 bg-blue-600/15 text-blue-400 text-xs font-bold px-3.5 py-1.5 rounded-full mb-10 border border-blue-500/25 tracking-widest uppercase">
                     <span class="w-1.5 h-1.5 bg-blue-400 rounded-full inline-block animate-pulse"></span>
-                    Distributed &bull; AI-Native &bull; Next-Generation
+                    smbgen-core &bull; customer-facing operating layer
                 </div>
 
                 <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight mb-7">
-                    The platform<br>
-                    <span class="text-blue-400">your business</span><br>
-                    runs on.
+                    The product layer<br>
+                    <span class="text-blue-400">your customers use</span><br>
+                    every day.
                 </h1>
 
                 <p class="text-lg text-slate-400 max-w-lg mb-11 font-light leading-relaxed">
-                    A next-generation, AI-derived platform for small and mid-market businesses
-                    that refuse to stay small. Every tool you need — one fabric, fully integrated.
+                    smbgen-core turns your website into a working business system: better contact capture,
+                    booking, payments, a real client portal, CRM visibility, and a CMS your team can use.
                 </p>
 
                 <div class="flex flex-wrap items-center gap-4 mb-14">
-                    <a href="{{ route('register') }}" class="bg-blue-600 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-blue-500 transition-all text-base shadow-lg shadow-blue-900/30">
-                        Start for free &rarr;
+                    <a href="{{ route('solutions') }}#contact-core" class="bg-blue-600 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-blue-500 transition-all text-base shadow-lg shadow-blue-900/30">
+                        Explore smbgen-core &rarr;
                     </a>
-                    <a href="#platform" class="text-slate-400 font-semibold hover:text-white transition-colors text-base flex items-center gap-2">
-                        Explore the platform <span>&darr;</span>
+                    <a href="#start-here" class="text-slate-400 font-semibold hover:text-white transition-colors text-base flex items-center gap-2">
+                        See the six core pages <span>&darr;</span>
                     </a>
                 </div>
 
                 {{-- Social proof --}}
                 <div class="pt-8 border-t border-slate-800 grid grid-cols-2 gap-5">
                     @foreach([
-                        ['Built on Laravel',     'Enterprise-grade PHP foundation'],
-                        ['Cloud-Native',          'Deploy anywhere, scale instantly'],
-                        ['AI-First Architecture', 'Intelligence in every workflow'],
-                        ['API-Driven',            'Integrate anything, anywhere'],
+                        ['Contact to Close',     'Capture, book, bill, and serve from one system'],
+                        ['Client-Ready UX',      'Simple paths customers understand immediately'],
+                        ['Connected Operations', 'Portal, CRM, CMS, and payments stay in sync'],
+                        ['Built to Grow',        'A clear core product with services layered around it'],
                     ] as [$title, $sub])
                         <div>
                             <div class="text-white text-sm font-bold">{{ $title }}</div>
@@ -173,49 +173,48 @@
                         <circle cx="108" cy="108" r="24" fill="rgba(15,10,10,0.8)" stroke="rgba(239,68,68,0.45)" stroke-width="1.5">
                             <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="0s"/>
                         </circle>
-                        <text x="108" y="105" text-anchor="middle" fill="#f87171" font-size="6.5" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">EX</text>
-                        <text x="108" y="115" text-anchor="middle" fill="#f87171" font-size="6.5" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">TREME</text>
-                        <text x="108" y="140" text-anchor="middle" fill="rgba(239,68,68,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">App&nbsp;Generator</text>
+                        <text x="108" y="108" text-anchor="middle" fill="#f87171" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">CONTACT</text>
+                        <text x="108" y="140" text-anchor="middle" fill="rgba(239,68,68,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Lead&nbsp;intake</text>
 
                         {{-- SIGNAL — top-right (372,108) --}}
                         <circle cx="372" cy="108" r="36" fill="rgba(139,92,246,0.07)" stroke="rgba(139,92,246,0.0)" stroke-width="0"/>
                         <circle cx="372" cy="108" r="24" fill="rgba(10,8,18,0.8)" stroke="rgba(139,92,246,0.45)" stroke-width="1.5">
                             <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="0.7s"/>
                         </circle>
-                        <text x="372" y="106" text-anchor="middle" fill="#c4b5fd" font-size="6.5" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">SIGNAL</text>
-                        <text x="372" y="140" text-anchor="middle" fill="rgba(139,92,246,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Social&nbsp;Auto</text>
+                        <text x="372" y="108" text-anchor="middle" fill="#c4b5fd" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">BOOK</text>
+                        <text x="372" y="140" text-anchor="middle" fill="rgba(139,92,246,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Scheduling</text>
 
                         {{-- RELAY — right (420,240) --}}
                         <circle cx="420" cy="240" r="36" fill="rgba(6,182,212,0.07)" stroke="rgba(6,182,212,0.0)" stroke-width="0"/>
                         <circle cx="420" cy="240" r="24" fill="rgba(2,14,18,0.8)" stroke="rgba(6,182,212,0.45)" stroke-width="1.5">
                             <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="1.4s"/>
                         </circle>
-                        <text x="420" y="238" text-anchor="middle" fill="#67e8f9" font-size="6.5" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">RELAY</text>
-                        <text x="420" y="272" text-anchor="middle" fill="rgba(6,182,212,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Email&nbsp;Mktg</text>
+                        <text x="420" y="240" text-anchor="middle" fill="#67e8f9" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">PAY</text>
+                        <text x="420" y="272" text-anchor="middle" fill="rgba(6,182,212,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Invoices</text>
 
                         {{-- SURGE — bottom-right (372,372) --}}
                         <circle cx="372" cy="372" r="36" fill="rgba(249,115,22,0.07)" stroke="rgba(249,115,22,0.0)" stroke-width="0"/>
                         <circle cx="372" cy="372" r="24" fill="rgba(14,6,0,0.8)" stroke="rgba(249,115,22,0.45)" stroke-width="1.5">
                             <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="2.1s"/>
                         </circle>
-                        <text x="372" y="370" text-anchor="middle" fill="#fdba74" font-size="6.5" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">SURGE</text>
-                        <text x="372" y="404" text-anchor="middle" fill="rgba(249,115,22,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Lead&nbsp;Gen</text>
+                        <text x="372" y="369" text-anchor="middle" fill="#fdba74" font-size="6" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">PORTAL</text>
+                        <text x="372" y="404" text-anchor="middle" fill="rgba(249,115,22,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Client&nbsp;access</text>
 
                         {{-- CAST — bottom-left (108,372) --}}
                         <circle cx="108" cy="372" r="36" fill="rgba(16,185,129,0.07)" stroke="rgba(16,185,129,0.0)" stroke-width="0"/>
                         <circle cx="108" cy="372" r="24" fill="rgba(2,14,8,0.8)" stroke="rgba(16,185,129,0.45)" stroke-width="1.5">
                             <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="2.8s"/>
                         </circle>
-                        <text x="108" y="370" text-anchor="middle" fill="#6ee7b7" font-size="6.5" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">CAST</text>
-                        <text x="108" y="404" text-anchor="middle" fill="rgba(16,185,129,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Web&nbsp;Design</text>
+                        <text x="108" y="372" text-anchor="middle" fill="#6ee7b7" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">CMS</text>
+                        <text x="108" y="404" text-anchor="middle" fill="rgba(16,185,129,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Content&nbsp;ops</text>
 
                         {{-- VAULT — left (60,240) --}}
                         <circle cx="60" cy="240" r="36" fill="rgba(99,102,241,0.07)" stroke="rgba(99,102,241,0.0)" stroke-width="0"/>
                         <circle cx="60" cy="240" r="24" fill="rgba(5,6,15,0.8)" stroke="rgba(99,102,241,0.45)" stroke-width="1.5">
                             <animate attributeName="stroke-opacity" values="0.45;0.8;0.45" dur="4s" repeatCount="indefinite" begin="3.5s"/>
                         </circle>
-                        <text x="60" y="238" text-anchor="middle" fill="#a5b4fc" font-size="6.5" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">VAULT</text>
-                        <text x="60" y="272" text-anchor="middle" fill="rgba(99,102,241,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">CRM&nbsp;&amp;&nbsp;Docs</text>
+                        <text x="60" y="240" text-anchor="middle" fill="#a5b4fc" font-size="7" font-family="Inter,sans-serif" font-weight="900" letter-spacing="0.8" opacity="0.95">CRM</text>
+                        <text x="60" y="272" text-anchor="middle" fill="rgba(99,102,241,0.5)" font-size="5.5" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.5">Pipeline</text>
                     </svg>
 
                 </div>
@@ -225,38 +224,109 @@
     </div>
 </section>
 
-{{-- ── CAPABILITY STRIP ─────────────────────────────────────────────── --}}
-<div class="bg-blue-600 py-4 px-6">
-    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
-        @foreach([
-            ['Rapid App Dev', true],
-            ['Social Automation', false],
-            ['Email Marketing', false],
-            ['Lead Generation &amp; Capture', false],
-            ['Lead Management', false],
-            ['AI Content Engine', false],
-            ['Document &amp; File Management', false],
-        ] as [$cap, $active])
-            <div class="flex items-center gap-2 text-xs font-black uppercase tracking-widest whitespace-nowrap {{ $active ? 'text-white' : 'text-white/65' }}">
-                <span class="text-blue-200">&#10022;</span>
-                {!! $cap !!}
-            </div>
-        @endforeach
+{{-- ── START HERE ───────────────────────────────────────────────────── --}}
+<section id="start-here" class="bg-white py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="max-w-3xl mb-12">
+            <span class="text-blue-600 text-xs font-black uppercase tracking-[0.2em] mb-4 block">smbgen-core</span>
+            <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-5">
+                Six explanation pages people instantly understand.
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                No jargon. No internal product names. Start with the exact job people need done, in the exact order they naturally think about it.
+            </p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            @php
+                $startHereItems = [
+                    [
+                        'step' => '01',
+                        'title' => 'Contact',
+                        'body' => 'A superior contact experience with structured intake, clearer qualification, and smarter routing than a generic form page.',
+                        'href' => route('solutions') . '#contact-core',
+                        'cta' => 'See contact page',
+                        'pillClass' => 'bg-blue-100 text-blue-700',
+                        'ctaClass' => 'group-hover:text-blue-700',
+                    ],
+                    [
+                        'step' => '02',
+                        'title' => 'Book',
+                        'body' => 'Scheduling that removes friction with availability, confirmations, reminders, and a smoother path from interest to appointment.',
+                        'href' => route('solutions') . '#book-core',
+                        'cta' => 'See booking page',
+                        'pillClass' => 'bg-violet-100 text-violet-700',
+                        'ctaClass' => 'group-hover:text-violet-700',
+                    ],
+                    [
+                        'step' => '03',
+                        'title' => 'Pay',
+                        'body' => 'A simpler payment experience that feels trustworthy and fast, with a cleaner handoff from approval to invoice to paid.',
+                        'href' => route('solutions') . '#pay-core',
+                        'cta' => 'See payments page',
+                        'pillClass' => 'bg-emerald-100 text-emerald-700',
+                        'ctaClass' => 'group-hover:text-emerald-700',
+                    ],
+                    [
+                        'step' => '04',
+                        'title' => 'Client Portal',
+                        'body' => 'One clear place for clients to log in, view files, track progress, manage billing, and stay aligned without extra back-and-forth.',
+                        'href' => route('solutions') . '#portal-core',
+                        'cta' => 'See portal page',
+                        'pillClass' => 'bg-orange-100 text-orange-700',
+                        'ctaClass' => 'group-hover:text-orange-700',
+                    ],
+                    [
+                        'step' => '05',
+                        'title' => 'CRM',
+                        'body' => 'Track leads, conversations, deals, follow-ups, and customer history in one place so nothing falls through the cracks.',
+                        'href' => route('solutions') . '#crm-core',
+                        'cta' => 'See CRM',
+                        'pillClass' => 'bg-indigo-100 text-indigo-700',
+                        'ctaClass' => 'group-hover:text-indigo-700',
+                    ],
+                    [
+                        'step' => '06',
+                        'title' => 'CMS',
+                        'body' => 'Update pages, publish offers, and manage content without turning every site change into a development ticket.',
+                        'href' => route('solutions') . '#cms-core',
+                        'cta' => 'See CMS',
+                        'pillClass' => 'bg-cyan-100 text-cyan-700',
+                        'ctaClass' => 'group-hover:text-cyan-700',
+                    ],
+                ];
+            @endphp
+
+            @foreach($startHereItems as $item)
+                <a href="{{ $item['href'] }}" class="group rounded-3xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:border-gray-300">
+                    <div class="mb-5 flex items-center justify-between">
+                        <span class="text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">{{ $item['step'] }}</span>
+                        <span class="rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] {{ $item['pillClass'] }}">{{ $item['title'] }}</span>
+                    </div>
+                    <h3 class="mb-3 text-2xl font-black tracking-tight text-gray-900">{{ $item['title'] }}</h3>
+                    <p class="mb-6 text-sm leading-relaxed text-gray-600">{{ $item['body'] }}</p>
+                    <div class="inline-flex items-center gap-2 text-sm font-bold text-gray-900 transition-colors {{ $item['ctaClass'] }}">
+                        {{ $item['cta'] }}
+                        <span>&rarr;</span>
+                    </div>
+                </a>
+            @endforeach
+        </div>
     </div>
-</div>
+</section>
 
 {{-- ── PLATFORM OVERVIEW ─────────────────────────────────────────────── --}}
 <section id="platform" class="bg-indigo-700 py-24 px-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
         <div>
-            <span class="text-indigo-300 text-xs font-black uppercase tracking-[0.2em] mb-5 block">01 &mdash; Application Platform</span>
+            <span class="text-indigo-300 text-xs font-black uppercase tracking-[0.2em] mb-5 block">How smbgen-core works</span>
             <h2 class="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-6">
-                Rapid application development that ships.
+                One connected core instead of six disconnected tools.
             </h2>
             <p class="text-indigo-200 text-lg leading-relaxed mb-8">
-                From prototype to production in weeks, not months.
-                Full-stack web applications built on the smbgen platform — fast, scalable, and AI-augmented from the start.
+                Contact, booking, payments, portal access, CRM, and CMS all live in the same operating layer.
+                That means less friction for customers and less cleanup work for your team.
             </p>
             <div class="flex flex-col gap-3 mb-9">
                 @foreach([
