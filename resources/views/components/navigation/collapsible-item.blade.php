@@ -5,9 +5,8 @@
 ])
 
 {{-- Parent item with expand toggle --}}
-<div class="space-y-1">
+<div x-data="{ expanded: false }" class="space-y-1">
     <button
-        x-data="{ expanded: false }"
         @click="expanded = !expanded"
         @class([
             'w-full flex items-center justify-between gap-3 px-3 py-2 rounded-lg',
