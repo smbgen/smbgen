@@ -378,10 +378,7 @@ class DashboardWidgetService
 
         // Check if Google Calendar is connected
         if (config('business.features.booking')) {
-            // Check for valid Google Calendar connections in google_credentials table
-            $googleConnected = \App\Models\User::whereHas('googleCredential', function ($q) {
-                $q->whereNotNull('refresh_token');
-            })->exists();
+            $googleConnected = $this->hasGoogleCalendarConnection();
 
             // Check for expired tokens
             $hasExpiredTokens = \App\Models\GoogleCredential::whereNotNull('refresh_token')
@@ -432,13 +429,18 @@ class DashboardWidgetService
         if (! config('business.features.booking')) {
             return [
                 'enabled' => false,
+                'googleConnected' => false,
+                'hasExpiredTokens' => false,
+                'stats' => [
+                    'pending' => 0,
+                    'upcoming' => 0,
+                    'thisWeek' => 0,
+                    'recentActivity' => [],
+                ],
             ];
         }
 
-        // Check if any user has Google Calendar connected via GoogleCredential with valid refresh token
-        $googleConnected = \App\Models\User::whereHas('googleCredential', function ($q) {
-            $q->whereNotNull('refresh_token');
-        })->exists();
+        $googleConnected = $this->hasGoogleCalendarConnection();
 
         // Check for expired or soon-to-expire tokens
         $hasExpiredTokens = \App\Models\GoogleCredential::whereNotNull('refresh_token')
@@ -479,6 +481,17 @@ class DashboardWidgetService
                 'recentActivity' => $recentActivity,
             ],
         ];
+    }
+
+    private function hasGoogleCalendarConnection(): bool
+    {
+        return \App\Models\User::query()
+            ->where(function ($query) {
+                $query->whereHas('googleCredential', function ($credentialQuery) {
+                    $credentialQuery->whereNotNull('refresh_token');
+                })->orWhereNotNull('google_refresh_token');
+            })
+            ->exists();
     }
 
     public function getEmailAnalytics(): array

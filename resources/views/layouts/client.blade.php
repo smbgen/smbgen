@@ -11,18 +11,18 @@
     @livewireStyles
     @stack('styles')
 </head>
-<body class="font-sans antialiased" style="--primary-color: {{ config('business.branding.primary_color', '#3B82F6') }}; --secondary-color: {{ config('business.branding.secondary_color', '#8B5CF6') }};">
+<body class="font-sans antialiased text-base" style="--primary-color: {{ config('business.branding.primary_color', '#3B82F6') }}; --secondary-color: {{ config('business.branding.secondary_color', '#8B5CF6') }};">
     <div class="min-h-screen bg-white dark:bg-gray-950">
         <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
+            <div class="page-shell">
+                <div class="flex justify-between h-20">
                     <div class="flex">
                         <div class="shrink-0 flex items-center">
-                            <a href="{{ route('dashboard') }}" class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ config('app.company_name', 'smbgen') }}</a>
+                            <x-navigation.brand :href="route('dashboard')" />
                         </div>
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             @auth
-                                <a href="{{ route('dashboard') }}" class="nav-link inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Dashboard</a>
+                                <x-navigation.top-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" label="Dashboard" />
                             @endauth
                         </div>
                     </div>
@@ -33,18 +33,18 @@
                         
                         @auth
                             <div class="ml-3 relative">
-                                <div class="flex items-center space-x-4">
-                                    <span class="text-gray-900 dark:text-gray-100">{{ auth()->user()->name }}</span>
-                                    <form method="POST" action="{{ route('logout') }}">@csrf<button type="submit" class="btn-danger text-sm">Logout</button></form>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-gray-900 dark:text-gray-100 text-base font-medium">{{ auth()->user()->name }}</span>
+                                    <form method="POST" action="{{ route('logout') }}">@csrf<button type="submit" class="btn-danger">Logout</button></form>
                                 </div>
                             </div>
                         @else
-                            <a href="{{ route('login') }}" class="btn-primary text-sm">Login</a>
+                            <a href="{{ route('login') }}" class="btn-primary">Login</a>
                         @endauth
                     </div>
 
                     <div class="-mr-2 flex items-center sm:hidden">
-                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
                             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
@@ -56,23 +56,22 @@
             <div id="mobile-menu" class="hidden sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
                     @auth
-                        <a href="{{ route('dashboard') }}" class="mobile-nav-link block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Dashboard</a>
-                        <a href="{{ route('messages.index') }}" class="mobile-nav-link block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Messages</a>
+                        <a href="{{ route('dashboard') }}" class="mobile-nav-link">Dashboard</a>
+                        <a href="{{ route('messages.index') }}" class="mobile-nav-link">Messages</a>
                         <form method="POST" action="{{ route('logout') }}" class="mt-2">
                             @csrf
-                            <button type="submit" class="mobile-nav-link block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-red-400 hover:text-white hover:bg-red-700">Logout</button>
+                            <button type="submit" class="mobile-nav-link mobile-nav-link-danger w-full text-left">Logout</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="mobile-nav-link block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Login</a>
+                        <a href="{{ route('login') }}" class="mobile-nav-link">Login</a>
                     @endauth
                 </div>
             </div>
         </nav>
 
         <main class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                @if (session('success'))<div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">{{ session('success') }}</div>@endif
-                @if (session('error'))<div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">{{ session('error') }}</div>@endif
+            <div class="page-shell">
+                <x-flash-messages />
                 
                 @if(auth()->check() && !auth()->user()->hasVerifiedEmail())
                     <!-- Verification Required Overlay -->
@@ -88,14 +87,14 @@
                             <div class="space-y-3">
                                 <form method="POST" action="{{ route('verification.send') }}">
                                     @csrf
-                                    <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 bg-yellow-600 hover:bg-yellow-500 text-white font-semibold rounded-lg transition-colors shadow-lg">
+                                    <button type="submit" class="w-full btn-accent">
                                         <i class="fas fa-paper-plane mr-2"></i>
                                         Resend Verification Email
                                     </button>
                                 </form>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-gray-300 font-medium rounded-lg transition-colors">
+                                    <button type="submit" class="w-full btn-secondary">
                                         <i class="fas fa-sign-out-alt mr-2"></i>
                                         Logout
                                     </button>

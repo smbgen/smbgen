@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'smbgen — Expert Growth Services for Small Business')
-@section('description', 'Web design, social media automation, email marketing, lead generation, and AI-powered content — end-to-end growth services for small and mid-market businesses.')
+@section('title', 'smbgen Services — Implementation and growth on top of smbgen-core')
+@section('description', 'Services that design, implement, and grow smbgen-core for your business: contact flow, booking, payments, client portal, CRM, CMS, and the campaigns that drive demand into them.')
 
 @section('content')
 
@@ -15,19 +15,18 @@
 
         <div class="inline-flex items-center gap-2 bg-blue-600/15 text-blue-400 text-xs font-bold px-3.5 py-1.5 rounded-full mb-10 border border-blue-500/25 tracking-widest uppercase">
             <span class="w-1.5 h-1.5 bg-blue-400 rounded-full inline-block animate-pulse"></span>
-            Full-Service Growth Agency &mdash; AI-Powered
+            Services layer for smbgen-core
         </div>
 
         <h1 class="text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-7">
-            One team.<br>
-            <span class="text-blue-400">Every channel.</span><br>
-            Serious growth.
+            We build and run<br>
+            <span class="text-blue-400">smbgen-core</span><br>
+            for your business.
         </h1>
 
         <p class="text-xl text-slate-400 max-w-2xl mb-11 font-light leading-relaxed">
-            smbgen delivers the full stack of digital growth services your business needs —
-            web design, social media, email marketing, lead generation, and AI-powered content
-            — all executed by one expert team with one unified platform behind it.
+            The product is smbgen-core. The services are how we tailor it, launch it, improve it,
+            and drive demand into it so your contact flow, booking flow, payments, portal, CRM, and CMS actually perform.
         </p>
 
         <div class="flex flex-wrap items-center gap-4">
@@ -46,13 +45,13 @@
 <div class="bg-blue-600 py-4 px-6">
     <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
         @foreach([
-            ['Web Design & Delivery', true],
-            ['Social Media Automation', false],
-            ['Email Marketing', false],
-            ['Lead Generation', false],
-            ['Lead Management', false],
-            ['AI Content', false],
-            ['Project & File Management', false],
+            ['Contact', true],
+            ['Book', false],
+            ['Pay', false],
+            ['Client Portal', false],
+            ['CRM', false],
+            ['CMS', false],
+            ['Growth Services', false],
         ] as [$cap, $active])
             <div class="flex items-center gap-2 text-xs font-black uppercase tracking-widest whitespace-nowrap {{ $active ? 'text-white' : 'text-white/65' }}">
                 <span class="text-blue-200">&#10022;</span>
@@ -66,14 +65,13 @@
 <section class="bg-white py-20 px-6">
     <div class="max-w-6xl mx-auto">
         <div class="max-w-2xl mb-16">
-            <span class="text-blue-600 text-xs font-black uppercase tracking-[0.2em] mb-4 block">Why smbgen</span>
+            <span class="text-blue-600 text-xs font-black uppercase tracking-[0.2em] mb-4 block">Why services still matter</span>
             <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-5">
-                Stop stitching together vendors.
+                smbgen-core is the product. We are the team behind the rollout.
             </h2>
             <p class="text-gray-500 text-lg font-light leading-relaxed">
-                Most small businesses juggle 6–10 different tools and agencies.
-                smbgen collapses the stack — one platform, one team, one bill,
-                fully integrated and AI-accelerated from day one.
+                Most businesses do not need more software. They need the right operating layer configured correctly,
+                launched quickly, and improved constantly. That is where smbgen services come in.
             </p>
         </div>
 
@@ -84,8 +82,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
                 </div>
-                <h3 class="text-lg font-black text-gray-900 mb-2 tracking-tight">Unified Platform</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">Everything in one dashboard. CRM, content, campaigns, leads, files — no context switching, no integration nightmares.</p>
+                <h3 class="text-lg font-black text-gray-900 mb-2 tracking-tight">Implementation</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">We configure contact capture, booking, payments, portal access, CRM workflows, and CMS structure around your actual business process.</p>
             </div>
             <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
                 <div class="w-10 h-10 bg-violet-100 rounded-xl flex items-center justify-center mb-5">
@@ -93,8 +91,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                     </svg>
                 </div>
-                <h3 class="text-lg font-black text-gray-900 mb-2 tracking-tight">AI-Accelerated</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">AI that writes, optimises, and automates. From SEO content to email sequences to lead scoring — intelligence built in, not bolted on.</p>
+                <h3 class="text-lg font-black text-gray-900 mb-2 tracking-tight">Optimisation</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">We improve the conversion path after launch so the product becomes a revenue system, not just a nice-looking interface.</p>
             </div>
             <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
                 <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center mb-5">
@@ -102,8 +100,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
                     </svg>
                 </div>
-                <h3 class="text-lg font-black text-gray-900 mb-2 tracking-tight">Results-Driven</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">Every service is tracked against real growth metrics. Not vanity dashboards — actual leads, booked calls, and revenue attribution.</p>
+                <h3 class="text-lg font-black text-gray-900 mb-2 tracking-tight">Growth</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">We drive traffic and demand into smbgen-core through content, SEO, email, social, and lead generation work tied to real pipeline outcomes.</p>
             </div>
         </div>
     </div>
@@ -346,17 +344,17 @@
             Ready when you are
         </div>
         <h2 class="text-5xl md:text-6xl font-black text-white tracking-tight mb-6 leading-tight">
-            Ready to grow<br>your business?
+            Ready to launch<br>smbgen-core properly?
         </h2>
         <p class="text-slate-400 text-xl mb-11 max-w-xl mx-auto font-light leading-relaxed">
-            Let&rsquo;s map out a strategy and get moving. One conversation, no fluff.
+            Start with the product page, then let us scope the implementation, optimisation, and growth work around it.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-            <a href="/contact" class="bg-blue-600 text-white font-bold px-8 py-4 rounded-xl hover:bg-blue-500 transition-colors text-base shadow-lg shadow-blue-900/40">
-                Book a call &rarr;
+            <a href="{{ route('solutions') }}" class="bg-blue-600 text-white font-bold px-8 py-4 rounded-xl hover:bg-blue-500 transition-colors text-base shadow-lg shadow-blue-900/40">
+                See smbgen-core &rarr;
             </a>
-            <a href="{{ route('home.platform') }}" class="border border-slate-700 text-slate-300 font-bold px-8 py-4 rounded-xl hover:border-slate-500 hover:text-white transition-colors text-base">
-                See the platform
+            <a href="/contact" class="border border-slate-700 text-slate-300 font-bold px-8 py-4 rounded-xl hover:border-slate-500 hover:text-white transition-colors text-base">
+                Talk to us
             </a>
         </div>
     </div>

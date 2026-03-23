@@ -26,35 +26,27 @@
             </div>
 
             {{-- Link columns --}}
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-10 text-sm">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-10 text-sm">
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">smbgen-core</h4>
+                    <div class="flex flex-col gap-2.5 text-slate-500">
+                        <a href="{{ route('solutions') }}#contact-core" class="hover:text-white transition-colors">Contact</a>
+                        <a href="{{ route('solutions') }}#book-core" class="hover:text-white transition-colors">Book</a>
+                        <a href="{{ route('solutions') }}#pay-core" class="hover:text-white transition-colors">Pay</a>
+                        <a href="{{ route('solutions') }}#portal-core" class="hover:text-white transition-colors">Client Portal</a>
+                        <a href="{{ route('solutions') }}#crm-core" class="hover:text-white transition-colors">CRM</a>
+                        <a href="{{ route('solutions') }}#cms-core" class="hover:text-white transition-colors">CMS</a>
+                    </div>
+                </div>
 
                 <div>
                     <h4 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">Platform</h4>
                     <div class="flex flex-col gap-2.5 text-slate-500">
-                        <a href="{{ route('home') }}#platform"  class="hover:text-white transition-colors">Rapid Dev</a>
-                        <a href="{{ route('home') }}#platform"  class="hover:text-white transition-colors">Cloud Delivery</a>
-                        <a href="{{ route('home') }}#platform"  class="hover:text-white transition-colors">CMS</a>
-                        <a href="{{ route('home') }}#ai"        class="hover:text-white transition-colors">AI Engine</a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">Services</h4>
-                    <div class="flex flex-col gap-2.5 text-slate-500">
-                        <a href="{{ route('home') }}#services" class="hover:text-white transition-colors">Web Design</a>
-                        <a href="{{ route('home') }}#services" class="hover:text-white transition-colors">Social Media</a>
-                        <a href="{{ route('home') }}#services" class="hover:text-white transition-colors">Email Marketing</a>
-                        <a href="{{ route('home') }}#services" class="hover:text-white transition-colors">Lead Gen</a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-bold mb-4 text-xs uppercase tracking-widest">Growth</h4>
-                    <div class="flex flex-col gap-2.5 text-slate-500">
-                        <a href="{{ route('home') }}#growth" class="hover:text-white transition-colors">Lead Capture</a>
-                        <a href="{{ route('home') }}#growth" class="hover:text-white transition-colors">Lead Management</a>
-                        <a href="{{ route('home') }}#growth" class="hover:text-white transition-colors">SEO</a>
-                        <a href="{{ route('home') }}#growth" class="hover:text-white transition-colors">Paid Acquisition</a>
+                        <a href="{{ route('home') }}#start-here" class="hover:text-white transition-colors">How it works</a>
+                        <a href="{{ route('home') }}#platform" class="hover:text-white transition-colors">Platform overview</a>
+                        <a href="{{ route('solutions') }}" class="hover:text-white transition-colors">smbgen-core pages</a>
+                        <a href="{{ route('home.services') }}" class="hover:text-white transition-colors">Services</a>
                     </div>
                 </div>
 
@@ -64,9 +56,14 @@
                         @if(Route::has('blog.index'))
                             <a href="{{ route('blog.index') }}" class="hover:text-white transition-colors">Blog</a>
                         @endif
-                        <a href="/contact" class="hover:text-white transition-colors">Contact</a>
-                        <a href="{{ route('login') }}" class="hover:text-white transition-colors">Sign in</a>
+                        <a href="https://github.com/smbgen" target="_blank" rel="noreferrer" class="hover:text-white transition-colors">GitHub</a>
                         <a href="{{ route('register') }}" class="hover:text-white transition-colors">Get started</a>
+                        @if(Route::has('legal.privacy'))
+                            <a href="{{ route('legal.privacy') }}" class="hover:text-white transition-colors">Privacy</a>
+                        @endif
+                        @if(Route::has('legal.eula'))
+                            <a href="{{ route('legal.eula') }}" class="hover:text-white transition-colors">Terms</a>
+                        @endif
                     </div>
                 </div>
 
