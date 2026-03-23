@@ -300,6 +300,7 @@
 <script>
 let availabilityData = null;
 let selectedSlotValue = null;
+let currentWeekIndex = 0;
 
 // Detect user's timezone
 function getUserTimezone() {
@@ -376,74 +377,8 @@ async function loadAvailability() {
         }
 
         container.classList.remove('hidden');
-        container.innerHTML = '';
-
-        data.weeks.forEach((week, weekIndex) => {
-            const weekDiv = document.createElement('div');
-            weekDiv.className = 'week-view';
-            
-            const daysGrid = document.createElement('div');
-            daysGrid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4';
-
-            let hasAvailableDays = false;
-
-            week.days.forEach(day => {
-                if (day.slots.length === 0 || !day.slots.some(s => s.available)) {
-                    return; // Skip days with no slots or all slots unavailable
-                }
-                
-                hasAvailableDays = true;
-
-                const dayCard = document.createElement('div');
-                dayCard.className = 'rounded-lg p-3';
-                dayCard.style.backgroundColor = '{{ $companyColors->body_background_color }}';
-                dayCard.style.border = '1px solid {{ $companyColors->text_color }}20';
-
-                const dayHeader = document.createElement('div');
-                dayHeader.className = 'text-center mb-3 pb-2';
-                dayHeader.style.borderBottom = '1px solid {{ $companyColors->text_color }}20';
-                dayHeader.innerHTML = `
-                    <div class="text-sm font-semibold" style="color: {{ $companyColors->text_color }}99;">${day.dayName}</div>
-                    <div class="text-lg font-bold" style="color: {{ $companyColors->text_color }};">${day.dayNumber}</div>
-                `;
-                dayCard.appendChild(dayHeader);
-
-                const slotsContainer = document.createElement('div');
-                slotsContainer.className = 'space-y-2';
-
-                day.slots.forEach(slot => {
-                    const slotBtn = document.createElement('button');
-                    slotBtn.type = 'button';
-                    slotBtn.className = 'time-slot w-full';
-                    slotBtn.textContent = slot.time;
-                    slotBtn.dataset.value = slot.value;
-
-                    if (!slot.available) {
-                        slotBtn.classList.add('unavailable');
-                        slotBtn.disabled = true;
-                    } else {
-                        slotBtn.addEventListener('click', () => selectSlot(slotBtn, slot.value));
-                    }
-
-                    slotsContainer.appendChild(slotBtn);
-                });
-
-                dayCard.appendChild(slotsContainer);
-                daysGrid.appendChild(dayCard);
-            });
-
-            // Only add week header and week to container if it has available days
-            if (hasAvailableDays) {
-                const weekHeader = document.createElement('h3');
-                weekHeader.className = 'text-lg font-semibold mb-4 text-center';
-                weekHeader.style.color = '{{ $companyColors->text_color }}';
-                weekHeader.textContent = week.weekLabel;
-                
-                weekDiv.appendChild(weekHeader);
-                weekDiv.appendChild(daysGrid);
-                container.appendChild(weekDiv);
-            }
-        });
+        currentWeekIndex = 0;
+        renderWeek(container, data, 0);
     } catch (error) {
         console.error('Failed to load availability:', error);
         document.getElementById('loadingMessage').innerHTML = '<p class="text-red-500">Failed to load availability. Please refresh the page.</p>';
@@ -508,6 +443,104 @@ function isElementInViewport(el) {
         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
+}
+
+function renderWeek(container, data, weekIndex) {
+    // Collect only weeks that have at least one available slot
+    const visibleWeeks = data.weeks.filter(w => w.days.some(d => d.slots.some(s => s.available)));
+
+    if (!visibleWeeks.length) {
+        document.getElementById('noAvailability').classList.remove('hidden');
+        container.classList.add('hidden');
+        return;
+    }
+
+    // Clamp index
+    currentWeekIndex = Math.max(0, Math.min(weekIndex, visibleWeeks.length - 1));
+    const week = visibleWeeks[currentWeekIndex];
+
+    container.innerHTML = '';
+
+    // Week header row with nav
+    const nav = document.createElement('div');
+    nav.className = 'flex items-center justify-between mb-5';
+    nav.innerHTML = `
+        <button type="button" id="prevWeekBtn"
+            class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-opacity ${currentWeekIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-80'}"
+            style="background: {{ $companyColors->text_color }}15; color: {{ $companyColors->text_color }};"
+            ${currentWeekIndex === 0 ? 'disabled' : ''}>
+            &larr; Prev week
+        </button>
+        <h3 class="text-base font-semibold" style="color: {{ $companyColors->text_color }};">${week.weekLabel} <span class="text-xs font-normal opacity-50">(${currentWeekIndex + 1} / ${visibleWeeks.length})</span></h3>
+        <button type="button" id="nextWeekBtn"
+            class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-opacity ${currentWeekIndex >= visibleWeeks.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-80'}"
+            style="background: {{ $companyColors->text_color }}15; color: {{ $companyColors->text_color }};"
+            ${currentWeekIndex >= visibleWeeks.length - 1 ? 'disabled' : ''}>
+            Next week &rarr;
+        </button>
+    `;
+    container.appendChild(nav);
+
+    if (!document.getElementById('prevWeekBtn').disabled) {
+        document.getElementById('prevWeekBtn').addEventListener('click', () => renderWeek(container, data, currentWeekIndex - 1));
+    }
+    if (!document.getElementById('nextWeekBtn').disabled) {
+        document.getElementById('nextWeekBtn').addEventListener('click', () => renderWeek(container, data, currentWeekIndex + 1));
+    }
+
+    // Days grid
+    const daysGrid = document.createElement('div');
+    daysGrid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4';
+
+    week.days.forEach(day => {
+        if (day.slots.length === 0 || !day.slots.some(s => s.available)) {
+            return;
+        }
+
+        const dayCard = document.createElement('div');
+        dayCard.className = 'rounded-lg p-3';
+        dayCard.style.backgroundColor = '{{ $companyColors->body_background_color }}';
+        dayCard.style.border = '1px solid {{ $companyColors->text_color }}20';
+
+        const dayHeader = document.createElement('div');
+        dayHeader.className = 'text-center mb-3 pb-2';
+        dayHeader.style.borderBottom = '1px solid {{ $companyColors->text_color }}20';
+        dayHeader.innerHTML = `
+            <div class="text-sm font-semibold" style="color: {{ $companyColors->text_color }}99;">${day.dayName}</div>
+            <div class="text-lg font-bold" style="color: {{ $companyColors->text_color }};">${day.dayNumber}</div>
+        `;
+        dayCard.appendChild(dayHeader);
+
+        const slotsContainer = document.createElement('div');
+        slotsContainer.className = 'space-y-2 max-h-64 overflow-y-auto pr-1';
+
+        day.slots.forEach(slot => {
+            const slotBtn = document.createElement('button');
+            slotBtn.type = 'button';
+            slotBtn.className = 'time-slot w-full';
+            slotBtn.textContent = slot.time;
+            slotBtn.dataset.value = slot.value;
+
+            // Re-apply selected state if this slot was previously chosen
+            if (selectedSlotValue && slot.value === selectedSlotValue) {
+                slotBtn.classList.add('selected');
+            }
+
+            if (!slot.available) {
+                slotBtn.classList.add('unavailable');
+                slotBtn.disabled = true;
+            } else {
+                slotBtn.addEventListener('click', () => selectSlot(slotBtn, slot.value));
+            }
+
+            slotsContainer.appendChild(slotBtn);
+        });
+
+        dayCard.appendChild(slotsContainer);
+        daysGrid.appendChild(dayCard);
+    });
+
+    container.appendChild(daysGrid);
 }
 
 document.getElementById('bookingForm').addEventListener('submit', (e) => {

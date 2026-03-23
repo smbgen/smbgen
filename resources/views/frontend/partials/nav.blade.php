@@ -10,12 +10,12 @@
             'description' => 'Contact, Book, Pay, Client Portal, CRM, CMS',
             'cardStyle' => 'background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%); border-color: #dbeafe;',
             'links' => [
-                ['label' => 'Contact', 'href' => route('solutions') . '#contact-core'],
-                ['label' => 'Book', 'href' => route('solutions') . '#book-core'],
-                ['label' => 'Pay', 'href' => route('solutions') . '#pay-core'],
-                ['label' => 'Client Portal', 'href' => route('solutions') . '#portal-core'],
-                ['label' => 'CRM', 'href' => route('solutions') . '#crm-core'],
-                ['label' => 'CMS', 'href' => route('solutions') . '#cms-core'],
+                ['label' => 'Contact', 'href' => route('product.contact')],
+                ['label' => 'Book', 'href' => route('product.book')],
+                ['label' => 'Pay', 'href' => route('product.pay')],
+                ['label' => 'Client Portal', 'href' => route('product.portal')],
+                ['label' => 'CRM', 'href' => route('product.crm')],
+                ['label' => 'CMS', 'href' => route('product.cms')],
             ],
         ],
         [
@@ -42,15 +42,15 @@
             'heading' => 'By Industry',
             'description' => 'Talk through your market and operating model',
             'links' => [
-                ['label' => 'Industry Discovery Call', 'href' => route('contact') . '?path=industry'],
+                ['label' => 'Book an Industry Discovery Call', 'href' => Route::has('booking.wizard') ? route('booking.wizard') . '?intent=industry' : route('contact')],
             ],
         ],
         [
             'heading' => 'By Solutions',
             'description' => 'Start from business bottlenecks and outcomes',
             'links' => [
-                ['label' => 'Solution Discovery Call', 'href' => route('contact') . '?path=solutions'],
-                ['label' => 'View Solution Areas', 'href' => route('solutions')],
+                ['label' => 'Book a Solutions Call', 'href' => Route::has('booking.wizard') ? route('booking.wizard') . '?intent=solutions' : route('contact')],
+                ['label' => 'View All Solution Areas', 'href' => route('solutions')],
             ],
         ],
     ];

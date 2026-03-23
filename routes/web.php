@@ -177,6 +177,14 @@ Route::get('/platform', fn () => view('frontend.home-platform'))->name('home.pla
 Route::get('/services', fn () => view('frontend.home-services'))->name('home.services');
 Route::get('/solutions', fn () => view('frontend.solutions'))->name('solutions');
 
+// smbgen-core individual product pages
+Route::get('/solutions/contact', fn () => view('frontend.product-page', ['productId' => 'contact-core']))->name('product.contact');
+Route::get('/solutions/book', fn () => view('frontend.product-page', ['productId' => 'book-core']))->name('product.book');
+Route::get('/solutions/pay', fn () => view('frontend.product-page', ['productId' => 'pay-core']))->name('product.pay');
+Route::get('/solutions/portal', fn () => view('frontend.product-page', ['productId' => 'portal-core']))->name('product.portal');
+Route::get('/solutions/crm', fn () => view('frontend.product-page', ['productId' => 'crm-core']))->name('product.crm');
+Route::get('/solutions/cms', fn () => view('frontend.product-page', ['productId' => 'cms-core']))->name('product.cms');
+
 // Contact page - CMS overridable, fallback to built-in contact page
 Route::get('/contact', function () {
     // Check if CMS contact page exists

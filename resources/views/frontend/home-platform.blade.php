@@ -31,8 +31,8 @@
                     </div>
                 @endforeach
             </div>
-            <a href="/contact" class="inline-flex items-center gap-2 bg-white text-indigo-700 font-bold px-5 py-3 rounded-xl hover:bg-indigo-50 transition-colors text-sm">
-                Start a project &rarr;
+            <a href="{{ Route::has('booking.wizard') ? route('booking.wizard') : route('contact') }}" class="inline-flex items-center gap-2 bg-white text-indigo-700 font-bold px-5 py-3 rounded-xl hover:bg-indigo-50 transition-colors text-sm">
+                Book a discovery call &rarr;
             </a>
         </div>
 
@@ -73,8 +73,8 @@
                         'step' => '01',
                         'title' => 'Contact',
                         'body' => 'A superior contact experience with structured intake, clearer qualification, and smarter routing than a generic form page.',
-                        'href' => route('solutions') . '#contact-core',
-                        'cta' => 'See contact page',
+                        'href' => route('product.contact'),
+                        'cta' => 'Explore Contact',
                         'pillClass' => 'bg-blue-100 text-blue-700',
                         'ctaClass' => 'group-hover:text-blue-700',
                         'demo' => 'contact',
@@ -83,8 +83,8 @@
                         'step' => '02',
                         'title' => 'Book',
                         'body' => 'Scheduling that removes friction with availability, confirmations, reminders, and a smoother path from interest to appointment.',
-                        'href' => route('solutions') . '#book-core',
-                        'cta' => 'See booking page',
+                        'href' => route('product.book'),
+                        'cta' => 'Explore Booking',
                         'pillClass' => 'bg-violet-100 text-violet-700',
                         'ctaClass' => 'group-hover:text-violet-700',
                         'demo' => 'book',
@@ -93,8 +93,8 @@
                         'step' => '03',
                         'title' => 'Pay',
                         'body' => 'A simpler payment experience that feels trustworthy and fast, with a cleaner handoff from approval to invoice to paid.',
-                        'href' => route('solutions') . '#pay-core',
-                        'cta' => 'See payments page',
+                        'href' => route('product.pay'),
+                        'cta' => 'Explore Pay',
                         'pillClass' => 'bg-emerald-100 text-emerald-700',
                         'ctaClass' => 'group-hover:text-emerald-700',
                         'demo' => 'pay',
@@ -103,8 +103,8 @@
                         'step' => '04',
                         'title' => 'Client Portal',
                         'body' => 'One clear place for clients to log in, view files, track progress, manage billing, and stay aligned without extra back-and-forth.',
-                        'href' => route('solutions') . '#portal-core',
-                        'cta' => 'See portal page',
+                        'href' => route('product.portal'),
+                        'cta' => 'Explore Portal',
                         'pillClass' => 'bg-orange-100 text-orange-700',
                         'ctaClass' => 'group-hover:text-orange-700',
                         'demo' => 'portal',
@@ -113,8 +113,8 @@
                         'step' => '05',
                         'title' => 'CRM',
                         'body' => 'Track leads, conversations, deals, follow-ups, and customer history in one place so nothing falls through the cracks.',
-                        'href' => route('solutions') . '#crm-core',
-                        'cta' => 'See CRM',
+                        'href' => route('product.crm'),
+                        'cta' => 'Explore CRM',
                         'pillClass' => 'bg-indigo-100 text-indigo-700',
                         'ctaClass' => 'group-hover:text-indigo-700',
                         'demo' => 'crm',
@@ -123,8 +123,8 @@
                         'step' => '06',
                         'title' => 'CMS',
                         'body' => 'Update pages, publish offers, and manage content without turning every site change into a development ticket.',
-                        'href' => route('solutions') . '#cms-core',
-                        'cta' => 'See CMS',
+                        'href' => route('product.cms'),
+                        'cta' => 'Explore CMS',
                         'pillClass' => 'bg-cyan-100 text-cyan-700',
                         'ctaClass' => 'group-hover:text-cyan-700',
                         'demo' => 'cms',
@@ -395,8 +395,8 @@
                 <span class="bg-orange-500/70 border border-orange-400/50 text-white text-sm font-bold px-4 py-2 rounded-full">{{ $tag }}</span>
             @endforeach
         </div>
-        <a href="/contact" class="inline-flex items-center gap-2 bg-white text-orange-700 font-black px-8 py-4 rounded-xl hover:bg-orange-50 transition-colors text-base shadow-xl shadow-orange-900/20">
-            Let&rsquo;s talk growth &rarr;
+        <a href="{{ Route::has('booking.wizard') ? route('booking.wizard') : route('contact') }}" class="inline-flex items-center gap-2 bg-white text-orange-700 font-black px-8 py-4 rounded-xl hover:bg-orange-50 transition-colors text-base shadow-xl shadow-orange-900/20">
+            Book a growth call &rarr;
         </a>
     </div>
 </section>
