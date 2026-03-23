@@ -177,6 +177,9 @@ Route::get('/platform', fn () => view('frontend.home-platform'))->name('home.pla
 Route::get('/services', fn () => view('frontend.home-services'))->name('home.services');
 Route::get('/solutions', fn () => view('frontend.solutions'))->name('solutions');
 
+// Google Workspace integrations landing page
+Route::get('/google-workspace', fn () => view('frontend.google-workspace'))->name('google.workspace');
+
 // smbgen-core individual product pages
 Route::get('/solutions/contact', fn () => view('frontend.product-page', ['productId' => 'contact-core']))->name('product.contact');
 Route::get('/solutions/book', fn () => view('frontend.product-page', ['productId' => 'book-core']))->name('product.book');

@@ -32,7 +32,7 @@
             'description' => 'Integrate and eliminate data silos',
             'cardStyle' => 'background: linear-gradient(135deg, #eef2ff 0%, #f0f9ff 35%, #ecfdf5 70%, #fff7ed 100%); border-color: #ddd6fe;',
             'links' => [
-                ['label' => 'Integration Planning', 'href' => route('contact') . '?topic=google-workspace'],
+                ['label' => 'Google Workspace Integrations', 'href' => route('google.workspace')],
             ],
         ],
     ];
