@@ -1,0 +1,1 @@
+<h1>{{ config('app.company_name') }}</h1>

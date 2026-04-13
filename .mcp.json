@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+        "herd": {
+            "command": "C:/Users/alexr/.config/herd/bin/php84.bat",
+            "args": [
+                "C:/Users/alexr/.config/herd/bin/herd-mcp.phar"
+            ],
+            "env": {
+                "SITE_PATH": "C:\\Users\\alexr\\Herd\\smbgen"
+            }
+        },
+        "nightwatch": {
+            "type": "http",
+            "url": "https://nightwatch.laravel.com/mcp"
+        }
+    }
+}

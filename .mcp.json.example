@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+        "herd": {
+            "command": "php",
+            "args": [
+                "~/.config/herd/bin/herd-mcp.phar"
+            ],
+            "env": {
+                "SITE_PATH": "/path/to/your/prtl7-app"
+            }
+        },
+        "nightwatch": {
+            "type": "http",
+            "url": "https://nightwatch.laravel.com/mcp"
+        }
+    }
+}

@@ -1,0 +1,54 @@
+---
+name: Feature Request
+description: Suggest a new feature or enhancement
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea? Describe it below and we'll take a look.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Explain the problem or limitation you're running into.
+      placeholder: "I find it frustrating when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear description of what you want to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative solutions or workarounds you've thought about.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Feature area
+      options:
+        - Client Management
+        - Booking & Scheduling
+        - CMS / Page Builder
+        - Blog
+        - File Management
+        - Messaging
+        - Billing & Payments
+        - AI Features
+        - Authentication & Security
+        - Admin Dashboard
+        - DevOps / Deployment
+        - Other
+    validations:
+      required: true

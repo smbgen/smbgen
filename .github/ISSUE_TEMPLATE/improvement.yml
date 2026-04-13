@@ -1,0 +1,40 @@
+---
+name: Improvement
+description: Improve something that already exists (performance, UX, code quality, docs)
+labels: [improvement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea to make something better? Tell us about it.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What would you like to improve?
+      description: Describe what exists today and what could be better.
+    validations:
+      required: true
+
+  - type: textarea
+    id: how
+    attributes:
+      label: Suggested improvement
+      description: How would you improve it?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type of improvement
+      options:
+        - Performance
+        - UI / UX
+        - Code quality / refactor
+        - Documentation
+        - Test coverage
+        - Accessibility
+        - Other
+    validations:
+      required: true
