@@ -376,8 +376,10 @@ Then follow these steps:
 
 ## 📜 License
 
-Licensed under the **SMBGen Community and Commercial License (v1.0)**.
-Organizations with more than 10 employees must obtain a commercial license.
+Licensed under the **Business Source License 1.1 (BSL)**.
+Production use is free for organizations with 10 or fewer
+employees/contractors. Organizations above that threshold require a commercial
+license. On 2029-04-13, this project converts to GPL-2.0-or-later.
 See [LICENSE](LICENSE) for full terms.
 
 ---
