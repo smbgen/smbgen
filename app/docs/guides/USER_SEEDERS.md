@@ -159,7 +159,7 @@ Login at `/login` → redirects to `/admin/dashboard` for `company_administrator
 
 ## Related
 
-- [Developer Setup](./planning/DEVELOPMENT_SETUP.md)
+- [Developer Setup](../planning/DEVELOPMENT_SETUP.md)
 - [Email Verification](./EMAIL_VERIFICATION_TESTING.md)
 
 ---

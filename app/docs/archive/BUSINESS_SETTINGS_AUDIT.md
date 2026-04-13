@@ -115,8 +115,8 @@ SELECT * FROM business_settings;
 | 3 | require_deposit | 0 | boolean | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
 | 4 | report_price_cents | 5000 | string | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
 | 5 | deposit_amount_cents | 10000 | string | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
-| 6 | app_name | CLIENTBRIDGE | string | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
-| 7 | company_name | CLIENTBRIDGE | string | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
+| 6 | app_name | SMBGEN | string | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
+| 7 | company_name | SMBGEN | string | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
 | 8 | theme_primary_color | #597197 | string | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
 | 9 | theme_secondary_color | #10b981 | string | 2025-10-04 00:11:57 | 2025-10-04 00:11:57 |
 | 10 | theme_background_color | #d4d6d8 | string | 2025-10-04 00:11:57 | 2025-10-04 00:12:18 |
@@ -131,13 +131,13 @@ SELECT * FROM business_settings;
 ### `config/app.php`
 ```php
 'name' => env('APP_NAME', 'Laravel'),
-'company_name' => env('APP_COMPANY_NAME', 'CLIENTBRIDGE'),
+'company_name' => env('APP_COMPANY_NAME', 'SMBGEN'),
 ```
 
 ### `config/business.php`
 ```php
-'name' => env('BUSINESS_NAME', 'CLIENTBRIDGE'),
-'company_name' => env('BUSINESS_COMPANY_NAME', 'CLIENTBRIDGE'),
+'name' => env('BUSINESS_NAME', 'SMBGEN'),
+'company_name' => env('BUSINESS_COMPANY_NAME', 'SMBGEN'),
 
 'branding' => [
     'logo' => env('BUSINESS_LOGO', '/images/logo.png'),

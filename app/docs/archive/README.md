@@ -5,11 +5,11 @@
 
 ---
 
-## ClientBridge
+## SMBGen
 
-CLIENTBRIDGE is a **unified platform for service professionals** that combines booking system, email, files, and meetings in one place. Built for contractors, inspectors, realtors, and field service professionals who need to manage clients professionally.
+SMBGEN is a **unified platform for service professionals** that combines booking system, email, files, and meetings in one place. Built for contractors, inspectors, realtors, and field service professionals who need to manage clients professionally.
 
-**PLATFORM VISION:** Stop juggling scattered tools. CLIENTBRIDGE brings appointments, leads, files, and communication together in one unified platform. Professional tools built for people who serve clients.
+**PLATFORM VISION:** Stop juggling scattered tools. SMBGEN brings appointments, leads, files, and communication together in one unified platform. Professional tools built for people who serve clients.
 
 ### Core Features
 
@@ -39,7 +39,7 @@ CLIENTBRIDGE is a **unified platform for service professionals** that combines b
 * Responsive UI with Tailwind CSS + Livewire
 * Google Workspace integration
 
-Hosted at [https://clientbridge.app](https://clientbridge.app)
+Hosted at [https://smbgen.app](https://smbgen.app)
 
 ### Requirements
 
@@ -173,7 +173,7 @@ php vendor/bin/pest -q
 
 ### Payment Integration
 
-ClientBridge includes basic Stripe payment integration for:
+SMBGen includes basic Stripe payment integration for:
 - **Product purchases** (landing page sales)
 - **Client invoices** (admin-generated billing)
 - **Secure checkout** with Stripe Checkout
@@ -222,8 +222,8 @@ Use Stripe's test mode with these test card numbers:
 ### Installation
 
 ```bash
-git clone git@github.com:alexramsey92/clientbridge-laravel.git
-cd clientbridge-laravel
+git clone git@github.com:alexramsey92/smbgen.git
+cd smbgen
 composer install
 cp .env.example .env
 php artisan key:generate
@@ -236,7 +236,7 @@ php artisan migrate
 
 1. **Set up domain DNS**: Point A record for `houston1.oldlinecyber.com` to your VPS IP.
 2. **Install Nginx, PHP 8.3, and necessary extensions**.
-3. **Create project directory**: Clone repo into `/home/alex/clientbridge`.
+3. **Create project directory**: Clone repo into `/home/alex/smbgen`.
 4. **Set permissions**:
 
    ```bash
@@ -258,7 +258,7 @@ php artisan migrate
        listen 443 ssl;
        server_name houston1.oldlinecyber.com;
 
-       root /home/alex/clientbridge/public;
+       root /home/alex/smbgen/public;
        index index.php index.html;
 
        ssl_certificate /etc/letsencrypt/live/houston1.oldlinecyber.com/fullchain.pem;
@@ -331,7 +331,7 @@ This setup is safe for internal development and small team production, but shoul
 
 # Laravel Platform Notes
 
-ClientBridge is built on **Laravel 12** with the following tech stack:
+SMBGen is built on **Laravel 12** with the following tech stack:
 
 ### Stack Highlights
 
@@ -383,8 +383,8 @@ ClientBridge is built on **Laravel 12** with the following tech stack:
 ### Setup Steps
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/clientbridge-laravel.git
-cd clientbridge-laravel
+git clone https://github.com/YOUR_USERNAME/smbgen.git
+cd smbgen
 
 # Install dependencies
 composer install
@@ -397,7 +397,7 @@ cp .env.example .env
 
 # Edit .env and set:
 # DB_CONNECTION=sqlite
-# DB_DATABASE=C:/Users/YOURNAME/Herd/clientbridge-laravel/database/database.sqlite
+# DB_DATABASE=C:/Users/YOURNAME/Herd/smbgen/database/database.sqlite
 
 # Generate app key
 php artisan key:generate
@@ -406,7 +406,7 @@ php artisan key:generate
 php artisan migrate
 
 # Open in browser
-http://clientbridge-laravel.test
+http://smbgen.test
 ```
 
 ---
@@ -432,11 +432,11 @@ php artisan migrate
 php artisan db:seed --class=UserSeeder
 
     'name' => 'Admin User',
-    'email' => 'admin@clientbridge.app',
+    'email' => 'admin@smbgen.app',
     'password' => Hash::make('admin123'),
 
     'name' => 'Demo Client',
-    'email' => 'demo@clientbridge.app',
+    'email' => 'demo@smbgen.app',
     'password' => Hash::make('demo123'),
 
 

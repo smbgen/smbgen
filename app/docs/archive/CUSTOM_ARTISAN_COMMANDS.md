@@ -1,6 +1,6 @@
 # Custom Artisan Commands Guide
 
-This document covers all custom Artisan commands in the CLIENTBRIDGE application, with detailed examples and use cases.
+This document covers all custom Artisan commands in the SMBGEN application, with detailed examples and use cases.
 
 ## Quick Reference
 
@@ -352,7 +352,7 @@ php artisan tinker --execute="App\Models\User::create(['name' => 'NAME', 'email'
 
 Create an admin user:
 ```bash
-php artisan tinker --execute="App\Models\User::create(['name' => 'Admin User', 'email' => 'admin@clientbridge.app', 'password' => 'SecurePassword123!', 'role' => 'company_administrator']);"
+php artisan tinker --execute="App\Models\User::create(['name' => 'Admin User', 'email' => 'admin@smbgen.app', 'password' => 'SecurePassword123!', 'role' => 'company_administrator']);"
 ```
 
 Create a regular user:

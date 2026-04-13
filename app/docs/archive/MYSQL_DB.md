@@ -1,6 +1,6 @@
 # MySQL Local Development Setup
 
-This guide covers setting up MySQL locally for ClientBridge Laravel development.
+This guide covers setting up MySQL locally for SMBGen development.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_USERNAME=root
 DB_PASSWORD=localdb
-DB_DATABASE=clientbridge_local
+DB_DATABASE=smbgen_local
 ```
 
 ## Setup Steps
@@ -47,11 +47,11 @@ net start mysql
 mysql -u root -p
 
 # Create database
-CREATE DATABASE clientbridge_local CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE smbgen_local CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 # Create user (optional - for production-like setup)
-CREATE USER 'clientbridge'@'localhost' IDENTIFIED BY 'localdb';
-GRANT ALL PRIVILEGES ON clientbridge_local.* TO 'clientbridge'@'localhost';
+CREATE USER 'smbgen'@'localhost' IDENTIFIED BY 'localdb';
+GRANT ALL PRIVILEGES ON smbgen_local.* TO 'smbgen'@'localhost';
 FLUSH PRIVILEGES;
 
 # Exit
@@ -72,7 +72,7 @@ Update your `.env` file with the database name:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=clientbridge_local
+DB_DATABASE=smbgen_local
 DB_USERNAME=root
 DB_PASSWORD=localdb
 ```
@@ -173,14 +173,14 @@ FLUSH PRIVILEGES;
 ```bash
 # Create the database manually
 mysql -u root -p
-CREATE DATABASE clientbridge_local;
+CREATE DATABASE smbgen_local;
 ```
 
 ### Permission Issues
 ```bash
 # Grant all privileges to user
 mysql -u root -p
-GRANT ALL PRIVILEGES ON clientbridge_local.* TO 'root'@'localhost';
+GRANT ALL PRIVILEGES ON smbgen_local.* TO 'root'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
@@ -282,7 +282,7 @@ php artisan config:cache
 ### Backup Database
 ```bash
 # Create backup
-mysqldump -u root -p clientbridge_local > backup.sql
+mysqldump -u root -p smbgen_local > backup.sql
 
 # Or with Laravel
 php artisan db:backup
@@ -291,7 +291,7 @@ php artisan db:backup
 ### Restore Database
 ```bash
 # Restore from backup
-mysql -u root -p clientbridge_local < backup.sql
+mysql -u root -p smbgen_local < backup.sql
 ```
 
 ---
@@ -302,7 +302,7 @@ mysql -u root -p clientbridge_local < backup.sql
 ```bash
 # Setup new database
 mysql -u root -p
-CREATE DATABASE clientbridge_local;
+CREATE DATABASE smbgen_local;
 
 # Update .env and run
 php artisan migrate:fresh --seed
@@ -316,4 +316,4 @@ php artisan db:show
 - Port: `3306`  
 - Username: `root`
 - Password: `localdb`
-- Database: `clientbridge_local`
+- Database: `smbgen_local`

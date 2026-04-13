@@ -1,4 +1,4 @@
-# CLIENTBRIDGE - Comprehensive Codebase Overview
+# SMBGEN - Comprehensive Codebase Overview
 
 **Version:** 1.0.0  
 **Framework:** Laravel 12.32.5  
@@ -28,7 +28,7 @@
 
 ## Executive Summary
 
-**CLIENTBRIDGE** is a comprehensive client management and business automation platform built for service professionals including contractors, inspectors, realtors, and field service providers. The platform unifies booking systems, lead management, client communications, file storage, and business operations into a single, cohesive application.
+**SMBGEN** is a comprehensive client management and business automation platform built for service professionals including contractors, inspectors, realtors, and field service providers. The platform unifies booking systems, lead management, client communications, file storage, and business operations into a single, cohesive application.
 
 ### Target Market
 - Contractors and home service providers
@@ -50,10 +50,10 @@ One unified platform that eliminates the need for multiple disconnected tools by
 ## Platform Overview
 
 ### Purpose
-CLIENTBRIDGE serves as a **unified business management platform** designed to streamline operations for service-based businesses. It replaces the need for multiple disparate tools (scheduling software, CRM, email management, file storage) with a single integrated solution.
+SMBGEN serves as a **unified business management platform** designed to streamline operations for service-based businesses. It replaces the need for multiple disparate tools (scheduling software, CRM, email management, file storage) with a single integrated solution.
 
 ### Business Model
-- **SaaS Platform:** Subscription-based service at `clientbridge.app`
+- **SaaS Platform:** Subscription-based service at `smbgen.app`
 - **Services Hybrid:** Quick audits with upsell opportunities for ongoing service
 - **Scalable Architecture:** Built to grow from individual professionals to enterprise teams
 
@@ -794,7 +794,7 @@ BOOKING_CREATE_LEAD=true
 ## Directory Structure
 
 ```
-clientbridge-laravel/
+smbgen/
 ├── app/
 │   ├── Console/Commands/          # Custom artisan commands
 │   ├── docs/                      # Project documentation
@@ -985,14 +985,14 @@ cd deployment
 
 **Production `.env` essentials:**
 ```env
-APP_NAME=CLIENTBRIDGE
+APP_NAME=SMBGEN
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://clientbridge.app
+APP_URL=https://smbgen.app
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_DATABASE=clientbridge_prod
+DB_DATABASE=smbgen_prod
 DB_USERNAME=your_username
 DB_PASSWORD=secure_password
 
@@ -1018,7 +1018,7 @@ GOOGLE_CLIENT_SECRET=...
 
 **Supervisor Configuration:**
 ```ini
-[program:clientbridge-worker]
+[program:smbgen-worker]
 process_name=%(program_name)s_%(process_num)02d
 command=php /path/to/artisan queue:work --sleep=3 --tries=3
 autostart=true
@@ -1058,8 +1058,8 @@ stdout_logfile=/path/to/storage/logs/worker.log
 **Setup:**
 ```bash
 # Clone repository
-git clone https://github.com/alexramsey92/clientbridge-laravel.git
-cd clientbridge-laravel
+git clone https://github.com/alexramsey92/smbgen.git
+cd smbgen
 
 # Install dependencies
 composer install
@@ -1235,7 +1235,7 @@ Located in `app/docs/`:
    - Lead capture workflow
    - Form builder guide
 
-5. **FEATURE_FLAGS.md**
+5. **guides/FEATURE_FLAGS.md**
    - Feature flag system
    - Configuration options
    - Usage examples
@@ -1505,7 +1505,7 @@ Multiple monitoring scripts in `deployment/`:
 
 **Created by:** Alexander Ramsey  
 **Website:** https://alexanderramsey.com  
-**Platform:** https://clientbridge.app
+**Platform:** https://smbgen.app
 
 **License:** MIT License
 
@@ -1526,10 +1526,10 @@ Multiple monitoring scripts in `deployment/`:
 
 **Application:**
 ```env
-APP_NAME=CLIENTBRIDGE
+APP_NAME=SMBGEN
 APP_ENV=local|development|staging|production
 APP_DEBUG=true|false
-APP_URL=https://clientbridge.app
+APP_URL=https://smbgen.app
 ```
 
 **Database:**
@@ -1537,7 +1537,7 @@ APP_URL=https://clientbridge.app
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=clientbridge
+DB_DATABASE=smbgen
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -1550,7 +1550,7 @@ MAIL_PORT=587
 MAIL_USERNAME=your-email@gmail.com
 MAIL_PASSWORD=your-app-password
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=noreply@clientbridge.app
+MAIL_FROM_ADDRESS=noreply@smbgen.app
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
@@ -1579,11 +1579,11 @@ FEATURE_INSPECTION_REPORTS=false
 
 **Business Configuration:**
 ```env
-BUSINESS_NAME=CLIENTBRIDGE
-BUSINESS_COMPANY_NAME=CLIENTBRIDGE
-BUSINESS_EMAIL=support@clientbridge.app
+BUSINESS_NAME=SMBGEN
+BUSINESS_COMPANY_NAME=SMBGEN
+BUSINESS_EMAIL=support@smbgen.app
 BUSINESS_PHONE=
-BUSINESS_WEBSITE=https://clientbridge.app
+BUSINESS_WEBSITE=https://smbgen.app
 BOOKING_REQUIRE_PROPERTY_ADDRESS=false
 BOOKING_SHOW_PROPERTY_ADDRESS=true
 BILLING_HOURLY_RATE_CENTS=20000

@@ -81,7 +81,7 @@ Check logs at: `storage/logs/laravel.log`
 ### Check Logs
 ```bash
 # On VPS
-tail -50 /var/www/clientbridge-laravel/storage/logs/laravel.log | grep "Booking confirmation"
+tail -50 /var/www/smbgen/storage/logs/laravel.log | grep "Booking confirmation"
 
 # Or locally
 tail -50 storage/logs/laravel.log | grep "Booking confirmation"

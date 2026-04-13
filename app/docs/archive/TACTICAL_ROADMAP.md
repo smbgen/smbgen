@@ -1,4 +1,4 @@
-# ClientBridge Tactical Roadmap
+# SMBGen Tactical Roadmap
 *Consolidated Strategy & Action Plan - October 3, 2025*
 
 ## 🎯 **VISION: ONE PLATFORM FOR SERVICE PROFESSIONALS**
@@ -33,7 +33,7 @@ Phone/Web Form → Auto-fill Forms → Google Meet → HD Video → Secure Porta
 
 ### **Multi-Instance Strategy:**
 1. **rtsenviro.com** → Dad's inspection/consulting services
-2. **clientbridge.app** → Open source marketing + demo instance
+2. **smbgen.app** → Open source marketing + demo instance
 3. **l7medialabs.com** → Jimmy's design services  
 4. **oldlinecyber.com** → Your $499 cyber audit service
 
@@ -154,7 +154,7 @@ php artisan migrate:status # Verify
 - Conversion funnel analytics
 - Customer status management
 
-#### **6. Set up Domain for clientbridge.app**  
+#### **6. Set up Domain for smbgen.app**  
 **Goal:** Live demo instance for marketing
 
 **Tasks:**
@@ -222,7 +222,7 @@ php artisan migrate:status # Verify
 - **oldlinecyber.com:** $499 cyber audits (target: 10/month = $4,990)
 - **rtsenviro.com:** Environmental inspections (target: 15/month = $7,500)
 - **l7medialabs.com:** Design consultations (target: 20/month = $10,000)
-- **clientbridge.app:** Lead generation for services above
+- **smbgen.app:** Lead generation for services above
 
 **Total potential monthly revenue:** $22,490 across all instances
 
@@ -287,7 +287,7 @@ This isn't just about building a booking system. You're creating:
 4. **Multiple revenue streams:** Direct business use + open source ecosystem
 
 The beauty is that each instance markets the others:
-- ClientBridge markets itself
+- SMBGen markets itself
 - Your businesses get better booking systems
 - The community grows the platform
 - Everyone wins without vendor lock-in

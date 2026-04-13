@@ -1,7 +1,7 @@
 # CMS Feature Documentation
 
 ## Overview
-The CMS (Content Management System) feature allows administrators to create and manage custom content pages for the ClientBridge application. This feature is controlled by a feature flag and provides a simple yet powerful interface for content management.
+The CMS (Content Management System) feature allows administrators to create and manage custom content pages for the SMBGen application. This feature is controlled by a feature flag and provides a simple yet powerful interface for content management.
 
 ## Feature Flag
 - **Environment Variable**: `FEATURE_CMS`

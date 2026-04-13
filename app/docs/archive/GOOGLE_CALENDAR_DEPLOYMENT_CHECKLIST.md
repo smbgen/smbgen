@@ -19,7 +19,7 @@ The Google Calendar was not saving connections in **any environment** (VPS, clou
 
 #### 1. Pull Latest Code
 ```bash
-cd /path/to/clientbridge-laravel
+cd /path/to/smbgen
 git pull origin main
 ```
 
@@ -112,7 +112,7 @@ sudo service apache2 restart
 ### Local Development
 ```bash
 # Navigate to project
-cd c:/Users/alexr/Herd/clientbridge-laravel
+cd c:/Users/alexr/Herd/smbgen
 
 # Follow steps 1-7 above
 

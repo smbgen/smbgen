@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the implementation of Google OAuth authentication in the ClientBridge Laravel application. The implementation provides a robust, secure, and well-logged authentication flow using Laravel Socialite.
+This document describes the implementation of Google OAuth authentication in the SMBGen application. The implementation provides a robust, secure, and well-logged authentication flow using Laravel Socialite.
 
 ## Implementation Details
 

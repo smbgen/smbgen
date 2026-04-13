@@ -349,10 +349,10 @@ Super admins should NEVER have a `tenant_id`.
 
 ## Related Documentation
 
-- [Multi-Tenant Setup](../MULTI_TENANT_SETUP.md)
-- [Subscription System](../STRIPE_SUBSCRIPTION_SETUP.md)
-- [Domain Management](../DOMAIN_CONNECTION_GUIDE.md)
-- [Tenancy Best Practices](./planning/MULTI_TENANCY_IMPLEMENTATION.md)
+- [Multi-Tenant Setup](./MULTI_TENANT_SETUP.md)
+- [Subscription System](../billing/STRIPE_SUBSCRIPTION_SETUP.md)
+- [Domain Management](../guides/DOMAIN_CONNECTION_GUIDE.md)
+- [Tenancy Best Practices](../planning/MULTI_TENANCY_IMPLEMENTATION.md)
 
 ## Support
 

@@ -1,8 +1,8 @@
-# ClientBridge Laravel - Comprehensive Codebase Analysis
+# SMBGen - Comprehensive Codebase Analysis
 
 ## Overview
 
-**ClientBridge** is a sophisticated **client relationship management (CRM) and service delivery platform** built on Laravel 12, designed specifically for service-based businesses. It combines scheduling, billing, communication, and AI-powered phone systems into a unified solution. The platform enables businesses to manage client interactions from initial lead capture through booking, service delivery, invoicing, and follow-up communications—all while integrating with essential business tools like Google Calendar, QuickBooks, and Bland AI for conversational phone calls.
+**SMBGen** is a sophisticated **client relationship management (CRM) and service delivery platform** built on Laravel 12, designed specifically for service-based businesses. It combines scheduling, billing, communication, and AI-powered phone systems into a unified solution. The platform enables businesses to manage client interactions from initial lead capture through booking, service delivery, invoicing, and follow-up communications—all while integrating with essential business tools like Google Calendar, QuickBooks, and Bland AI for conversational phone calls.
 
 ---
 
@@ -181,7 +181,7 @@
 ## Business Impact
 
 ### Operational Efficiency
-ClientBridge dramatically reduces operational overhead for service-based businesses by **consolidating 6-8 separate tools into one platform**. A typical business using this system would replace:
+SMBGen dramatically reduces operational overhead for service-based businesses by **consolidating 6-8 separate tools into one platform**. A typical business using this system would replace:
 - A CRM (like HubSpot or Salesforce)
 - A scheduling tool (Calendly or Acuity)
 - An invoicing system (QuickBooks alone doesn't handle scheduling)
@@ -260,7 +260,7 @@ The current architecture supports moderate scale (~10,000 clients/bookings per b
 - Generate API documentation using `scribe` or `l5-swagger`
 - Offer API access at Professional tier and above  
 
-**Business Impact**: Opens a **B2B2B revenue stream** by enabling software vendors (e.g., point-of-sale systems, field service management tools) to integrate ClientBridge. Partner referral fees (20-30% of first-year revenue) could add $50-100K ARR with just 5-10 partnerships. Also increases stickiness (customers using APIs are 3x less likely to churn).  
+**Business Impact**: Opens a **B2B2B revenue stream** by enabling software vendors (e.g., point-of-sale systems, field service management tools) to integrate SMBGen. Partner referral fees (20-30% of first-year revenue) could add $50-100K ARR with just 5-10 partnerships. Also increases stickiness (customers using APIs are 3x less likely to churn).  
 **Technical Effort**: 30-40 hours (API structure, documentation, rate limiting).
 
 ### 4. **Enhance Email Marketing with Campaign Automation**
@@ -307,7 +307,7 @@ The current architecture supports moderate scale (~10,000 clients/bookings per b
 
 ## Conclusion
 
-ClientBridge is a **highly marketable, feature-rich platform** with clear product-market fit for service-based SMBs. The technical foundation is solid (Laravel 12, modern frontend stack, robust integrations), and the AI phone system represents a meaningful innovation. With the recommended enhancements—particularly multi-tenancy, API access, and billing automation—this application could realistically achieve **$5-10M ARR within 24 months** through a combination of SaaS subscriptions, usage-based pricing, and partnership revenue. The key unlock is transitioning from single-tenant deployments to a scalable SaaS model, which would reduce customer acquisition costs (CAC) from $2,000+ (custom deployment) to $200-500 (self-serve signup).
+SMBGen is a **highly marketable, feature-rich platform** with clear product-market fit for service-based SMBs. The technical foundation is solid (Laravel 12, modern frontend stack, robust integrations), and the AI phone system represents a meaningful innovation. With the recommended enhancements—particularly multi-tenancy, API access, and billing automation—this application could realistically achieve **$5-10M ARR within 24 months** through a combination of SaaS subscriptions, usage-based pricing, and partnership revenue. The key unlock is transitioning from single-tenant deployments to a scalable SaaS model, which would reduce customer acquisition costs (CAC) from $2,000+ (custom deployment) to $200-500 (self-serve signup).
 
 ---
 

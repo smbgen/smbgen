@@ -1,11 +1,11 @@
-# CLIENTBRIDGE Platform Overview
+# SMBGEN Platform Overview
 *Unified Platform for Service Professionals - October 2025*
 
 ## 🎯 **ONE PLATFORM. ALL YOUR TOOLS.**
 
 **Booking System • Email • Files • Meetings**
 
-Stop juggling scattered tools. CLIENTBRIDGE brings appointments, leads, files, and communication together in one unified platform built for professionals who service clients.
+Stop juggling scattered tools. SMBGEN brings appointments, leads, files, and communication together in one unified platform built for professionals who service clients.
 
 ✓ Automatic Google Meet Links  
 ✓ Calendar Intelligence  
@@ -18,7 +18,7 @@ Stop juggling scattered tools. CLIENTBRIDGE brings appointments, leads, files, a
 
 ## 🏗️ **LIKE YOUR SERVICE BODY FOR THE WEB**
 
-CLIENTBRIDGE gives you everything in one platform: scheduling + email + files + video meetings. Professional tools built for people who serve clients.
+SMBGEN gives you everything in one platform: scheduling + email + files + video meetings. Professional tools built for people who serve clients.
 
 ### **Zero-Friction Meetings**
 Google Meet links auto-generate for every booking. No scheduling links. No manual setup. One click and you're in the meeting room.
@@ -130,12 +130,12 @@ Enterprise-grade features that work like consumer apps. No learning curve. No tr
 
 ## 🔗 **POWERED BY GOOGLE WORKSPACE**
 
-Professional email on your domain. Enterprise security. Seamlessly integrated with CLIENTBRIDGE.
+Professional email on your domain. Enterprise security. Seamlessly integrated with SMBGEN.
 
 - **Gmail**: Professional email on your domain with AI-powered features
-- **Calendar**: Bi-directional sync with CLIENTBRIDGE scheduling system
+- **Calendar**: Bi-directional sync with SMBGEN scheduling system
 - **Drive**: Unlimited file storage and real-time collaboration  
-- **Meet**: HD video conferencing integrated with CLIENTBRIDGE
+- **Meet**: HD video conferencing integrated with SMBGEN
 
 ---
 
@@ -158,12 +158,12 @@ Securely store, organize, and share all client files and documentation with comp
 
 ## 🎨 **WHITE-LABEL YOUR PLATFORM**
 
-Resellers and agencies—customize colors, branding, and domain names. Offer CLIENTBRIDGE as your own product with complete customization.
+Resellers and agencies—customize colors, branding, and domain names. Offer SMBGEN as your own product with complete customization.
 
 - **Custom branding and colors**: Make it match your brand
 - **Custom domain support**: Your domain, your platform
 - **Branded email and documents**: Professional appearance throughout
-- **Agency partner program**: Build your business on CLIENTBRIDGE
+- **Agency partner program**: Build your business on SMBGEN
 
 ---
 
@@ -193,7 +193,7 @@ Invoicing, payment processing, and financial reporting built in.
 
 Stop juggling tools. Start managing your business like a pro.
 
-**CLIENTBRIDGE: Unified platform for service professionals.**
+**SMBGEN: Unified platform for service professionals.**
 
 Built in America by service pros, for service pros.
 

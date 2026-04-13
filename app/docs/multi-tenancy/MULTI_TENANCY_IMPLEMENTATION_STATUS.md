@@ -308,7 +308,7 @@ smbgen has a functional multi-tenancy foundation using Stancl Tenancy with separ
 #### 11. Super Admin Seeder
 **Status**: ✅ COMPLETED (January 4, 2026)
 
-See [app/docs/SUPER_ADMIN_SETUP.md](./SUPER_ADMIN_SETUP.md) for usage.
+See [SUPER_ADMIN_SETUP.md](./SUPER_ADMIN_SETUP.md) for usage.
 
 ---
 
@@ -414,12 +414,15 @@ config/
 ### Documentation
 ```
 app/docs/
-├── MULTI_TENANT_SETUP.md            ✅ Complete
-├── SUPER_ADMIN_SETUP.md             ✅ Complete (January 4, 2026)
-├── STRIPE_SUBSCRIPTION_SETUP.md     ✅ Complete
-├── DOMAIN_CONNECTION_GUIDE.md       ✅ Complete
+├── multi-tenancy/
+│   ├── MULTI_TENANT_SETUP.md            ✅ Complete
+│   └── SUPER_ADMIN_SETUP.md             ✅ Complete (January 4, 2026)
+├── billing/
+│   └── STRIPE_SUBSCRIPTION_SETUP.md     ✅ Complete
+├── guides/
+│   └── DOMAIN_CONNECTION_GUIDE.md       ✅ Complete
 └── planning/
-    └── MULTI_TENANCY_IMPLEMENTATION.md ✅ Complete
+    └── MULTI_TENANCY_IMPLEMENTATION.md  ✅ Complete
 ```
 
 ---
@@ -668,10 +671,10 @@ STRIPE_ENTERPRISE_PRICE_ID=price_...
 ## Related Documentation
 
 - [Super Admin Setup Guide](./SUPER_ADMIN_SETUP.md) - Creating and managing super admins
-- [Multi-Tenant Setup](../MULTI_TENANT_SETUP.md) - Initial tenancy configuration
-- [Stripe Subscription Setup](../STRIPE_SUBSCRIPTION_SETUP.md) - Billing integration
-- [Domain Connection Guide](../DOMAIN_CONNECTION_GUIDE.md) - Custom domain setup
-- [Tenancy Planning](./planning/MULTI_TENANCY_IMPLEMENTATION.md) - Architecture decisions
+- [Multi-Tenant Setup](./MULTI_TENANT_SETUP.md) - Initial tenancy configuration
+- [Stripe Subscription Setup](../billing/STRIPE_SUBSCRIPTION_SETUP.md) - Billing integration
+- [Domain Connection Guide](../guides/DOMAIN_CONNECTION_GUIDE.md) - Custom domain setup
+- [Tenancy Planning](../planning/MULTI_TENANCY_IMPLEMENTATION.md) - Architecture decisions
 
 ---
 

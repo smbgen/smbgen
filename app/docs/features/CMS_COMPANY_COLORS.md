@@ -187,7 +187,7 @@ When `auto_inject_css` is enabled (default), the CSS is automatically injected i
 
 ## Relationship with Theme System
 
-The Company Colors system is separate from the admin panel theme system ([THEME_SYSTEM.md](./THEME_SYSTEM.md)):
+The Company Colors system is separate from the admin panel theme system ([THEME_SYSTEM.md](../architecture/THEME_SYSTEM.md)):
 
 - **Theme System**: Controls admin panel appearance (light/dark mode)
 - **Company Colors**: Controls public-facing CMS page branding

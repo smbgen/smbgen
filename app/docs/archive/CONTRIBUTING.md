@@ -1,11 +1,11 @@
-# Contributing to ClientBridge
+# Contributing to SMBGen
 
-Thank you for your interest in contributing to ClientBridge! We welcome contributions from the community.
+Thank you for your interest in contributing to SMBGen! We welcome contributions from the community.
 
 ## 🚀 Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/clientbridge-laravel.git`
+2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/smbgen.git`
 3. Create a new branch: `git checkout -b feature/your-feature-name`
 4. Make your changes
 5. Test thoroughly
@@ -91,7 +91,7 @@ We welcome feature suggestions! Please:
 
 ## 🔒 Security
 
-If you discover a security vulnerability, please email security@clientbridge.app instead of opening a public issue.
+If you discover a security vulnerability, please email security@smbgen.app instead of opening a public issue.
 
 ## 📜 License
 

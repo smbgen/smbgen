@@ -4,7 +4,7 @@ Laravel Boost accelerates AI-assisted development by providing the essential con
 
 **Last Updated:** October 12, 2025  
 **Version:** Laravel Boost v1.3.0+  
-**Project:** ClientBridge Laravel
+**Project:** SMBGen
 
 ---
 
@@ -875,5 +875,5 @@ Laravel Boost significantly enhances AI-assisted Laravel development by providin
 **Document Version:** 2.0.0  
 **Last Updated:** October 12, 2025  
 **Laravel Boost Version:** v1.3.0+  
-**Project:** ClientBridge Laravel  
+**Project:** SMBGen  
 **Author:** Comprehensive guide based on official Laravel Boost documentation

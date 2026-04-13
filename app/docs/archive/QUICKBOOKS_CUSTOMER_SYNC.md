@@ -2,7 +2,7 @@
 
 ## Overview
 
-This feature allows you to import and sync customer data between QuickBooks Online and the ClientBridge clients table. Customers can be imported in bulk or synced individually to maintain consistency between systems.
+This feature allows you to import and sync customer data between QuickBooks Online and the SMBGen clients table. Customers can be imported in bulk or synced individually to maintain consistency between systems.
 
 ## Features
 
@@ -141,7 +141,7 @@ After import, you'll see:
 ## Use Cases
 
 ### Initial Setup
-Import all QuickBooks customers when setting up ClientBridge:
+Import all QuickBooks customers when setting up SMBGen:
 ```bash
 php artisan quickbooks:import-customers
 ```

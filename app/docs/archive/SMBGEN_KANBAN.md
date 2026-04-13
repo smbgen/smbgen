@@ -1,5 +1,5 @@
 ```markdown
-# CLIENTBRIDGE Development Kanban Board
+# SMBGEN Development Kanban Board
 
 **⚠️ DEPRECATED: This document has been consolidated into [TACTICAL_ROADMAP.md](./TACTICAL_ROADMAP.md)**
 

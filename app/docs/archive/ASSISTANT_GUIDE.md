@@ -1,4 +1,4 @@
-# 🤖 AI Assistant Guide - ClientBridge Laravel
+# 🤖 AI Assistant Guide - SMBGen
 
 ## 🖥️ **Environment Setup**
 
@@ -10,7 +10,7 @@
 - **PHP**: `C:/Users/alexr/.config/herd/bin/php.bat`
 - **Composer**: `C:/Users/alexr/.config/herd/bin/composer.bat`
 - **Node/NPM**: Standard Windows installation
-- **Project Root**: `C:/Users/alexr/Documents/GitHub/clientbridge-laravel`
+- **Project Root**: `C:/Users/alexr/Documents/GitHub/smbgen`
 
 ### **Bash Profile Configuration**:
 ```bash
@@ -38,7 +38,7 @@ alias composer="composer.bat"
 ### **Framework**: Laravel 12.x
 ### **Frontend**: Tailwind CSS v3.4.0 + Livewire
 ### **Database**: MySQL (via Herd)
-### **Local Domain**: `clientbridge-laravel.test`
+### **Local Domain**: `smbgen.test`
 
 ### **Key Features**:
 - Multi-role authentication (company_administrator, client, user)
@@ -191,7 +191,7 @@ php vendor/bin/pest -q
 3. Clear caches if needed
 
 ### **After Making Changes**:
-1. Test locally on `clientbridge-laravel.test`
+1. Test locally on `smbgen.test`
 2. Build assets: `npm run build`
 3. Commit with descriptive message
 4. Push to repository

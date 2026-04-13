@@ -237,7 +237,7 @@ MAIL_PORT=2525
 MAIL_USERNAME=your_username
 MAIL_PASSWORD=your_password
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=hello@clientbridge.app
+MAIL_FROM_ADDRESS=hello@smbgen.app
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 

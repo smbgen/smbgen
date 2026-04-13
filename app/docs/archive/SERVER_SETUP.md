@@ -1,4 +1,4 @@
-# 🛠️ ClientBridge Server Setup Guide
+# 🛠️ SMBGen Server Setup Guide
 
 > A concise, battle-tested summary of everything needed to spin up and manage a production-ready Laravel app on a \$5 VPS with Git-powered deploys.
 
@@ -35,14 +35,14 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 ```bash
 # Create new site config
-sudo nano /etc/nginx/sites-available/clientbridge
+sudo nano /etc/nginx/sites-available/smbgen
 
 # Example config:
 server {
     listen 80;
     server_name houston1.oldlinecyber.com;
 
-    root /home/alex/clientbridge/public;
+    root /home/alex/smbgen/public;
     index index.php index.html;
 
     location / {
@@ -60,7 +60,7 @@ server {
 }
 
 # Enable and reload
-sudo ln -s /etc/nginx/sites-available/clientbridge /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/smbgen /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
@@ -75,8 +75,8 @@ sudo certbot --nginx -d houston1.oldlinecyber.com
 
 ```bash
 cd ~
-composer create-project laravel/laravel clientbridge
-cd clientbridge
+composer create-project laravel/laravel smbgen
+cd smbgen
 cp .env.example .env
 php artisan key:generate
 ```
@@ -98,7 +98,7 @@ sudo chmod 664 database/database.sqlite
 
 # In .env:
 DB_CONNECTION=sqlite
-DB_DATABASE=/home/alex/clientbridge/database/database.sqlite
+DB_DATABASE=/home/alex/smbgen/database/database.sqlite
 ```
 
 ## 🔁 Git + Deploy
@@ -109,21 +109,21 @@ ssh-keygen -t ed25519 -C "houston1.oldlinecyber.com"
 cat ~/.ssh/id_ed25519.pub # add to GitHub deploy keys
 
 # Repo setup
-cd ~/clientbridge
+cd ~/smbgen
 git init
-git remote add origin git@github.com:alexramsey92/clientbridge-laravel.git
+git remote add origin git@github.com:alexramsey92/smbgen.git
 git pull origin main
 ```
 
 ### Example deploy script
 
 ```bash
-nano ~/deploy-clientbridge.sh
+nano ~/deploy-smbgen.sh
 ```
 
 ```bash
 #!/bin/bash
-cd ~/clientbridge || exit
+cd ~/smbgen || exit
 git pull origin main
 composer install --no-dev --optimize-autoloader
 php artisan migrate --force
@@ -134,7 +134,7 @@ sudo systemctl restart php8.3-fpm
 ```
 
 ```bash
-chmod +x ~/deploy-clientbridge.sh
+chmod +x ~/deploy-smbgen.sh
 ```
 
 ## 🔍 Useful Commands

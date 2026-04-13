@@ -1,12 +1,12 @@
-# CLIENTBRIDGE – High-Level Context for Copilot & Contributors
+# SMBGEN – High-Level Context for Copilot & Contributors
 
 ## General Overview
 
-- **CLIENTBRIDGE** (always all caps)
+- **SMBGEN** (always all caps)
 - Laravel-based unified platform by Alexander Ramsey.
 - Purpose: One platform for service professionals - booking system, email, files, meetings.
 - Target users: Contractors, inspectors, realtors, field service professionals.
-- Marketing domain: `clientbridge.app`
+- Marketing domain: `smbgen.app`
 
 ## Versioning & Roadmap
 
@@ -79,7 +79,7 @@
 
 ## Marketing & Platform
 
-- `clientbridge.app` – unified platform for service professionals
+- `smbgen.app` – unified platform for service professionals
 - Target market: Contractors, inspectors, realtors, field service professionals
 - Value proposition: One platform for booking system + email + files + meetings
 - Lead capture: Property-aware forms with automatic Google Meet integration

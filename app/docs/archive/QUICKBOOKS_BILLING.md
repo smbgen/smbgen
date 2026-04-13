@@ -2,7 +2,7 @@
 
 ## Overview
 
-ClientBridge uses **QuickBooks Online** for invoice generation and payment processing. This replaces the previous Stripe integration and provides a complete invoicing and accounting solution.
+SMBGen uses **QuickBooks Online** for invoice generation and payment processing. This replaces the previous Stripe integration and provides a complete invoicing and accounting solution.
 
 ## Features
 

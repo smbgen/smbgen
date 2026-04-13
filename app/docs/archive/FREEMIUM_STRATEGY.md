@@ -1,4 +1,4 @@
-# CLIENTBRIDGE Freemium Multi-Tenant Strategy
+# SMBGEN Freemium Multi-Tenant Strategy
 
 **Version:** 2.0  
 **Date:** November 24, 2025  
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-**The Pivot:** Transform CLIENTBRIDGE from whitelabel single-tenant to freemium multi-tenant SaaS platform.
+**The Pivot:** Transform SMBGEN from whitelabel single-tenant to freemium multi-tenant SaaS platform.
 
 **Core Strategy:** Give away the booking system for free to maximize user adoption, then monetize through premium add-ons (email management, CMS, AI phone system).
 
@@ -31,12 +31,12 @@
 
 ## The Freemium Model
 
-### FREE TIER: "CLIENTBRIDGE Booking"
+### FREE TIER: "SMBGEN Booking"
 
 **What's Included:**
 ```
 ✅ Google OAuth signup (any Gmail account)
-✅ Public booking page (clientbridge.app/book/username)
+✅ Public booking page (smbgen.app/book/username)
 ✅ Availability settings (hours, days, breaks)
 ✅ Google Calendar two-way sync
 ✅ Automatic Google Meet link generation
@@ -51,7 +51,7 @@
 
 **What's Limited:**
 ```
-❌ Custom branding (CLIENTBRIDGE logo on booking page)
+❌ Custom branding (SMBGEN logo on booking page)
 ❌ Email management features
 ❌ CMS/landing pages
 ❌ AI phone system
@@ -65,7 +65,7 @@
 **Why This Works:**
 1. **Removes friction:** No credit card required to start
 2. **Solves real problem:** Eliminates phone tag for appointment booking
-3. **Network effect:** Every booking page is marketing (powered by CLIENTBRIDGE)
+3. **Network effect:** Every booking page is marketing (powered by SMBGEN)
 4. **Qualification:** 50 bookings/month filters serious users from tire-kickers
 5. **Upgrade path:** Users who hit 50 bookings/month are growing and can afford paid
 
@@ -89,7 +89,7 @@
 **Competitive Comparison:**
 - Mailchimp: $13-300+/month (overkill for SMBs)
 - HubSpot: $45-3200+/month (too complex)
-- CLIENTBRIDGE: $29/month (just what you need)
+- SMBGEN: $29/month (just what you need)
 
 #### 2. CMS & Lead Forms - $39/month
 ```
@@ -111,7 +111,7 @@
 **Competitive Comparison:**
 - Wix/Squarespace: $16-45/month (no CRM integration)
 - Leadpages: $37-239/month (no booking integration)
-- CLIENTBRIDGE: $39/month (website + forms + CRM + booking)
+- SMBGEN: $39/month (website + forms + CRM + booking)
 
 #### 3. AI Phone System (Bland.ai Integration) - $79/month
 ```
@@ -134,7 +134,7 @@
 **Competitive Comparison:**
 - Bland.ai direct: $0.09/min ($18 for 200 min) + complexity
 - Ruby Receptionists: $240-840/month (human receptionists)
-- CLIENTBRIDGE: $79/month (AI + integration)
+- SMBGEN: $79/month (AI + integration)
 
 #### 4. Team Plan - $99/month
 ```
@@ -154,7 +154,7 @@
 #### 5. Pro Bundle - $149/month (Save $28)
 ```
 ✅ Everything: Booking + Email + CMS + AI Phone
-✅ White-label option (remove CLIENTBRIDGE branding)
+✅ White-label option (remove SMBGEN branding)
 ✅ Custom domain
 ✅ Advanced analytics
 ✅ API access
@@ -276,35 +276,35 @@ class Client extends Model
 #### URL Structure
 
 **Booking Pages:**
-- Free tier: `clientbridge.app/book/{username}`
+- Free tier: `smbgen.app/book/{username}`
 - Custom domain: `schedule.businessname.com`
-- Subdomain: `businessname.clientbridge.app`
+- Subdomain: `businessname.smbgen.app`
 
 **Admin Dashboard:**
-- All users: `app.clientbridge.app/admin`
+- All users: `app.smbgen.app/admin`
 - Tenant context determined by authentication
 
 **Public CMS Pages:**
-- Free/paid: `businessname.clientbridge.app/{slug}`
+- Free/paid: `businessname.smbgen.app/{slug}`
 - Custom domain: `businessname.com/{slug}`
 
 #### Signup Flow
 
 ```
-1. User visits clientbridge.app
+1. User visits smbgen.app
 2. Clicks "Sign up free"
 3. Google OAuth consent screen
-4. Returns to clientbridge.app/auth/callback
+4. Returns to smbgen.app/auth/callback
 5. Creates tenant record with random subdomain
 6. Creates user record linked to tenant
-7. Redirects to app.clientbridge.app/admin/onboarding
+7. Redirects to app.smbgen.app/admin/onboarding
 8. Onboarding wizard:
    - Choose username for booking page
    - Set availability
    - Connect Google Calendar
    - Test booking
-9. Redirects to app.clientbridge.app/admin/dashboard
-10. Shows "Your booking page: clientbridge.app/book/{username}"
+9. Redirects to app.smbgen.app/admin/dashboard
+10. Shows "Your booking page: smbgen.app/book/{username}"
 ```
 
 #### Feature Flagging
@@ -515,7 +515,7 @@ if (auth()->user()->canUseFeature('email')) {
 **Value Communication:**
 - Calculator: "Save 10 hours/week = $500/month value"
 - ROI: "Pay $29/month, win one extra job = $500+"
-- Comparison: "Housecall Pro: $169/month, CLIENTBRIDGE: $29-149/month"
+- Comparison: "Housecall Pro: $169/month, SMBGEN: $29-149/month"
 
 ---
 
@@ -625,7 +625,7 @@ Expected to hit: Month 4 (Q2 2026)
 - No industry-specific features
 - Doesn't understand service businesses
 
-**CLIENTBRIDGE Advantage:**
+**SMBGEN Advantage:**
 - Free tier is competitive with Calendly paid
 - Add CRM features Calendly doesn't have
 - Service business specific
@@ -643,7 +643,7 @@ Expected to hit: Month 4 (Q2 2026)
 - Complex onboarding
 - Overkill for solo operators
 
-**CLIENTBRIDGE Advantage:**
+**SMBGEN Advantage:**
 - 85% cheaper
 - Simpler, faster to start
 - Free tier for small users
@@ -661,7 +661,7 @@ Expected to hit: Month 4 (Q2 2026)
 - Not built for service businesses
 - Weak CRM features
 
-**CLIENTBRIDGE Advantage:**
+**SMBGEN Advantage:**
 - Better for property-based services
 - More powerful CRM
 - Google Workspace native
@@ -888,7 +888,7 @@ Why: Direct correlation to revenue, indicates product value and retention.
 
 ## Conclusion
 
-This freemium multi-tenant strategy transforms CLIENTBRIDGE from a nice whitelabel tool into a scalable SaaS platform with clear path to $675K ARR by end of 2026.
+This freemium multi-tenant strategy transforms SMBGEN from a nice whitelabel tool into a scalable SaaS platform with clear path to $675K ARR by end of 2026.
 
 **The Unlock:** Free tier removes friction, drives massive user adoption, creates network effects through booking pages.
 
@@ -898,7 +898,7 @@ This freemium multi-tenant strategy transforms CLIENTBRIDGE from a nice whitelab
 
 **The Next Step:** Build the multi-tenant foundation over next 16 weeks, launch beta in Q1 2026, scale to 1,000 users by end of Q1.
 
-**The Vision:** CLIENTBRIDGE becomes the default booking + CRM + communication tool for service professionals who don't need (or can't afford) complex enterprise solutions like Housecall Pro, but need more than just Calendly.
+**The Vision:** SMBGEN becomes the default booking + CRM + communication tool for service professionals who don't need (or can't afford) complex enterprise solutions like Housecall Pro, but need more than just Calendly.
 
 ---
 

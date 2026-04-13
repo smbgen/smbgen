@@ -36,7 +36,7 @@ This is the main demo page that visitors will see after the redirect.
 
 ### Step 2: Update URLs (When Going Live)
 When you deploy to production, update these URLs in the redirect file:
-- Change `http://clientbridge-laravel.test/cyber-audit-demo` to your production URL
+- Change `http://smbgen.test/cyber-audit-demo` to your production URL
 - Example: `https://yourdomain.com/cyber-audit-demo`
 
 ### Step 3: Test the Setup

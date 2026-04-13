@@ -99,7 +99,7 @@ smbgen isn't generic. Workflows, intake forms, and defaults are customized for y
 
 ### For Builders & Developers
 
-> Want to customize this for your business? [Full setup guide →](app/docs/DEVELOPER_CONTRIBUTOR_START_HERE.md)
+> Want to customize this for your business? [Full setup guide →](app/docs/guides/DEVELOPER_CONTRIBUTOR_START_HERE.md)
 
 ### Prerequisites
 ```bash
@@ -180,7 +180,7 @@ AWS_BUCKET=your-bucket
 AWS_ENDPOINT=https://xxx.r2.cloudflarestorage.com
 ```
 
-👉 [All environment variables →](app/docs/ENV_EXAMPLE.md)
+👉 [All environment variables →](app/docs/reference/ENV_EXAMPLE.md)
 
 ---
 
@@ -281,24 +281,25 @@ routes/
 
 ## 📚 Documentation (Comprehensive Guides)
 
-All documentation lives in [`app/docs/`](app/docs/) — organized by topic:
+All documentation lives in [`app/docs/`](app/docs/) and is organized by topic:
 
-**Getting Started**
-- [Developer Setup](app/docs/DEVELOPER_CONTRIBUTOR_START_HERE.md) — Windows/Mac/Linux
-- [Feature Flags](app/docs/FEATURE_FLAGS.md) — Enable/disable features
-- [Environment Variables](app/docs/ENV_EXAMPLE.md) — All `.env` settings
+**Guides**
+- [Developer Setup](app/docs/guides/DEVELOPER_CONTRIBUTOR_START_HERE.md)
+- [Feature Flags](app/docs/guides/FEATURE_FLAGS.md)
+- [Domain Connection Guide](app/docs/guides/DOMAIN_CONNECTION_GUIDE.md)
+- [Email Verification Testing](app/docs/guides/EMAIL_VERIFICATION_TESTING.md)
 
-**Building Blocks**
-- [Booking System](app/docs/BOOKING_CUSTOM_FIELDS_IMPLEMENTATION.md)
-- [Blog Engine](app/docs/BLOG_IMPLEMENTATION_SUMMARY.md)
-- [AI Features](app/docs/AI_IMPLEMENTATION_COMPLETE.md)
-- [Stripe Billing](app/docs/STRIPE_SUBSCRIPTION_SETUP.md)
-- [Google Calendar](app/docs/GOOGLE_CALENDAR_DEBUG_QUICKREF.md)
+**Features & Architecture**
+- [Booking System](app/docs/features/BOOKING_CUSTOM_FIELDS_IMPLEMENTATION.md)
+- [Blog Engine](app/docs/features/BLOG_IMPLEMENTATION_SUMMARY.md)
+- [AI Features](app/docs/features/AI_IMPLEMENTATION_COMPLETE.md)
+- [Theme System](app/docs/architecture/THEME_SYSTEM.md)
 
-**Operations**
-- [Domain Setup](app/docs/DOMAIN_CONNECTION_GUIDE.md)
-- [Admin Features](app/docs/SUPER_ADMIN_SETUP.md)
-- [Theme System](app/docs/THEME_SYSTEM.md)
+**Billing, Integrations, and Tenancy**
+- [Stripe Billing](app/docs/billing/STRIPE_SUBSCRIPTION_SETUP.md)
+- [Google Calendar](app/docs/integrations/GOOGLE_CALENDAR_DEBUG_QUICKREF.md)
+- [Multi-Tenant Setup](app/docs/multi-tenancy/MULTI_TENANT_SETUP.md)
+- [Super Admin Setup](app/docs/multi-tenancy/SUPER_ADMIN_SETUP.md)
 
 ---
 
@@ -361,7 +362,7 @@ Then follow these steps:
 
 5. **Open a pull request** to `main`
 
-👉 [Full contribution guide →](app/docs/DEVELOPER_CONTRIBUTOR_START_HERE.md)
+👉 [Full contribution guide →](app/docs/guides/DEVELOPER_CONTRIBUTOR_START_HERE.md)
 
 ---
 
@@ -370,7 +371,7 @@ Then follow these steps:
 - 📖 [Full Documentation](app/docs/README.md)
 - 💬 [Questions & Discussions](https://github.com/alexramsey92/smbgen/discussions)
 - 🐛 [Report Issues](https://github.com/alexramsey92/smbgen/issues)
-- ⚠️ [Known Limitations](app/docs/REMAINING_ISSUES.md)
+- ⚠️ [Known Limitations](app/docs/reference/REMAINING_ISSUES.md)
 
 ---
 
@@ -388,6 +389,6 @@ See [LICENSE](LICENSE) for full terms.
 
 ### No vendor lock-in. No "call for pricing." Just a platform that works for your business.
 
-**[Get Started →](#-quick-start)** • **[Explore Docs](app/docs/README.md)** • **[Contribute](app/docs/DEVELOPER_CONTRIBUTOR_START_HERE.md)**
+**[Get Started →](#-quick-start)** • **[Explore Docs](app/docs/README.md)** • **[Contribute](app/docs/guides/DEVELOPER_CONTRIBUTOR_START_HERE.md)**
 
 </div>

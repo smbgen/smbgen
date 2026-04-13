@@ -2,7 +2,7 @@
 
 ## Overview
 
-ClientBridge now uses **Stripe** as the primary payment processor, replacing QuickBooks for direct payment collection. This provides a simpler, more flexible payment experience with instant processing and real-time payment tracking.
+SMBGen now uses **Stripe** as the primary payment processor, replacing QuickBooks for direct payment collection. This provides a simpler, more flexible payment experience with instant processing and real-time payment tracking.
 
 ## Features
 

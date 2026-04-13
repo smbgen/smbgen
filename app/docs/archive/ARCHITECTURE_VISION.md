@@ -1,5 +1,5 @@
 ````markdown
-# ClientBridge Architecture Vision
+# SMBGen Architecture Vision
 
 **📋 NOTE: This vision has evolved. See [TACTICAL_ROADMAP.md](./TACTICAL_ROADMAP.md) for current unified customer engine approach.**
 
@@ -7,9 +7,9 @@
 
 ## 🎯 **UNIFIED PLATFORM MISSION**
 
-**CLIENTBRIDGE MISSION:** One Platform. All Your Tools. Booking System • Email • Files • Meetings.
+**SMBGEN MISSION:** One Platform. All Your Tools. Booking System • Email • Files • Meetings.
 
-CLIENTBRIDGE is a unified platform for service professionals that brings appointments, leads, files, and communication together in one place. Built specifically for contractors, inspectors, realtors, and field service professionals who need professional tools to manage clients.
+SMBGEN is a unified platform for service professionals that brings appointments, leads, files, and communication together in one place. Built specifically for contractors, inspectors, realtors, and field service professionals who need professional tools to manage clients.
 
 **Core Philosophy:** Stop juggling scattered tools. Professional tools built for people who serve clients.
 
@@ -167,4 +167,4 @@ POST /api/messages (client communication)
 
 ---
 
-**This unified platform approach transforms CLIENTBRIDGE from a generic client portal into the essential business operating system for service professionals - one platform for all their tools.**
+**This unified platform approach transforms SMBGEN from a generic client portal into the essential business operating system for service professionals - one platform for all their tools.**

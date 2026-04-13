@@ -38,7 +38,7 @@
   ```
 
 ### Phase 3: The Great Public Directory Disaster
-- **Problem**: `ls -la /home/alex/clientbridge/public/index.php` → "no such file or directory"
+- **Problem**: `ls -la /home/alex/smbgen/public/index.php` → "no such file or directory"
 - **Root Cause**: User ran `rm -rf public` and `git pull` didn't restore it
 - **Why Git Didn't Help**: 
   - `public/index.php` IS tracked in git
@@ -51,7 +51,7 @@
 - **Root Cause**: Nginx was trying to serve directory listings instead of Laravel
 - **Error Logs**:
   ```
-  directory index of "/home/alex/clientbridge/public/" is forbidden
+  directory index of "/home/alex/smbgen/public/" is forbidden
   ```
 - **Solution**: Proper Laravel Nginx configuration with `try_files` directive
 
@@ -60,8 +60,8 @@
 - **Root Cause**: SQLite database file had wrong permissions
 - **Solution**: 
   ```bash
-  sudo chown www-data:www-data /home/alex/clientbridge/database/database.sqlite
-  sudo chmod 664 /home/alex/clientbridge/database/database.sqlite
+  sudo chown www-data:www-data /home/alex/smbgen/database/database.sqlite
+  sudo chmod 664 /home/alex/smbgen/database/database.sqlite
   ```
 
 ## 🛠️ The Complete Fix Sequence
@@ -82,10 +82,10 @@ nvm alias default 24
 git checkout HEAD -- public/
 
 # Set proper ownership
-sudo chown -R alex:alex ~/clientbridge
-sudo chown -R www-data:www-data ~/clientbridge/storage
-sudo chown -R www-data:www-data ~/clientbridge/bootstrap/cache
-sudo chown -R www-data:www-data ~/clientbridge/public
+sudo chown -R alex:alex ~/smbgen
+sudo chown -R www-data:www-data ~/smbgen/storage
+sudo chown -R www-data:www-data ~/smbgen/bootstrap/cache
+sudo chown -R www-data:www-data ~/smbgen/public
 ```
 
 ### 3. Rebuild Assets
@@ -99,10 +99,10 @@ npm run build
 ### 4. Fix Database Permissions
 ```bash
 # Fix SQLite permissions
-sudo chown www-data:www-data /home/alex/clientbridge/database/database.sqlite
-sudo chmod 664 /home/alex/clientbridge/database/database.sqlite
-sudo chown www-data:www-data /home/alex/clientbridge/database/
-sudo chmod 775 /home/alex/clientbridge/database/
+sudo chown www-data:www-data /home/alex/smbgen/database/database.sqlite
+sudo chmod 664 /home/alex/smbgen/database/database.sqlite
+sudo chown www-data:www-data /home/alex/smbgen/database/
+sudo chmod 775 /home/alex/smbgen/database/
 ```
 
 ### 5. Verify Nginx Configuration
@@ -111,7 +111,7 @@ server {
     listen 443 ssl;
     server_name houston1.oldlinecyber.com;
     
-    root /home/alex/clientbridge/public;
+    root /home/alex/smbgen/public;
     index index.php index.html;
     
     location / {
@@ -172,11 +172,11 @@ server {
 ```bash
 # Check what's wrong
 sudo tail -f /var/log/nginx/error.log
-tail -f /home/alex/clientbridge/storage/logs/laravel.log
+tail -f /home/alex/smbgen/storage/logs/laravel.log
 
 # Fix permissions
-sudo chown -R alex:alex ~/clientbridge
-sudo chown -R www-data:www-data ~/clientbridge/storage ~/clientbridge/bootstrap/cache ~/clientbridge/public
+sudo chown -R alex:alex ~/smbgen
+sudo chown -R www-data:www-data ~/smbgen/storage ~/smbgen/bootstrap/cache ~/smbgen/public
 
 # Rebuild everything
 rm -rf node_modules package-lock.json public/build

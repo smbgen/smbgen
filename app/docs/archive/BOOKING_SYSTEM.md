@@ -1,8 +1,8 @@
-# ClientBridge Booking System Documentation
+# SMBGen Booking System Documentation
 
 ## 🎯 **Overview**
 
-The ClientBridge booking system is a complete appointment scheduling solution with Google Calendar integration, blackout date management, and double-booking prevention.
+The SMBGen booking system is a complete appointment scheduling solution with Google Calendar integration, blackout date management, and double-booking prevention.
 
 ## 📋 **Features**
 

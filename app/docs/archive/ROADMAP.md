@@ -1,4 +1,4 @@
-# ClientBridge Development Roadmap
+# SMBGen Development Roadmap
 
 **Version:** 2.0  
 **Last Updated:** October 18, 2025  
@@ -8,7 +8,7 @@
 
 ## 🎯 Project Vision
 
-ClientBridge is a comprehensive virtual consulting platform handling the entire client lifecycle: booking → meeting → documentation → invoicing → payment. Focus: automate repetitive tasks, provide professional service delivery, and maintain security safeguards.
+SMBGen is a comprehensive virtual consulting platform handling the entire client lifecycle: booking → meeting → documentation → invoicing → payment. Focus: automate repetitive tasks, provide professional service delivery, and maintain security safeguards.
 
 ---
 
@@ -194,15 +194,15 @@ CREATE TABLE email_approval_queue (
 
 ### 2.3 Booking Confirmation Email (Dual System) 🟡
 
-**Status:** ⚠️ **PARTIAL - Google Sends, ClientBridge Doesn't**  
+**Status:** ⚠️ **PARTIAL - Google Sends, SMBGen Doesn't**  
 **Priority:** MEDIUM 🟡  
-**User Story:** "Google Calendar sends the invite, but we should also send a ClientBridge confirmation email as fallback"
+**User Story:** "Google Calendar sends the invite, but we should also send a SMBGen confirmation email as fallback"
 
 **Current Behavior:**
 - ✅ Booking creates Google Calendar event
 - ✅ Google sends calendar invite with Meet link
 - ✅ Email logged in `email_logs` via LogSentEmail listener
-- ❌ No ClientBridge-branded confirmation email
+- ❌ No SMBGen-branded confirmation email
 - ❌ No template customization for confirmation
 
 **Proposed Dual System:**
@@ -212,7 +212,7 @@ CREATE TABLE email_approval_queue (
    - Calendar integration
    - Automatic reminders
 
-2. **Secondary:** ClientBridge Confirmation Email (ADD)
+2. **Secondary:** SMBGen Confirmation Email (ADD)
    - Branded email with company logo
    - Expectations, legal terms, cost info
    - Backup in case Google service fails
@@ -522,7 +522,7 @@ $session = \Stripe\Checkout\Session::create([
 ### 4.1 Client File Upload System
 
 **Priority:** MEDIUM 🟡  
-**User Story:** "Allow customers to click an email link in their confirmation email to upload files into their clientbridge client portal for review by dad later"
+**User Story:** "Allow customers to click an email link in their confirmation email to upload files into their smbgen client portal for review by dad later"
 
 **Implementation:**
 

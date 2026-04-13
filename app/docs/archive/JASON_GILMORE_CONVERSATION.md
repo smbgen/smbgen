@@ -2,13 +2,13 @@
 
 **Date Range:** November 17-24, 2025  
 **Platform:** LinkedIn Messaging  
-**Participants:** Alexander Ramsey (Founder, CLIENTBRIDGE) & Jason Gilmore (CTO Adalo, Technical Partner Xenon Partners)
+**Participants:** Alexander Ramsey (Founder, SMBGEN) & Jason Gilmore (CTO Adalo, Technical Partner Xenon Partners)
 
 ---
 
 ## Executive Summary
 
-This conversation represents a pivotal moment in CLIENTBRIDGE's journey - from a personal project solving a specific problem for one home inspector (my dad) to potentially becoming a scalable SaaS platform. Jason Gilmore, author of the PHP/MySQL book that sparked my development journey 21 years ago, provided critical validation, mentorship, and strategic guidance that transformed my perspective on the business.
+This conversation represents a pivotal moment in SMBGEN's journey - from a personal project solving a specific problem for one home inspector (my dad) to potentially becoming a scalable SaaS platform. Jason Gilmore, author of the PHP/MySQL book that sparked my development journey 21 years ago, provided critical validation, mentorship, and strategic guidance that transformed my perspective on the business.
 
 **Key Outcomes:**
 1. ✅ Validation from experienced SaaS operator (13+ multi-million ARR companies)
@@ -49,7 +49,7 @@ Jason immediately saw the potential in geographic-based affinity mapping and not
 - I worked in his business for 3 years - I understand SMB pain intimately
 
 **The Validation Moment:**
-Dad sponsored me to attend **Laracon Denver** where Laravel Cloud was announced. Immediately deployed CLIENTBRIDGE to it.
+Dad sponsored me to attend **Laracon Denver** where Laravel Cloud was announced. Immediately deployed SMBGEN to it.
 
 **Current Production State:**
 Running three instances:
@@ -151,7 +151,7 @@ I shared screenshots of **Bland.ai** - an AI phone system that can:
 **Jason's Validation (November 24, 12:32 PM):**
 > "I am friends with the COO of an HR company down in Florida that is using bland.ai with great success. Also aware of a huge mortgage company that is using a similar tool to have text-based conversations with homeowners whenever the interest rate drops below their current mortgage interest rate. People really seem to like these tools when they are properly deployed."
 
-**Strategic Implication:** AI phone systems are being successfully deployed at scale. This is a validated integration path for CLIENTBRIDGE.
+**Strategic Implication:** AI phone systems are being successfully deployed at scale. This is a validated integration path for SMBGEN.
 
 ### SecurityBot.dev Trial
 
@@ -269,7 +269,7 @@ PAID ADD-ONS:
 - **Toast:** Restaurant-focused, service gap
 - **Square Appointments:** Limited features
 
-**CLIENTBRIDGE Advantage:**
+**SMBGEN Advantage:**
 - Purpose-built for service professionals
 - Simpler than enterprise tools
 - More features than booking-only
@@ -417,7 +417,7 @@ Service professionals know each other:
 
 2. **Competitive Analysis**
    - Deep dive on Toast weaknesses
-   - Calendly vs CLIENTBRIDGE comparison
+   - Calendly vs SMBGEN comparison
    - Housecall Pro pricing vs feature set
    - Square Appointments limitations
 
@@ -452,7 +452,7 @@ Service professionals know each other:
 
 3. **Work-Life Balance**
    - Maintain NCI Frederick position
-   - Nights/weekends on CLIENTBRIDGE
+   - Nights/weekends on SMBGEN
    - Be strategic about public visibility
    - Manage employer expectations
 
@@ -491,7 +491,7 @@ Service professionals know each other:
 ### Why This Matters
 
 **Personal Level:**
-This conversation transformed CLIENTBRIDGE from "my dad's booking system" to "scalable SaaS platform with validated market demand."
+This conversation transformed SMBGEN from "my dad's booking system" to "scalable SaaS platform with validated market demand."
 
 **Technical Level:**
 Validation from someone who runs 13 multi-million ARR SaaS companies that:
@@ -567,7 +567,7 @@ Connected with Jason Gilmore, who:
 
 ## Conclusion
 
-This conversation represents the inflection point where CLIENTBRIDGE stopped being a side project and started becoming a real business. Jason Gilmore's validation, strategic guidance, and network access transformed my understanding of what's possible.
+This conversation represents the inflection point where SMBGEN stopped being a side project and started becoming a real business. Jason Gilmore's validation, strategic guidance, and network access transformed my understanding of what's possible.
 
 **The Meta Moment:** I booked a demo with a SaaS M&A expert using the booking system I built to show him the booking system I built. And it worked.
 
@@ -598,4 +598,4 @@ This conversation represents the inflection point where CLIENTBRIDGE stopped bei
 
 **The Strategy:** Find people on shared interest maps (Laramap), share genuine story, ask specific questions, provide value.
 
-**The Results:** Conversation with Jason Gilmore that changed the trajectory of CLIENTBRIDGE.
+**The Results:** Conversation with Jason Gilmore that changed the trajectory of SMBGEN.

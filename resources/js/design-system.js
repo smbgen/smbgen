@@ -1,5 +1,5 @@
 /**
- * ClientBridge Design System
+ * SMBGen Design System
  * 
  * Unified design language for consistent UI/UX across the application.
  * Based on professional SaaS dashboard patterns with dark theme support.

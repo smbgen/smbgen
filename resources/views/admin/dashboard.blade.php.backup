@@ -358,10 +358,10 @@
                     </div>
                 @endif
 
-                <!-- ClientBridge System -->
+                <!-- SMBGen System -->
                 <div class="text-center p-4 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors">
                     <div class="text-3xl mb-3">⚙️</div>
-                    <h4 class="font-semibold text-gray-100 mb-2">ClientBridge System</h4>
+                    <h4 class="font-semibold text-gray-100 mb-2">SMBGen System</h4>
                     <p class="text-gray-400 text-sm mb-4">System settings and access management</p>
                     <div class="space-y-2">
                         @if(auth()->check() && auth()->user()->isAdministrator())
@@ -947,14 +947,14 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
                         <input type="text" name="subject" required 
-                               value="ClientBridge Test Email"
+                               value="SMBGen Test Email"
                                class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Message</label>
                         <textarea name="message" rows="4" required
-                                  class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500">This is a test email from ClientBridge.
+                                  class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500">This is a test email from SMBGen.
 
 If you received this, your email configuration is working correctly!
 

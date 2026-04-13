@@ -24,7 +24,7 @@ composer require league/flysystem-google-cloud-storage
 2. Create a Google Cloud Storage bucket:
    - Go to [Google Cloud Console](https://console.cloud.google.com)
    - Navigate to Cloud Storage > Buckets
-   - Create a new bucket (e.g., `clientbridge-files`)
+   - Create a new bucket (e.g., `smbgen-files`)
    - Set appropriate location and storage class
 
 3. Create a Service Account:
@@ -40,7 +40,7 @@ Add to your `.env`:
 FILESYSTEM_DRIVER=gcs
 
 GOOGLE_CLOUD_PROJECT_ID=your-project-id
-GOOGLE_CLOUD_STORAGE_BUCKET=clientbridge-files
+GOOGLE_CLOUD_STORAGE_BUCKET=smbgen-files
 GOOGLE_CLOUD_KEY_FILE=/path/to/service-account.json
 ```
 
@@ -71,7 +71,7 @@ FILESYSTEM_DRIVER=s3
 AWS_ACCESS_KEY_ID=your-access-key
 AWS_SECRET_ACCESS_KEY=your-secret-key
 AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=clientbridge-files
+AWS_BUCKET=smbgen-files
 ```
 
 ### Production Best Practices (S3)

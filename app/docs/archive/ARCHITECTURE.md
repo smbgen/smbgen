@@ -1,4 +1,4 @@
-# ClientBridge Architecture Documentation
+# SMBGen Architecture Documentation
 
 **Version:** 1.0  
 **Last Updated:** January 2025  
@@ -26,7 +26,7 @@
 
 ## System Overview
 
-ClientBridge is a Laravel-based client management platform designed for virtual consulting sessions. It combines booking management, email communication, and Google Calendar integration with a focus on security and ease of use.
+SMBGen is a Laravel-based client management platform designed for virtual consulting sessions. It combines booking management, email communication, and Google Calendar integration with a focus on security and ease of use.
 
 ### Technology Stack
 
@@ -253,7 +253,7 @@ Key features:
 
 ```php
 // Get a setting (with type casting)
-$companyName = BusinessSetting::get('company_name', 'ClientBridge');
+$companyName = BusinessSetting::get('company_name', 'SMBGen');
 $isEnabled = BusinessSetting::get('feature_x', false);  // Returns bool
 
 // Set a setting
@@ -315,7 +315,7 @@ OAuth2 authentication for Google services (Calendar, Drive, etc.).
 
 1. **Create Google Cloud Project**
    - Go to [console.cloud.google.com](https://console.cloud.google.com)
-   - Create new project: "ClientBridge"
+   - Create new project: "SMBGen"
 
 2. **Enable APIs**
    - Google Calendar API
@@ -327,7 +327,7 @@ OAuth2 authentication for Google services (Calendar, Drive, etc.).
    - Authorized redirect URIs:
      ```
      https://houston1.oldlinecyber.com/auth/google/callback
-     http://clientbridge-laravel.test/auth/google/callback
+     http://smbgen.test/auth/google/callback
      ```
 
 4. **Configure .env**
@@ -508,7 +508,7 @@ SMTP-based email system with template support and history tracking.
 **Provider:** NixiHost  
 **Host:** rtsenviro.com  
 **Port:** 465 (SSL)  
-**From:** clientbridge@rtsenviro.com
+**From:** smbgen@rtsenviro.com
 
 **`.env` configuration:**
 
@@ -516,10 +516,10 @@ SMTP-based email system with template support and history tracking.
 MAIL_MAILER=smtp
 MAIL_HOST=rtsenviro.com
 MAIL_PORT=465
-MAIL_USERNAME=clientbridge@rtsenviro.com
+MAIL_USERNAME=smbgen@rtsenviro.com
 MAIL_PASSWORD=your-password-here
 MAIL_ENCRYPTION=ssl
-MAIL_FROM_ADDRESS=clientbridge@rtsenviro.com
+MAIL_FROM_ADDRESS=smbgen@rtsenviro.com
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
@@ -761,7 +761,7 @@ DB_DATABASE=/absolute/path/to/database.sqlite
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=clientbridge
+DB_DATABASE=smbgen
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -807,7 +807,7 @@ php artisan db:seed
 
 ```bash
 ssh root@houston1.oldlinecyber.com
-cd /home/alex/clientbridge
+cd /home/alex/smbgen
 bash deployment/vps-deploy.sh
 ```
 
@@ -824,7 +824,7 @@ bash deployment/vps-deploy.sh
 
 ### Nginx Configuration
 
-**Location:** `/etc/nginx/sites-available/clientbridge`
+**Location:** `/etc/nginx/sites-available/smbgen`
 
 **Key sections:**
 
@@ -832,7 +832,7 @@ bash deployment/vps-deploy.sh
 server {
     listen 443 ssl http2;
     server_name houston1.oldlinecyber.com;
-    root /home/alex/clientbridge/public;
+    root /home/alex/smbgen/public;
     
     # SSL
     ssl_certificate /etc/letsencrypt/live/houston1.oldlinecyber.com/fullchain.pem;
@@ -880,12 +880,12 @@ pm.max_spare_servers = 3
 chown -R www-data:www-data storage bootstrap/cache
 
 # Application files owned by deploy user
-chown -R alex:alex /home/alex/clientbridge
+chown -R alex:alex /home/alex/smbgen
 ```
 
 ### Git Repository
 
-**Remote:** github.com/alexramsey92/clientbridge-laravel  
+**Remote:** github.com/alexramsey92/smbgen  
 **Branch:** main
 
 **Deployment workflow:**
@@ -898,7 +898,7 @@ git push origin main
 
 # VPS
 ssh root@houston1.oldlinecyber.com
-cd /home/alex/clientbridge
+cd /home/alex/smbgen
 bash deployment/vps-deploy.sh
 ```
 
@@ -1043,7 +1043,7 @@ bash deployment/whitelist-my-ip.sh
 
 # Or manually:
 ssh root@houston1.oldlinecyber.com
-nano /etc/nginx/sites-available/clientbridge
+nano /etc/nginx/sites-available/smbgen
 
 # Add your IP:
 location /admin {
@@ -1107,7 +1107,7 @@ For background jobs:
 php artisan queue:work --daemon
 
 # Or use Supervisor
-sudo nano /etc/supervisor/conf.d/clientbridge-worker.conf
+sudo nano /etc/supervisor/conf.d/smbgen-worker.conf
 ```
 
 ### Debugging Commands
@@ -1137,7 +1137,7 @@ php artisan about
 
 ```bash
 # Start Herd (automatic)
-# Visit: http://clientbridge-laravel.test
+# Visit: http://smbgen.test
 
 # Watch for file changes
 npm run dev
@@ -1169,7 +1169,7 @@ php artisan optimize:clear
 5. **Deploy to VPS:**
    ```bash
    ssh root@houston1.oldlinecyber.com
-   cd /home/alex/clientbridge
+   cd /home/alex/smbgen
    bash deployment/vps-deploy.sh
    ```
 

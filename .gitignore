@@ -43,3 +43,4 @@ storage/logs/*.log
 debug_*.php
 test_*.php
 verify_*.php
+.mcp.json

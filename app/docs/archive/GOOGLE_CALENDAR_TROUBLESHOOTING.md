@@ -1,7 +1,7 @@
 # Google Calendar Integration - Troubleshooting Guide
 
 ## Overview
-This guide helps diagnose and fix Google Calendar connection issues in ClientBridge.
+This guide helps diagnose and fix Google Calendar connection issues in SMBGen.
 
 ## 🔥 CRITICAL: Two Different OAuth Flows (Nov 18, 2025)
 
@@ -33,7 +33,7 @@ But NO calendar scopes, you're hitting the **wrong callback URL**!
 
 **1. Update .env on VPS:**
 ```bash
-nano /var/www/clientbridge-laravel/.env
+nano /var/www/smbgen/.env
 ```
 
 Add this line (if not present):
@@ -53,7 +53,7 @@ https://houston1.oldlinecyber.com/admin/calendar/callback
 
 **3. Clear Cache:**
 ```bash
-cd /var/www/clientbridge-laravel
+cd /var/www/smbgen
 php artisan config:clear
 php artisan cache:clear
 ```

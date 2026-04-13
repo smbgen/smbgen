@@ -240,7 +240,7 @@ All errors are now logged to `storage/logs/laravel.log`:
 [2025-10-06 ...] local.WARNING: Failed to update .env file {"error": "...", "key": "APP_NAME"}
 
 // Successful updates
-[2025-10-06 ...] local.INFO: Updated .env file {"key": "APP_NAME", "value": "ClientBridge"}
+[2025-10-06 ...] local.INFO: Updated .env file {"key": "APP_NAME", "value": "SMBGen"}
 ```
 
 ---

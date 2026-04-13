@@ -1,6 +1,6 @@
 # Windows Environment Setup & Troubleshooting
 
-This document covers Windows-specific configuration and common issues when developing ClientBridge Laravel on Windows with Laravel Herd and Git Bash.
+This document covers Windows-specific configuration and common issues when developing SMBGen on Windows with Laravel Herd and Git Bash.
 
 ## Table of Contents
 - [Laravel Herd Configuration](#laravel-herd-configuration)
@@ -453,7 +453,7 @@ composer -V
 
 # Verify you're in the project root
 pwd
-# Should show: /c/Users/[username]/Documents/GitHub/clientbridge-laravel
+# Should show: /c/Users/[username]/Documents/GitHub/smbgen
 ```
 
 ### 2. Fix Bootstrap Authentication Issues

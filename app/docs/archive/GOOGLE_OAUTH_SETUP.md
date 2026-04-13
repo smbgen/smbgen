@@ -1,10 +1,10 @@
 # Google OAuth Setup for Calendar Integration
 
-This guide explains how to set up Google OAuth for both user authentication and Google Calendar integration in ClientBridge.
+This guide explains how to set up Google OAuth for both user authentication and Google Calendar integration in SMBGen.
 
 ## Two Separate OAuth Flows
 
-ClientBridge uses Google OAuth for two purposes:
+SMBGen uses Google OAuth for two purposes:
 
 1. **User Authentication** (`/auth/google/callback`)
    - Allows users to sign in with their Google account
@@ -35,16 +35,16 @@ ClientBridge uses Google OAuth for two purposes:
 1. Go to **APIs & Services** > **Credentials**
 2. Click **Create Credentials** > **OAuth client ID**
 3. Application type: **Web application**
-4. Name: `ClientBridge` (or your app name)
+4. Name: `SMBGen` (or your app name)
 
 ### 4. Configure Authorized Redirect URIs
 
 Add **BOTH** redirect URIs for **EACH** environment:
 
-**Production (clientbridge.app):**
+**Production (smbgen.app):**
 ```
-https://clientbridge.app/auth/google/callback
-https://clientbridge.app/admin/calendar/callback
+https://smbgen.app/auth/google/callback
+https://smbgen.app/admin/calendar/callback
 ```
 
 **Local Development:**
@@ -89,8 +89,8 @@ GOOGLE_CLIENT_ID=your_client_id_here.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your_client_secret_here
 
 # Redirect URIs (use localhost)
-GOOGLE_REDIRECT_URI=http://clientbridge-laravel.test/auth/google/callback
-GOOGLE_CALENDAR_REDIRECT_URI=http://clientbridge-laravel.test/admin/calendar/callback
+GOOGLE_REDIRECT_URI=http://smbgen.test/auth/google/callback
+GOOGLE_CALENDAR_REDIRECT_URI=http://smbgen.test/admin/calendar/callback
 ```
 
 **Note**: You'll need to add localhost URIs to Google Cloud Console too.
@@ -102,7 +102,7 @@ GOOGLE_CALENDAR_REDIRECT_URI=http://clientbridge-laravel.test/admin/calendar/cal
 1. Go to **APIs & Services** > **OAuth consent screen**
 2. User Type: **External** (unless you have Google Workspace)
 3. Fill in required fields:
-   - App name: `ClientBridge`
+   - App name: `SMBGen`
    - User support email: your email
    - Developer contact: your email
 
@@ -130,7 +130,7 @@ To allow any Google user to connect:
 4. Once approved, status changes to "Published"
 
 **During Testing**: Users will see "This app isn't verified" warning. They can click:
-- "Advanced" → "Go to ClientBridge (unsafe)"
+- "Advanced" → "Go to SMBGen (unsafe)"
 
 ## Testing the Connection
 
@@ -183,13 +183,13 @@ This checks:
 
 **Fix**:
 1. Check your environment variables (in Laravel Cloud or .env):
-   - `GOOGLE_REDIRECT_URI=https://clientbridge.app/auth/google/callback`
-   - `GOOGLE_CALENDAR_REDIRECT_URI=https://clientbridge.app/admin/calendar/callback`
+   - `GOOGLE_REDIRECT_URI=https://smbgen.app/auth/google/callback`
+   - `GOOGLE_CALENDAR_REDIRECT_URI=https://smbgen.app/admin/calendar/callback`
 2. Go to Google Cloud Console > Credentials > Your OAuth Client
 3. Scroll to "Authorized redirect URIs"
 4. Add the EXACT URIs (copy/paste from error message if shown):
-   - `https://clientbridge.app/auth/google/callback`
-   - `https://clientbridge.app/admin/calendar/callback`
+   - `https://smbgen.app/auth/google/callback`
+   - `https://smbgen.app/admin/calendar/callback`
 5. Click **Save** (changes are immediate)
 6. No trailing slashes unless both have them
 7. Protocol must match exactly (http vs https)

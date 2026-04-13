@@ -15,19 +15,19 @@
    15  ll sites-enabled/
    16  sudo nano /etc/nginx/sites-available/houston1
    17  sudo nginx -t && sudo systemctl reload nginx
-   18  ls ~/clientbridge/public/
-   19  cat ~/clientbridge/public/index.php
+   18  ls ~/smbgen/public/
+   19  cat ~/smbgen/public/index.php
    20  ll
    21  ls sites-available/
    22  ll
    23  cd sites-available/
    24  ll
-   25  rm clientbridge
-   26  sudo rm clientbridge
+   25  rm smbgen
+   26  sudo rm smbgen
    27  cd ..
    28  cd sites-enabled/
    29  ll
-   30  sudo rm clientbridge
+   30  sudo rm smbgen
    31  ll
    32  history
    33  sudo nginx -t && sudo systemctl reload nginx
@@ -45,19 +45,19 @@
    45  sudo nginx -t
    46  sudo systemctl reload nginx
    47  cat /etc/nginx/sites-available/houston1 | grep root
-   48  sudo chown -R www-data:www-data /home/alex/clientbridge
-   49  sudo find /home/alex/clientbridge -type d -exec chmod 755 {} \;
-   50  sudo find /home/alex/clientbridge -type f -exec chmod 644 {} \;
+   48  sudo chown -R www-data:www-data /home/alex/smbgen
+   49  sudo find /home/alex/smbgen -type d -exec chmod 755 {} \;
+   50  sudo find /home/alex/smbgen -type f -exec chmod 644 {} \;
    51  sudo nginx -t
    52  sudo systemctl reload nginx
-   53  cd ~/clientbridge/
+   53  cd ~/smbgen/
    54  ll
    55  php artisan config:clear
    56  phgp artison route:clear
    57  php artisan route:clear
    58  php artisan serve
    59  cat /etc/nginx/sites-available/houston1 | grep root
-   60  ls -l /home/alex/clientbridge/public/index.php
+   60  ls -l /home/alex/smbgen/public/index.php
    61  php artisan route:list
    62  tail -n 50 storage/logs/laravel.log
    63  curl -I http://localhost
@@ -80,10 +80,10 @@
    80  ls -al sites-enabled/
    81  ls -al sites-available/
    82  cat sites-available/houston1
-   83  ls ~/clientbridge/
-   84  ls -ltra ~/clientbridge/
+   83  ls ~/smbgen/
+   84  ls -ltra ~/smbgen/
    85  ll
-   86  cd ~/clientbridge/
+   86  cd ~/smbgen/
    87  ll
    88  cd routes/
    89  ll
@@ -100,19 +100,19 @@
   100  sudo systemctl reload nginx
   101  tail -n 40 /var/log/nginx/error.log
   102  sudo tail -n 40 /var/log/nginx/error.log
-  103  sudo chown -R www-data:www-data /home/alex/clientbridge
-  104  sudo find /home/alex/clientbridge -type d -exec chmod 755 {} \;
-  105  sudo find /home/alex/clientbridge -type f -exec chmod 644 {} \;
+  103  sudo chown -R www-data:www-data /home/alex/smbgen
+  104  sudo find /home/alex/smbgen -type d -exec chmod 755 {} \;
+  105  sudo find /home/alex/smbgen -type f -exec chmod 644 {} \;
   106  sudo systemctl reload nginx
   107  php
   108  cd ..
-  109  sudo rm -rf ~/clientbridge/
-  110  composer create-project laravel/laravel clientbridge
-  111  sudo chown -R www-data:www-data ~/clientbridge
-  112  sudo find ~/clientbridge -type d -exec chmod 755 {} \;
-  113  sudo find ~/clientbridge -type f -exec chmod 644 {} \;
-  114  sudo chmod -R 775 ~/clientbridge/storage ~/clientbridge/bootstrap/cache
-  115  cd ~/clientbridge
+  109  sudo rm -rf ~/smbgen/
+  110  composer create-project laravel/laravel smbgen
+  111  sudo chown -R www-data:www-data ~/smbgen
+  112  sudo find ~/smbgen -type d -exec chmod 755 {} \;
+  113  sudo find ~/smbgen -type f -exec chmod 644 {} \;
+  114  sudo chmod -R 775 ~/smbgen/storage ~/smbgen/bootstrap/cache
+  115  cd ~/smbgen
   116  cp .env.example .env
   117  sudo cp .env.example .env
   118  php artisan key:generate
@@ -127,33 +127,33 @@
   127  sudo systemctl restart php8.3-fpm
   128  sudo systemctl reload nginx
   129  grep root /etc/nginx/sites-available/houston1
-  130  ls -l /home/alex/clientbridge/public/index.php
+  130  ls -l /home/alex/smbgen/public/index.php
   131  sudo php artisan route:list
   132  php artisan route:list
   133  tail -n 40 /var/log/nginx/error.log
   134  sudo tail -n 40 /var/log/nginx/error.log
-  135  sudo chown -R www-data:www-data /home/alex/clientbridge
-  136  sudo find /home/alex/clientbridge -type d -exec chmod 755 {} \;
-  137  sudo find /home/alex/clientbridge -type f -exec chmod 644 {} \;
-  138  sudo chmod -R 775 /home/alex/clientbridge/storage /home/alex/clientbridge/bootstrap/cache
+  135  sudo chown -R www-data:www-data /home/alex/smbgen
+  136  sudo find /home/alex/smbgen -type d -exec chmod 755 {} \;
+  137  sudo find /home/alex/smbgen -type f -exec chmod 644 {} \;
+  138  sudo chmod -R 775 /home/alex/smbgen/storage /home/alex/smbgen/bootstrap/cache
   139  sudo systemctl restart php8.3-fpm
   140  sudo systemctl reload nginx
-  141  ls -l /home/alex/clientbridge/public/index.php
+  141  ls -l /home/alex/smbgen/public/index.php
   142  ps aux | grep nginx
-  143  ls -l /home/alex/clientbridge/public/index.php
+  143  ls -l /home/alex/smbgen/public/index.php
   144  history
   145  tail -n 40 /var/log/nginx/error.log
   146  sudo tail -n 40 /var/log/nginx/error.log
-  147  sudo -u www-data cat /home/alex/clientbridge/public/index.php
-  148  sudo chown -R www-data:www-data /home/alex/clientbridge
-  149  sudo find /home/alex/clientbridge -type d -exec chmod 755 {} \;
-  150  sudo find /home/alex/clientbridge -type f -exec chmod 644 {} \;
-  151  sudo chmod -R 775 /home/alex/clientbridge/storage /home/alex/clientbridge/bootstrap/cache
+  147  sudo -u www-data cat /home/alex/smbgen/public/index.php
+  148  sudo chown -R www-data:www-data /home/alex/smbgen
+  149  sudo find /home/alex/smbgen -type d -exec chmod 755 {} \;
+  150  sudo find /home/alex/smbgen -type f -exec chmod 644 {} \;
+  151  sudo chmod -R 775 /home/alex/smbgen/storage /home/alex/smbgen/bootstrap/cache
   152  sudo systemctl restart php8.3-fpm
   153  sudo systemctl reload nginx
-  154  sudo -u www-data cat /home/alex/clientbridge/public/index.php
+  154  sudo -u www-data cat /home/alex/smbgen/public/index.php
   155  sudo chmod 711 /home/alex
-  156  sudo -u www-data cat /home/alex/clientbridge/public/index.php
+  156  sudo -u www-data cat /home/alex/smbgen/public/index.php
   157  sudo apt install php8.3-sqlite3
   158  sudo systemctl restart php8.3-fpm
   159  php -m | grep sqlite
@@ -164,26 +164,26 @@
   164  git init
   165  sudo git init
   166  sudo git add .
-  167  git config --global --add safe.directory /home/alex/clientbridge
+  167  git config --global --add safe.directory /home/alex/smbgen
   168  git commit -m "Initial Laravel commit"
   169  sudo git commit -m "Initial Laravel commit"
-  170  sudo git config --global --add safe.directory /home/alex/clientbridge
+  170  sudo git config --global --add safe.directory /home/alex/smbgen
   171  sudo git commit -m "Initial Laravel commit"
-  172  git remote add origin git@github.com:alexramsey92/clientbridge-laravel.git
-  173  sudo git remote add origin git@github.com:alexramsey92/clientbridge-laravel.git
+  172  git remote add origin git@github.com:alexramsey92/smbgen.git
+  173  sudo git remote add origin git@github.com:alexramsey92/smbgen.git
   174  git push -u origin main
   175  sudo git push
   176  sudo git push --set-upstream origin master
-  177  git remote add origin git@github.com:alexramsey92/clientbridge.git
+  177  git remote add origin git@github.com:alexramsey92/smbgen.git
   178  code .
   179  git remote remove origin
   180  sudo git remote remove origin
-  181  sudo git remote add origin git@github.com:alexramsey92/clientbridge-laravel.git
+  181  sudo git remote add origin git@github.com:alexramsey92/smbgen.git
   182  sudo git push
   183  sudo git push --set-upstream origin master
   184  git branch -M main
   185  sudo git branch -M main
-  186  sudo git remote add origin git@github.com:alexramsey92/clientbridge-laravel.git
+  186  sudo git remote add origin git@github.com:alexramsey92/smbgen.git
   187  sudo git push -u origin main
   188  git status
   189  git add .
@@ -199,45 +199,45 @@
   199  ssh -T git@github.com
   200  git push -u origin main
   201  sudo git push -u origin main
-  202  sudo ssh-keygen -t ed25519 -C "deploy@clientbridge" -f ~/.ssh/clientbridge_deploy_key
-  203  sudo cat ~/.ssh/clientbridge_deploy_key.pub
+  202  sudo ssh-keygen -t ed25519 -C "deploy@smbgen" -f ~/.ssh/smbgen_deploy_key
+  203  sudo cat ~/.ssh/smbgen_deploy_key.pub
   204  nano ~/.ssh/config
   205  cd ..
-  206  nano ~/deploy-clientbridge.sh
-  207  sudo chmod +x ~/deploy-clientbridge.sh
-  208  ~/deploy-clientbridge.sh
-  209  sudo ~/deploy-clientbridge.sh
-  210  nano ~/deploy-clientbridge.sh
-  211  ~/deploy-clientbridge.sh
-  212  nano ~/deploy-clientbridge.sh
-  213  ~/deploy-clientbridge.sh
-  214  nano ~/deploy-clientbridge.sh
-  215  ~/deploy-clientbridge.sh
-  216  sudo chown -R alex:alex ~/clientbridge
-  217  ~/deploy-clientbridge.sh
-  218  sudo chown -R www-data:www-data /home/alex/clientbridge/storage /home/alex/clientbridge/bootstrap/cache
-  219  sudo chmod -R 775 /home/alex/clientbridge/storage /home/alex/clientbridge/bootstrap/cache
+  206  nano ~/deploy-smbgen.sh
+  207  sudo chmod +x ~/deploy-smbgen.sh
+  208  ~/deploy-smbgen.sh
+  209  sudo ~/deploy-smbgen.sh
+  210  nano ~/deploy-smbgen.sh
+  211  ~/deploy-smbgen.sh
+  212  nano ~/deploy-smbgen.sh
+  213  ~/deploy-smbgen.sh
+  214  nano ~/deploy-smbgen.sh
+  215  ~/deploy-smbgen.sh
+  216  sudo chown -R alex:alex ~/smbgen
+  217  ~/deploy-smbgen.sh
+  218  sudo chown -R www-data:www-data /home/alex/smbgen/storage /home/alex/smbgen/bootstrap/cache
+  219  sudo chmod -R 775 /home/alex/smbgen/storage /home/alex/smbgen/bootstrap/cache
   220  sudo systemctl restart php8.3-fpm
   221  sudo systemctl reload nginx
-  222  sudo chown www-data:www-data /home/alex/clientbridge/database/database.sqlite
-  223  sudo chmod 664 /home/alex/clientbridge/database/database.sqlite
+  222  sudo chown www-data:www-data /home/alex/smbgen/database/database.sqlite
+  223  sudo chmod 664 /home/alex/smbgen/database/database.sqlite
   224  sudo chmod 711 /home/alex
   225  sudo systemctl restart php8.3-fpm
   226  sudo systemctl reload nginx
-  227  ls -l /home/alex/clientbridge/database/database.sqlite
-  228  ls -ld /home/alex/clientbridge/database
-  229  sudo chmod 755 /home/alex/clientbridge/database
-  230  sudo chmod 755 /home/alex/clientbridge
+  227  ls -l /home/alex/smbgen/database/database.sqlite
+  228  ls -ld /home/alex/smbgen/database
+  229  sudo chmod 755 /home/alex/smbgen/database
+  230  sudo chmod 755 /home/alex/smbgen
   231  sudo chmod 711 /home/alex
   232  sudo systemctl restart php8.3-fpm
-  233  sudo -u www-data touch /home/alex/clientbridge/database/__test.sqlite
-  234  sudo chown -R www-data:www-data /home/alex/clientbridge/database
-  235  sudo chmod -R 775 /home/alex/clientbridge/database
+  233  sudo -u www-data touch /home/alex/smbgen/database/__test.sqlite
+  234  sudo chown -R www-data:www-data /home/alex/smbgen/database
+  235  sudo chmod -R 775 /home/alex/smbgen/database
   236  sudo chmod 711 /home/alex
-  237  sudo -u www-data touch /home/alex/clientbridge/database/__test.sqlite
+  237  sudo -u www-data touch /home/alex/smbgen/database/__test.sqlite
   238  history
   239  git status
-  240  cd clientbridge/
+  240  cd smbgen/
   241  git stauts
   242  git status
   243  git add .
@@ -250,15 +250,15 @@
   250  git push --set-upstream origin main
   251  sudo nano resources/views/welcome.blade.php
   252  php artisan make:migration create_clients_table
-  253  sudo chgrp -R www-data ~/clientbridge
-  254  sudo chmod -R g+w ~/clientbridge
+  253  sudo chgrp -R www-data ~/smbgen
+  254  sudo chmod -R g+w ~/smbgen
   255  php artisan make:migration create_clients_table
   256  sudo groupadd laravel
   257  sudo usermod -aG laravel alex
   258  sudo usermod -aG laravel www-data
-  259  sudo chown -R alex:laravel ~/clientbridge
-  260  sudo find ~/clientbridge -type d -exec chmod 2775 {} \;
-  261  sudo find ~/clientbridge -type f -exec chmod 664 {} \;
+  259  sudo chown -R alex:laravel ~/smbgen
+  260  sudo find ~/smbgen -type d -exec chmod 2775 {} \;
+  261  sudo find ~/smbgen -type f -exec chmod 664 {} \;
   262  sudo nano ~/.bashrc
   263  php artisan make:migration create_clients_table
   264  nano database/migrations/2025_05_06_000121_create_clients_table.php
@@ -266,12 +266,12 @@
   266  nano routes/web.php
   267  nano resources/views/welcome.blade.php
   268  php artisan tinker
-  269  sudo chown -R www-data:www-data /home/alex/clientbridge/storage
-  270  sudo chown -R www-data:www-data /home/alex/clientbridge/bootstrap/cache
-  271  sudo chmod -R 775 /home/alex/clientbridge/storage
-  272  sudo chmod -R 775 /home/alex/clientbridge/bootstrap/cache
-  273  sudo chgrp -R laravel /home/alex/clientbridge
-  274  sudo chmod -R g+w /home/alex/clientbridge
+  269  sudo chown -R www-data:www-data /home/alex/smbgen/storage
+  270  sudo chown -R www-data:www-data /home/alex/smbgen/bootstrap/cache
+  271  sudo chmod -R 775 /home/alex/smbgen/storage
+  272  sudo chmod -R 775 /home/alex/smbgen/bootstrap/cache
+  273  sudo chgrp -R laravel /home/alex/smbgen
+  274  sudo chmod -R g+w /home/alex/smbgen
   275  sudo systemctl restart php8.3-fpm
   276  nano routes/web.php
   277  cat routes/web.php
@@ -375,7 +375,7 @@
   375  sudo find . -type d -exec chmod 775 {} \;
   376  sudo find . -type f -exec chmod 664 {} \;
   377  php artisan package:discover
-  378  ls -al /home/alex/clientbridge/storage/logs/laravel.log
+  378  ls -al /home/alex/smbgen/storage/logs/laravel.log
   379  php artisan package:discover
   380  sudo usermod -aG www-data alex
   381  newgrp www-data
@@ -384,12 +384,12 @@
   384  curl -sS https://getcomposer.org/installer | php
   385  sudo mv composer.phar /usr/local/bin/composer
   386  composer --version
-  387  composer create-project laravel/laravel clientbridge
+  387  composer create-project laravel/laravel smbgen
   388  ll
-  389  sudo chown -R www-data:www-data ~/clientbridge
-  390  sudo chmod -R 775 ~/clientbridge/storage ~/clientbridge/bootstrap/cache
-  391  sudo nano /etc/nginx/sites-available/clientbridge
-  392  sudo ln -s /etc/nginx/sites-available/clientbridge /etc/nginx/sites-enabled/
+  389  sudo chown -R www-data:www-data ~/smbgen
+  390  sudo chmod -R 775 ~/smbgen/storage ~/smbgen/bootstrap/cache
+  391  sudo nano /etc/nginx/sites-available/smbgen
+  392  sudo ln -s /etc/nginx/sites-available/smbgen /etc/nginx/sites-enabled/
   393  sudo nginx -t
   394  sudo systemctl reload nginx
   395  sudo systemctl start nginx
@@ -400,7 +400,7 @@
   400  systemctl status nginx.service
   401  cat /etc/nginx
   402  cat /etc/nginx/sites-available/
-  403  cat /etc/nginx/sites-available/clientbridge
+  403  cat /etc/nginx/sites-available/smbgen
   404  sudo nginx
   405  sudo lsof -i :80
   406  systemctl status http
@@ -410,10 +410,10 @@
   410  sudo systemctl stop apache2
   411  sudo systemctl start nginx
   412  sudo systemctl status nginx
-  413  ls /home/alex/clientbridge/public
+  413  ls /home/alex/smbgen/public
   414  sudo systemctl status php8.3-fpm
   415  sudo apt install certbot python3-certbot-nginx
-  416  sudo certbot --nginx -d houston1.clientbridge.app
+  416  sudo certbot --nginx -d houston1.smbgen.app
   417  hostnamectl
   418  sudo hostnamectl set-hostname houston1.oldlinecyber.com
   419  sudo nano /etc/hosts
@@ -421,7 +421,7 @@
   421  ping houston1.oldlinecyber.com
   422  sudo ufw status
   423  history
-  424  sudo certbot --nginx -d houston1.clientbridge.app
+  424  sudo certbot --nginx -d houston1.smbgen.app
   425  sudo systemctl stop apache2
   426  sudo systemctl disable apache2
   427  sudo apt purge apache2 apache2-utils apache2-bin apache2-data -y
@@ -433,22 +433,22 @@
   433  sudo systemctl reload nginx
   434  sudo certbot --nginx -d houston1.oldlinecyber.com
   435  ls -l /etc/nginx/sites-enabled/
-  436  sudo nano /etc/nginx/sites-available/clientbridge
+  436  sudo nano /etc/nginx/sites-available/smbgen
   437  sudo systemctl status php8.3-fpm
   438  sudo systemctl reload nginx
-  439  sudo nano /etc/nginx/sites-available/clientbridge
+  439  sudo nano /etc/nginx/sites-available/smbgen
   440  sudo tail -n 40 /var/log/nginx/error.log
-  441  sudo ln -sf /etc/nginx/sites-available/clientbridge /etc/nginx/sites-enabled/clientbridge
-  442  ls -ld /home/alex/clientbridge/public
-  443  sudo chown -R www-data:www-data /home/alex/clientbridge
-  444  sudo chmod -R 755 /home/alex/clientbridge
-  445  cd clientbridge/
+  441  sudo ln -sf /etc/nginx/sites-available/smbgen /etc/nginx/sites-enabled/smbgen
+  442  ls -ld /home/alex/smbgen/public
+  443  sudo chown -R www-data:www-data /home/alex/smbgen
+  444  sudo chmod -R 755 /home/alex/smbgen
+  445  cd smbgen/
   446  composer install
   447  sudo tail -n 40 /var/log/nginx/error.log
   448  sudo tail -f 40 /var/log/nginx/error.log
-  449  sudo chown -R www-data:www-data /home/alex/clientbridge
-  450  sudo find /home/alex/clientbridge -type d -exec chmod 755 {} \;
-  451  sudo find /home/alex/clientbridge -type f -exec chmod 644 {} \;
+  449  sudo chown -R www-data:www-data /home/alex/smbgen
+  450  sudo find /home/alex/smbgen -type d -exec chmod 755 {} \;
+  451  sudo find /home/alex/smbgen -type f -exec chmod 644 {} \;
   452  sudo systemctl restart php8.3-fpm
   453  sudo systemctl reload nginx
   454  systemctl status nginx
@@ -459,7 +459,7 @@
   459  cd ..
   460  cd sites-enabled/
   461  ll
-  462  cd ~/clientbridge/
+  462  cd ~/smbgen/
   463  ll
   464  history
   465  hostnamectl
@@ -477,7 +477,7 @@
   477  dig AAAA houston1.oldlinecyber.com
   478  sudo certbot --nginx -d houston1.oldlinecyber.com
   479  sudo nano /etc/nginx/sites-available/houston1
-  480  cd clientbridge/
+  480  cd smbgen/
   481  git init
   482  sudo git init
   483  git add .
@@ -486,7 +486,7 @@
   486  history
   487  git status
   488  ll
-  489  cd clientbridge/
+  489  cd smbgen/
   490  ll
   491  git status
   492  git pull
@@ -502,7 +502,7 @@
   502  php artisan migrate:fresh --seed
   503  git pull
   504  git pull
-  505  cd clientbridge/
+  505  cd smbgen/
   506  git pull
   507  git status
   508  ll
@@ -516,14 +516,14 @@
   516  php artisan db:seed
   517  php artisan migrate:fresh --seed
   518  git pull
-  519  cd clientbridge/
+  519  cd smbgen/
   520  git pull
   521  npm install
   522  npm run build
   523  git pull
   524  history
   525  ll
-  526  cd clientbridge/
+  526  cd smbgen/
   527  ll
   528  git status
   529  git pull
@@ -610,19 +610,19 @@
   610  tail -f -n 65 storage/logs/laravel.log
   611  sudo -i
   612  ll
-  613  cd clientbridge/
+  613  cd smbgen/
   614  ll
   615  history
   616  tail -f -n 65 storage/logs/laravel.log
   617  ll
-  618  cd clientbridge/
+  618  cd smbgen/
   619  ll
   620  git pull
   621  php artisan migrate:fresh --seed
   622  git pull
-  623  cd clientbridge/
+  623  cd smbgen/
   624  git pull
-  625  cd clientbridge/
+  625  cd smbgen/
   626  git pull
   627  ll
   628  cat .env

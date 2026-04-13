@@ -1,8 +1,8 @@
-# Competitive Analysis: Calendly vs ClientBridge
+# Competitive Analysis: Calendly vs SMBGen
 
 **Analysis Date:** January 2025  
 **Competitor:** Calendly  
-**Our Product:** ClientBridge
+**Our Product:** SMBGen
 
 ---
 
@@ -17,7 +17,7 @@
 | **Teams** | $16/seat/mo | Small teams collaborating on scheduling |
 | **Enterprise** | Starts at $15k/year | Large organizations with complex requirements |
 
-**Key Insight:** Calendly's pricing is per-seat/per-user, which can get expensive quickly for teams. ClientBridge could offer better value for small businesses with a flat-rate or per-business pricing model.
+**Key Insight:** Calendly's pricing is per-seat/per-user, which can get expensive quickly for teams. SMBGen could offer better value for small businesses with a flat-rate or per-business pricing model.
 
 ---
 
@@ -25,7 +25,7 @@
 
 ### Meeting Scheduling Features
 
-| Feature | Calendly Free | Calendly Standard | Calendly Teams | ClientBridge Current | ClientBridge Planned |
+| Feature | Calendly Free | Calendly Standard | Calendly Teams | SMBGen Current | SMBGen Planned |
 |---------|---------------|-------------------|----------------|---------------------|---------------------|
 | **Meeting polls** | ✅ | ✅ | ✅ | ❌ | 🔄 Consider |
 | **One-on-one meetings** | Only 1 type | ✅ Unlimited | ✅ Unlimited | ✅ | ✅ |
@@ -34,7 +34,7 @@
 | **Round robin event types** | ❌ | ❌ | ✅ | ❌ | ❌ Not needed |
 
 **Analysis:**
-- **ClientBridge Gap:** We need group/collective event types for multiple participants
+- **SMBGen Gap:** We need group/collective event types for multiple participants
 - **Our Advantage:** We're building invoice integration and payment processing, which Calendly doesn't handle
 - **Action Item:** Prioritize multiple invitee support (already in roadmap Phase 2)
 
@@ -42,14 +42,14 @@
 
 ### Notification & Communication
 
-| Feature | Calendly Free | Calendly Standard | Calendly Teams | ClientBridge Current | ClientBridge Planned |
+| Feature | Calendly Free | Calendly Standard | Calendly Teams | SMBGen Current | SMBGen Planned |
 |---------|---------------|-------------------|----------------|---------------------|---------------------|
 | **Email notifications for bookings/cancellations** | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **Email notifications for reminders/follow-ups** | ❌ | ✅ | ✅ | ❌ | ✅ Phase 6 |
 | **Customize notification workflows** | ❌ | ✅ | ✅ | 🔄 Partial | ✅ Phase 2 (templates) |
 
 **Analysis:**
-- **ClientBridge Gap:** Missing automated reminders (24hr, 1hr before)
+- **SMBGen Gap:** Missing automated reminders (24hr, 1hr before)
 - **Our Advantage:** Custom email templates with more flexibility
 - **Action Item:** Add booking reminder emails to Phase 6
 
@@ -57,14 +57,14 @@
 
 ### Profile & Availability Management
 
-| Feature | Calendly Free | Calendly Standard | Calendly Teams | ClientBridge Current | ClientBridge Planned |
+| Feature | Calendly Free | Calendly Standard | Calendly Teams | SMBGen Current | SMBGen Planned |
 |---------|---------------|-------------------|----------------|---------------------|---------------------|
 | **View Contact profiles and scheduling activity** | ✅ | ✅ | ✅ | ❌ | 🔄 Consider |
 | **Share availability directly from Contact profiles** | ❌ | ✅ | ✅ | ❌ | ❌ Not needed |
 | **Add links or redirect users from confirmation page** | ❌ | ✅ | ✅ | ❌ | 🔄 Consider (payment links) |
 
 **Analysis:**
-- **ClientBridge Gap:** No contact profile system yet
+- **SMBGen Gap:** No contact profile system yet
 - **Our Advantage:** We're building a full client portal with file uploads and invoicing
 - **Action Item:** Consider adding client profiles in Phase 4
 
@@ -72,14 +72,14 @@
 
 ### Advanced Routing & Automation
 
-| Feature | Calendly Free | Calendly Standard | Calendly Teams | ClientBridge Current | ClientBridge Planned |
+| Feature | Calendly Free | Calendly Standard | Calendly Teams | SMBGen Current | SMBGen Planned |
 |---------|---------------|-------------------|----------------|---------------------|---------------------|
 | **Create forms and route invitees based on answers** | ❌ | ❌ | ✅ Teams | ❌ | 🔄 Consider |
 | **Route invitees with 3rd party forms (Marketo, HubSpot, Pardot)** | ❌ | ❌ | ✅ Teams | ❌ | ❌ Not needed |
 | **Route invitees with Salesforce account owner lookup** | ❌ | ❌ | ❌ Enterprise | ❌ | ❌ Not needed |
 
 **Analysis:**
-- **ClientBridge Gap:** No routing logic based on intake forms
+- **SMBGen Gap:** No routing logic based on intake forms
 - **Our Advantage:** We don't need complex routing; our use case is simpler (one consultant)
 - **Action Item:** Not a priority; our instant meet button serves similar purpose
 
@@ -113,7 +113,7 @@
 
 ---
 
-## 🎯 ClientBridge Competitive Positioning
+## 🎯 SMBGen Competitive Positioning
 
 ### Our Target Market
 **Primary:** Solo consultants and small consulting firms (1-5 people)
@@ -125,7 +125,7 @@
 ### Our Unique Value Proposition
 
 ```
-ClientBridge = Calendly + Invoicing + Payment Processing + Document Management + AI Reports
+SMBGen = Calendly + Invoicing + Payment Processing + Document Management + AI Reports
 
 "The only platform that handles your entire client lifecycle:
 Booking → Meeting → Documentation → Invoicing → Payment"
@@ -133,7 +133,7 @@ Booking → Meeting → Documentation → Invoicing → Payment"
 
 ### Features Calendly DOESN'T Have (Our Differentiators)
 
-| Feature | ClientBridge | Calendly | Competitive Advantage |
+| Feature | SMBGen | Calendly | Competitive Advantage |
 |---------|--------------|----------|---------------------|
 | **Invoice Generation** | ✅ Planned | ❌ | 🏆 MAJOR - We handle payments |
 | **Payment Processing** | ✅ Planned | ❌ | 🏆 MAJOR - Complete transaction lifecycle |
@@ -174,13 +174,13 @@ To compete with Calendly's Standard plan ($10/mo), we need:
 
 ### Option 1: Undercut Calendly (Value Play)
 ```
-ClientBridge Starter: $8/month
+SMBGen Starter: $8/month
 - Everything in Calendly Standard ($10)
 - PLUS: Invoice generation
 - PLUS: Payment processing
 - PLUS: File uploads
 
-ClientBridge Pro: $15/month
+SMBGen Pro: $15/month
 - Everything in Calendly Teams ($16)
 - PLUS: AI transcription
 - PLUS: Automated reports
@@ -191,7 +191,7 @@ ClientBridge Pro: $15/month
 
 ### Option 2: Premium Positioning (Full-Service Play)
 ```
-ClientBridge Complete: $49/month (flat rate, unlimited bookings)
+SMBGen Complete: $49/month (flat rate, unlimited bookings)
 - All scheduling features
 - Unlimited invoices
 - Payment processing (minus transaction fees)
@@ -207,11 +207,11 @@ ClientBridge Complete: $49/month (flat rate, unlimited bookings)
 
 ### Option 3: Transaction-Based (Usage Play)
 ```
-ClientBridge Free: $0
+SMBGen Free: $0
 - Unlimited bookings
 - Basic email notifications
 
-ClientBridge Per-Session: $5 per paid session
+SMBGen Per-Session: $5 per paid session
 - Only pay when you get paid
 - Invoice + payment processing
 - File uploads for that session
@@ -326,7 +326,7 @@ ClientBridge Per-Session: $5 per paid session
 
 ## 📊 Competitive Matrix
 
-| Capability | Calendly | Acuity | Koalendar | ClientBridge |
+| Capability | Calendly | Acuity | Koalendar | SMBGen |
 |------------|----------|--------|-----------|--------------|
 | **Booking/Scheduling** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 | **Team Features** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
@@ -429,7 +429,7 @@ Position as:
 
 ## 🎯 One-Sentence Positioning Statement
 
-**For solo consultants and small consulting firms who need more than just scheduling, ClientBridge is the only platform that manages your entire client lifecycle—from booking to payment to automated reporting—so you can focus on consulting, not admin work.**
+**For solo consultants and small consulting firms who need more than just scheduling, SMBGen is the only platform that manages your entire client lifecycle—from booking to payment to automated reporting—so you can focus on consulting, not admin work.**
 
 ---
 

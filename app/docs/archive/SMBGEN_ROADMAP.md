@@ -1,5 +1,5 @@
 ````markdown
-# CLIENTBRIDGE Development Roadmap
+# SMBGEN Development Roadmap
 
 **⚠️ DEPRECATED: This document has been consolidated into [TACTICAL_ROADMAP.md](./TACTICAL_ROADMAP.md)**
 
@@ -244,7 +244,7 @@ Schema::create('payments', function (Blueprint $table) {
 **So that** we can capture leads effectively
 
 **Acceptance Criteria:**
-- [ ] Embed L7 landing page in CLIENTBRIDGE
+- [ ] Embed L7 landing page in SMBGEN
 - [ ] Lead form submission handling
 - [ ] Lead scoring and qualification
 - [ ] CRM integration for lead management

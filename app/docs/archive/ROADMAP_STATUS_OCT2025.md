@@ -1,4 +1,4 @@
-# ClientBridge - Actual Status Review
+# SMBGen - Actual Status Review
 **Date:** October 18, 2025  
 **Purpose:** Reality check against original ROADMAP.md based on git history, database, and QA feedback
 
@@ -23,7 +23,7 @@
 - ✅ Blackout dates
 - ✅ Google Meet link generation
 - ✅ Google Calendar sends invite automatically
-- ❌ **MISSING: ClientBridge confirmation email (dual system)** 🟡
+- ❌ **MISSING: SMBGen confirmation email (dual system)** 🟡
 - ❌ **MISSING: Automated 24h/1h reminders** 🟡
 
 ### CMS & Lead Generation (BONUS FEATURES)
@@ -100,7 +100,7 @@
 
 1. **Booking Confirmation Emails (Dual System)**
    - Google already sends calendar invite (working)
-   - Add ClientBridge-branded confirmation as backup
+   - Add SMBGen-branded confirmation as backup
    - Timeline: 1 day
 
 2. **Automated Booking Reminders**

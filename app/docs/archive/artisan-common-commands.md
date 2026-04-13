@@ -1,6 +1,6 @@
 # Common Artisan Commands — Quick Reference
 
-This file collects the most useful `php artisan` commands we use during development, debugging, and deployment for the ClientBridge Laravel app. Each command is provided with a short explanation, recommended usage, and notes for Windows + Bash (WSL / Git Bash / mingw) where applicable.
+This file collects the most useful `php artisan` commands we use during development, debugging, and deployment for the SMBGen app. Each command is provided with a short explanation, recommended usage, and notes for Windows + Bash (WSL / Git Bash / mingw) where applicable.
 
 Notes:
 - Run commands from the repository root (where `artisan` is located).

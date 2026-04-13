@@ -48,14 +48,14 @@ This implementation adds complete subscription management, trial tracking, and d
    - Link to setup guide
 
 ### Documentation
-7. **DOMAIN_CONNECTION_GUIDE.md**
+7. **guides/DOMAIN_CONNECTION_GUIDE.md**
    - Step-by-step DNS configuration
    - Provider-specific instructions (GoDaddy, Namecheap, Cloudflare)
    - Troubleshooting guide
    - SSL certificate information
    - Email consideration warnings
 
-8. **STRIPE_SUBSCRIPTION_SETUP.md**
+8. **billing/STRIPE_SUBSCRIPTION_SETUP.md**
    - Environment variable configuration
    - Stripe Dashboard setup instructions
    - Webhook configuration
@@ -415,11 +415,11 @@ APP_SERVER_IP=203.0.113.10
 
 ### For Admins
 - Subscription management guide in app
-- Domain setup guide (DOMAIN_CONNECTION_GUIDE.md)
+- Domain setup guide (`../guides/DOMAIN_CONNECTION_GUIDE.md`)
 - FAQ section on common issues
 
 ### For Developers
-- Stripe integration guide (STRIPE_SUBSCRIPTION_SETUP.md)
+- Stripe integration guide (`./STRIPE_SUBSCRIPTION_SETUP.md`)
 - Webhook event handling
 - Testing procedures
 - Deployment checklist

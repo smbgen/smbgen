@@ -1,4 +1,4 @@
-# ClientBridge UX Improvements - October 2025
+# SMBGen UX Improvements - October 2025
 
 ## Overview
 Complete redesign of the admin dashboard and navigation system to create a unified, professional design language with better space utilization and user experience.
@@ -243,7 +243,7 @@ npm run build
 npm run dev
 
 # View changes
-# Navigate to: http://clientbridge-laravel.test/admin/dashboard
+# Navigate to: http://smbgen.test/admin/dashboard
 ```
 
 ## Feedback & Iteration
