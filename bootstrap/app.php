@@ -41,6 +41,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'companyAdministrator' => \App\Http\Middleware\CompanyAdministrator::class,
             'superAdmin' => \App\Http\Middleware\SuperAdmin::class,
+            'super.admin' => \App\Http\Middleware\SuperAdministrator::class,
             'centralOnly' => \App\Http\Middleware\EnsureCentralDomain::class,
             'tenantOnly' => \App\Http\Middleware\EnsureTenantContext::class,
             'tenantUser' => \App\Http\Middleware\EnsureTenantUserMatchesContext::class,

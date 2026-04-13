@@ -9,6 +9,8 @@ class InvoicePolicy
 {
     public function view(User $user, Invoice $invoice): bool
     {
-        return $user->id === $invoice->user_id || $user->role === 'company_administrator';
+        return $user->id === $invoice->user_id
+            || $user->role === 'company_administrator'
+            || $user->role === 'tenant_admin';
     }
 }

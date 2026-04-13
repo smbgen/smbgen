@@ -72,7 +72,7 @@ class VerifyEmailController extends Controller
 
             if ($user->hasVerifiedEmail()) {
                 // Redirect based on role
-                if ($user->role === 'company_administrator') {
+                if ($user->isAdministrator()) {
                     return redirect()->route('admin.dashboard')->with('status', 'Email already verified');
                 }
 
@@ -98,7 +98,7 @@ class VerifyEmailController extends Controller
             }
 
             // Redirect based on role after verification
-            if ($user->role === 'company_administrator') {
+            if ($user->isAdministrator()) {
                 return redirect()->route('admin.dashboard')->with('status', 'Email verified successfully!');
             }
 

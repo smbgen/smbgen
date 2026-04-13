@@ -70,7 +70,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('super-admin.dashboard');
         }
 
-        if ($user->role === 'company_administrator') {
+        if ($user->isAdministrator()) {
             if ($this->requiresDomainOnboarding($user)) {
                 return redirect('/admin/domain-onboarding');
             }
@@ -148,7 +148,7 @@ class AuthenticatedSessionController extends Controller
                 [
                     'name' => $googleUser->getName(),
                     'google_id' => $googleUser->getId(),
-                    'role' => 'client',
+                    'role' => User::ROLE_TENANT_ADMIN,
                     'password' => Hash::make(Str::random(32)), // unguessable; user signs in via Google
                 ]
             );
@@ -190,7 +190,7 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->intended(route('super-admin.dashboard'));
             }
 
-            if ($user->role === 'company_administrator') {
+            if ($user->isAdministrator()) {
                 if ($this->requiresDomainOnboarding($user)) {
                     return redirect('/admin/domain-onboarding');
                 }
@@ -218,7 +218,7 @@ class AuthenticatedSessionController extends Controller
             return false;
         }
 
-        if ($user->role !== User::ROLE_ADMINISTRATOR || empty($user->tenant_id)) {
+        if (! $user->isAdministrator() || empty($user->tenant_id)) {
             return false;
         }
 
