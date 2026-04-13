@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         \Illuminate\Session\SessionServiceProvider::class,
         \Illuminate\Cookie\CookieServiceProvider::class,
         // EmailEventServiceProvider removed - listeners are auto-discovered in Laravel 12
-        \App\Modules\CleanSlate\CleanSlateServiceProvider::class,
+        \App\Modules\SaasProductModule\SaasProductModuleServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
@@ -28,9 +28,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'companyAdministrator' => \App\Http\Middleware\CompanyAdministrator::class,
             'cors' => \App\Http\Middleware\HandleCors::class,
-            // Clean Slate
-            'subscribed'           => \App\Modules\CleanSlate\Http\Middleware\EnsureSubscribed::class,
-            'onboarding.complete'  => \App\Modules\CleanSlate\Http\Middleware\EnsureOnboardingComplete::class,
+            // SaaS Product Module
+            'subscribed'           => \App\Modules\SaasProductModule\Http\Middleware\EnsureSubscribed::class,
+            'onboarding.complete'  => \App\Modules\SaasProductModule\Http\Middleware\EnsureOnboardingComplete::class,
         ]);
     })
     ->withExceptions(function (Illuminate\Foundation\Configuration\Exceptions $exceptions) {

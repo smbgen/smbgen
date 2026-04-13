@@ -86,7 +86,7 @@ class ContactController extends Controller
         }
     }
 
-    public function submitCleanSlateIntake(Request $request)
+    public function submitSaasProductModuleIntake(Request $request)
     {
         $validated = $request->validate([
             'name'            => 'required|string|max:255',
@@ -111,7 +111,7 @@ class ContactController extends Controller
                 'name'               => $validated['name'],
                 'email'              => $validated['email'],
                 'message'            => $messageBody,
-                'source_site'        => 'Clean Slate Landing Page',
+                'source_site'        => 'SaaS Product Module Landing Page',
                 'notification_email' => config('business.contact.email'),
                 'ip_address'         => $request->ip(),
                 'user_agent'         => $request->userAgent(),
@@ -126,10 +126,10 @@ class ContactController extends Controller
                 Mail::to($validated['email'])
                     ->send(new ContactInquiryReceived(
                         name: $validated['name'],
-                        companyName: 'Clean Slate by L7 Media Labs',
+                        companyName: 'SaaS Product Module by L7 Media Labs',
                     ));
             } catch (\Exception $e) {
-                Log::warning('Clean Slate: failed to send customer confirmation', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
+                Log::warning('SaaS Product Module: failed to send customer confirmation', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
             }
 
             $businessEmail = config('business.contact.email');
@@ -147,16 +147,16 @@ class ContactController extends Controller
                             replyToName: $validated['name'],
                         ));
                 } catch (\Exception $e) {
-                    Log::warning('Clean Slate: failed to send admin notification', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
+                    Log::warning('SaaS Product Module: failed to send admin notification', ['error' => $e->getMessage(), 'lead_id' => $lead->id]);
                 }
             }
 
-            return redirect()->to(route('clean-slate') . '#intake')
+            return redirect()->to(route('saas-product-module') . '#intake')
                 ->with('success', "Thanks {$validated['name']} — we've received your request and will be in touch within one business day.");
         } catch (\Exception $e) {
-            Log::error('Clean Slate intake submission failed', ['error' => $e->getMessage()]);
+            Log::error('SaaS Product Module intake submission failed', ['error' => $e->getMessage()]);
 
-            return redirect()->to(route('clean-slate') . '#intake')
+            return redirect()->to(route('saas-product-module') . '#intake')
                 ->withInput()
                 ->with('error', 'Something went wrong. Please try again or email us directly at chat@l7medialabs.com.');
         }

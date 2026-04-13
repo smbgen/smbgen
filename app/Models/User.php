@@ -182,10 +182,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Clean Slate profile for this user
+     * SaaS Product Module profile for this user
      */
     public function profile()
     {
-        return $this->hasOne(\App\Modules\CleanSlate\Models\Profile::class);
+        return $this->hasOne(\App\Modules\SaasProductModule\Models\Profile::class);
     }
 }

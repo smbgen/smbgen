@@ -103,30 +103,30 @@
                     @endif -->
                 </div>
 
-                <!-- Clean Slate Section -->
-                @if(\Route::has('cleanslate.billing.plans'))
+                <!-- SaaS Product Module Section -->
+                @if(\Route::has('saasproductmodule.billing.plans'))
                 <div class="mb-6 space-y-1">
-                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">Clean Slate — Admin</div>
-                    <a href="{{ route('admin.cleanslate.index') }}" class="sidebar-link {{ request()->routeIs('admin.cleanslate.*') ? 'active' : '' }}">
+                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">SaaS Product Module — Admin</div>
+                    <a href="{{ route('admin.saasproductmodule.index') }}" class="sidebar-link {{ request()->routeIs('admin.saasproductmodule.*') ? 'active' : '' }}">
                         <i class="fas fa-users text-lg"></i>
                         <span>Customers</span>
                     </a>
-                    <a href="{{ route('admin.cleanslate.brokers') }}" class="sidebar-link {{ request()->routeIs('admin.cleanslate.brokers*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.saasproductmodule.brokers') }}" class="sidebar-link {{ request()->routeIs('admin.saasproductmodule.brokers*') ? 'active' : '' }}">
                         <i class="fas fa-database text-lg"></i>
                         <span>Data Brokers</span>
                     </a>
-                    <a href="{{ route('admin.cleanslate.debug') }}" class="sidebar-link {{ request()->routeIs('admin.cleanslate.debug') ? 'active' : '' }}">
+                    <a href="{{ route('admin.saasproductmodule.debug') }}" class="sidebar-link {{ request()->routeIs('admin.saasproductmodule.debug') ? 'active' : '' }}">
                         <i class="fas fa-bug text-lg"></i>
                         <span>Debug</span>
                     </a>
                 </div>
                 <div class="mb-6 space-y-1">
-                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">Clean Slate — My Account</div>
-                    <a href="{{ route('cleanslate.entry') }}" class="sidebar-link {{ request()->routeIs('cleanslate.*') ? 'active' : '' }}">
+                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">SaaS Product Module — My Account</div>
+                    <a href="{{ route('saasproductmodule.entry') }}" class="sidebar-link {{ request()->routeIs('saasproductmodule.*') ? 'active' : '' }}">
                         <i class="fas fa-shield-halved text-lg"></i>
                         <span>My Dashboard</span>
                     </a>
-                    <a href="{{ route('cleanslate.billing.plans') }}" class="sidebar-link {{ request()->routeIs('cleanslate.billing.*') ? 'active' : '' }}">
+                    <a href="{{ route('saasproductmodule.billing.plans') }}" class="sidebar-link {{ request()->routeIs('saasproductmodule.billing.*') ? 'active' : '' }}">
                         <i class="fas fa-credit-card text-lg"></i>
                         <span>Plans & Billing</span>
                     </a>

@@ -752,13 +752,13 @@ if (config('business.features.cms')) {
         ->name('cms.form.submit')
         ->where('slug', '[a-z0-9\-]+');
 
-    // Clean Slate — Digital Reputation & Data Suppression landing page
-    Route::get('/clean-slate', function () {
-        return view('clean-slate');
-    })->name('clean-slate');
+    // SaaS Product Module — Digital Reputation & Data Suppression landing page
+    Route::get('/saas-product-module', function () {
+        return view('saas-product-module');
+    })->name('saas-product-module');
 
-    // Clean Slate intake form submission
-    Route::post('/clean-slate/intake', [App\Http\Controllers\ContactController::class, 'submitCleanSlateIntake'])->name('clean-slate.intake');
+    // SaaS Product Module intake form submission
+    Route::post('/saas-product-module/intake', [App\Http\Controllers\ContactController::class, 'submitSaasProductModuleIntake'])->name('saas-product-module.intake');
 
     // CMS page display - CATCH-ALL route (matches any remaining /{slug})
     // Since this is last, all specific routes above will match first
