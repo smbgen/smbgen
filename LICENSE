@@ -1,21 +1,67 @@
-MIT License
+SMBGen Community and Commercial License (v1.0)
 
 Copyright (c) 2025 ClientBridge
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This software is source-available under the terms below.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. Definitions
+
+"Organization" means the legal entity using the Software.
+
+"Employee Count" means the total number of full-time, part-time, and
+contract workers engaged by the Organization and its Affiliates.
+
+"Affiliate" means any entity that controls, is controlled by, or is under
+common control with the Organization.
+
+"Commercial License" means a separate paid license agreement provided by the
+copyright holder.
+
+2. License Grant
+
+Subject to these terms, Organizations with an Employee Count of 10 or fewer
+may use, copy, modify, and self-host the Software for internal business
+purposes.
+
+3. Redistribution
+
+You may share source modifications internally within your Organization.
+Public redistribution of modified or unmodified copies requires prior written
+permission from the copyright holder.
+
+4. Restriction for Larger Organizations
+
+Any Organization with an Employee Count greater than 10 must obtain a valid
+Commercial License before using the Software in production, staging, or any
+revenue-generating environment.
+
+Evaluation for up to 30 days is permitted for Organizations with an Employee
+Count greater than 10, solely for internal testing and not for production use.
+
+5. Prohibited Uses Without Commercial License
+
+Without a Commercial License, Organizations with an Employee Count greater
+than 10 may not:
+
+- use the Software in production;
+- provide the Software as a hosted service;
+- resell, sublicense, or embed the Software in a commercial offering.
+
+6. Attribution
+
+This license notice must be included in all copies or substantial portions of
+the Software.
+
+7. No Warranty
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+8. Contact
+
+For commercial licensing inquiries, contact the project owner.

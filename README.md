@@ -376,7 +376,9 @@ Then follow these steps:
 
 ## 📜 License
 
-Licensed under the **MIT License**. See [LICENSE](LICENSE) file.
+Licensed under the **SMBGen Community and Commercial License (v1.0)**.
+Organizations with more than 10 employees must obtain a commercial license.
+See [LICENSE](LICENSE) for full terms.
 
 ---
 
