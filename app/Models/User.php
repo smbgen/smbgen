@@ -168,7 +168,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Check if user is a platform-level super administrator (company_administrator or legacy administrator).
-     * Super admins have cross-tenant access and should not log in directly on tenant subdomains.
+     * Super admins have cross-tenant visibility; the access restriction itself is enforced
+     * by the {@see \App\Http\Middleware\EnsureTenantUserMatchesContext} middleware.
      */
     public function isSuperAdmin(): bool
     {

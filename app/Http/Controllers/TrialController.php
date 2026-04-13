@@ -61,7 +61,7 @@ class TrialController extends Controller
                 'role' => \App\Models\User::ROLE_TENANT_ADMIN,
                 'trial_ends_at' => now()->addDays(14),
                 'email_verified_at' => now(),
-                'is_super_admin' => false,
+                'is_super_admin' => false, // legacy column; isSuperAdmin() now checks role
             ]);
 
             DB::commit();
