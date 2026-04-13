@@ -45,6 +45,9 @@
                     <div class="flex flex-col gap-2.5 text-slate-500">
                         <a href="{{ route('home') }}#start-here" class="hover:text-white transition-colors">How it works</a>
                         <a href="{{ route('home') }}#platform" class="hover:text-white transition-colors">Platform overview</a>
+                        @if(Route::has('features'))
+                            <a href="{{ route('features') }}" class="hover:text-white transition-colors">All features</a>
+                        @endif
                         <a href="{{ route('solutions') }}" class="hover:text-white transition-colors">smbgen-core pages</a>
                         @if(Route::has('solutions.areas'))
                             <a href="{{ route('solutions.areas') }}" class="hover:text-white transition-colors">Solution Areas</a>

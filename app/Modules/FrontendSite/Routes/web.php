@@ -10,6 +10,10 @@ Route::middleware('moduleEnabled:frontend_site')->group(function () {
     Route::get('/', fn () => view('frontend.home-platform'))->name('home');
     Route::get('/platform', fn () => view('frontend.home-platform'))->name('home.platform');
     Route::get('/services', fn () => view('frontend.home-services'))->name('home.services');
+    if (app()->isLocal()) {
+        Route::get('/overview-deck', fn () => view('frontend.overview-deck'))->name('overview.deck');
+    }
+    Route::get('/features', fn () => view('frontend.features'))->name('features');
     Route::get('/solutions', fn () => view('frontend.solutions'))->name('solutions');
     Route::get('/google-workspace', fn () => view('frontend.google-workspace'))->name('google.workspace');
 
