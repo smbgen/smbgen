@@ -148,7 +148,7 @@
                                     </td>
                                     <td>
                                         @if($tenants->isNotEmpty())
-                                            <form method="POST" action="{{ route('super-admin.users.tenant', $user) }}" class="flex min-w-[220px] flex-col items-stretch gap-2 sm:min-w-0 sm:flex-row sm:items-center">
+                                            <form method="POST" action="{{ route('super-admin.users.tenant', $user) }}" class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
                                                 @csrf
                                                 @method('PATCH')
                                                 <select name="tenant_id" class="admin-input text-xs py-1 px-2">
