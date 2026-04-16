@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\BusinessSetting;
+use App\Models\Tenant;
 use App\Models\User;
 use App\Support\ModuleRegistry;
 use Illuminate\Http\RedirectResponse;
@@ -67,6 +68,21 @@ class DeploymentConsoleController extends Controller
             ->with('success', 'Guided setup completed.');
     }
 
+    public function updateUserTenant(Request $request, User $user): RedirectResponse
+    {
+        $validated = $request->validate([
+            'tenant_id' => ['nullable', 'string', 'exists:tenants,id'],
+            'role' => ['nullable', 'string', 'in:'.implode(',', [User::ROLE_ADMINISTRATOR, User::ROLE_ADMINISTRATOR_LEGACY, User::ROLE_TENANT_ADMIN])],
+        ]);
+
+        $user->forceFill([
+            'tenant_id' => $validated['tenant_id'] ?: null,
+            'role' => $validated['role'] ?? $user->role,
+        ])->save();
+
+        return back()->with('success', 'Tenant assignment updated for '.$user->email.'.');
+    }
+
     public function updateSuperAdmin(Request $request, User $user): RedirectResponse
     {
         $validated = $request->validate([
@@ -103,6 +119,7 @@ class DeploymentConsoleController extends Controller
     {
         $tenantsTableExists = Schema::hasTable('tenants');
         $activityLogTableExists = Schema::hasTable('activity_logs');
+        $tenants = $tenantsTableExists ? Tenant::query()->orderBy('name')->get(['id', 'name', 'subdomain']) : collect();
 
         $usersQuery = User::query()->orderByDesc('is_super_admin')->orderBy('name');
 
@@ -143,6 +160,7 @@ class DeploymentConsoleController extends Controller
             'guidedSetupCompleted' => BusinessSetting::get('super_admin_guided_setup_completed', false),
             'users' => $usersQuery->get(),
             'recentlyLoggedInUsers' => $recentlyLoggedInUsers,
+            'tenants' => $tenants,
         ];
     }
 }

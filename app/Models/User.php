@@ -182,10 +182,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isSuperAdmin(): bool
     {
-        return in_array($this->role, [
-            self::ROLE_ADMINISTRATOR,
-            self::ROLE_ADMINISTRATOR_LEGACY,
-        ], true);
+        return (bool) $this->is_super_admin;
     }
 
     /**

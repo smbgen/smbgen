@@ -108,6 +108,7 @@
                                 <th>Role</th>
                                 <th>Tenant</th>
                                 <th>Last Login</th>
+                                <th>Assign Tenant</th>
                                 <th class="text-right">Super Admin</th>
                             </tr>
                         </thead>
@@ -143,6 +144,29 @@
                                             <div class="text-sm text-gray-500 dark:text-gray-400">{{ \Illuminate\Support\Carbon::parse($user->last_logged_in_at)->diffForHumans() }}</div>
                                         @else
                                             <span class="text-sm text-gray-500 dark:text-gray-400">Never</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($tenants->isNotEmpty())
+                                            <form method="POST" action="{{ route('super-admin.users.tenant', $user) }}" class="flex items-center gap-2">
+                                                @csrf
+                                                @method('PATCH')
+                                                <select name="tenant_id" class="admin-input text-xs py-1 px-2">
+                                                    <option value="">— None —</option>
+                                                    @foreach($tenants as $tenant)
+                                                        <option value="{{ $tenant->id }}" @selected($user->tenant_id === $tenant->id)>
+                                                            {{ $tenant->name }}{{ $tenant->subdomain ? ' ('.$tenant->subdomain.')' : '' }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <select name="role" class="admin-input text-xs py-1 px-2">
+                                                    <option value="{{ \App\Models\User::ROLE_ADMINISTRATOR }}" @selected($user->role === \App\Models\User::ROLE_ADMINISTRATOR)>Company Admin</option>
+                                                    <option value="{{ \App\Models\User::ROLE_TENANT_ADMIN }}" @selected($user->role === \App\Models\User::ROLE_TENANT_ADMIN)>Tenant User</option>
+                                                </select>
+                                                <button type="submit" class="btn-secondary text-xs whitespace-nowrap">Assign</button>
+                                            </form>
+                                        @else
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">No tenants</span>
                                         @endif
                                     </td>
                                     <td class="text-right">

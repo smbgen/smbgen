@@ -250,3 +250,53 @@ test('impersonating super admin can stop impersonating from tenant admin surface
     expect(auth()->id())->toBe($this->superAdmin->id);
     expect(session()->has('super_admin_impersonating'))->toBeFalse();
 });
+
+test('super admin can assign a user to a tenant', function () {
+    $tenant = Tenant::create(['id' => 'assign-test', 'name' => 'Assign Test Co', 'subdomain' => 'assign-test']);
+    $user = User::factory()->create(['role' => User::ROLE_TENANT_ADMIN, 'tenant_id' => null]);
+
+    ActivityLog::create(['user_id' => $user->id, 'action' => 'login', 'description' => 'login', 'created_at' => now()]);
+
+    $response = $this->actingAs($this->superAdmin)
+        ->patch(route('super-admin.users.tenant', $user), [
+            'tenant_id' => $tenant->id,
+            'role' => User::ROLE_ADMINISTRATOR,
+        ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    $user->refresh();
+    expect($user->tenant_id)->toBe($tenant->id);
+    expect($user->role)->toBe(User::ROLE_ADMINISTRATOR);
+});
+
+test('super admin can remove a user from a tenant', function () {
+    $tenant = Tenant::create(['id' => 'remove-test', 'name' => 'Remove Test Co', 'subdomain' => 'remove-test']);
+    $user = User::factory()->create(['role' => User::ROLE_ADMINISTRATOR, 'tenant_id' => $tenant->id]);
+
+    ActivityLog::create(['user_id' => $user->id, 'action' => 'login', 'description' => 'login', 'created_at' => now()]);
+
+    $response = $this->actingAs($this->superAdmin)
+        ->patch(route('super-admin.users.tenant', $user), [
+            'tenant_id' => '',
+            'role' => User::ROLE_TENANT_ADMIN,
+        ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    $user->refresh();
+    expect($user->tenant_id)->toBeNull();
+});
+
+test('company administrator cannot assign users to tenants', function () {
+    $tenant = Tenant::create(['id' => 'forbidden-test', 'name' => 'Forbidden Co', 'subdomain' => 'forbidden-test']);
+    $user = User::factory()->create(['role' => User::ROLE_TENANT_ADMIN, 'tenant_id' => null]);
+
+    $this->actingAs($this->admin)
+        ->patch(route('super-admin.users.tenant', $user), ['tenant_id' => $tenant->id]);
+
+    $user->refresh();
+    expect($user->tenant_id)->toBeNull();
+});

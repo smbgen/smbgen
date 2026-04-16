@@ -18,6 +18,7 @@ Route::middleware(['centralOnly', 'auth', 'verified', 'superAdmin'])
         Route::post('/guided-setup', [DeploymentConsoleController::class, 'storeGuidedSetup'])->name('guided-setup.store');
         Route::post('/guided-setup/complete', [DeploymentConsoleController::class, 'complete'])->name('guided-setup.complete');
         Route::patch('/users/{user}/super-admin', [DeploymentConsoleController::class, 'updateSuperAdmin'])->name('users.super-admin');
+        Route::patch('/users/{user}/tenant', [DeploymentConsoleController::class, 'updateUserTenant'])->name('users.tenant');
 
         // Tenant management
         Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
