@@ -1,8 +1,15 @@
 @extends('layouts.guest')
 
 @section('content')
-<div class="px-4 w-full max-w-md">
-    <div class="bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl p-6">
+<div class="relative w-full min-h-screen bg-gradient-to-br from-gray-100 via-slate-50 to-blue-100/40 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950/30 flex items-center justify-center px-4">
+    <div class="w-full max-w-md">
+        <div class="mb-5 flex justify-center">
+            <div class="inline-flex items-center rounded-full border border-blue-200 bg-white/85 px-4 py-2 text-sm font-semibold tracking-wide text-gray-800 shadow-sm dark:border-blue-500/30 dark:bg-gray-800/85 dark:text-gray-100">
+                {{ config('app.company_name', config('app.name')) }}
+            </div>
+        </div>
+
+        <div class="bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl p-6">
         <h2 class="text-gray-900 dark:text-white text-xl font-semibold mb-1">Sign in to your organization</h2>
         <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Use your account credentials to continue.</p>
 
@@ -49,5 +56,6 @@
             <a href="{{ route('password.request') }}" class="text-blue-600 hover:underline dark:text-blue-300">Forgot your password?</a>
         </div>
     </div>
+</div>
 </div>
 @endsection

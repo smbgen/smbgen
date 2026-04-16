@@ -19,6 +19,7 @@ it('shows standard organization login when tenancy is disabled', function () {
     $response = $this->get('/login');
 
     $response->assertOk()
+        ->assertSee(config('app.company_name', config('app.name')))
         ->assertSee('Sign in to your organization')
         ->assertSee('Create a new account')
         ->assertSee('Continue with Google')
