@@ -53,4 +53,18 @@ return [
         ],
     ],
 
+    // Meta Graph API (Facebook & Instagram)
+    'meta' => [
+        'app_id' => env('META_APP_ID'),
+        'app_secret' => env('META_APP_SECRET'),
+        'redirect' => env('META_REDIRECT_URI'),
+    ],
+
+    // LinkedIn OAuth 2
+    'linkedin' => [
+        'client_id' => env('LINKEDIN_CLIENT_ID'),
+        'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
+        'redirect' => env('LINKEDIN_REDIRECT_URI'),
+    ],
+
 ];

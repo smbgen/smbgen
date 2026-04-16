@@ -15,3 +15,8 @@ use Illuminate\Support\Facades\Schedule;
 
 // Clean up expired password reset tokens daily at 2 AM
 Schedule::command('auth:clear-resets')->dailyAt('02:00');
+
+// Dispatch queued jobs for social media posts that are due to publish
+if (config('business.features.social_media', false)) {
+    Schedule::command('social:publish-scheduled')->everyMinute();
+}

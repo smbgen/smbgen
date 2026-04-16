@@ -29,6 +29,7 @@
         <env name="FEATURE_BILLING" value="true"/>
         <env name="FEATURE_MESSAGES" value="true"/>
         <env name="FEATURE_CMS" value="true"/>
+        <env name="FEATURE_SOCIAL_MEDIA" value="true"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="QUEUE_CONNECTION" value="sync"/>

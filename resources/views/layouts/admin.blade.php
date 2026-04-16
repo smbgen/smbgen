@@ -97,6 +97,14 @@
                     @endif
                 </x-navigation.collapsible-section>
 
+                <!-- Social Media Section -->
+                @if(config('business.features.social_media') && \Route::has('admin.social.posts.index'))
+                    <x-navigation.collapsible-section id="nav_social" label="Social Media">
+                        <x-navigation.sidebar-link :href="route('admin.social.posts.index')" :active="request()->routeIs('admin.social.posts.*')" icon="fas fa-calendar-check" label="Posts" />
+                        <x-navigation.sidebar-link :href="route('admin.social.accounts.index')" :active="request()->routeIs('admin.social.accounts.*')" icon="fas fa-plug" label="Connected Accounts" />
+                    </x-navigation.collapsible-section>
+                @endif
+
                 <!-- Content Management Section (Collapsible) -->
                 @if(config('business.features.cms') || config('business.features.blog') || config('business.features.booking'))
                     <x-navigation.collapsible-section id="nav_content" label="Content Management">
