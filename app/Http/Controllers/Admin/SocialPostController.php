@@ -117,10 +117,19 @@ class SocialPostController extends Controller
 
         $recentImages = CmsImage::orderByDesc('created_at')->take(12)->get();
 
+        // Pre-selected CMS image IDs for the Alpine.js media picker
+        $selectedImageIds = $socialPost->media
+            ->where('mediable_type', CmsImage::class)
+            ->pluck('mediable_id')
+            ->filter()
+            ->values()
+            ->toArray();
+
         return view('admin.social.posts.edit', [
             'post' => $socialPost,
             'accounts' => $accounts,
             'recentImages' => $recentImages,
+            'selectedImageIds' => $selectedImageIds,
         ]);
     }
 

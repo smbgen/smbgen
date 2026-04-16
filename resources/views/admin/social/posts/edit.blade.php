@@ -2,7 +2,7 @@
 
 @section('content')
 <div x-data="{
-    selectedImages: {{ json_encode($post->media->whereNull('mediable_type')->isEmpty() ? $post->media->pluck('mediable_id')->filter()->values()->toArray() : []) }},
+    selectedImages: {{ json_encode($selectedImageIds) }},
     toggleImage(id) {
         const idx = this.selectedImages.indexOf(id);
         if (idx === -1) {

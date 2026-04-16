@@ -175,7 +175,7 @@ class LinkedInAdapter implements SocialPlatformAdapter
         }
 
         // Step 2: Upload binary
-        $imageContents = @file_get_contents($imageUrl);
+        $imageContents = file_get_contents($imageUrl);
         if ($imageContents === false) {
             throw new PublishException("Could not fetch image for LinkedIn upload: {$imageUrl}", 'IMAGE_FETCH_FAILED');
         }
