@@ -25,6 +25,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     const ROLE_ADMINISTRATOR_LEGACY = 'administrator';
 
+    const ROLE_TENANT_ADMIN = 'tenant_admin';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -162,19 +164,36 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Check if user is an administrator
+     * Check if user is an administrator (company_administrator, legacy administrator, or tenant_admin).
      */
     public function isAdministrator(): bool
     {
-        return $this->isSuperAdmin() || in_array($this->role, [self::ROLE_ADMINISTRATOR, self::ROLE_ADMINISTRATOR_LEGACY], true);
+        return in_array($this->role, [
+            self::ROLE_ADMINISTRATOR,
+            self::ROLE_ADMINISTRATOR_LEGACY,
+            self::ROLE_TENANT_ADMIN,
+        ], true);
     }
 
     /**
-     * Check if user is a super administrator.
+     * Check if user is a platform-level super administrator (company_administrator or legacy administrator).
+     * Super admins have cross-tenant visibility; the access restriction itself is enforced
+     * by the {@see \App\Http\Middleware\EnsureTenantUserMatchesContext} middleware.
      */
     public function isSuperAdmin(): bool
     {
-        return (bool) $this->is_super_admin;
+        return in_array($this->role, [
+            self::ROLE_ADMINISTRATOR,
+            self::ROLE_ADMINISTRATOR_LEGACY,
+        ], true);
+    }
+
+    /**
+     * Check if user is a tenant admin (self-serve business owner).
+     */
+    public function isTenantAdmin(): bool
+    {
+        return $this->role === self::ROLE_TENANT_ADMIN;
     }
 
     /**

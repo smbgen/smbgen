@@ -73,4 +73,14 @@ class UserFactory extends Factory
             'role' => 'client',
         ]);
     }
+
+    /**
+     * Indicate that the user is a tenant admin (self-serve business owner).
+     */
+    public function tenantAdmin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'tenant_admin',
+        ]);
+    }
 }

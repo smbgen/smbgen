@@ -140,7 +140,7 @@ class AuthenticatedSessionController extends Controller
                 [
                     'name' => $googleUser->getName(),
                     'google_id' => $googleUser->getId(),
-                    'role' => 'client',
+                    'role' => User::ROLE_TENANT_ADMIN,
                     'password' => Hash::make(Str::random(32)), // unguessable; user signs in via Google
                 ]
             );
