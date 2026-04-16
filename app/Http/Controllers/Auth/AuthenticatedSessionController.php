@@ -27,7 +27,9 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('debug.switch-user');
         }
 
-        return view('auth.login');
+        return view('auth.login', [
+            'tenancyEnabled' => (bool) config('app.tenancy_enabled', false),
+        ]);
     }
 
     /**

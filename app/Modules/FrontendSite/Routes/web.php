@@ -4,10 +4,33 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CmsFormSubmissionController;
 use App\Http\Controllers\CmsPagePublicController;
 use App\Http\Controllers\ContactController;
+use App\Models\User;
+use App\Support\ModuleRegistry;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    if (ModuleRegistry::isEnabled('frontend_site') && ModuleRegistry::isSelectedFrontend('frontend_site')) {
+        return view('frontend.home-platform');
+    }
+
+    if (! auth()->check()) {
+        return redirect()->route('login');
+    }
+
+    $authenticatedUser = auth()->user();
+
+    if ($authenticatedUser->isSuperAdmin()) {
+        return redirect()->route('super-admin.dashboard');
+    }
+
+    if (in_array($authenticatedUser->role, [User::ROLE_ADMINISTRATOR, User::ROLE_ADMINISTRATOR_LEGACY, 'company_administrator'], true)) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    return redirect()->route('dashboard');
+})->name('home');
+
 Route::middleware('moduleEnabled:frontend_site')->group(function () {
-    Route::get('/', fn () => view('frontend.home-platform'))->name('home');
     Route::get('/platform', fn () => view('frontend.home-platform'))->name('home.platform');
     Route::get('/services', fn () => view('frontend.home-services'))->name('home.services');
     if (app()->isLocal()) {

@@ -36,6 +36,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'tenancy_enabled' => filter_var(env('TENANCY_ENABLED', false), FILTER_VALIDATE_BOOLEAN),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

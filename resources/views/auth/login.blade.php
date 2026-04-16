@@ -1,6 +1,7 @@
 @php
   use Illuminate\Support\Str;
 
+  $tenancyEnabled = (bool) ($tenancyEnabled ?? config('app.tenancy_enabled', false));
   $trialUrl = rtrim((string) config('app.url'), '/').route('trial.show', absolute: false);
   $googleLoginUrl = route('auth.google.redirect');
 @endphp
@@ -21,7 +22,7 @@
         <div class="space-y-6">
           <div class="space-y-3">
             <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-700 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-200">
-              Existing Workspace
+              {{ $tenancyEnabled ? 'Existing Workspace' : 'Organization Login' }}
             </div>
             <div>
               <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Welcome back</h2>
@@ -63,13 +64,19 @@
     </div>
 
     <div>
-      <button type="submit" class="w-full btn-primary py-3">Continue to workspace</button>
+      <button type="submit" class="w-full btn-primary py-3">{{ $tenancyEnabled ? 'Continue to workspace' : 'Sign in' }}</button>
     </div>
   </form>
   
   <div class="mt-3 text-center">
     <a href="{{ route('password.request') }}" class="text-sm text-blue-400 hover:underline">Forgot your password?</a>
   </div>
+
+  @unless($tenancyEnabled)
+  <div class="mt-2 text-center">
+    <a href="{{ route('register') }}" class="text-sm text-blue-400 hover:underline">Create a new account</a>
+  </div>
+  @endunless
   
   <div class="flex items-center gap-3 mt-1 mb-3">
     <span class="h-px bg-gray-300 dark:bg-gray-700 flex-1"></span>
@@ -94,13 +101,23 @@
       </div>
 
       <div class="space-y-5">
-        <div class="rounded-[28px] border border-slate-800 bg-slate-900 p-6 text-white shadow-xl shadow-slate-900/20">
-          <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-200">New Here?</div>
-          <h3 class="mt-4 text-2xl font-semibold tracking-tight">Create a new workspace</h3>
-          <p class="mt-3 text-sm leading-6 text-slate-300">If you are setting up smbgen for the first time, start with registration. You can launch your tenant, choose your subdomain, and come back to this screen anytime after setup.</p>
-          <a href="{{ $trialUrl }}" class="mt-5 inline-flex items-center justify-center rounded-xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-300">Start registration</a>
-          <p class="mt-3 text-xs leading-5 text-slate-400">This is the best path for new businesses evaluating the platform.</p>
-        </div>
+        @if($tenancyEnabled)
+          <div class="rounded-[28px] border border-slate-800 bg-slate-900 p-6 text-white shadow-xl shadow-slate-900/20">
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-200">New Here?</div>
+            <h3 class="mt-4 text-2xl font-semibold tracking-tight">Create a new workspace</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-300">If you are setting up smbgen for the first time, start with registration. You can launch your tenant, choose your subdomain, and come back to this screen anytime after setup.</p>
+            <a href="{{ $trialUrl }}" class="mt-5 inline-flex items-center justify-center rounded-xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-300">Start registration</a>
+            <p class="mt-3 text-xs leading-5 text-slate-400">This is the best path for new businesses evaluating the platform.</p>
+          </div>
+        @else
+          <div class="rounded-[28px] border border-slate-800 bg-slate-900 p-6 text-white shadow-xl shadow-slate-900/20">
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-200">New Here?</div>
+            <h3 class="mt-4 text-2xl font-semibold tracking-tight">Create a new account</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-300">Use registration to join your organization. If you already have an account, sign in above or use the password reset link if needed.</p>
+            <a href="{{ route('register') }}" class="mt-5 inline-flex items-center justify-center rounded-xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-300">Register account</a>
+            <p class="mt-3 text-xs leading-5 text-slate-400">Standard organization login flow is active while multi-tenancy is disabled.</p>
+          </div>
+        @endif
 
         <div class="rounded-[28px] border border-gray-200 bg-white/85 p-6 shadow-lg shadow-slate-200/60 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-800/85 dark:shadow-none">
           <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">Flow Map</p>

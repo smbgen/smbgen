@@ -1,11 +1,11 @@
 <?php
 
-it('returns not found for frontend home when frontend module is disabled', function () {
+it('redirects to login when frontend module is disabled for guests', function () {
     config()->set('modules.registry.frontend_site.default_enabled', false);
 
     $response = $this->get('/');
 
-    $response->assertNotFound();
+    $response->assertRedirect(route('login'));
 });
 
 it('serves frontend home when frontend module is enabled', function () {
