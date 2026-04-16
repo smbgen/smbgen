@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Stancl\Tenancy\Database\Models\Domain;
 
 it('redirects company administrator to domain onboarding when incomplete', function () {
+    config()->set('app.url', 'https://central.test');
     putenv('TENANCY_ENABLED=true');
 
     try {
@@ -33,7 +34,7 @@ it('redirects company administrator to domain onboarding when incomplete', funct
             'password' => 'password123',
         ]);
 
-        $response->assertRedirect('/admin/domain-onboarding');
+        $response->assertRedirect('https://acme.central.test/admin/domain-onboarding');
     } finally {
         putenv('TENANCY_ENABLED=false');
     }

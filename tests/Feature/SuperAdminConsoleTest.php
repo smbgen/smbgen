@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ActivityLog;
 use App\Models\BusinessSetting;
 use App\Models\SubscriptionTier;
 use App\Models\Tenant;
@@ -97,12 +98,73 @@ test('super admin can update deployment console settings', function () {
         ->and(BusinessSetting::get('module_frontend_site_enabled'))->toBeTrue();
 });
 
+test('deployment console shows logged-in user queue with tenant association sorted latest first', function () {
+    $olderTenant = Tenant::create([
+        'id' => (string) \Illuminate\Support\Str::uuid(),
+        'name' => 'Older Tenant',
+        'email' => 'owner@older.test',
+        'subdomain' => 'older',
+        'plan' => 'trial',
+        'deployment_mode' => 'shared',
+        'is_active' => true,
+    ]);
+
+    $newerTenant = Tenant::create([
+        'id' => (string) \Illuminate\Support\Str::uuid(),
+        'name' => 'Newer Tenant',
+        'email' => 'owner@newer.test',
+        'subdomain' => 'newer',
+        'plan' => 'trial',
+        'deployment_mode' => 'shared',
+        'is_active' => true,
+    ]);
+
+    $olderUser = User::factory()->create([
+        'tenant_id' => $olderTenant->id,
+        'name' => 'Older User',
+        'email' => 'older-user@test.com',
+    ]);
+
+    $newerUser = User::factory()->create([
+        'tenant_id' => $newerTenant->id,
+        'name' => 'Newer User',
+        'email' => 'newer-user@test.com',
+    ]);
+
+    $olderLogin = ActivityLog::create([
+        'user_id' => $olderUser->id,
+        'action' => 'login',
+        'description' => 'User logged in',
+        'ip_address' => '127.0.0.1',
+        'user_agent' => 'Pest',
+    ]);
+    $olderLogin->forceFill(['created_at' => now()->subHour()])->save();
+
+    $newerLogin = ActivityLog::create([
+        'user_id' => $newerUser->id,
+        'action' => 'login_google',
+        'description' => 'User logged in via Google OAuth',
+        'ip_address' => '127.0.0.1',
+        'user_agent' => 'Pest',
+    ]);
+    $newerLogin->forceFill(['created_at' => now()])->save();
+
+    $response = $this->actingAs($this->superAdmin)
+        ->get(route('super-admin.deployment-console'));
+
+    $response->assertOk()
+        ->assertSee('User Management Queue')
+        ->assertSee('Older Tenant')
+        ->assertSee('Newer Tenant')
+        ->assertSeeInOrder(['newer-user@test.com', 'older-user@test.com']);
+});
+
 test('frontend site module can be disabled by deployment settings', function () {
     BusinessSetting::set('module_frontend_site_enabled', false, 'boolean');
 
     $response = $this->get('/');
 
-    $response->assertNotFound();
+    $response->assertRedirect(route('login'));
 });
 
 test('super admin routes are central-only when tenancy is enabled', function () {

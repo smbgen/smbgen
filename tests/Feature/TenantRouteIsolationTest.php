@@ -2,6 +2,7 @@
 
 use App\Models\Tenant;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 it('blocks tenant admin routes on central domain when tenancy is enabled', function () {
@@ -61,6 +62,41 @@ it('forbids authenticated users from accessing a different tenant domain', funct
         $response = $this->actingAs($user)->get('/_tenant-user-check');
 
         $response->assertForbidden();
+    } finally {
+        putenv('TENANCY_ENABLED=false');
+    }
+});
+
+it('redirects tenant administrators from central login to their tenant admin host', function () {
+    config()->set('app.url', 'https://central.test');
+    putenv('TENANCY_ENABLED=true');
+
+    try {
+        $tenant = Tenant::create([
+            'id' => (string) \Illuminate\Support\Str::uuid(),
+            'name' => 'Tenant Redirect',
+            'email' => 'owner@tenant-redirect.test',
+            'subdomain' => 'tenant-redirect',
+            'plan' => 'trial',
+            'deployment_mode' => 'shared',
+            'is_active' => true,
+        ]);
+
+        $user = User::factory()->create([
+            'tenant_id' => $tenant->id,
+            'role' => User::ROLE_ADMINISTRATOR,
+            'email' => 'owner@tenant-redirect.test',
+            'password' => Hash::make('password123'),
+            'email_verified_at' => now(),
+            'is_super_admin' => false,
+        ]);
+
+        $response = $this->post('https://central.test/login', [
+            'email' => $user->email,
+            'password' => 'password123',
+        ]);
+
+        $response->assertRedirect('https://tenant-redirect.central.test/admin/domain-onboarding');
     } finally {
         putenv('TENANCY_ENABLED=false');
     }
