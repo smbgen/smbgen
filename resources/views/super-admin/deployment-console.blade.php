@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="max-w-6xl mx-auto py-6 space-y-6">
-    <div class="admin-page-header">
+    <div class="admin-page-header flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
             <h1 class="admin-page-title">Deployment Console</h1>
             <p class="admin-page-subtitle">Choose which module owns the public site and which product stacks should be live.</p>
@@ -87,7 +87,7 @@
         </div>
 
         <div class="flex justify-end">
-            <button type="submit" class="btn-primary">Save Deployment Console</button>
+            <button type="submit" class="btn-primary w-full sm:w-auto">Save Deployment Console</button>
         </div>
     </form>
 
@@ -148,7 +148,7 @@
                                     </td>
                                     <td>
                                         @if($tenants->isNotEmpty())
-                                            <form method="POST" action="{{ route('super-admin.users.tenant', $user) }}" class="flex items-center gap-2">
+                                            <form method="POST" action="{{ route('super-admin.users.tenant', $user) }}" class="flex min-w-[220px] flex-col items-stretch gap-2 sm:min-w-0 sm:flex-row sm:items-center">
                                                 @csrf
                                                 @method('PATCH')
                                                 <select name="tenant_id" class="admin-input text-xs py-1 px-2">
@@ -174,7 +174,7 @@
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="is_super_admin" value="{{ $user->isSuperAdmin() ? '0' : '1' }}">
-                                            <button type="submit" class="btn-secondary text-xs">{{ $user->isSuperAdmin() ? 'Remove' : 'Promote' }}</button>
+                                            <button type="submit" class="btn-secondary text-xs w-full sm:w-auto">{{ $user->isSuperAdmin() ? 'Remove' : 'Promote' }}</button>
                                         </form>
                                     </td>
                                 </tr>

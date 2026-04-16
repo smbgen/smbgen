@@ -22,6 +22,16 @@ test('super admin can access the deployment console dashboard', function () {
         ->assertSee('Deployment Console');
 });
 
+test('super admin layout includes mobile navigation controls', function () {
+    $response = $this->actingAs($this->superAdmin)
+        ->get(route('super-admin.dashboard'));
+
+    $response->assertOk()
+        ->assertSee('Open navigation')
+        ->assertSee('Close navigation')
+        ->assertSee('-translate-x-full lg:static');
+});
+
 test('company administrator cannot access the super admin dashboard', function () {
     $response = $this->actingAs($this->admin)
         ->getJson(route('super-admin.dashboard'));

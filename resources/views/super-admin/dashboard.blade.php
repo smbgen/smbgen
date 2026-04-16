@@ -14,7 +14,7 @@
             <h1 class="mt-2 text-3xl font-semibold text-white">Super Admin Console</h1>
             <p class="mt-2 max-w-3xl text-sm text-slate-400">Operate smbgen as a deployment platform: assign super admins, control tenancy, choose the primary frontend stack, and manage module topology.</p>
         </div>
-        <div class="flex gap-3">
+        <div class="flex flex-wrap gap-3">
             <a href="{{ route('super-admin.guided-setup') }}" class="inline-flex items-center rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-200 hover:bg-slate-800 transition-colors">Guided Setup</a>
             <a href="{{ route('super-admin.deployment-console') }}" class="inline-flex items-center rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-cyan-400 transition-colors">Deployment Console</a>
         </div>
@@ -54,7 +54,7 @@
                         'trial' => \App\Models\Tenant::query()->where('plan', 'trial')->count(),
                     ];
                 @endphp
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid gap-4 sm:grid-cols-3">
                     <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
                         <div class="text-3xl font-bold text-gray-900 dark:text-white">{{ $tenantStats['total'] }}</div>
                         <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Total Tenants</div>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             @else
-                <div class="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-4 flex items-center justify-between">
+                <div class="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-exclamation-triangle text-amber-500"></i>
                         <p class="text-sm text-amber-700 dark:text-amber-300">Tenancy tables not found. Run migrations to enable multi-tenancy.</p>
@@ -89,7 +89,7 @@
         </div>
         <div class="admin-card-body space-y-4">
             @foreach($modules as $module)
-                <div class="flex items-start justify-between rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                <div class="flex flex-col gap-3 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                         <div class="flex items-center gap-2">
                             <h4 class="font-medium text-gray-900 dark:text-white">{{ $module['name'] }}</h4>

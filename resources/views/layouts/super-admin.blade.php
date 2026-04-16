@@ -10,13 +10,15 @@
     @vite('resources/js/app.js')
     @stack('styles')
 </head>
-<body class="bg-slate-950 font-sans antialiased text-gray-100">
-    <div class="flex min-h-screen">
+<body x-data="{ sidebarOpen: false }" class="bg-slate-950 font-sans antialiased text-gray-100" :class="{ 'overflow-hidden lg:overflow-auto': sidebarOpen }">
+    <div class="flex min-h-screen flex-col lg:flex-row">
+        <div x-cloak x-show="sidebarOpen" x-transition.opacity class="fixed inset-0 z-40 bg-slate-950/70 lg:hidden" @click="sidebarOpen = false"></div>
 
         {{-- Sidebar --}}
-        <aside class="w-72 flex-shrink-0 bg-slate-900 border-r border-slate-800 flex flex-col">
+        <aside class="fixed inset-y-0 left-0 z-50 w-72 max-w-[calc(100vw-2rem)] flex-shrink-0 bg-slate-900 border-r border-slate-800 flex flex-col transform transition-transform duration-300 -translate-x-full lg:static lg:max-w-none lg:translate-x-0" :class="{ 'translate-x-0': sidebarOpen }">
             <div class="px-6 py-5 border-b border-slate-800">
-                <a href="{{ route('super-admin.dashboard') }}" class="flex items-start gap-3 text-white">
+                <div class="flex items-start justify-between gap-3">
+                    <a href="{{ route('super-admin.dashboard') }}" class="flex items-start gap-3 text-white">
                     <div class="h-11 w-11 rounded-2xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-950/30">
                         <i class="fas fa-shield-halved text-white text-sm"></i>
                     </div>
@@ -25,7 +27,11 @@
                         <p class="text-lg font-semibold leading-tight">Super Admin Console</p>
                         <p class="text-xs text-slate-400 mt-1">Central-only operations surface</p>
                     </div>
-                </a>
+                    </a>
+                    <button type="button" class="lg:hidden text-slate-400 hover:text-white transition-colors" @click="sidebarOpen = false" aria-label="Close navigation">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
             </div>
 
             <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
@@ -101,13 +107,16 @@
         </aside>
 
         {{-- Main content --}}
-        <div class="flex-1 flex flex-col min-w-0">
+        <div class="flex-1 flex flex-col min-w-0 w-full">
 
             {{-- Top bar --}}
-            <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 flex-shrink-0">
-                <div>
+            <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between gap-3 px-4 sm:px-6 flex-shrink-0">
+                <div class="flex items-center gap-3 min-w-0">
+                    <button type="button" class="inline-flex items-center justify-center rounded-lg border border-slate-700 p-2 text-slate-300 hover:bg-slate-800 hover:text-white transition-colors lg:hidden" @click="sidebarOpen = true" aria-label="Open navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
                     @if (isset($breadcrumbs) && count($breadcrumbs))
-                        <nav class="flex items-center gap-2 text-sm">
+                        <nav class="hidden sm:flex items-center gap-2 text-sm truncate">
                             @foreach ($breadcrumbs as $crumb)
                                 @if (!$loop->last)
                                     <a href="{{ $crumb['url'] }}" class="text-slate-400 hover:text-white transition-colors">{{ $crumb['label'] }}</a>
@@ -117,6 +126,7 @@
                                 @endif
                             @endforeach
                         </nav>
+                        <p class="sm:hidden text-sm text-slate-200 truncate">{{ $breadcrumbs[array_key_last($breadcrumbs)]['label'] }}</p>
                     @else
                         <div>
                             <p class="text-xs uppercase tracking-[0.18em] text-slate-500">Super Admin Surface</p>
@@ -149,7 +159,7 @@
                 </div>
             @endif
 
-            <main class="flex-1 p-6 overflow-y-auto">
+            <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
                 @yield('content')
             </main>
         </div>
