@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $tenancyEnabled = (bool) config('app.tenancy_enabled', false);
 
-        return view('auth.login', [
+        return view($tenancyEnabled ? 'auth.login' : 'auth.login-standard', [
             'tenancyEnabled' => $tenancyEnabled,
         ]);
     }

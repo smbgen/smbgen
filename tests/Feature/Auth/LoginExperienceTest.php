@@ -19,10 +19,9 @@ it('shows standard organization login when tenancy is disabled', function () {
     $response = $this->get('/login');
 
     $response->assertOk()
-        ->assertSee('Welcome back')
-        ->assertSee('Organization Login')
+        ->assertSee('Sign in to your organization')
         ->assertSee('Create a new account')
-        ->assertSee('One-click login with Google')
+        ->assertSee('Continue with Google')
         ->assertSee('Forgot your password?')
         ->assertDontSee('Create a new workspace');
 });
