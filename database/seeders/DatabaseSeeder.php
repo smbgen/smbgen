@@ -25,9 +25,7 @@ class DatabaseSeeder extends Seeder
                 \App\Modules\CleanSlate\Database\Seeders\DemoCustomerSeeder::class,
             ], static fn (string $seeder): bool => class_exists($seeder));
 
-            if ($optionalSeeders !== []) {
-                $this->call($optionalSeeders);
-            }
+            $this->call($optionalSeeders);
         }
     }
 }
