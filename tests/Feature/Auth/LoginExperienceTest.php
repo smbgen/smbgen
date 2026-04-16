@@ -13,17 +13,16 @@ it('shows give it a try on the public homepage', function () {
         ->assertSee('Give it a try');
 });
 
-it('shows registration and google guidance on the login screen', function () {
+it('shows standard organization login when tenancy is disabled', function () {
     config()->set('app.tenancy_enabled', false);
 
     $response = $this->get('/login');
 
     $response->assertOk()
-        ->assertSee('Organization Login')
+        ->assertSee('Sign in to your organization')
         ->assertSee('Create a new account')
         ->assertSee('Forgot your password?')
-        ->assertSee('One-click login with Google')
-        ->assertSee('Flow Map');
+        ->assertDontSee('Create a new workspace');
 });
 
 it('shows workspace creation path on login when tenancy is enabled', function () {
