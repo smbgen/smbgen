@@ -19,8 +19,8 @@ class MagicLinkController extends Controller
      */
     public function send(User $user)
     {
-        // ensure caller is an authenticated company administrator
-        if (! Auth::check() || Auth::user()->role !== 'company_administrator') {
+        // ensure caller is an authenticated administrator
+        if (! Auth::check() || ! Auth::user()->isAdministrator()) {
             abort(403);
         }
 

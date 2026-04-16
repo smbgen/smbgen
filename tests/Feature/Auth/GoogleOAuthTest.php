@@ -41,6 +41,7 @@ class GoogleOAuthTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'alex@example.com',
             'google_id' => '12345',
+            'role' => 'tenant_admin',
         ]);
         $this->assertDatabaseHas('clients', [
             'email' => 'alex@example.com',
@@ -49,7 +50,8 @@ class GoogleOAuthTest extends TestCase
         ]);
         $user = User::where('email', 'alex@example.com')->firstOrFail();
         $this->assertTrue($user->hasVerifiedEmail());
-        $response->assertRedirect('/dashboard');
+        $this->assertTrue($user->isTenantAdmin());
+        $response->assertRedirect('/admin/dashboard');
     }
 
     public function test_google_callback_logs_in_existing_user(): void
@@ -81,7 +83,7 @@ class GoogleOAuthTest extends TestCase
         $response->assertRedirect('/dashboard');
     }
 
-    public function test_google_callback_redirects_admin_to_admin_dashboard(): void
+    public function test_google_callback_redirects_admin_to_super_admin_dashboard(): void
     {
         $user = User::factory()->admin()->create([
             'email' => 'admin@example.com',
@@ -90,6 +92,28 @@ class GoogleOAuthTest extends TestCase
 
         $socialiteUser = $this->mockSocialiteUser(
             id: '77777',
+            name: $user->name,
+            email: $user->email,
+        );
+
+        Socialite::shouldReceive('driver->user')
+            ->once()
+            ->andReturn($socialiteUser);
+
+        $response = $this->get(route('auth.google.callback'));
+
+        $response->assertRedirect(route('super-admin.dashboard', absolute: false));
+    }
+
+    public function test_google_callback_redirects_tenant_admin_to_admin_dashboard(): void
+    {
+        $user = User::factory()->tenantAdmin()->create([
+            'email' => 'tenant-admin@example.com',
+            'google_id' => '88888',
+        ]);
+
+        $socialiteUser = $this->mockSocialiteUser(
+            id: '88888',
             name: $user->name,
             email: $user->email,
         );

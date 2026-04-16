@@ -194,7 +194,7 @@ class CalendarController extends Controller
         // Admin can disconnect any user, or user can disconnect themselves
         $userId = $request->input('user_id');
 
-        if ($userId && auth()->user()->role === 'company_administrator') {
+        if ($userId && auth()->user()->isAdministrator()) {
             // Admin disconnecting another user
             $user = User::findOrFail($userId);
         } else {
