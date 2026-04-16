@@ -29,7 +29,9 @@ test('super admin layout includes mobile navigation controls', function () {
     $response->assertOk()
         ->assertSee('Open navigation')
         ->assertSee('Close navigation')
-        ->assertSee('-translate-x-full lg:static');
+        ->assertSee('x-data="{ sidebarOpen: false }"', false)
+        ->assertSee('@click="sidebarOpen = true"', false)
+        ->assertSee('@click="sidebarOpen = false"', false);
 });
 
 test('company administrator cannot access the super admin dashboard', function () {

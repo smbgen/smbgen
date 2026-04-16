@@ -10,7 +10,7 @@
     @vite('resources/js/app.js')
     @stack('styles')
 </head>
-<body x-data="{ sidebarOpen: false }" class="bg-slate-950 font-sans antialiased text-gray-100" :class="{ 'overflow-hidden lg:overflow-auto': sidebarOpen }">
+<body x-data="{ sidebarOpen: false }" class="bg-slate-950 font-sans antialiased text-gray-100" :class="{ 'overflow-hidden': sidebarOpen }">
     <div class="flex min-h-screen flex-col lg:flex-row">
         <div x-cloak x-show="sidebarOpen" x-transition.opacity class="fixed inset-0 z-40 bg-slate-950/70 lg:hidden" @click="sidebarOpen = false"></div>
 
