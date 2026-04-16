@@ -1,5 +1,9 @@
 <?php
 
+beforeEach(function (): void {
+    config()->set('modules.registry.frontend_site.default_enabled', true);
+});
+
 it('renders the home page with smbgen core messaging', function () {
     $response = $this->get(route('home'));
 

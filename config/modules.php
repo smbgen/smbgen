@@ -7,7 +7,7 @@ return [
             'description' => 'Primary public website, CMS delivery, contact funnel, and booking entry points.',
             'category' => 'frontend',
             'core' => true,
-            'default_enabled' => true,
+            'default_enabled' => filter_var(env('FRONTEND_ENABLED', false), FILTER_VALIDATE_BOOLEAN),
             'default_selected' => true,
         ],
     ],

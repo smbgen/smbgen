@@ -1,6 +1,26 @@
 #!/bin/bash
 set -e
 
+to_bool() {
+    case "${1,,}" in
+        1|true|yes|on) echo "true" ;;
+        *) echo "false" ;;
+    esac
+}
+
+BUILD_FRONTEND="$(to_bool "${FRONTEND_ENABLED:-false}")"
+
+for arg in "$@"; do
+    case "$arg" in
+        --with-frontend)
+            BUILD_FRONTEND="true"
+            ;;
+        --without-frontend)
+            BUILD_FRONTEND="false"
+            ;;
+    esac
+done
+
 # Get the project root directory (parent of deployment/)
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -41,14 +61,19 @@ php artisan route:cache
 php artisan view:cache
 echo ""
 
-# Build frontend assets (if npm is available)
-if command -v npm &> /dev/null; then
-    echo "🎨 Building frontend assets..."
-    npm install
-    npm run build
-    echo ""
+# Build frontend assets only when explicitly enabled.
+if [ "$BUILD_FRONTEND" = "true" ]; then
+    if command -v npm &> /dev/null; then
+        echo "🎨 Building frontend assets..."
+        npm install
+        npm run build
+        echo ""
+    else
+        echo "⚠️  npm not found, skipping frontend build"
+        echo ""
+    fi
 else
-    echo "⚠️  npm not found, skipping frontend build"
+    echo "⏭️  Frontend build disabled (set FRONTEND_ENABLED=true or pass --with-frontend to enable)"
     echo ""
 fi
 
