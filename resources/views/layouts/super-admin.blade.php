@@ -201,7 +201,7 @@
                     const href = link.getAttribute('href');
                     const target = link.getAttribute('target');
 
-                    if (href === null || href === '' || href.startsWith('#') || target === '_blank') {
+                    if (!href || href.startsWith('#') || target === '_blank') {
                         return;
                     }
 

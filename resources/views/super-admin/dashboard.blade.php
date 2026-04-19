@@ -11,7 +11,7 @@
     <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
             <p class="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-400">Platform Control</p>
-            <h1 class="mt-2 font-semibold text-2xl sm:text-3xl text-white">Super Admin Console</h1>
+            <h1 class="mt-2 text-2xl sm:text-3xl font-semibold text-white">Super Admin Console</h1>
             <p class="mt-2 max-w-3xl text-sm text-slate-400">Operate smbgen as a deployment platform: assign super admins, control tenancy, choose the primary frontend stack, and manage module topology.</p>
         </div>
         <div class="flex flex-col sm:flex-row gap-3">
