@@ -102,6 +102,7 @@
                 </div>
             </div>
         </aside>
+        <div id="super-admin-sidebar-overlay" class="fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-sm hidden lg:hidden"></div>
 
         {{-- Main content --}}
         <div class="flex-1 flex flex-col min-w-0">
@@ -163,7 +164,6 @@
                 @yield('content')
             </main>
         </div>
-        <div id="super-admin-sidebar-overlay" class="fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-sm hidden lg:hidden"></div>
     </div>
 
     @stack('scripts')
@@ -198,10 +198,10 @@
 
             sidebar?.querySelectorAll('a').forEach((link) => {
                 link.addEventListener('click', function () {
-                    const href = link.getAttribute('href') || '';
+                    const href = link.getAttribute('href');
                     const target = link.getAttribute('target');
 
-                    if (href.startsWith('#') || target === '_blank') {
+                    if (!href || href.startsWith('#') || target === '_blank') {
                         return;
                     }
 
