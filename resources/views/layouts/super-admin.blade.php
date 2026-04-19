@@ -11,11 +11,11 @@
     @stack('styles')
 </head>
 <body class="bg-slate-950 font-sans antialiased text-gray-100">
-    <div class="flex min-h-screen">
+    <div class="flex min-h-screen flex-col lg:flex-row">
 
         {{-- Sidebar --}}
-        <aside class="w-72 flex-shrink-0 bg-slate-900 border-r border-slate-800 flex flex-col">
-            <div class="px-6 py-5 border-b border-slate-800">
+        <aside id="super-admin-sidebar" class="fixed inset-y-0 left-0 z-50 w-72 flex-shrink-0 bg-slate-900 border-r border-slate-800 flex flex-col transform -translate-x-full transition-transform duration-300 lg:static lg:translate-x-0">
+            <div class="px-6 py-5 border-b border-slate-800 flex items-start justify-between gap-3">
                 <a href="{{ route('super-admin.dashboard') }}" class="flex items-start gap-3 text-white">
                     <div class="h-11 w-11 rounded-2xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-950/30">
                         <i class="fas fa-shield-halved text-white text-sm"></i>
@@ -26,6 +26,9 @@
                         <p class="text-xs text-slate-400 mt-1">Central-only operations surface</p>
                     </div>
                 </a>
+                <button id="super-admin-sidebar-close" type="button" aria-label="Close sidebar" class="lg:hidden text-slate-400 hover:text-white transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
             </div>
 
             <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
@@ -104,10 +107,17 @@
         <div class="flex-1 flex flex-col min-w-0">
 
             {{-- Top bar --}}
-            <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 flex-shrink-0">
-                <div>
+            <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-3 sm:px-6 flex-shrink-0">
+                <div class="flex items-center gap-3 min-w-0">
+                    <button id="super-admin-sidebar-toggle" type="button" aria-label="Open sidebar" class="lg:hidden text-slate-200 hover:text-white hover:bg-slate-800 rounded-lg p-2 transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="lg:hidden">
+                        <p class="text-xs uppercase tracking-[0.18em] text-slate-500">Super Admin</p>
+                        <p class="text-sm text-slate-300">Platform control</p>
+                    </div>
                     @if (isset($breadcrumbs) && count($breadcrumbs))
-                        <nav class="flex items-center gap-2 text-sm">
+                        <nav class="hidden lg:flex items-center gap-2 text-sm">
                             @foreach ($breadcrumbs as $crumb)
                                 @if (!$loop->last)
                                     <a href="{{ $crumb['url'] }}" class="text-slate-400 hover:text-white transition-colors">{{ $crumb['label'] }}</a>
@@ -118,7 +128,7 @@
                             @endforeach
                         </nav>
                     @else
-                        <div>
+                        <div class="hidden lg:block">
                             <p class="text-xs uppercase tracking-[0.18em] text-slate-500">Super Admin Surface</p>
                             <p class="text-sm text-slate-300">Central platform operations</p>
                         </div>
@@ -139,22 +149,63 @@
 
             {{-- Flash messages --}}
             @if (session('success'))
-                <div class="mx-6 mt-4 px-4 py-3 bg-green-900/50 border border-green-700 rounded-lg text-green-300 text-sm">
+                <div class="mx-3 sm:mx-6 mt-4 px-4 py-3 bg-green-900/50 border border-green-700 rounded-lg text-green-300 text-sm">
                     {{ session('success') }}
                 </div>
             @endif
             @if (session('error'))
-                <div class="mx-6 mt-4 px-4 py-3 bg-red-900/50 border border-red-700 rounded-lg text-red-300 text-sm">
+                <div class="mx-3 sm:mx-6 mt-4 px-4 py-3 bg-red-900/50 border border-red-700 rounded-lg text-red-300 text-sm">
                     {{ session('error') }}
                 </div>
             @endif
 
-            <main class="flex-1 p-6 overflow-y-auto">
+            <main class="flex-1 p-3 sm:p-6 overflow-y-auto">
                 @yield('content')
             </main>
         </div>
     </div>
+    <div id="super-admin-sidebar-overlay" class="fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-sm hidden lg:hidden"></div>
 
     @stack('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebar = document.getElementById('super-admin-sidebar');
+            const overlay = document.getElementById('super-admin-sidebar-overlay');
+            const toggleButton = document.getElementById('super-admin-sidebar-toggle');
+            const closeButton = document.getElementById('super-admin-sidebar-close');
+
+            function openSidebar() {
+                if (!sidebar || !overlay) {
+                    return;
+                }
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                if (!sidebar || !overlay) {
+                    return;
+                }
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+
+            toggleButton?.addEventListener('click', openSidebar);
+            closeButton?.addEventListener('click', closeSidebar);
+            overlay?.addEventListener('click', closeSidebar);
+
+            sidebar?.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', closeSidebar);
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && overlay && !overlay.classList.contains('hidden')) {
+                    closeSidebar();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
