@@ -197,7 +197,16 @@
             overlay?.addEventListener('click', closeSidebar);
 
             sidebar?.querySelectorAll('a').forEach((link) => {
-                link.addEventListener('click', closeSidebar);
+                link.addEventListener('click', function () {
+                    const href = link.getAttribute('href') ?? '';
+                    const target = link.getAttribute('target');
+
+                    if (href.startsWith('#') || target === '_blank') {
+                        return;
+                    }
+
+                    closeSidebar();
+                });
             });
 
             document.addEventListener('keydown', function (event) {
