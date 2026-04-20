@@ -242,7 +242,7 @@ it('can filter logs by date range', function () {
 
     // Manually update the created_at to simulate an old log
     $oldLog = ActivityLog::first();
-    $oldLog->update(['created_at' => now()->subDays(10)]);
+    ActivityLog::where('id', $oldLog->id)->update(['created_at' => now()->subDays(10)]);
 
     ActivityLogger::log('test_action', 'Test recent', null, null);
 

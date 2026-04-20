@@ -49,7 +49,12 @@ class AvailabilityController extends Controller
             'user_id' => 'required|exists:users,id',
             'day_of_week' => 'required|integer|min:0|max:6',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
+            'end_time' => ['required', 'date_format:H:i', function ($attribute, $value, $fail) use ($request) {
+                $start = $request->input('start_time');
+                if ($start && $value <= $start) {
+                    $fail('The end time must be after the start time.');
+                }
+            }],
             'duration' => 'required|integer|min:15|max:240',
             'break_period_minutes' => 'required|integer|min:0|max:120',
             'minimum_booking_notice_hours' => 'required|integer|min:1|max:168',
@@ -78,7 +83,12 @@ class AvailabilityController extends Controller
         $validated = $request->validate([
             'day_of_week' => 'required|integer|min:0|max:6',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
+            'end_time' => ['required', 'date_format:H:i', function ($attribute, $value, $fail) use ($request) {
+                $start = $request->input('start_time');
+                if ($start && $value <= $start) {
+                    $fail('The end time must be after the start time.');
+                }
+            }],
             'duration' => 'required|integer|min:15|max:240',
             'break_period_minutes' => 'required|integer|min:0|max:120',
             'minimum_booking_notice_hours' => 'required|integer|min:1|max:168',

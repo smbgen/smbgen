@@ -78,3 +78,5 @@ Route::post('/pay/confirm', [PaymentController::class, 'confirmPayment'])->name(
 Route::get('/magic-link/{token}/consume', [\App\Http\Controllers\MagicLinkController::class, 'consume'])
     ->middleware('throttle:10,1')
     ->name('magic.consume');
+
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');

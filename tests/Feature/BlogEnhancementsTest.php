@@ -69,5 +69,5 @@ test('sitemap returns valid xml', function () {
     $response = $this->get(route('sitemap'));
 
     $response->assertOk();
-    $response->assertHeader('Content-Type', 'text/xml');
+    $response->assertHeader('Content-Type', 'text/xml; charset=utf-8');
 });
