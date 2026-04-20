@@ -34,11 +34,11 @@ class PackageIngestService
         $files = $this->scanDirectory($tmpDir, $tmpDir);
 
         return [
-            'name'              => $this->guessPackageName($zipFile->getClientOriginalName()),
-            'source'            => 'zip_upload',
+            'name' => $this->guessPackageName($zipFile->getClientOriginalName()),
+            'source' => 'zip_upload',
             'original_filename' => $zipFile->getClientOriginalName(),
-            'tmp_dir'           => $tmpDir,
-            'files'             => $files,
+            'tmp_dir' => $tmpDir,
+            'files' => $files,
         ];
     }
 
@@ -56,11 +56,11 @@ class PackageIngestService
         }
 
         return [
-            'name'              => 'New Package',
-            'source'            => 'multi_file',
+            'name' => 'New Package',
+            'source' => 'multi_file',
             'original_filename' => null,
-            'tmp_dir'           => null,
-            'files'             => $files,
+            'tmp_dir' => null,
+            'files' => $files,
         ];
     }
 
@@ -79,13 +79,13 @@ class PackageIngestService
         array $uploadedFiles = []
     ): Package {
         $package = Package::create([
-            'name'               => $reviewedData['name'],
-            'client_id'          => $client->id,
+            'name' => $reviewedData['name'],
+            'client_id' => $client->id,
             'created_by_user_id' => $createdByUserId,
-            'status'             => 'ready',
-            'source'             => $reviewedData['source'],
-            'original_filename'  => $reviewedData['original_filename'] ?? null,
-            'portal_enabled'     => false,
+            'status' => 'ready',
+            'source' => $reviewedData['source'],
+            'original_filename' => $reviewedData['original_filename'] ?? null,
+            'portal_enabled' => false,
         ]);
 
         $packageDir = "packages/{$client->id}/{$package->id}";
@@ -116,17 +116,17 @@ class PackageIngestService
             }
 
             PackageFile::create([
-                'package_id'    => $package->id,
+                'package_id' => $package->id,
                 'original_name' => $originalName,
-                'display_name'  => $fileData['display_name'],
-                'type'          => $type,
-                'role'          => $role,
-                'group_label'   => $fileData['group_label'] ?? null,
-                'storage_path'  => $storagePath,
-                'storage_disk'  => $disk,
-                'size_bytes'    => $sizeBytes,
+                'display_name' => $fileData['display_name'],
+                'type' => $type,
+                'role' => $role,
+                'group_label' => $fileData['group_label'] ?? null,
+                'storage_path' => $storagePath,
+                'storage_disk' => $disk,
+                'size_bytes' => $sizeBytes,
                 'portal_promoted' => false,
-                'sort_order'    => $index,
+                'sort_order' => $index,
             ]);
         }
 
@@ -153,7 +153,7 @@ class PackageIngestService
                 continue;
             }
 
-            $fullPath    = $currentDir.'/'.$entry;
+            $fullPath = $currentDir.'/'.$entry;
             $relativePath = $relativeBase ? $relativeBase.'/'.$entry : $entry;
 
             if (is_dir($fullPath)) {
@@ -169,7 +169,7 @@ class PackageIngestService
                 $classification = $this->classifyFromPath($fullPath, $entry);
                 $results[] = array_merge($classification, [
                     'tmp_relative_path' => $relativePath,
-                    'group_label'       => null, // set by parent folder loop above
+                    'group_label' => null, // set by parent folder loop above
                 ]);
             }
         }
@@ -183,25 +183,25 @@ class PackageIngestService
 
         return array_merge($classification, [
             'tmp_relative_path' => null,
-            'group_label'       => $group,
+            'group_label' => $group,
         ]);
     }
 
     private function classifyFromPath(string $fullPath, string $filename): array
     {
-        $ext      = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
         $mimeType = mime_content_type($fullPath) ?: 'application/octet-stream';
-        $type     = $this->detectType($ext, $mimeType, $fullPath, $filename);
-        $role     = $this->assignRole($type);
+        $type = $this->detectType($ext, $mimeType, $fullPath, $filename);
+        $role = $this->assignRole($type);
         $displayName = $this->extractDisplayName($filename);
 
         return [
             'original_name' => $filename,
-            'display_name'  => $displayName,
-            'type'          => $type,
-            'role'          => $role,
-            'mime_type'     => $mimeType,
-            'size_bytes'    => filesize($fullPath),
+            'display_name' => $displayName,
+            'type' => $type,
+            'role' => $role,
+            'mime_type' => $mimeType,
+            'size_bytes' => filesize($fullPath),
         ];
     }
 
@@ -263,10 +263,10 @@ class PackageIngestService
     private function assignRole(string $type): string
     {
         return match ($type) {
-            'HTML_EMAIL'        => 'email_template',
+            'HTML_EMAIL' => 'email_template',
             'MARKDOWN_RESEARCH' => 'research',
-            'JSON_DATA'         => 'data',
-            default             => 'deliverable',
+            'JSON_DATA' => 'data',
+            default => 'deliverable',
         };
     }
 
@@ -286,11 +286,11 @@ class PackageIngestService
     private function subDirForRole(string $role): string
     {
         return match ($role) {
-            'deliverable'    => 'deliverables',
-            'research'       => 'research',
-            'data'           => 'research',
+            'deliverable' => 'deliverables',
+            'research' => 'research',
+            'data' => 'research',
             'email_template' => 'email',
-            default          => 'other',
+            default => 'other',
         };
     }
 
@@ -313,24 +313,24 @@ class PackageIngestService
     private function writeManifest(Package $package, string $packageDir): void
     {
         $manifest = [
-            'id'                => $package->id,
-            'name'              => $package->name,
-            'client_id'         => $package->client_id,
-            'created_by'        => $package->created_by_user_id,
-            'created_at'        => $package->created_at->toIso8601String(),
-            'status'            => $package->status,
-            'source'            => $package->source,
+            'id' => $package->id,
+            'name' => $package->name,
+            'client_id' => $package->client_id,
+            'created_by' => $package->created_by_user_id,
+            'created_at' => $package->created_at->toIso8601String(),
+            'status' => $package->status,
+            'source' => $package->source,
             'original_filename' => $package->original_filename,
-            'portal_enabled'    => $package->portal_enabled,
-            'files'             => $package->files->map(fn ($f) => [
-                'id'             => $f->id,
-                'original_name'  => $f->original_name,
-                'display_name'   => $f->display_name,
-                'type'           => $f->type,
-                'role'           => $f->role,
-                'group_label'    => $f->group_label,
-                'storage_path'   => $f->storage_path,
-                'size_bytes'     => $f->size_bytes,
+            'portal_enabled' => $package->portal_enabled,
+            'files' => $package->files->map(fn ($f) => [
+                'id' => $f->id,
+                'original_name' => $f->original_name,
+                'display_name' => $f->display_name,
+                'type' => $f->type,
+                'role' => $f->role,
+                'group_label' => $f->group_label,
+                'storage_path' => $f->storage_path,
+                'size_bytes' => $f->size_bytes,
                 'portal_promoted' => $f->portal_promoted,
             ])->values()->all(),
         ];

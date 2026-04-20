@@ -11,13 +11,13 @@ it('shows filtered calendar logs from storage', function () {
     File::ensureDirectoryExists(dirname($logPath));
 
     $entries = [
-        "[2026-01-01 00:00:00] local.INFO: Startup complete",
-        "[2026-01-02 00:00:00] local.INFO: [GoogleCalendar] createEventForUser called",
-        "Stack trace line 1",
-        "Stack trace line 2",
-        "[2026-01-02 00:05:00] local.ERROR: [Booking] Failed to create event",
-        "Details about the failure",
-        "[2026-01-03 00:00:00] local.INFO: Regular log",
+        '[2026-01-01 00:00:00] local.INFO: Startup complete',
+        '[2026-01-02 00:00:00] local.INFO: [GoogleCalendar] createEventForUser called',
+        'Stack trace line 1',
+        'Stack trace line 2',
+        '[2026-01-02 00:05:00] local.ERROR: [Booking] Failed to create event',
+        'Details about the failure',
+        '[2026-01-03 00:00:00] local.INFO: Regular log',
     ];
 
     File::put($logPath, implode("\n", $entries));

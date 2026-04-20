@@ -60,10 +60,10 @@ class Package extends Model
     public function getStatusBadgeClassAttribute(): string
     {
         return match ($this->status) {
-            'draft'  => 'bg-yellow-900/40 text-yellow-300 border border-yellow-700',
-            'ready'  => 'bg-blue-900/40 text-blue-300 border border-blue-700',
-            'sent'   => 'bg-green-900/40 text-green-300 border border-green-700',
-            default  => 'bg-gray-700 text-gray-300',
+            'draft' => 'bg-yellow-900/40 text-yellow-300 border border-yellow-700',
+            'ready' => 'bg-blue-900/40 text-blue-300 border border-blue-700',
+            'sent' => 'bg-green-900/40 text-green-300 border border-green-700',
+            default => 'bg-gray-700 text-gray-300',
         };
     }
 

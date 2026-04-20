@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -21,7 +20,7 @@ class UserSeeder extends Seeder
     {
         // Use the specified password for admin user
         $adminPassword = 'JUHeKKEcg~y2Z7q9Wd2M9UmqnQ~^ZeQtzP';
-        $demoPassword  = 'demo-password-local-only';
+        $demoPassword = 'demo-password-local-only';
 
         // Admin user
         $admin = User::firstOrCreate([

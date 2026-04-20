@@ -28,9 +28,9 @@ class CalendarController extends Controller
             'configured_base_redirect' => config('services.google.redirect'),
             'final_redirect_uri' => $redirectUri,
             'app_url' => config('app.url'),
-            'client_id_configured' => !empty(config('services.google.client_id')),
+            'client_id_configured' => ! empty(config('services.google.client_id')),
             'client_id_value' => config('services.google.client_id'),
-            'client_secret_configured' => !empty(config('services.google.client_secret')),
+            'client_secret_configured' => ! empty(config('services.google.client_secret')),
             'user_id' => auth()->id(),
             'user_email' => auth()->user()->email,
             'request_url' => request()->url(),
@@ -53,12 +53,12 @@ class CalendarController extends Controller
         try {
             $redirectResponse = $socialite->redirect();
             $actualRedirectUrl = $redirectResponse->getTargetUrl();
-            
+
             \Log::info('Google OAuth redirect URL generated', [
                 'full_redirect_url' => $actualRedirectUrl,
                 'url_length' => strlen($actualRedirectUrl),
             ]);
-            
+
             return $redirectResponse;
         } catch (\Exception $e) {
             \Log::error('Failed to generate Google OAuth redirect', [
