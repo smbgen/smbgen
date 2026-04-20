@@ -36,6 +36,7 @@ test('admin can convert lead to client', function () {
     $lead = LeadForm::factory()->create([
         'name' => 'Jane Smith',
         'email' => 'jane@example.com',
+        'form_data' => ['phone' => '555-1234'],
     ]);
 
     $response = $this->actingAs($this->admin)

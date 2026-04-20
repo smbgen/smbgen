@@ -3,14 +3,12 @@
 use App\Models\BookingFieldConfig;
 use App\Models\User;
 
-use function Pest\Laravel\actingAs;
-
 beforeEach(function () {
     $this->admin = User::factory()->create(['role' => 'company_administrator']);
 });
 
 test('admin can view booking field configuration page', function () {
-    $response = actingAs($this->admin)->get(route('admin.booking-fields.edit'));
+    $response = $this->actingAs($this->admin)->get(route('admin.booking-fields.edit'));
 
     $response->assertSuccessful();
     $response->assertSee('Booking Form Configuration');
@@ -31,7 +29,7 @@ test('booking field config has correct default values', function () {
 test('admin can toggle phone field visibility', function () {
     $config = BookingFieldConfig::getConfig();
 
-    actingAs($this->admin)->put(route('admin.booking-fields.update'), [
+    $this->actingAs($this->admin)->put(route('admin.booking-fields.update'), [
         'show_phone' => false,
         'require_phone' => false,
         'show_property_address' => true,
@@ -47,7 +45,7 @@ test('admin can toggle phone field visibility', function () {
 test('admin can make property address required', function () {
     $config = BookingFieldConfig::getConfig();
 
-    actingAs($this->admin)->put(route('admin.booking-fields.update'), [
+    $this->actingAs($this->admin)->put(route('admin.booking-fields.update'), [
         'show_phone' => true,
         'require_phone' => false,
         'show_property_address' => true,
@@ -80,7 +78,7 @@ test('admin can add custom fields', function () {
         ],
     ];
 
-    actingAs($this->admin)->put(route('admin.booking-fields.update'), [
+    $this->actingAs($this->admin)->put(route('admin.booking-fields.update'), [
         'show_phone' => true,
         'require_phone' => false,
         'show_property_address' => true,

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\EmailTrackingController;
+use App\Http\Controllers\LeadFormController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -66,6 +67,8 @@ Route::get('/auth/google/redirect', [AuthenticatedSessionController::class, 'red
 
 Route::get('/auth/google/callback', [AuthenticatedSessionController::class, 'handleGoogleCallback'])
     ->name('auth.google.callback');
+
+Route::post('/leadform', [LeadFormController::class, 'store'])->name('leadform.store');
 
 Route::post('/stripe/webhook', [PaymentController::class, 'webhook'])->name('stripe.webhook');
 Route::get('/pay', [PaymentController::class, 'collect'])->name('payment.collect');

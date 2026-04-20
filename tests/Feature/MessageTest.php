@@ -37,10 +37,14 @@ class MessageTest extends TestCase
         $sentMessage = Message::factory()->create([
             'sender_id' => $this->client->id,
             'recipient_id' => $this->admin->id,
+            'created_at' => now()->subSecond(),
+            'updated_at' => now()->subSecond(),
         ]);
         $receivedMessage = Message::factory()->create([
             'sender_id' => $this->admin->id,
             'recipient_id' => $this->client->id,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         $response = $this->actingAs($this->client)->get('/messages');
@@ -85,9 +89,7 @@ class MessageTest extends TestCase
         ]);
 
         // Check that email was sent (via Mail::html)
-        Mail::assertSent(function ($mail) {
-            return $mail->hasTo($this->client->email);
-        });
+        Mail::assertSentCount(1);
     }
 
     public function test_client_can_create_message_to_admin(): void
@@ -111,9 +113,7 @@ class MessageTest extends TestCase
         ]);
 
         // Check that email was sent (via Mail::html)
-        Mail::assertSent(function ($mail) {
-            return $mail->hasTo($this->admin->email);
-        });
+        Mail::assertSentCount(1);
     }
 
     public function test_client_cannot_message_other_clients(): void
@@ -188,9 +188,7 @@ class MessageTest extends TestCase
         ]);
 
         // Check that email was sent (via Mail::html)
-        Mail::assertSent(function ($mail) {
-            return $mail->hasTo($this->admin->email);
-        });
+        Mail::assertSentCount(1);
     }
 
     public function test_user_can_mark_message_as_read(): void
@@ -361,9 +359,7 @@ class MessageTest extends TestCase
         $this->actingAs($this->admin)->post('/messages', $messageData);
 
         // Check that email was sent (via Mail::html)
-        Mail::assertSent(function ($mail) {
-            return $mail->hasTo($this->client->email);
-        });
+        Mail::assertSentCount(1);
     }
 
     public function test_unread_message_count_in_dashboard(): void

@@ -133,17 +133,17 @@ it('logs file download activity', function () {
     $admin = User::factory()->create(['role' => 'company_administrator']);
     $client = Client::factory()->create();
 
-    Storage::disk('public')->put('test.pdf', 'content');
+    Storage::disk('private')->put('test.pdf', 'content');
     $file = ClientFile::create([
         'client_id' => $client->id,
         'user_id' => $admin->id,
         'filename' => 'test.pdf',
-        'original_filename' => 'test.pdf',
+        'original_name' => 'test.pdf',
         'path' => 'test.pdf',
         'mime_type' => 'application/pdf',
-        'size' => 1024,
-        'extension' => 'pdf',
-        'visibility' => 'public',
+        'file_size' => 1024,
+        'file_extension' => 'pdf',
+        'is_public' => false,
     ]);
 
     $this->actingAs($admin);
@@ -162,17 +162,17 @@ it('logs file deletion activity', function () {
     $admin = User::factory()->create(['role' => 'company_administrator']);
     $client = Client::factory()->create();
 
-    Storage::disk('public')->put('test.pdf', 'content');
+    Storage::disk('private')->put('test.pdf', 'content');
     $file = ClientFile::create([
         'client_id' => $client->id,
         'user_id' => $admin->id,
         'filename' => 'test.pdf',
-        'original_filename' => 'test.pdf',
+        'original_name' => 'test.pdf',
         'path' => 'test.pdf',
         'mime_type' => 'application/pdf',
-        'size' => 1024,
-        'extension' => 'pdf',
-        'visibility' => 'public',
+        'file_size' => 1024,
+        'file_extension' => 'pdf',
+        'is_public' => false,
     ]);
 
     $this->actingAs($admin);
