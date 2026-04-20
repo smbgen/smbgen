@@ -12,3 +12,7 @@ require __DIR__.'/web/trial.php';
     require __DIR__.'/web/admin.php';
     require __DIR__.'/web/blog.php';
 });
+
+// CMS public routes (form submission + catch-all slug) must be last
+// so they don't intercept specific named routes defined above.
+require __DIR__.'/web/content.php';

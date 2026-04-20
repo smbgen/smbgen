@@ -21,7 +21,7 @@
                         @if($post->excerpt)
                             <p class="text-gray-700 dark:text-gray-300 mb-4">{{ $post->excerpt }}</p>
                         @endif
-                        <a href="{{ route('blog.show', $post->slug') }}" class="text-blue-600 hover:underline">Read more →</a>
+                        <a href="{{ route('blog.show', $post->slug) }}" class="text-blue-600 hover:underline">Read more →</a>
                     </div>
                 </article>
             @endforeach
