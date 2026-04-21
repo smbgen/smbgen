@@ -1,0 +1,547 @@
+parameters:
+    ignoreErrors:
+        -
+            identifier: return.type
+            path: app/Models/SocialPost.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: return.type
+            path: app/Models/SocialPostTarget.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: variable.undefined
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Console/Commands/SendDeploymentNotification.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: booleanAnd.rightAlwaysTrue
+            path: app/Console/Commands/SendTestEmails.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: booleanNot.alwaysFalse
+            path: app/Console/Commands/SendTestEmails.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: isset.variable
+            path: app/Console/Commands/SendTestEmails.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/AISEOController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/AdminBillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: larastan.relationExistence
+            path: app/Http/Controllers/Admin/AdminDashboardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/AdminDashboardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/Admin/BlogCommentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/BookingController.php
+            count: 5
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Http/Controllers/Admin/CalendarController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/CalendarController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/CmsImageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/Admin/CmsPageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Http/Controllers/Admin/DomainOnboardingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: booleanAnd.alwaysFalse
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: isset.variable
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: variable.undefined
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: booleanNot.alwaysFalse
+            path: app/Http/Controllers/Admin/EmailLogController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Http/Controllers/Admin/EmailLogController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 20
+            reportUnmatched: false
+        -
+            identifier: class.notFound
+            path: app/Http/Controllers/Admin/InspectionReportController.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: larastan.relationExistence
+            path: app/Http/Controllers/Admin/InspectionReportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: booleanAnd.alwaysFalse
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: isset.offset
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/Admin/PackageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Http/Controllers/Admin/PackageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullCoalesce.offset
+            path: app/Http/Controllers/Admin/PackageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.unresolvableType
+            path: app/Http/Controllers/Admin/SearchController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Http/Controllers/Admin/SearchController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/SearchController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/Admin/SetupWizardController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: greater.alwaysTrue
+            path: app/Http/Controllers/Admin/SetupWizardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Http/Controllers/Admin/SetupWizardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/Admin/StripePaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/Admin/StripePaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Http/Controllers/Admin/WordPressImportController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: app/Http/Controllers/Auth/AuthenticatedSessionController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/BillingController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/BillingController.php
+            count: 7
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Http/Controllers/BlogCommentController.php
+            count: 4
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Http/Controllers/BlogCommentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: if.alwaysTrue
+            path: app/Http/Controllers/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Http/Controllers/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: arguments.count
+            path: app/Http/Controllers/ClientController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: larastan.relationExistence
+            path: app/Http/Controllers/ClientController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Http/Controllers/ClientController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/ClientController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: nullCoalesce.offset
+            path: app/Http/Controllers/ClientImportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: foreach.nonIterable
+            path: app/Http/Controllers/CmsFormSubmissionController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/EmailTrackingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/MagicLinkController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: argument.unresolvableType
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: if.alwaysTrue
+            path: app/Http/Controllers/MessageController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: larastan.relationExistence
+            path: app/Http/Controllers/MessageController.php
+            count: 6
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/MessageController.php
+            count: 6
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Http/Controllers/PaymentController.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Http/Controllers/PaymentController.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: app/Http/Controllers/SuperAdmin/DiagnosticsController.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: app/Http/Middleware/HandleCors.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: app/Http/Middleware/RedirectIfAuthenticated.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Listeners/TrackClientLogin.php
+            count: 4
+            reportUnmatched: false
+        -
+            identifier: nullCoalesce.expr
+            path: app/Mail/BookingAdminNotification.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Mail/BookingAdminNotification.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: function.alreadyNarrowedType
+            path: app/Mail/BookingCancellation.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullCoalesce.expr
+            path: app/Mail/BookingCancellation.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Mail/BookingCancellation.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: nullCoalesce.expr
+            path: app/Mail/BookingConfirmation.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Mail/BookingConfirmation.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Models/BlogCategory.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Models/BlogComment.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.nonObject
+            path: app/Models/BlogPost.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Models/BlogTag.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: booleanAnd.leftAlwaysTrue
+            path: app/Models/Booking.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: instanceof.alwaysFalse
+            path: app/Models/Booking.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullCoalesce.expr
+            path: app/Models/Booking.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Models/Booking.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: foreach.emptyArray
+            path: app/Models/BookingFieldConfig.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.phpDocType
+            path: app/Models/BusinessSetting.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: ternary.alwaysTrue
+            path: app/Models/GoogleCredential.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: match.alwaysTrue
+            path: app/Models/Package.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: match.alwaysTrue
+            path: app/Models/PackageFile.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: arguments.count
+            path: app/Models/Tenant.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Models/Tenant.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Models/Tenant.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Models/User.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: nullsafe.neverNull
+            path: app/Providers/AppServiceProvider.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Services/ActivityLogger.php
+            count: 19
+            reportUnmatched: false
+        -
+            identifier: class.notFound
+            path: app/Services/DashboardWidgetService.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: nullCoalesce.expr
+            path: app/Services/DashboardWidgetService.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: return.type
+            path: app/Services/EmailTrackingService.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: app/Services/EnvironmentService.php
+            count: 3
+            reportUnmatched: false
+        -
+            identifier: method.notFound
+            path: app/Services/GoogleCalendarService.php
+            count: 5
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Services/GoogleCalendarService.php
+            count: 6
+            reportUnmatched: false
+        -
+            identifier: argument.unresolvableType
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Services/PackageIngestService.php
+            count: 9
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Services/StripeService.php
+            count: 6
+            reportUnmatched: false
+        -
+            identifier: identical.alwaysFalse
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: property.notFound
+            path: app/Services/StripeService.php
+            count: 9
+            reportUnmatched: false
+        -
+            identifier: argument.type
+            path: app/Support/ModuleRegistry.php
+            count: 1
+            reportUnmatched: false
+        -
+            identifier: staticClassAccess.privateMethod
+            path: app/Support/ModuleRegistry.php
+            count: 2
+            reportUnmatched: false

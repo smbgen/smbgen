@@ -237,4 +237,26 @@ Route::middleware(['auth', 'verified', 'companyAdministrator'])->prefix('admin')
     Route::patch('/packages/{package}/files/{file}/promote', [\App\Http\Controllers\Admin\PackageController::class, 'togglePromote'])->name('admin.packages.files.promote');
     Route::get('/packages/{package}/files/{file}/preview', [\App\Http\Controllers\Admin\PackageController::class, 'previewFile'])->name('admin.packages.files.preview');
     Route::get('/packages/{package}/files/{file}/content', [\App\Http\Controllers\Admin\PackageController::class, 'fileContent'])->name('admin.packages.files.content');
+
+    // Social Media – feature-flagged
+    if (config('business.features.social_media')) {
+        // Social accounts (connect / manage)
+        Route::get('/social-media/accounts', [\App\Http\Controllers\Admin\SocialAccountController::class, 'index'])->name('admin.social.accounts.index');
+        Route::get('/social-media/accounts/create', [\App\Http\Controllers\Admin\SocialAccountController::class, 'create'])->name('admin.social.accounts.create');
+        Route::post('/social-media/accounts', [\App\Http\Controllers\Admin\SocialAccountController::class, 'store'])->name('admin.social.accounts.store');
+        Route::patch('/social-media/accounts/{account}/toggle', [\App\Http\Controllers\Admin\SocialAccountController::class, 'toggle'])->name('admin.social.accounts.toggle');
+        Route::delete('/social-media/accounts/{account}', [\App\Http\Controllers\Admin\SocialAccountController::class, 'destroy'])->name('admin.social.accounts.destroy');
+
+        // Social posts (compose / schedule / manage)
+        Route::get('/social-media/posts', [\App\Http\Controllers\Admin\SocialPostController::class, 'index'])->name('admin.social.posts.index');
+        Route::get('/social-media/posts/create', [\App\Http\Controllers\Admin\SocialPostController::class, 'create'])->name('admin.social.posts.create');
+        Route::post('/social-media/posts', [\App\Http\Controllers\Admin\SocialPostController::class, 'store'])->name('admin.social.posts.store');
+        Route::get('/social-media/posts/{socialPost}', [\App\Http\Controllers\Admin\SocialPostController::class, 'show'])->name('admin.social.posts.show');
+        Route::get('/social-media/posts/{socialPost}/edit', [\App\Http\Controllers\Admin\SocialPostController::class, 'edit'])->name('admin.social.posts.edit');
+        Route::put('/social-media/posts/{socialPost}', [\App\Http\Controllers\Admin\SocialPostController::class, 'update'])->name('admin.social.posts.update');
+        Route::post('/social-media/posts/{socialPost}/cancel', [\App\Http\Controllers\Admin\SocialPostController::class, 'cancel'])->name('admin.social.posts.cancel');
+        Route::post('/social-media/posts/{socialPost}/approve', [\App\Http\Controllers\Admin\SocialPostController::class, 'approve'])->name('admin.social.posts.approve');
+        Route::delete('/social-media/posts/{socialPost}', [\App\Http\Controllers\Admin\SocialPostController::class, 'destroy'])->name('admin.social.posts.destroy');
+        Route::post('/social-media/targets/{target}/retry', [\App\Http\Controllers\Admin\SocialPostController::class, 'retryTarget'])->name('admin.social.targets.retry');
+    }
 });

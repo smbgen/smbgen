@@ -38,6 +38,7 @@
         <env name="FEATURE_BILLING" value="true"/>
         <env name="FEATURE_MESSAGES" value="true"/>
         <env name="FEATURE_CMS" value="true"/>
+        <env name="FEATURE_SOCIAL_MEDIA" value="true"/>
         <env name="FEATURE_INSPECTION_REPORTS" value="true"/>
         <env name="FRONTEND_ENABLED" value="true" force="true"/>
         <env name="COMPANY_NAME" value="smbgen"/>

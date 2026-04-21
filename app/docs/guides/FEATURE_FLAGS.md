@@ -37,6 +37,14 @@ The application uses these five flags to control major functionality:
 - **Config key:** `config('business.features.blog')`
 - **Usage in Blade:** `@if(config('business.features.blog'))`
 
+### 6. **FEATURE_SOCIAL_MEDIA** (default: `false`)
+- **Controls:** Social media post composer, scheduler, and account management for LinkedIn, Facebook, and Instagram
+- **Routes:** `/admin/social-media/*`
+- **Config key:** `config('business.features.social_media')`
+- **Usage in Blade:** `@if(config('business.features.social_media'))`
+- **Requires:** Queue worker + Laravel scheduler running; platform API credentials in `.env`
+- **See:** `app/docs/features/SOCIAL_MEDIA_MODULE.md`
+
 ## How to Toggle Features
 
 1. Open your `.env` file

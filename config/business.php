@@ -77,6 +77,9 @@ return [
 
         // Phone System - AI-assisted phone calls with Bland AI / Twilio
         'phone_system' => filter_var(env('FEATURE_PHONE_SYSTEM', false), FILTER_VALIDATE_BOOLEAN),
+
+        // Social Media - Scheduled posting to LinkedIn, Facebook, and Instagram
+        'social_media' => filter_var(env('FEATURE_SOCIAL_MEDIA', false), FILTER_VALIDATE_BOOLEAN),
     ],
 
     // Business Type Configuration
