@@ -87,8 +87,6 @@ class MessageTest extends TestCase
             'body' => 'This is a test message body from admin to client.',
             'is_read' => false,
         ]);
-
-
     }
 
     public function test_client_can_create_message_to_admin(): void
@@ -110,8 +108,6 @@ class MessageTest extends TestCase
             'body' => 'This is a test message body from client to admin.',
             'is_read' => false,
         ]);
-
-
     }
 
     public function test_client_cannot_message_other_clients(): void
@@ -184,8 +180,6 @@ class MessageTest extends TestCase
             'body' => 'This is a reply to the original message.',
             'is_read' => false,
         ]);
-
-
     }
 
     public function test_user_can_mark_message_as_read(): void

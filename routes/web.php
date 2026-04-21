@@ -15,17 +15,22 @@ require __DIR__.'/web/trial.php';
 
 // Module routes must load before the CMS catch-all slug route
 $moduleRouteFiles = glob(app_path('Modules/*/Routes/web.php')) ?: [];
+
 usort($moduleRouteFiles, function (string $left, string $right): int {
     $leftIsFrontend = str_contains($left, '/FrontendSite/');
     $rightIsFrontend = str_contains($right, '/FrontendSite/');
+
     if ($leftIsFrontend === $rightIsFrontend) {
         return strcmp($left, $right);
     }
+
     return $leftIsFrontend ? 1 : -1;
 });
+
 foreach ($moduleRouteFiles as $moduleRouteFile) {
     require $moduleRouteFile;
 }
+
 unset($moduleRouteFiles, $moduleRouteFile);
 
 // CMS public routes (form submission + catch-all slug) must be last
