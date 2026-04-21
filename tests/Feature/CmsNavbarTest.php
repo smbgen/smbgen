@@ -82,6 +82,7 @@ test('admin can update navbar settings', function () {
 });
 
 test('navbar appears on contact page', function () {
+    \App\Models\BusinessSetting::set('module_frontend_site_enabled', true, 'boolean');
     $response = $this->get('/contact');
 
     $response->assertSuccessful()
@@ -89,6 +90,7 @@ test('navbar appears on contact page', function () {
 });
 
 test('navbar appears on booking page', function () {
+    \App\Models\BusinessSetting::set('module_frontend_site_enabled', true, 'boolean');
     $response = $this->get('/book');
 
     $response->assertSuccessful()

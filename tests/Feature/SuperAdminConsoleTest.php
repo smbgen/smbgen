@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ActivityLog;
 use App\Models\BusinessSetting;
 use App\Models\SubscriptionTier;
 use App\Models\Tenant;
@@ -97,40 +98,95 @@ test('super admin can update deployment console settings', function () {
         ->and(BusinessSetting::get('module_frontend_site_enabled'))->toBeTrue();
 });
 
+test('deployment console shows logged-in user queue with tenant association sorted latest first', function () {
+    $olderTenant = Tenant::create([
+        'id' => (string) \Illuminate\Support\Str::uuid(),
+        'name' => 'Older Tenant',
+        'email' => 'owner@older.test',
+        'subdomain' => 'older',
+        'plan' => 'trial',
+        'deployment_mode' => 'shared',
+        'is_active' => true,
+    ]);
+
+    $newerTenant = Tenant::create([
+        'id' => (string) \Illuminate\Support\Str::uuid(),
+        'name' => 'Newer Tenant',
+        'email' => 'owner@newer.test',
+        'subdomain' => 'newer',
+        'plan' => 'trial',
+        'deployment_mode' => 'shared',
+        'is_active' => true,
+    ]);
+
+    $olderUser = User::factory()->create([
+        'tenant_id' => $olderTenant->id,
+        'name' => 'Older User',
+        'email' => 'older-user@test.com',
+    ]);
+
+    $newerUser = User::factory()->create([
+        'tenant_id' => $newerTenant->id,
+        'name' => 'Newer User',
+        'email' => 'newer-user@test.com',
+    ]);
+
+    $olderLogin = ActivityLog::create([
+        'user_id' => $olderUser->id,
+        'action' => 'login',
+        'description' => 'User logged in',
+        'ip_address' => '127.0.0.1',
+        'user_agent' => 'Pest',
+    ]);
+    $olderLogin->forceFill(['created_at' => now()->subHour()])->save();
+
+    $newerLogin = ActivityLog::create([
+        'user_id' => $newerUser->id,
+        'action' => 'login_google',
+        'description' => 'User logged in via Google OAuth',
+        'ip_address' => '127.0.0.1',
+        'user_agent' => 'Pest',
+    ]);
+    $newerLogin->forceFill(['created_at' => now()])->save();
+
+    $response = $this->actingAs($this->superAdmin)
+        ->get(route('super-admin.deployment-console'));
+
+    $response->assertOk()
+        ->assertSee('User Management Queue')
+        ->assertSee('Older Tenant')
+        ->assertSee('Newer Tenant')
+        ->assertSeeInOrder(['newer-user@test.com', 'older-user@test.com']);
+});
+
 test('frontend site module can be disabled by deployment settings', function () {
     BusinessSetting::set('module_frontend_site_enabled', false, 'boolean');
 
     $response = $this->get('/');
 
-    $response->assertNotFound();
+    $response->assertRedirect(route('login'));
 });
 
 test('super admin routes are central-only when tenancy is enabled', function () {
     config()->set('app.url', 'https://central.test');
     config()->set('tenancy.central_domains', ['central.test']);
-
-    putenv('TENANCY_ENABLED=true');
+    config()->set('app.tenancy_enabled', true);
 
     $response = $this->actingAs($this->superAdmin)
         ->get('https://tenant.test/super-admin');
 
     $response->assertNotFound();
-
-    putenv('TENANCY_ENABLED=false');
 });
 
 test('super admin routes are accessible on configured central domain', function () {
     config()->set('app.url', 'https://central.test');
     config()->set('tenancy.central_domains', ['central.test']);
-
-    putenv('TENANCY_ENABLED=true');
+    config()->set('app.tenancy_enabled', true);
 
     $response = $this->actingAs($this->superAdmin)
         ->get('https://central.test/super-admin');
 
     $response->assertOk();
-
-    putenv('TENANCY_ENABLED=false');
 });
 
 test('super admin can impersonate a tenant admin and is redirected to the tenant admin dashboard', function () {
@@ -187,4 +243,54 @@ test('impersonating super admin can stop impersonating from tenant admin surface
     $response->assertRedirect(route('super-admin.tenants.index', absolute: true));
     expect(auth()->id())->toBe($this->superAdmin->id);
     expect(session()->has('super_admin_impersonating'))->toBeFalse();
+});
+
+test('super admin can assign a user to a tenant', function () {
+    $tenant = Tenant::create(['id' => 'assign-test', 'name' => 'Assign Test Co', 'subdomain' => 'assign-test']);
+    $user = User::factory()->create(['role' => User::ROLE_TENANT_ADMIN, 'tenant_id' => null]);
+
+    ActivityLog::create(['user_id' => $user->id, 'action' => 'login', 'description' => 'login', 'created_at' => now()]);
+
+    $response = $this->actingAs($this->superAdmin)
+        ->patch(route('super-admin.users.tenant', $user), [
+            'tenant_id' => $tenant->id,
+            'role' => User::ROLE_ADMINISTRATOR,
+        ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    $user->refresh();
+    expect($user->tenant_id)->toBe($tenant->id);
+    expect($user->role)->toBe(User::ROLE_ADMINISTRATOR);
+});
+
+test('super admin can remove a user from a tenant', function () {
+    $tenant = Tenant::create(['id' => 'remove-test', 'name' => 'Remove Test Co', 'subdomain' => 'remove-test']);
+    $user = User::factory()->create(['role' => User::ROLE_ADMINISTRATOR, 'tenant_id' => $tenant->id]);
+
+    ActivityLog::create(['user_id' => $user->id, 'action' => 'login', 'description' => 'login', 'created_at' => now()]);
+
+    $response = $this->actingAs($this->superAdmin)
+        ->patch(route('super-admin.users.tenant', $user), [
+            'tenant_id' => '',
+            'role' => User::ROLE_TENANT_ADMIN,
+        ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    $user->refresh();
+    expect($user->tenant_id)->toBeNull();
+});
+
+test('company administrator cannot assign users to tenants', function () {
+    $tenant = Tenant::create(['id' => 'forbidden-test', 'name' => 'Forbidden Co', 'subdomain' => 'forbidden-test']);
+    $user = User::factory()->create(['role' => User::ROLE_TENANT_ADMIN, 'tenant_id' => null]);
+
+    $this->actingAs($this->admin)
+        ->patch(route('super-admin.users.tenant', $user), ['tenant_id' => $tenant->id]);
+
+    $user->refresh();
+    expect($user->tenant_id)->toBeNull();
 });

@@ -6,11 +6,11 @@ use App\Mail\MagicLinkMail;
 use App\Models\MagicLink;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class MagicLinkController extends Controller
 {
@@ -19,8 +19,8 @@ class MagicLinkController extends Controller
      */
     public function send(User $user)
     {
-        // ensure caller is an authenticated company administrator
-        if (! Auth::check() || Auth::user()->role !== 'company_administrator') {
+        // ensure caller is an authenticated administrator
+        if (! Auth::check() || ! Auth::user()->isAdministrator()) {
             abort(403);
         }
 

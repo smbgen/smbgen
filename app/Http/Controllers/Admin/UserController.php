@@ -54,7 +54,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'role' => ['required', 'in:user,company_administrator'],
+            'role' => ['required', 'in:user,tenant_admin,company_administrator'],
         ]);
 
         $data['password'] = Hash::make($data['password']);
@@ -103,7 +103,7 @@ class UserController extends Controller
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'role' => ['required', 'in:user,client,company_administrator'],
+            'role' => ['required', 'in:user,client,tenant_admin,company_administrator'],
         ];
 
         // Add password validation only if password is provided

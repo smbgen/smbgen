@@ -83,9 +83,9 @@ class ClaudeAIService
     {
         $companyColors = CmsCompanyColors::getSettings();
         $classes = $companyColors->allowed_css_classes ?? CmsCompanyColors::getDefaultCssClassWhitelist();
-        
+
         // Ensure $classes is an array
-        if (!is_array($classes)) {
+        if (! is_array($classes)) {
             $classes = CmsCompanyColors::getDefaultCssClassWhitelist();
         }
 

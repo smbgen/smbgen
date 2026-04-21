@@ -6,7 +6,6 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
-use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -15,9 +14,6 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
-        then: function (): void {
-            Route::middleware('web')->group(base_path('routes/modules.php'));
-        },
     )
     ->withProviders(array_filter([
         \Illuminate\Auth\AuthServiceProvider::class,
@@ -41,6 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'companyAdministrator' => \App\Http\Middleware\CompanyAdministrator::class,
             'superAdmin' => \App\Http\Middleware\SuperAdmin::class,
+            'super.admin' => \App\Http\Middleware\SuperAdministrator::class,
             'centralOnly' => \App\Http\Middleware\EnsureCentralDomain::class,
             'tenantOnly' => \App\Http\Middleware\EnsureTenantContext::class,
             'tenantUser' => \App\Http\Middleware\EnsureTenantUserMatchesContext::class,

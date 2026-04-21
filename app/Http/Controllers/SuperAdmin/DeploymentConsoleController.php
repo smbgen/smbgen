@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityLog;
 use App\Models\BusinessSetting;
+use App\Models\Tenant;
 use App\Models\User;
 use App\Support\ModuleRegistry;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class DeploymentConsoleController extends Controller
@@ -65,6 +68,21 @@ class DeploymentConsoleController extends Controller
             ->with('success', 'Guided setup completed.');
     }
 
+    public function updateUserTenant(Request $request, User $user): RedirectResponse
+    {
+        $validated = $request->validate([
+            'tenant_id' => ['nullable', 'string', 'exists:tenants,id'],
+            'role' => ['nullable', 'string', 'in:'.implode(',', [User::ROLE_ADMINISTRATOR, User::ROLE_ADMINISTRATOR_LEGACY, User::ROLE_TENANT_ADMIN])],
+        ]);
+
+        $user->forceFill([
+            'tenant_id' => $validated['tenant_id'] ?: null,
+            'role' => $validated['role'] ?? $user->role,
+        ])->save();
+
+        return back()->with('success', 'Tenant assignment updated for '.$user->email.'.');
+    }
+
     public function updateSuperAdmin(Request $request, User $user): RedirectResponse
     {
         $validated = $request->validate([
@@ -99,6 +117,39 @@ class DeploymentConsoleController extends Controller
 
     private function viewData(): array
     {
+        $tenantsTableExists = Schema::hasTable('tenants');
+        $activityLogTableExists = Schema::hasTable('activity_logs');
+        $tenants = $tenantsTableExists ? Tenant::query()->orderBy('name')->get(['id', 'name', 'subdomain']) : collect();
+
+        $usersQuery = User::query()->orderByDesc('is_super_admin')->orderBy('name');
+
+        if ($tenantsTableExists) {
+            $usersQuery->with('tenant');
+        }
+
+        $recentlyLoggedInUsers = collect();
+
+        if ($activityLogTableExists) {
+            $latestLoginSubquery = ActivityLog::query()
+                ->selectRaw('user_id, MAX(created_at) as last_logged_in_at')
+                ->whereIn('action', ['login', 'login_google'])
+                ->groupBy('user_id');
+
+            $recentLoginsQuery = User::query()
+                ->select('users.*', 'latest_logins.last_logged_in_at')
+                ->joinSub($latestLoginSubquery, 'latest_logins', function ($join): void {
+                    $join->on('users.id', '=', 'latest_logins.user_id');
+                })
+                ->orderByDesc('latest_logins.last_logged_in_at')
+                ->limit(100);
+
+            if ($tenantsTableExists) {
+                $recentLoginsQuery->with('tenant');
+            }
+
+            $recentlyLoggedInUsers = $recentLoginsQuery->get();
+        }
+
         return [
             'modules' => ModuleRegistry::all(),
             'frontendOptions' => ModuleRegistry::frontendOptions(),
@@ -107,7 +158,9 @@ class DeploymentConsoleController extends Controller
             'deploymentEnvironment' => BusinessSetting::get('deployment_environment', config('app.env')),
             'selectedFrontend' => ModuleRegistry::selectedFrontend(),
             'guidedSetupCompleted' => BusinessSetting::get('super_admin_guided_setup_completed', false),
-            'users' => User::query()->orderByDesc('is_super_admin')->orderBy('name')->get(),
+            'users' => $usersQuery->get(),
+            'recentlyLoggedInUsers' => $recentlyLoggedInUsers,
+            'tenants' => $tenants,
         ];
     }
 }

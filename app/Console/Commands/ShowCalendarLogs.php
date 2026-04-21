@@ -27,14 +27,15 @@ class ShowCalendarLogs extends Command
     public function handle(): int
     {
         $logPath = storage_path('logs/laravel.log');
-        
-        if (!File::exists($logPath)) {
+
+        if (! File::exists($logPath)) {
             $this->error("Log file not found: {$logPath}");
+
             return 1;
         }
 
         $linesToRead = max(1, (int) $this->option('lines'));
-        
+
         // Read the last N lines of the log file using a fixed-size buffer (no shell_exec)
         $buffer = [];
         try {
@@ -50,7 +51,8 @@ class ShowCalendarLogs extends Command
                 }
             }
         } catch (\Throwable $e) {
-            $this->error('Failed to read log file: ' . $e->getMessage());
+            $this->error('Failed to read log file: '.$e->getMessage());
+
             return 1;
         }
 
@@ -58,12 +60,12 @@ class ShowCalendarLogs extends Command
         $lines = $buffer;
         $filteredLines = [];
         $currentEntry = [];
-        
+
         foreach ($lines as $line) {
             // Check if line starts a new log entry (Laravel log format: [timestamp] environment.level: message)
             if (preg_match('/^\[\d{4}-\d{2}-\d{2}/', $line)) {
                 // Process previous entry
-                if (!empty($currentEntry)) {
+                if (! empty($currentEntry)) {
                     $entryText = implode("\n", $currentEntry);
                     if ($this->matchesFilter($entryText)) {
                         $filteredLines[] = $entryText;
@@ -76,9 +78,9 @@ class ShowCalendarLogs extends Command
                 $currentEntry[] = $line;
             }
         }
-        
+
         // Process last entry
-        if (!empty($currentEntry)) {
+        if (! empty($currentEntry)) {
             $entryText = implode("\n", $currentEntry);
             if ($this->matchesFilter($entryText)) {
                 $filteredLines[] = $entryText;
@@ -86,19 +88,20 @@ class ShowCalendarLogs extends Command
         }
 
         if (empty($filteredLines)) {
-            $this->warn('No Google Calendar or Booking related logs found in the last ' . $linesToRead . ' lines');
+            $this->warn('No Google Calendar or Booking related logs found in the last '.$linesToRead.' lines');
             $this->info('Try increasing --lines parameter or check if bookings are being made');
+
             return 0;
         }
 
         $this->info('=== Google Calendar & Booking Logs ===');
         $this->line('');
-        
+
         foreach ($filteredLines as $entry) {
             $this->line($entry);
             $this->line('---');
         }
-        
+
         $this->info(sprintf('Found %d relevant log entries', count($filteredLines)));
 
         return 0;

@@ -32,7 +32,7 @@ it('creates a new trial user successfully', function () {
         'tenant_id' => User::where('email', 'john@testcompany.com')->value('tenant_id'),
         'email' => 'john@testcompany.com',
         'name' => 'John Doe',
-        'role' => 'company_administrator',
+        'role' => 'tenant_admin',
     ]);
 
     $tenantId = User::where('email', 'john@testcompany.com')->value('tenant_id');

@@ -10,6 +10,14 @@ class RoleBasedRedirectTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config()->set('app.tenancy_enabled', false);
+        putenv('TENANCY_ENABLED=false');
+    }
+
     public function test_client_is_redirected_to_dashboard_after_login(): void
     {
         $user = User::factory()->client()->create();
@@ -22,9 +30,21 @@ class RoleBasedRedirectTest extends TestCase
         $response->assertRedirect(route('dashboard', absolute: false));
     }
 
-    public function test_company_administrator_is_redirected_to_admin_dashboard_after_login(): void
+    public function test_company_administrator_is_redirected_to_super_admin_dashboard_after_login(): void
     {
         $user = User::factory()->admin()->create();
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $response->assertRedirect(route('super-admin.dashboard', absolute: false));
+    }
+
+    public function test_tenant_admin_is_redirected_to_admin_dashboard_after_login(): void
+    {
+        $user = User::factory()->tenantAdmin()->create();
 
         $response = $this->post('/login', [
             'email' => $user->email,
