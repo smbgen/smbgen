@@ -44,7 +44,7 @@ class AdminDashboardController extends Controller
         $connectedCalendarUser = null;
 
         if (
-            (bool) env('TENANCY_ENABLED', false)
+            config('app.tenancy_enabled', false)
             && $authenticatedUser
             && $authenticatedUser->role === User::ROLE_ADMINISTRATOR
             && ! empty($authenticatedUser->tenant_id)
