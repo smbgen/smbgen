@@ -17,15 +17,5 @@ class DatabaseSeeder extends Seeder
             LeadFormSeeder::class,
             MessageSeeder::class,
         ]);
-
-        // Extreme demo data — local/staging only
-        if (! app()->isProduction()) {
-            $optionalSeeders = array_filter([
-                \App\Modules\CleanSlate\Database\Seeders\DataBrokerSeeder::class,
-                \App\Modules\CleanSlate\Database\Seeders\DemoCustomerSeeder::class,
-            ], static fn (string $seeder): bool => class_exists($seeder));
-
-            $this->call($optionalSeeders);
-        }
     }
 }
