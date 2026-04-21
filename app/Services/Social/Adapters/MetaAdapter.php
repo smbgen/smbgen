@@ -176,7 +176,7 @@ class MetaAdapter implements SocialPlatformAdapter
             throw new PublishException('No Instagram Business Account ID configured.', 'NO_IG_USER_ID');
         }
 
-        $mediaItems = $post->media->filter(fn ($m) => $m->getUrl())->values();
+        $mediaItems = $post->media->filter(fn ($m) => $m->getUrl() !== null)->values();
 
         if ($mediaItems->isEmpty()) {
             throw new PublishException('Instagram requires at least one image.', 'NO_MEDIA');

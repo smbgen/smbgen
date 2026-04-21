@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use App\Services\StripeService;
 use Illuminate\Support\Facades\Config;
 

@@ -97,7 +97,7 @@ class LinkedInAdapter implements SocialPlatformAdapter
             ? "urn:li:organization:{$account->platform_page_id}"
             : "urn:li:person:{$account->platform_user_id}";
 
-        $mediaItems = $post->media->filter(fn ($m) => $m->getUrl())->values();
+        $mediaItems = $post->media->filter(fn ($m) => $m->getUrl() !== null)->values();
 
         $body = [
             'author' => $authorUrn,

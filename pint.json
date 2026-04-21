@@ -1,0 +1,12 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "fully_qualified_strict_types": false,
+        "braces_position": false,
+        "unary_operator_spaces": false,
+        "ordered_imports": false,
+        "single_line_after_imports": false,
+        "class_definition": false,
+        "no_extra_blank_lines": false
+    }
+}

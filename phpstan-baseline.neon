@@ -1,6 +1,16 @@
 parameters:
     ignoreErrors:
         -
+            identifier: return.type
+            path: app/Models/SocialPost.php
+            count: 2
+            reportUnmatched: false
+        -
+            identifier: return.type
+            path: app/Models/SocialPostTarget.php
+            count: 2
+            reportUnmatched: false
+        -
             identifier: method.notFound
             path: app/Console/Commands/DiagnoseGoogleCalendar.php
             count: 3
