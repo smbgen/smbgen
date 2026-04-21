@@ -3,7 +3,6 @@
 use App\Models\User;
 use App\Services\StripeService;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Log;
 
 beforeEach(function () {
     Config::set('services.stripe.secret', '');

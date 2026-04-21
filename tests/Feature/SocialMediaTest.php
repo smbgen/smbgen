@@ -10,7 +10,6 @@ use App\Services\Social\Adapters\SocialPlatformAdapter;
 use App\Services\Social\SocialMediaService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
-use Mockery;
 
 uses(RefreshDatabase::class);
 
