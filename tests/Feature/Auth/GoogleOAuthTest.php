@@ -12,6 +12,12 @@ class GoogleOAuthTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutVite();
+    }
+
     public function test_google_redirect_route_initiates_redirect(): void
     {
         Socialite::shouldReceive('driver->redirect')

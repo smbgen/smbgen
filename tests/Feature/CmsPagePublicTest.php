@@ -39,7 +39,7 @@ it('returns 404 for non-existent cms pages', function () {
 
 it('displays cta button when present', function () {
     $page = CmsPage::create([
-        'slug' => 'services',
+        'slug' => 'our-services',
         'title' => 'Our Services',
         'body_content' => '<p>We offer great services</p>',
         'cta_text' => 'Get Started',
@@ -47,7 +47,7 @@ it('displays cta button when present', function () {
         'is_published' => true,
     ]);
 
-    $response = $this->get('/services');
+    $response = $this->get('/our-services');
 
     $response->assertOk();
     $response->assertSee('Get Started');

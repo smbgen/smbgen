@@ -68,6 +68,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'is_super_admin' => 'boolean',
+            'notify_on_new_bookings' => 'boolean',
+            'notify_on_new_leads' => 'boolean',
             'trial_ends_at' => 'datetime',
             'enabled_services' => 'array',
             'password' => 'hashed',

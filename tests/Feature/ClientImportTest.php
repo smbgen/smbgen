@@ -17,7 +17,7 @@ test('admin can access import page', function () {
 
     $response->assertSuccessful();
     $response->assertSee('Import Clients');
-    $response->assertSee('Upload CSV File');
+    $response->assertSee('Select CSV or Phone Contacts File');
 });
 
 test('admin can upload valid csv file', function () {

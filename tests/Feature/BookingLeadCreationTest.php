@@ -126,10 +126,8 @@ it('respects phone field configuration', function () {
 });
 
 it('requires phone when configured', function () {
-    config([
-        'business.booking.show_phone_field' => true,
-        'business.booking.require_phone' => true,
-    ]);
+    $config = \App\Models\BookingFieldConfig::getConfig();
+    $config->update(['show_phone' => true, 'require_phone' => true]);
 
     $bookingTime = Carbon::tomorrow()->setTime(10, 0);
 
@@ -146,10 +144,8 @@ it('requires phone when configured', function () {
 });
 
 it('requires property address when configured', function () {
-    config([
-        'business.booking.show_property_address_field' => true,
-        'business.booking.require_property_address' => true,
-    ]);
+    $config = \App\Models\BookingFieldConfig::getConfig();
+    $config->update(['show_property_address' => true, 'require_property_address' => true]);
 
     $bookingTime = Carbon::tomorrow()->setTime(10, 0);
 

@@ -235,7 +235,7 @@ class PaymentController extends Controller
                 'currency' => 'usd',
                 'customer' => $customerId,
                 'receipt_email' => $validated['email'],
-                'description' => $validated['description'] ?? ('Payment via ' . config('app.name')),
+                'description' => $validated['description'] ?? ('Payment via '.config('app.name')),
                 'metadata' => [
                     'customer_name' => $validated['name'],
                     'invoice_id' => $invoice->id,

@@ -26,9 +26,11 @@ class ClientFileTest extends TestCase
         // Create corresponding client records
         $this->client = Client::factory()->create([
             'email' => $this->clientUser->email,
+            'user_provisioned_at' => now(),
         ]);
         $this->otherClient = Client::factory()->create([
             'email' => $this->otherClientUser->email,
+            'user_provisioned_at' => now(),
         ]);
 
         Storage::fake('private');
@@ -149,7 +151,7 @@ class ClientFileTest extends TestCase
         ]);
 
         // Create the file in storage
-        Storage::put($file->path, 'fake file content');
+        Storage::disk('private')->put($file->path, 'fake file content');
 
         $response = $this->actingAs($this->clientUser)
             ->get("/documents/download/{$file->id}");
@@ -182,7 +184,7 @@ class ClientFileTest extends TestCase
         ]);
 
         // Create the file in storage
-        Storage::put($file->path, 'fake file content');
+        Storage::disk('private')->put($file->path, 'fake file content');
 
         $response = $this->actingAs($this->clientUser)
             ->delete("/documents/{$file->id}");
@@ -195,7 +197,7 @@ class ClientFileTest extends TestCase
         ]);
 
         // File should be deleted from storage
-        Storage::assertMissing($file->path);
+        Storage::disk('private')->assertMissing($file->path);
     }
 
     public function test_client_cannot_delete_other_clients_file(): void
@@ -226,16 +228,16 @@ class ClientFileTest extends TestCase
         ]);
 
         // Create the file in storage
-        Storage::put($file->path, 'fake file content');
+        Storage::disk('private')->put($file->path, 'fake file content');
 
         // Verify file exists
-        Storage::assertExists($file->path);
+        Storage::disk('private')->assertExists($file->path);
 
         // Delete the file
         $this->actingAs($this->clientUser)->delete("/documents/{$file->id}");
 
         // File should be removed from storage
-        Storage::assertMissing($file->path);
+        Storage::disk('private')->assertMissing($file->path);
     }
 
     public function test_admin_cannot_access_client_file_endpoints(): void

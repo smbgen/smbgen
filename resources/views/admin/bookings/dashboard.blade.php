@@ -157,6 +157,21 @@
                                         <i class="fas fa-paper-plane"></i> Send Reminder Email
                                     </button>
                                 </form>
+                                @php
+                                    $existingClient = \App\Models\Client::where('email', $booking->customer_email)->first();
+                                @endphp
+                                @if($existingClient)
+                                    <span class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 rounded-lg px-3 py-2 text-sm flex items-center gap-1.5">
+                                        <i class="fas fa-check"></i> Already a client
+                                    </span>
+                                @else
+                                    <form action="{{ route('admin.bookings.convert-to-client', $booking) }}" method="POST" class="inline">
+                                        @csrf
+                                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-3 py-2 text-sm transition-colors flex items-center gap-1.5">
+                                            <i class="fas fa-user-plus"></i> Convert to Client
+                                        </button>
+                                    </form>
+                                @endif
                                 <form action="{{ route('admin.bookings.destroy', $booking) }}" method="POST" class="inline" onsubmit="return confirm('Delete this booking?');">
                                     @csrf
                                     @method('DELETE')

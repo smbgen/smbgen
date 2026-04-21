@@ -1,7 +1,11 @@
 <?php
 
+use App\Models\BusinessSetting;
+
 beforeEach(function (): void {
     config()->set('modules.registry.frontend_site.default_enabled', true);
+    // Ensure module enabled state is stored in DB for middleware check
+    BusinessSetting::set('module_frontend_site_enabled', true, 'boolean');
 });
 
 it('renders the home page with smbgen core messaging', function () {
