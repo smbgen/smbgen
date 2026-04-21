@@ -4,7 +4,7 @@
 
 Use modules to ship productized SaaS stacks inside smbgen without bloating the core app routes or forcing business-specific code into the shared platform.
 
-The current reference implementation is the Extreme product stack, implemented in [app/Modules/CleanSlate](../Modules/CleanSlate).
+The current reference implementation is the Extreme product stack.
 
 ## What A Module Owns
 
@@ -43,7 +43,7 @@ It demonstrates how to:
 - enforce product-specific subscription middleware
 - add an admin area under its own prefix
 
-Even though the folder is currently named `CleanSlate`, treat it as the example module pattern for future productized stacks.
+Treat Extreme as the example module pattern for future productized stacks.
 
 ## Recommended Module Structure
 
