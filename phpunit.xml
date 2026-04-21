@@ -16,7 +16,15 @@
         <include>
             <directory>app</directory>
         </include>
+        <exclude>
+            <directory>app/Http/Middleware</directory>
+        </exclude>
     </source>
+    <coverage>
+        <report>
+            <text outputFile="php://stdout" showUncoveredFiles="false" showOnlySummary="true"/>
+        </report>
+    </coverage>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="APP_KEY" value="base64:DJyqY3A/w2ah4Hu8fQdMI70VE8p6ZFAunnyPaHtmtRE="/>
