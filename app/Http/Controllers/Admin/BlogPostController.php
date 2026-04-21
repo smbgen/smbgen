@@ -69,7 +69,7 @@ class BlogPostController extends Controller
         $data['author_id'] = auth()->id();
 
         // Handle published_at based on status
-        if ($data['status'] === 'published' && ! $data['published_at']) {
+        if ($data['status'] === 'published' && empty($data['published_at'] ?? null)) {
             $data['published_at'] = now();
         }
 
@@ -115,7 +115,7 @@ class BlogPostController extends Controller
         $data = $request->validated();
 
         // Handle published_at based on status
-        if ($data['status'] === 'published' && ! $data['published_at']) {
+        if ($data['status'] === 'published' && empty($data['published_at'] ?? null)) {
             $data['published_at'] = now();
         }
 

@@ -78,37 +78,39 @@ class HtmlSanitizer
         // Extract and protect script tags and their content
         $scripts = [];
         $scriptPlaceholder = '___SCRIPT_PLACEHOLDER_';
-        $html = preg_replace_callback('/<script\b[^>]*>(.*?)<\/script>/is', function($matches) use (&$scripts, $scriptPlaceholder) {
+        $html = preg_replace_callback('/<script\b[^>]*>(.*?)<\/script>/is', function ($matches) use (&$scripts, $scriptPlaceholder) {
             $index = count($scripts);
             $scripts[$index] = $matches[0];
-            return $scriptPlaceholder . $index . '___';
+
+            return $scriptPlaceholder.$index.'___';
         }, $html);
 
         // Extract and protect style tags and their content
         $styles = [];
         $stylePlaceholder = '___STYLE_PLACEHOLDER_';
-        $html = preg_replace_callback('/<style\b[^>]*>(.*?)<\/style>/is', function($matches) use (&$styles, $stylePlaceholder) {
+        $html = preg_replace_callback('/<style\b[^>]*>(.*?)<\/style>/is', function ($matches) use (&$styles, $stylePlaceholder) {
             $index = count($styles);
             $styles[$index] = $matches[0];
-            return $stylePlaceholder . $index . '___';
+
+            return $stylePlaceholder.$index.'___';
         }, $html);
 
         // Now sanitize the remaining HTML (without script/style content)
         $clean = preg_replace('/on\w+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $html) ?? '';
         $clean = preg_replace('/javascript:\s*(?![^<]*<\/script>)/i', '', $clean) ?? '';
-        
+
         // Allow head-specific tags
         $allowedTags = '<link><meta><title><base><noscript>';
         $clean = strip_tags($clean, $allowedTags);
 
         // Restore script tags with their original content
         foreach ($scripts as $index => $script) {
-            $clean = str_replace($scriptPlaceholder . $index . '___', $script, $clean);
+            $clean = str_replace($scriptPlaceholder.$index.'___', $script, $clean);
         }
 
         // Restore style tags with their original content
         foreach ($styles as $index => $style) {
-            $clean = str_replace($stylePlaceholder . $index . '___', $style, $clean);
+            $clean = str_replace($stylePlaceholder.$index.'___', $style, $clean);
         }
 
         return $clean;

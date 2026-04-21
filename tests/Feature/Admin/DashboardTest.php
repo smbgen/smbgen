@@ -129,36 +129,32 @@ test('dashboard still renders bookings card when appointments disabled', functio
 });
 
 test('dashboard shows tenant domain onboarding status card when tenancy is enabled', function () {
-    putenv('TENANCY_ENABLED=true');
+    config()->set('app.tenancy_enabled', true);
 
-    try {
-        $tenant = Tenant::create([
-            'id' => (string) \Illuminate\Support\Str::uuid(),
-            'name' => 'Acme Dashboard',
-            'email' => 'owner@acme-dashboard.test',
-            'subdomain' => 'acme-dashboard',
-            'plan' => 'trial',
-            'deployment_mode' => 'shared',
-            'is_active' => true,
-            'custom_domain' => 'app.acme-dashboard.example',
-        ]);
-        $tenant->setAttribute('custom_domain_status', 'pending_dns');
-        $tenant->save();
+    $tenant = Tenant::create([
+        'id' => (string) \Illuminate\Support\Str::uuid(),
+        'name' => 'Acme Dashboard',
+        'email' => 'owner@acme-dashboard.test',
+        'subdomain' => 'acme-dashboard',
+        'plan' => 'trial',
+        'deployment_mode' => 'shared',
+        'is_active' => true,
+        'custom_domain' => 'app.acme-dashboard.example',
+    ]);
+    $tenant->setAttribute('custom_domain_status', 'pending_dns');
+    $tenant->save();
 
-        $this->admin->update([
-            'tenant_id' => $tenant->id,
-        ]);
+    $this->admin->update([
+        'tenant_id' => $tenant->id,
+    ]);
 
-        app()->instance('currentTenant', $tenant);
+    app()->instance('currentTenant', $tenant);
 
-        $response = $this->actingAs($this->admin)
-            ->get(route('admin.dashboard'));
+    $response = $this->actingAs($this->admin)
+        ->get(route('admin.dashboard'));
 
-        $response->assertOk();
-        $response->assertSee('Domain Setup Status');
-        $response->assertSee('Pending DNS');
-        $response->assertSee('Manage Domain Setup');
-    } finally {
-        putenv('TENANCY_ENABLED=false');
-    }
+    $response->assertOk();
+    $response->assertSee('Domain Setup Status');
+    $response->assertSee('Pending DNS');
+    $response->assertSee('Manage Domain Setup');
 });

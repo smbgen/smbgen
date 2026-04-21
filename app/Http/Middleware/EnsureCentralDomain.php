@@ -10,7 +10,7 @@ class EnsureCentralDomain
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (! (bool) env('TENANCY_ENABLED', false)) {
+        if (! config('app.tenancy_enabled', false)) {
             return $next($request);
         }
 

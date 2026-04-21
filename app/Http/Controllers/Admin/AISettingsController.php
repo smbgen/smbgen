@@ -66,8 +66,8 @@ class AISettingsController extends Controller
     {
         try {
             $apiKey = $request->input('api_key');
-            
-            if (!$apiKey) {
+
+            if (! $apiKey) {
                 $apiKey = BusinessSetting::get('ai_api_key');
                 if ($apiKey) {
                     try {
@@ -78,11 +78,11 @@ class AISettingsController extends Controller
                 }
             }
 
-            if (!$apiKey) {
+            if (! $apiKey) {
                 $apiKey = config('ai.anthropic.api_key');
             }
 
-            if (!$apiKey) {
+            if (! $apiKey) {
                 return response()->json([
                     'success' => false,
                     'message' => 'No API key configured. Please set your Anthropic API key first.',
@@ -95,7 +95,7 @@ class AISettingsController extends Controller
                 'anthropic-version' => '2023-06-01',
             ])->get('https://api.anthropic.com/v1/models');
 
-            if (!$response->successful()) {
+            if (! $response->successful()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Failed to fetch models from Anthropic. Please check your API key.',
@@ -103,7 +103,7 @@ class AISettingsController extends Controller
             }
 
             $models = $response->json('data', []);
-            
+
             // Extract model IDs and sort
             $modelList = collect($models)
                 ->pluck('id')

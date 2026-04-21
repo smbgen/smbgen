@@ -41,6 +41,7 @@ beforeEach(function () {
 
     $this->admin->googleCredential()->create([
         'refresh_token' => 'test-token',
+        'access_token' => 'test-access-token',
         'calendar_id' => 'primary',
         'external_account_email' => 'admin@test.com',
     ]);
@@ -60,7 +61,7 @@ test('booking stores custom fields in custom_form_data', function () {
 
     $slot = now()->addDays(2)->setTime(10, 0)->toIso8601String();
 
-    $response = $this->post(route('booking.store'), [
+    $response = $this->post(route('booking.book'), [
         'name' => 'John Doe',
         'email' => 'john@example.com',
         'phone' => '555-1234',
@@ -93,7 +94,7 @@ test('booking creates lead with custom fields in form_data', function () {
 
     $slot = now()->addDays(2)->setTime(10, 0)->toIso8601String();
 
-    $this->post(route('booking.store'), [
+    $this->post(route('booking.book'), [
         'name' => 'Jane Smith',
         'email' => 'jane@example.com',
         'phone' => '555-5678',
@@ -123,7 +124,7 @@ test('booking confirmation email includes custom fields', function () {
 
     $slot = now()->addDays(2)->setTime(10, 0)->toIso8601String();
 
-    $this->post(route('booking.store'), [
+    $this->post(route('booking.book'), [
         'name' => 'Bob Johnson',
         'email' => 'bob@example.com',
         'phone' => '555-9999',
@@ -155,7 +156,7 @@ test('booking handles empty custom fields gracefully', function () {
 
     $slot = now()->addDays(2)->setTime(10, 0)->toIso8601String();
 
-    $response = $this->post(route('booking.store'), [
+    $response = $this->post(route('booking.book'), [
         'name' => 'Alice Brown',
         'email' => 'alice@example.com',
         'slot' => $slot,
@@ -175,7 +176,7 @@ test('booking only stores non-empty custom fields', function () {
 
     $slot = now()->addDays(2)->setTime(10, 0)->toIso8601String();
 
-    $this->post(route('booking.store'), [
+    $this->post(route('booking.book'), [
         'name' => 'Charlie Davis',
         'email' => 'charlie@example.com',
         'preferred_contact_method' => 'Email',
@@ -196,7 +197,7 @@ test('booking email displays toggleable fields when present', function () {
 
     $slot = now()->addDays(2)->setTime(10, 0)->toIso8601String();
 
-    $this->post(route('booking.store'), [
+    $this->post(route('booking.book'), [
         'name' => 'Diana Evans',
         'email' => 'diana@example.com',
         'phone' => '555-1111',

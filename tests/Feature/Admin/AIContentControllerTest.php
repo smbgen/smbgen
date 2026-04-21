@@ -1,18 +1,13 @@
 <?php
 
 use App\Models\AIGeneration;
-use App\Models\Company;
 use App\Models\User;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
 beforeEach(function () {
     // Create admin user for testing
-    $company = Company::factory()->create();
-    $this->admin = User::factory()->create([
-        'company_id' => $company->id,
-        'role' => 'administrator',
-    ]);
+    $this->admin = User::factory()->admin()->create();
 
     // Enable AI features
     Config::set('ai.enabled', true);

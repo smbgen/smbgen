@@ -120,9 +120,8 @@ class AIContentController extends Controller
                 ]);
             }
 
-            $errorMessage = $e->getMessage();
+            $errorMessage = 'Failed to generate content. Please try again.';
 
-            // Use the specific error message from the service in production too
             return response()->json([
                 'success' => false,
                 'error' => $errorMessage,

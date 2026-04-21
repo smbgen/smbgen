@@ -15,6 +15,7 @@ if (config('business.features.blog')) {
     Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
     Route::get('/blog/tag/{slug}', [BlogController::class, 'tag'])->name('blog.tag');
     Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+    Route::middleware('auth')->post('/blog/{post}/comments', [\App\Http\Controllers\BlogCommentController::class, 'store'])->name('blog.comments.store');
 
     Route::middleware(['auth', 'companyAdministrator'])->prefix('admin')->group(function () {
         Route::resource('blog/posts', BlogPostController::class)->names([

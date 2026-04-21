@@ -12,7 +12,6 @@ class AccountSecurityNoticeMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * @param  User    $user
      * @param  string  $type  'password_reset_requested' | 'google_login_required'
      */
     public function __construct(
@@ -24,7 +23,7 @@ class AccountSecurityNoticeMail extends Mailable
     {
         $subject = match ($this->type) {
             'google_login_required' => 'Account access notice',
-            default                 => 'Security notice: password reset requested',
+            default => 'Security notice: password reset requested',
         };
 
         return $this->subject($subject)

@@ -40,9 +40,9 @@ class SuperAdminSeeder extends Seeder
         $this->command->warn('Admin Credentials:');
         $this->command->line("  Email:    {$admin->email}");
         $this->command->newLine();
-        $this->command->warn('  PASSWORD: ' . $password);
+        $this->command->warn('  PASSWORD: '.$password);
         $this->command->newLine();
-        $this->command->info('Access URL: ' . config('app.url') . '/admin/dashboard');
+        $this->command->info('Access URL: '.config('app.url').'/admin/dashboard');
         $this->command->newLine();
         $this->command->info('═══════════════════════════════════════════════════════════');
         $this->command->warn('⚠️  SAVE THESE CREDENTIALS NOW! They will not be shown again.');

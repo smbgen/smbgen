@@ -170,29 +170,23 @@ test('frontend site module can be disabled by deployment settings', function () 
 test('super admin routes are central-only when tenancy is enabled', function () {
     config()->set('app.url', 'https://central.test');
     config()->set('tenancy.central_domains', ['central.test']);
-
-    putenv('TENANCY_ENABLED=true');
+    config()->set('app.tenancy_enabled', true);
 
     $response = $this->actingAs($this->superAdmin)
         ->get('https://tenant.test/super-admin');
 
     $response->assertNotFound();
-
-    putenv('TENANCY_ENABLED=false');
 });
 
 test('super admin routes are accessible on configured central domain', function () {
     config()->set('app.url', 'https://central.test');
     config()->set('tenancy.central_domains', ['central.test']);
-
-    putenv('TENANCY_ENABLED=true');
+    config()->set('app.tenancy_enabled', true);
 
     $response = $this->actingAs($this->superAdmin)
         ->get('https://central.test/super-admin');
 
     $response->assertOk();
-
-    putenv('TENANCY_ENABLED=false');
 });
 
 test('super admin can impersonate a tenant admin and is redirected to the tenant admin dashboard', function () {

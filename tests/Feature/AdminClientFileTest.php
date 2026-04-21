@@ -95,7 +95,7 @@ class AdminClientFileTest extends TestCase
             ]);
 
         $response->assertRedirect();
-        $response->assertSessionHas('success', 'File uploaded successfully.');
+        $response->assertSessionHas('success', 'File uploaded successfully to private storage.');
 
         $this->assertDatabaseHas('client_files', [
             'client_id' => $this->client->id,
@@ -133,7 +133,7 @@ class AdminClientFileTest extends TestCase
         ]);
 
         // Create the file in storage
-        Storage::put($file->path, 'fake admin file content');
+        Storage::disk('private')->put($file->path, 'fake admin file content');
 
         $response = $this->actingAs($this->admin)
             ->get("/admin/clients/{$this->client->id}/files/{$file->id}/download");
@@ -166,7 +166,7 @@ class AdminClientFileTest extends TestCase
         ]);
 
         // Create the file in storage
-        Storage::put($file->path, 'fake admin file content');
+        Storage::disk('private')->put($file->path, 'fake admin file content');
 
         $response = $this->actingAs($this->admin)
             ->delete("/admin/clients/{$this->client->id}/files/{$file->id}");
@@ -179,7 +179,7 @@ class AdminClientFileTest extends TestCase
         ]);
 
         // File should be deleted from storage
-        Storage::assertMissing($file->path);
+        Storage::disk('private')->assertMissing($file->path);
     }
 
     public function test_admin_cannot_delete_file_from_wrong_client(): void
@@ -210,16 +210,16 @@ class AdminClientFileTest extends TestCase
         ]);
 
         // Create the file in storage
-        Storage::put($file->path, 'fake admin storage content');
+        Storage::disk('private')->put($file->path, 'fake admin storage content');
 
         // Verify file exists
-        Storage::assertExists($file->path);
+        Storage::disk('private')->assertExists($file->path);
 
         // Delete the file
         $this->actingAs($this->admin)->delete("/admin/clients/{$this->client->id}/files/{$file->id}");
 
         // File should be removed from storage
-        Storage::assertMissing($file->path);
+        Storage::disk('private')->assertMissing($file->path);
     }
 
     public function test_client_file_relationship(): void

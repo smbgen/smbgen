@@ -154,7 +154,7 @@ class CmsPageController extends Controller
 
         $cmsPage->update($validated);
 
-        return redirect()->route('admin.cms.edit', $cmsPage)
+        return redirect()->route('admin.cms.index')
             ->with('success', 'Page updated successfully!');
     }
 
