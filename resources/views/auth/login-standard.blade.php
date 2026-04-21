@@ -365,6 +365,13 @@
 
     init();
 
+    // Re-draw canvas when user toggles dark/light mode (guard ctx in case init failed)
+    window.addEventListener('theme-changed', () => {
+      if (ctx) {
+        drawFrame();
+      }
+    });
+
     if (mediaReduced.matches) {
       drawFrame();
       return;
@@ -374,10 +381,6 @@
 
     window.addEventListener('resize', () => {
       init();
-    });
-
-    window.addEventListener('theme-changed', () => {
-      drawFrame();
     });
 
     document.addEventListener('visibilitychange', () => {
