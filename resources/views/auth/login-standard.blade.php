@@ -14,6 +14,14 @@
   </div>
 
   <div class="px-4 w-full max-w-md z-10">
+    {{-- Company name badge & dark mode toggle --}}
+    <div class="flex items-center justify-between mb-4">
+      <div class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/70 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur-sm dark:border-gray-600 dark:bg-gray-800/70 dark:text-gray-200">
+        {{ config('app.company_name', config('app.name')) }}
+      </div>
+      <x-dark-mode-toggle />
+    </div>
+
     <div class="bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-[28px] shadow-xl p-6 sm:p-8">
       <div class="space-y-6">
         <div class="space-y-3">
@@ -366,6 +374,10 @@
 
     window.addEventListener('resize', () => {
       init();
+    });
+
+    window.addEventListener('theme-changed', () => {
+      drawFrame();
     });
 
     document.addEventListener('visibilitychange', () => {
