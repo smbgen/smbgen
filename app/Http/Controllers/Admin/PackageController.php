@@ -30,7 +30,7 @@ class PackageController extends Controller
         }
 
         $packages = $query->paginate(20)->withQueryString();
-        $clients  = Client::orderBy('name')->get(['id', 'name']);
+        $clients = Client::orderBy('name')->get(['id', 'name']);
 
         return view('admin.packages.index', compact('packages', 'clients'));
     }
@@ -40,7 +40,7 @@ class PackageController extends Controller
      */
     public function create(Request $request)
     {
-        $clients       = Client::where('is_active', true)->orderBy('name')->get(['id', 'name']);
+        $clients = Client::where('is_active', true)->orderBy('name')->get(['id', 'name']);
         $selectedClient = $request->filled('client_id')
             ? Client::find($request->client_id)
             : null;
@@ -83,12 +83,12 @@ class PackageController extends Controller
 
         session([
             $sessionKey => [
-                'client_id'        => $client->id,
-                'source'           => $draft['source'],
+                'client_id' => $client->id,
+                'source' => $draft['source'],
                 'original_filename' => $draft['original_filename'],
-                'tmp_dir'          => $tmpDir,
+                'tmp_dir' => $tmpDir,
                 'multi_file_paths' => $multiFilePaths,
-                'upload_type'      => $request->upload_type,
+                'upload_type' => $request->upload_type,
             ],
         ]);
 
@@ -99,11 +99,11 @@ class PackageController extends Controller
         $roles = ['deliverable', 'research', 'data', 'email_template'];
 
         return view('admin.packages.review', [
-            'client'     => $client,
-            'draft'      => $draft,
+            'client' => $client,
+            'draft' => $draft,
             'sessionKey' => $sessionKey,
-            'fileTypes'  => $fileTypes,
-            'roles'      => $roles,
+            'fileTypes' => $fileTypes,
+            'roles' => $roles,
         ]);
     }
 
@@ -113,15 +113,15 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'session_key'             => 'required|string',
-            'name'                    => 'required|string|max:255',
-            'files'                   => 'required|array',
-            'files.*.original_name'   => 'required|string',
-            'files.*.display_name'    => 'required|string',
-            'files.*.type'            => 'required|string',
-            'files.*.role'            => 'required|in:deliverable,research,data,email_template',
+            'session_key' => 'required|string',
+            'name' => 'required|string|max:255',
+            'files' => 'required|array',
+            'files.*.original_name' => 'required|string',
+            'files.*.display_name' => 'required|string',
+            'files.*.type' => 'required|string',
+            'files.*.role' => 'required|in:deliverable,research,data,email_template',
             'files.*.tmp_relative_path' => 'nullable|string',
-            'files.*.group_label'     => 'nullable|string',
+            'files.*.group_label' => 'nullable|string',
         ]);
 
         $sessionKey = $request->session_key;
@@ -142,10 +142,10 @@ class PackageController extends Controller
         }
 
         $reviewedData = [
-            'name'              => $request->name,
-            'source'            => $sessionData['source'],
+            'name' => $request->name,
+            'source' => $sessionData['source'],
             'original_filename' => $sessionData['original_filename'],
-            'files'             => $request->files_data ?? $request->input('files'),
+            'files' => $request->files_data ?? $request->input('files'),
         ];
 
         $package = $this->ingest->commit(
@@ -174,8 +174,8 @@ class PackageController extends Controller
     {
         $package->load(['files', 'client', 'createdBy']);
 
-        $deliverables   = $package->files->where('role', 'deliverable')->values();
-        $researchFiles  = $package->files->whereIn('role', ['research', 'data'])->values();
+        $deliverables = $package->files->where('role', 'deliverable')->values();
+        $researchFiles = $package->files->whereIn('role', ['research', 'data'])->values();
         $emailTemplates = $package->files->where('role', 'email_template')->values();
 
         // Pin index files to the top of research
@@ -230,7 +230,7 @@ class PackageController extends Controller
     {
         abort_if($file->package_id !== $package->id, 403);
 
-        $disk     = $file->storage_disk ?: 'private';
+        $disk = $file->storage_disk ?: 'private';
         $contents = Storage::disk($disk)->get($file->storage_path);
 
         if ($contents === null) {
@@ -239,12 +239,12 @@ class PackageController extends Controller
 
         $mimeMap = [
             'HTML_PRESENTATION' => 'text/html',
-            'HTML_EMAIL'        => 'text/html',
-            'PDF_DOCUMENT'      => 'application/pdf',
+            'HTML_EMAIL' => 'text/html',
+            'PDF_DOCUMENT' => 'application/pdf',
             'MARKDOWN_RESEARCH' => 'text/plain',
-            'JSON_DATA'         => 'application/json',
-            'WORD_DOCUMENT'     => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'POWERPOINT'        => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'JSON_DATA' => 'application/json',
+            'WORD_DOCUMENT' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'POWERPOINT' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
         ];
         $mime = $mimeMap[$file->type] ?? 'application/octet-stream';
 
@@ -264,7 +264,7 @@ class PackageController extends Controller
     {
         abort_if($file->package_id !== $package->id, 403);
 
-        $disk     = $file->storage_disk ?: 'private';
+        $disk = $file->storage_disk ?: 'private';
         $contents = Storage::disk($disk)->get($file->storage_path);
 
         return response()->json(['content' => $contents ?? '']);

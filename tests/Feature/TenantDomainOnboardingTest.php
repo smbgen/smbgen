@@ -7,37 +7,33 @@ use Stancl\Tenancy\Database\Models\Domain;
 
 it('redirects company administrator to domain onboarding when incomplete', function () {
     config()->set('app.url', 'https://central.test');
-    putenv('TENANCY_ENABLED=true');
+    config()->set('app.tenancy_enabled', true);
 
-    try {
-        $tenant = Tenant::create([
-            'id' => (string) \Illuminate\Support\Str::uuid(),
-            'name' => 'Acme LLC',
-            'email' => 'owner@acme.test',
-            'subdomain' => 'acme',
-            'plan' => 'trial',
-            'deployment_mode' => 'shared',
-            'is_active' => true,
-        ]);
+    $tenant = Tenant::create([
+        'id' => (string) \Illuminate\Support\Str::uuid(),
+        'name' => 'Acme LLC',
+        'email' => 'owner@acme.test',
+        'subdomain' => 'acme',
+        'plan' => 'trial',
+        'deployment_mode' => 'shared',
+        'is_active' => true,
+    ]);
 
-        $user = User::factory()->create([
-            'tenant_id' => $tenant->id,
-            'email' => 'owner@acme.test',
-            'password' => Hash::make('password123'),
-            'role' => User::ROLE_ADMINISTRATOR,
-            'email_verified_at' => now(),
-            'is_super_admin' => false,
-        ]);
+    $user = User::factory()->create([
+        'tenant_id' => $tenant->id,
+        'email' => 'owner@acme.test',
+        'password' => Hash::make('password123'),
+        'role' => User::ROLE_ADMINISTRATOR,
+        'email_verified_at' => now(),
+        'is_super_admin' => false,
+    ]);
 
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password123',
-        ]);
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password123',
+    ]);
 
-        $response->assertRedirect('https://acme.central.test/admin/domain-onboarding');
-    } finally {
-        putenv('TENANCY_ENABLED=false');
-    }
+    $response->assertRedirect('https://acme.central.test/admin/domain-onboarding');
 });
 
 it('stores custom domain and pending dns status', function () {

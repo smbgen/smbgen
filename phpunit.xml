@@ -19,6 +19,7 @@
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
+        <env name="APP_KEY" value="base64:DJyqY3A/w2ah4Hu8fQdMI70VE8p6ZFAunnyPaHtmtRE="/>
         <env name="APP_DEBUG" value="false"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
@@ -29,6 +30,9 @@
         <env name="FEATURE_BILLING" value="true"/>
         <env name="FEATURE_MESSAGES" value="true"/>
         <env name="FEATURE_CMS" value="true"/>
+        <env name="FEATURE_INSPECTION_REPORTS" value="true"/>
+        <env name="FRONTEND_ENABLED" value="true" force="true"/>
+        <env name="COMPANY_NAME" value="smbgen"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="QUEUE_CONNECTION" value="sync"/>

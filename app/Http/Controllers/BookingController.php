@@ -73,7 +73,7 @@ class BookingController extends Controller
         // Get user's timezone preference from request, default to first rule's timezone
         // Handle empty string from query parameter (?timezone=)
         $timezone = $request->input('timezone');
-        $userTimezone = !empty($timezone) ? $timezone : ($availabilityRules->first()->timezone ?? 'UTC');
+        $userTimezone = ! empty($timezone) ? $timezone : ($availabilityRules->first()->timezone ?? 'UTC');
 
         // Get the maximum days ahead from the first availability rule (they should all be the same per user)
         $maxDaysAhead = $availabilityRules->first()->maximum_booking_days_ahead ?? 28;

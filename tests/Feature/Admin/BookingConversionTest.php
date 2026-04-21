@@ -5,6 +5,7 @@ use App\Models\Client;
 use App\Models\User;
 
 beforeEach(function () {
+    $this->withoutVite();
     $this->admin = User::factory()->create([
         'role' => 'company_administrator',
         'email' => 'admin@test.com',

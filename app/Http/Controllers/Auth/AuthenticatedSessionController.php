@@ -218,6 +218,18 @@ class AuthenticatedSessionController extends Controller
         }
 
         if ($this->isCompanyAdministrator($user)) {
+            if (empty($user->tenant_id)) {
+                return redirect()->route('super-admin.dashboard');
+            }
+
+            $targetPath = $this->requiresDomainOnboarding($user)
+                ? '/admin/domain-onboarding'
+                : '/admin/dashboard';
+
+            return $this->tenantAwareRedirect($request, $user, $targetPath);
+        }
+
+        if ($user->isTenantAdmin()) {
             $targetPath = $this->requiresDomainOnboarding($user)
                 ? '/admin/domain-onboarding'
                 : '/admin/dashboard';

@@ -8,7 +8,6 @@ use App\Models\CmsCompanyColors;
 use App\Models\CmsPage;
 use App\Services\AI\ClaudeAIService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class SetupWizardController extends Controller
@@ -20,7 +19,7 @@ class SetupWizardController extends Controller
     {
         $wizardProgress = $this->getWizardProgress();
         $currentStep = $wizardProgress['current_step'];
-        
+
         return view('admin.setup-wizard.index', compact('wizardProgress', 'currentStep'));
     }
 
@@ -30,13 +29,13 @@ class SetupWizardController extends Controller
     public function show(string $step)
     {
         $validSteps = ['business', 'theme', 'first-page', 'navigation', 'integrations', 'complete'];
-        
-        if (!in_array($step, $validSteps)) {
+
+        if (! in_array($step, $validSteps)) {
             abort(404);
         }
 
         $wizardProgress = $this->getWizardProgress();
-        
+
         return view("admin.setup-wizard.steps.{$step}", compact('wizardProgress'));
     }
 
@@ -67,7 +66,7 @@ class SetupWizardController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to save business information: ' . $e->getMessage(),
+                'message' => 'Failed to save business information: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -87,13 +86,13 @@ class SetupWizardController extends Controller
             $colors = CmsCompanyColors::firstOrNew([]);
             $colors->primary_color = $validated['primary_color'];
             $colors->secondary_color = $validated['secondary_color'] ?? $validated['primary_color'];
-            
+
             if ($validated['preset'] ?? null) {
                 $colors->applyPreset($validated['preset']);
             }
-            
+
             $colors->save();
-            
+
             BusinessSetting::set('setup_wizard_theme', true, 'boolean');
 
             return response()->json([
@@ -104,7 +103,7 @@ class SetupWizardController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to save theme: ' . $e->getMessage(),
+                'message' => 'Failed to save theme: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -122,24 +121,24 @@ class SetupWizardController extends Controller
 
         try {
             $content = $validated['custom_content'] ?? '';
-            
+
             // If AI is enabled and requested, generate content
             if (($validated['use_ai'] ?? false) && config('ai.enabled')) {
                 $companyName = BusinessSetting::get('company_name', config('app.company_name'));
                 $industry = BusinessSetting::get('industry', '');
-                
+
                 $prompt = "Create a {$validated['page_type']} page for {$companyName}";
                 if ($industry) {
                     $prompt .= ", a company in the {$industry} industry";
                 }
-                
+
                 $aiService = app(ClaudeAIService::class);
                 $content = $aiService->generateLandingPage($prompt);
             }
 
             // Create the first CMS page
             $page = CmsPage::create([
-                'title' => ucfirst($validated['page_type']) . ' Page',
+                'title' => ucfirst($validated['page_type']).' Page',
                 'slug' => $validated['page_type'] === 'home' ? 'home' : $validated['page_type'],
                 'content' => $content,
                 'is_published' => true,
@@ -158,7 +157,7 @@ class SetupWizardController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to create page: ' . $e->getMessage(),
+                'message' => 'Failed to create page: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -219,7 +218,7 @@ class SetupWizardController extends Controller
             'integrations' => BusinessSetting::get('setup_wizard_integrations', false),
         ];
 
-        $completed = array_filter($steps, fn($val) => $val === true);
+        $completed = array_filter($steps, fn ($val) => $val === true);
         $total = count($steps);
         $completedCount = count($completed);
         $percentage = $total > 0 ? round(($completedCount / $total) * 100) : 0;
@@ -227,7 +226,7 @@ class SetupWizardController extends Controller
         // Determine current step (first incomplete or last if all done)
         $currentStep = 'business';
         foreach ($steps as $step => $done) {
-            if (!$done) {
+            if (! $done) {
                 $currentStep = $step;
                 break;
             }

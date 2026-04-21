@@ -180,7 +180,7 @@ class ClientController extends Controller
 
         // Log the client update with changes
         if (! empty($changes)) {
-            \App\Services\ActivityLogger::logClientUpdate($client, ['changes' => $changes]);
+            \App\Services\ActivityLogger::logClientUpdate($client, $changes);
         }
 
         return redirect()->route('clients.index')->with('success', 'Client updated successfully.');
