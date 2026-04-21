@@ -129,10 +129,11 @@ class LinkedInAdapter implements SocialPlatformAdapter
         }
 
         // LinkedIn returns the URN in X-RestLi-Id header
-        $postId = $response->header('X-RestLi-Id') ?? $response->json('id');
+        $headerId = $response->header('X-RestLi-Id');
+        $postId = $headerId !== '' ? $headerId : (string) ($response->json('id') ?? 'unknown');
 
         return PublishResult::ok(
-            platformPostId: $postId ?? 'unknown',
+            platformPostId: $postId,
             platformPostUrl: null, // LinkedIn does not return a URL from ugcPosts
             rawResponse: $responseBody,
         );

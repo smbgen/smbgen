@@ -63,7 +63,7 @@ class SocialMediaService
             ]);
 
             // Create targets for each selected account
-            foreach (($data['account_ids'] ?? []) as $accountId) {
+            foreach ($data['account_ids'] as $accountId) {
                 SocialPostTarget::create([
                     'social_post_id' => $post->id,
                     'social_account_id' => $accountId,
@@ -139,8 +139,8 @@ class SocialMediaService
     public function publishTarget(SocialPostTarget $target): SocialPostTarget
     {
         $target->load(['socialPost.media', 'socialAccount']);
-        $post = $target->socialPost;
-        $account = $target->socialAccount;
+        $post = $target->socialPost ?? throw new \RuntimeException("Social post not found for target {$target->id}");
+        $account = $target->socialAccount ?? throw new \RuntimeException("Social account not found for target {$target->id}");
 
         $idempotencyKey = 'post-'.$post->id.'-target-'.$target->id.'-attempt-'.($target->attempt_count + 1);
 
@@ -240,7 +240,7 @@ class SocialMediaService
     public function cancel(SocialPost $post): void
     {
         $post->update(['status' => SocialPost::STATUS_CANCELLED]);
-        $post->targets()->pending()->update(['status' => SocialPostTarget::STATUS_SKIPPED]);
+        $post->targets()->where('status', SocialPostTarget::STATUS_PENDING)->update(['status' => SocialPostTarget::STATUS_SKIPPED]);
     }
 
     /**

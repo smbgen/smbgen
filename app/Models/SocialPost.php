@@ -72,20 +72,21 @@ class SocialPost extends Model
         return $this->morphTo('source');
     }
 
+    /** @return HasMany<SocialPostTarget, SocialPost> */
     public function targets(): HasMany
     {
         return $this->hasMany(SocialPostTarget::class);
     }
 
+    /** @return HasMany<SocialPostMedia, SocialPost> */
     public function media(): HasMany
     {
         return $this->hasMany(SocialPostMedia::class)->orderBy('sort_order');
     }
 
-    public function attempts(): HasMany
+    public function attempts(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
-        return $this->hasMany(SocialPublishAttempt::class, 'social_post_target_id')
-            ->through('targets');
+        return $this->hasManyThrough(SocialPublishAttempt::class, SocialPostTarget::class);
     }
 
     /** Whether the post is ready to be dispatched to the queue. */
@@ -99,6 +100,7 @@ class SocialPost extends Model
             return false;
         }
 
+        // @phpstan-ignore method.nonObject
         return $this->scheduled_at === null || $this->scheduled_at->lte(now());
     }
 

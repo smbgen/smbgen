@@ -43,8 +43,9 @@ class SocialPostMedia extends Model
     public function getUrl(): ?string
     {
         // If sourced from a CmsImage, delegate to that model
-        if ($this->mediable_type === CmsImage::class && $this->mediable) {
-            return $this->mediable->getUrl();
+        $mediable = $this->mediable;
+        if ($mediable instanceof CmsImage) {
+            return $mediable->getUrl();
         }
 
         // Direct upload via a configured disk

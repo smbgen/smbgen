@@ -85,6 +85,7 @@ class SocialAccount extends Model
             return false; // long-lived tokens (Meta pages) have no expiry stored
         }
 
+        // @phpstan-ignore method.nonObject
         return $this->token_expires_at->isPast();
     }
 

@@ -42,11 +42,13 @@ class SocialPostTarget extends Model
         ];
     }
 
+    /** @return BelongsTo<SocialPost, SocialPostTarget> */
     public function socialPost(): BelongsTo
     {
         return $this->belongsTo(SocialPost::class);
     }
 
+    /** @return BelongsTo<SocialAccount, SocialPostTarget> */
     public function socialAccount(): BelongsTo
     {
         return $this->belongsTo(SocialAccount::class);
