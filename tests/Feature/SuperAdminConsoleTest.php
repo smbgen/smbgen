@@ -21,6 +21,7 @@ test('super admin can access the deployment console dashboard', function () {
         ->assertSee('Super Admin Console')
         ->assertSee('Deployment Console')
         ->assertSee('Open navigation menu')
+        ->assertSee('Logout')
         ->assertSee('sm:grid-cols-2', false);
 });
 
