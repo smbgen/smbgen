@@ -66,7 +66,7 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'user' is not found in App\\Models\\LoginAttempt model\.#'
+            message: "#Relation 'user' is not found in App\\Models\\LoginAttempt model\.#"
             path: app/Http/Controllers/Admin/AdminDashboardController.php
             count: 1
             reportUnmatched: false
@@ -171,107 +171,107 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'client' is not found in App\\Models\\InspectionReport model\.#'
+            message: "#Relation 'client' is not found in App\\Models\\InspectionReport model\.#"
             path: app/Http/Controllers/Admin/InspectionReportController.php
             count: 1
             reportUnmatched: false
@@ -296,7 +296,7 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Offset 'property_address' on non-falsy-string in isset\(\) does not exist\.#'
+            message: "#Offset 'property_address' on non-falsy-string in isset\(\) does not exist\.#"
             path: app/Http/Controllers/Admin/LeadController.php
             count: 1
             reportUnmatched: false
@@ -306,7 +306,7 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Offset 'phone' on non-falsy-string in isset\(\) does not exist\.#'
+            message: "#Offset 'phone' on non-falsy-string in isset\(\) does not exist\.#"
             path: app/Http/Controllers/Admin/LeadController.php
             count: 1
             reportUnmatched: false
@@ -316,7 +316,7 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Offset 'customer_phone' on non-falsy-string in isset\(\) does not exist\.#'
+            message: "#Offset 'customer_phone' on non-falsy-string in isset\(\) does not exist\.#"
             path: app/Http/Controllers/Admin/LeadController.php
             count: 1
             reportUnmatched: false
@@ -331,7 +331,7 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Offset 'tmp_dir' on array\{name: string, source: string, original_filename: string\|null, files: array\} on left side of \?\? does not exist\.#'
+            message: "#Offset 'tmp_dir' on array\{name: string, source: string, original_filename: string\|null, files: array\} on left side of \?\? does not exist\.#"
             path: app/Http/Controllers/Admin/PackageController.php
             count: 1
             reportUnmatched: false
@@ -401,7 +401,7 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/Auth/AuthenticatedSessionController.php
             count: 1
             reportUnmatched: false
@@ -501,12 +501,12 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'recipient' is not found in App\\Models\\Message model\.#'
+            message: "#Relation 'recipient' is not found in App\\Models\\Message model\.#"
             path: app/Http/Controllers/ClientController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'sender' is not found in App\\Models\\Message model\.#'
+            message: "#Relation 'sender' is not found in App\\Models\\Message model\.#"
             path: app/Http/Controllers/ClientController.php
             count: 1
             reportUnmatched: false
@@ -546,22 +546,22 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'recipient' is not found in App\\Models\\Message model\.#'
+            message: "#Relation 'recipient' is not found in App\\Models\\Message model\.#"
             path: app/Http/Controllers/MessageController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'sender' is not found in App\\Models\\Message model\.#'
+            message: "#Relation 'sender' is not found in App\\Models\\Message model\.#"
             path: app/Http/Controllers/MessageController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'recipient' is not found in App\\Models\\Message model\.#'
+            message: "#Relation 'recipient' is not found in App\\Models\\Message model\.#"
             path: app/Http/Controllers/MessageController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'sender' is not found in App\\Models\\Message model\.#'
+            message: "#Relation 'sender' is not found in App\\Models\\Message model\.#"
             path: app/Http/Controllers/MessageController.php
             count: 1
             reportUnmatched: false
@@ -596,12 +596,12 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'recipient' is not found in App\\Models\\Message model\.#'
+            message: "#Relation 'recipient' is not found in App\\Models\\Message model\.#"
             path: app/Http/Controllers/MessageController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Relation 'sender' is not found in App\\Models\\Message model\.#'
+            message: "#Relation 'sender' is not found in App\\Models\\Message model\.#"
             path: app/Http/Controllers/MessageController.php
             count: 1
             reportUnmatched: false
@@ -646,27 +646,27 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/SuperAdmin/DiagnosticsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/SuperAdmin/DiagnosticsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Controllers/SuperAdmin/DiagnosticsController.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Middleware/HandleCors.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Http/Middleware/RedirectIfAuthenticated.php
             count: 1
             reportUnmatched: false
@@ -786,12 +786,12 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Match arm comparison between 'sent' and 'sent' is always true\.#'
+            message: "#Match arm comparison between 'sent' and 'sent' is always true\.#"
             path: app/Models/Package.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Match arm comparison between 'email_template' and 'email_template' is always true\.#'
+            message: "#Match arm comparison between 'email_template' and 'email_template' is always true\.#"
             path: app/Models/PackageFile.php
             count: 1
             reportUnmatched: false
@@ -951,17 +951,17 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Services/EnvironmentService.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Services/EnvironmentService.php
             count: 1
             reportUnmatched: false
         -
-            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            message: "#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#"
             path: app/Services/EnvironmentService.php
             count: 1
             reportUnmatched: false
@@ -1071,7 +1071,7 @@ parameters:
             count: 1
             reportUnmatched: false
         -
-            message: '#Strict comparison using === between mixed~\(0\|0\.0\|''\|'0'\|array\{\}\|false\|null\) and '' will always evaluate to false\.#'
+            message: "#Strict comparison using === between mixed~\(0\|0\.0\|''\|'0'\|array\{\}\|false\|null\) and '' will always evaluate to false\.#"
             path: app/Services/StripeService.php
             count: 1
             reportUnmatched: false
