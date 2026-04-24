@@ -19,7 +19,9 @@ test('super admin can access the deployment console dashboard', function () {
 
     $response->assertOk()
         ->assertSee('Super Admin Console')
-        ->assertSee('Deployment Console');
+        ->assertSee('Deployment Console')
+        ->assertSee('Open navigation menu')
+        ->assertSee('sm:grid-cols-2', false);
 });
 
 test('company administrator cannot access the super admin dashboard', function () {

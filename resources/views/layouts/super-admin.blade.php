@@ -11,10 +11,12 @@
     @stack('styles')
 </head>
 <body class="bg-slate-950 font-sans antialiased text-gray-100">
-    <div class="flex min-h-screen">
+    <div x-data="{ sidebarOpen: false }" class="flex min-h-screen w-full">
+
+        <div x-cloak x-show="sidebarOpen" x-transition.opacity class="fixed inset-0 z-40 bg-slate-950/70 lg:hidden" @click="sidebarOpen = false"></div>
 
         {{-- Sidebar --}}
-        <aside class="w-72 flex-shrink-0 bg-slate-900 border-r border-slate-800 flex flex-col">
+        <aside class="fixed inset-y-0 left-0 z-50 w-72 flex-shrink-0 -translate-x-full bg-slate-900 border-r border-slate-800 flex flex-col transition-transform duration-300 ease-out lg:static lg:translate-x-0" :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
             <div class="px-6 py-5 border-b border-slate-800">
                 <a href="{{ route('super-admin.dashboard') }}" class="flex items-start gap-3 text-white">
                     <div class="h-11 w-11 rounded-2xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-950/30">
@@ -101,11 +103,14 @@
         </aside>
 
         {{-- Main content --}}
-        <div class="flex-1 flex flex-col min-w-0">
+        <div class="flex-1 flex min-w-0 flex-col">
 
             {{-- Top bar --}}
-            <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 flex-shrink-0">
-                <div>
+            <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-4 sm:px-6 flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <button type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 text-slate-300 transition-colors hover:bg-slate-800 hover:text-white lg:hidden" @click="sidebarOpen = true" aria-label="Open navigation menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
                     @if (isset($breadcrumbs) && count($breadcrumbs))
                         <nav class="flex items-center gap-2 text-sm">
                             @foreach ($breadcrumbs as $crumb)
@@ -139,17 +144,17 @@
 
             {{-- Flash messages --}}
             @if (session('success'))
-                <div class="mx-6 mt-4 px-4 py-3 bg-green-900/50 border border-green-700 rounded-lg text-green-300 text-sm">
+                <div class="mx-4 mt-4 px-4 py-3 bg-green-900/50 border border-green-700 rounded-lg text-green-300 text-sm sm:mx-6">
                     {{ session('success') }}
                 </div>
             @endif
             @if (session('error'))
-                <div class="mx-6 mt-4 px-4 py-3 bg-red-900/50 border border-red-700 rounded-lg text-red-300 text-sm">
+                <div class="mx-4 mt-4 px-4 py-3 bg-red-900/50 border border-red-700 rounded-lg text-red-300 text-sm sm:mx-6">
                     {{ session('error') }}
                 </div>
             @endif
 
-            <main class="flex-1 p-6 overflow-y-auto">
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6">
                 @yield('content')
             </main>
         </div>
