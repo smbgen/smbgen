@@ -1,0 +1,1167 @@
+parameters:
+    ignoreErrors:
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::isExpired\(\)\.#'
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$calendar_id\.#'
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$expires_at\.#'
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::needsRefresh\(\)\.#'
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Variable \$usersWithLegacy might not be defined\.#'
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::isExpired\(\)\.#'
+            path: app/Console/Commands/DiagnoseGoogleCalendar.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$count of method App\\Console\\Commands\\SendDeploymentNotification::getCommitHistory\(\) expects int, string\|null given\.#'
+            path: app/Console/Commands/SendDeploymentNotification.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Negated boolean expression is always false\.#'
+            path: app/Console/Commands/SendTestEmails.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Right side of && is always true\.#'
+            path: app/Console/Commands/SendTestEmails.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Variable \$emailLog in isset\(\) always exists and is not nullable\.#'
+            path: app/Console/Commands/SendTestEmails.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$view of function view expects view-string\|null, string given\.#'
+            path: app/Http/Controllers/AISEOController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$email\.#'
+            path: app/Http/Controllers/Admin/AdminBillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$refresh_token\.#'
+            path: app/Http/Controllers/Admin/AdminDashboardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'user' is not found in App\\Models\\LoginAttempt model\.#'
+            path: app/Http/Controllers/Admin/AdminDashboardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$view of function view expects view-string\|null, string given\.#'
+            path: app/Http/Controllers/Admin/BlogCommentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Http/Controllers/Admin/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$email\.#'
+            path: app/Http/Controllers/Admin/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Http/Controllers/Admin/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id\.#'
+            path: app/Http/Controllers/Admin/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id\.#'
+            path: app/Http/Controllers/Admin/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Laravel\\Socialite\\Contracts\\Provider::redirectUrl\(\)\.#'
+            path: app/Http/Controllers/Admin/CalendarController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Laravel\\Socialite\\Contracts\\Provider::redirectUrl\(\)\.#'
+            path: app/Http/Controllers/Admin/CalendarController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$refresh_token\.#'
+            path: app/Http/Controllers/Admin/CalendarController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\User::\$is_admin\.#'
+            path: app/Http/Controllers/Admin/CmsImageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$view of function view expects view-string\|null, string given\.#'
+            path: app/Http/Controllers/Admin/CmsPageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe property access "\?->tenant_id" on left side of \?\? is unnecessary\. Use -> instead\.#'
+            path: app/Http/Controllers/Admin/DomainOnboardingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$client\.#'
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Result of && is always false\.#'
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Undefined variable: \$emailLog#'
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Variable \$emailLog in isset\(\) is never defined\.#'
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Undefined variable: \$trackingService#'
+            path: app/Http/Controllers/Admin/EmailController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Support\\Collection<\(int\|string\), mixed>::paginate\(\)\.#'
+            path: app/Http/Controllers/Admin/EmailLogController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Negated boolean expression is always false\.#'
+            path: app/Http/Controllers/Admin/EmailLogController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Admin/EnvironmentSettingsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'client' is not found in App\\Models\\InspectionReport model\.#'
+            path: app/Http/Controllers/Admin/InspectionReportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Instantiated class App\\Http\\Controllers\\Admin\\GoogleDriveService not found\.#'
+            path: app/Http/Controllers/Admin/InspectionReportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to method findOrCreateInspectionReportsFolder\(\) on an unknown class App\\Http\\Controllers\\Admin\\GoogleDriveService\.#'
+            path: app/Http/Controllers/Admin/InspectionReportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to method storeInspectionReport\(\) on an unknown class App\\Http\\Controllers\\Admin\\GoogleDriveService\.#'
+            path: app/Http/Controllers/Admin/InspectionReportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$slug\.#'
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Offset 'property_address' on non-falsy-string in isset\(\) does not exist\.#'
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Result of && is always false\.#'
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Offset 'phone' on non-falsy-string in isset\(\) does not exist\.#'
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Result of && is always false\.#'
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Offset 'customer_phone' on non-falsy-string in isset\(\) does not exist\.#'
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Result of && is always false\.#'
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$title\.#'
+            path: app/Http/Controllers/Admin/LeadController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Offset 'tmp_dir' on array\{name: string, source: string, original_filename: string\|null, files: array\} on left side of \?\? does not exist\.#'
+            path: app/Http/Controllers/Admin/PackageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #5 \$uploadedFiles of method App\\Services\\PackageIngestService::commit\(\) expects array.*#'
+            path: app/Http/Controllers/Admin/PackageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::isIndexFile\(\)\.#'
+            path: app/Http/Controllers/Admin/PackageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$callback of method Illuminate\\Database\\Eloquent\\Collection<int,App\\Models\\Invoice>::map\( \) contains unresolvable type\.#'
+            path: app/Http/Controllers/Admin/SearchController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Http/Controllers/Admin/SearchController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe property access "\?->name" on left side of \?\? is unnecessary\. Use -> instead\.#'
+            path: app/Http/Controllers/Admin/SearchController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$view of function view expects view-string\|null, string given\.#'
+            path: app/Http/Controllers/Admin/SetupWizardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$view of function view expects view-string\|null, string given\.#'
+            path: app/Http/Controllers/Admin/SetupWizardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method App\\Models\\CmsCompanyColors::applyPreset\(\)\.#'
+            path: app/Http/Controllers/Admin/SetupWizardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Comparison operation ">" between 5 and 0 is always true\.#'
+            path: app/Http/Controllers/Admin/SetupWizardController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$view of function view expects view-string\|null, string given\.#'
+            path: app/Http/Controllers/Admin/StripePaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Stripe\\StripeObject::\$payment_intent\.#'
+            path: app/Http/Controllers/Admin/StripePaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method DOMNode::getAttribute\(\)\.#'
+            path: app/Http/Controllers/Admin/WordPressImportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method DOMNode::getAttribute\(\)\.#'
+            path: app/Http/Controllers/Admin/WordPressImportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/Auth/AuthenticatedSessionController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method App\\Http\\Controllers\\BillingController::authorize\(\)\.#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$description\.#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$unit_amount\.#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$quantity\.#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$params of static method Stripe\\Checkout\\Session::create\(\) expects array\{adaptive.*#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$description\.#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$unit_amount\.#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$quantity\.#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$params of static method Stripe\\Checkout\\Session::create\(\) expects array\{adaptive.*#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$email\.#'
+            path: app/Http/Controllers/BillingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe property access "\?->id" on left side of \?\? is unnecessary\. Use -> instead\.#'
+            path: app/Http/Controllers/BlogCommentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method App\\Http\\Controllers\\BlogCommentController::authorize\(\)\.#'
+            path: app/Http/Controllers/BlogCommentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method App\\Http\\Controllers\\BlogCommentController::authorize\(\)\.#'
+            path: app/Http/Controllers/BlogCommentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method App\\Http\\Controllers\\BlogCommentController::authorize\(\)\.#'
+            path: app/Http/Controllers/BlogCommentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method App\\Http\\Controllers\\BlogCommentController::authorize\(\)\.#'
+            path: app/Http/Controllers/BlogCommentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::needsRefresh\(\)\.#'
+            path: app/Http/Controllers/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#If condition is always true\.#'
+            path: app/Http/Controllers/BookingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Static method App\\Services\\ActivityLogger::logClientCreate\(\) invoked with 2 parameters, 1 required\.#'
+            path: app/Http/Controllers/ClientController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe property access "\?->id" on left side of \?\? is unnecessary\. Use -> instead\.#'
+            path: app/Http/Controllers/ClientController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'recipient' is not found in App\\Models\\Message model\.#'
+            path: app/Http/Controllers/ClientController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'sender' is not found in App\\Models\\Message model\.#'
+            path: app/Http/Controllers/ClientController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Static method App\\Services\\ActivityLogger::logClientDelete\(\) invoked with 2 parameters, 1 required\.#'
+            path: app/Http/Controllers/ClientController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\Client::\$user\.#'
+            path: app/Http/Controllers/ClientController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\Client::\$user\.#'
+            path: app/Http/Controllers/ClientController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Offset 0 on non-empty-list<string> on left side of \?\? always exists a nd is not nullable\.#'
+            path: app/Http/Controllers/ClientImportController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Argument of an invalid type string supplied for foreach, only iterables are supported\.#'
+            path: app/Http/Controllers/CmsFormSubmissionController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #2 \$values of method Illuminate\\Http\\Response::header\(\) expects array\|string, int<0, max> given\.#'
+            path: app/Http/Controllers/EmailTrackingController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\MagicLink::\$user\.#'
+            path: app/Http/Controllers/MagicLinkController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'recipient' is not found in App\\Models\\Message model\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'sender' is not found in App\\Models\\Message model\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'recipient' is not found in App\\Models\\Message model\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'sender' is not found in App\\Models\\Message model\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\Message::\$thread_unread_count\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\Message::\$thread_message_count\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$callback of method Illuminate\\Database\\Eloquent\\Collection<int,App\\Models\\Client>::map\(\) contains unresolvable type\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\Client::\$company\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\Client::\$user\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#If condition is always true\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'recipient' is not found in App\\Models\\Message model\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Relation 'sender' is not found in App\\Models\\Message model\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\Message::\$sender\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#If condition is always true\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\Message::\$sender\.#'
+            path: app/Http/Controllers/MessageController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$params of static method Stripe\\Checkout\\Session::create\(\) expects array\{adaptive.*#'
+            path: app/Http/Controllers/PaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$email\.#'
+            path: app/Http/Controllers/PaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$params of method Stripe\\Service\\PaymentIntentService::create\(\) expects array\{amo.*#'
+            path: app/Http/Controllers/PaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$email\.#'
+            path: app/Http/Controllers/PaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$email\.#'
+            path: app/Http/Controllers/PaymentController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/SuperAdmin/DiagnosticsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/SuperAdmin/DiagnosticsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Controllers/SuperAdmin/DiagnosticsController.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Middleware/HandleCors.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Http/Middleware/RedirectIfAuthenticated.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable::\$role\.#'
+            path: app/Listeners/TrackClientLogin.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable::\$email\.#'
+            path: app/Listeners/TrackClientLogin.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable::\$id\.#'
+            path: app/Listeners/TrackClientLogin.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable::\$email\.#'
+            path: app/Listeners/TrackClientLogin.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Expression on left side of \?\? is not nullable\.#'
+            path: app/Mail/BookingAdminNotification.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe method call on non-nullable type Carbon\\Carbon\. Use -> instead\.#'
+            path: app/Mail/BookingAdminNotification.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Expression on left side of \?\? is not nullable\.#'
+            path: app/Mail/BookingCancellation.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe method call on non-nullable type Carbon\\Carbon\. Use -> instead\.#'
+            path: app/Mail/BookingCancellation.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to function is_string\(\) with string will always evaluate to true\.#'
+            path: app/Mail/BookingCancellation.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe method call on non-nullable type \*NEVER\*\. Use -> instead\.#'
+            path: app/Mail/BookingCancellation.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Expression on left side of \?\? is not nullable\.#'
+            path: app/Mail/BookingConfirmation.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe method call on non-nullable type Carbon\\Carbon\. Use -> instead\.#'
+            path: app/Mail/BookingConfirmation.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany::published\(\)\.#'
+            path: app/Models/BlogCategory.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Models/BlogComment.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Cannot call method isPast\(\) on string\.#'
+            path: app/Models/BlogPost.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany::published\(\)\.#'
+            path: app/Models/BlogTag.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Expression on left side of \?\? is not nullable\.#'
+            path: app/Models/Booking.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe method call on non-nullable type Carbon\\Carbon\. Use -> instead\.#'
+            path: app/Models/Booking.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Instanceof between string and DateTimeInterface will always evaluate to false\.#'
+            path: app/Models/Booking.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Left side of && is always true\.#'
+            path: app/Models/Booking.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Empty array passed to foreach\.#'
+            path: app/Models/BookingFieldConfig.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#PHPDoc type array of property App\\Models\\BusinessSetting::\$casts is not covariant with PHPDoc typ.*#'
+            path: app/Models/BusinessSetting.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Ternary operator condition is always true\.#'
+            path: app/Models/GoogleCredential.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Match arm comparison between 'sent' and 'sent' is always true\.#'
+            path: app/Models/Package.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Match arm comparison between 'email_template' and 'email_template' is always true\.#'
+            path: app/Models/PackageFile.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$slug\.#'
+            path: app/Models/Tenant.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::hasFeature\(\)\.#'
+            path: app/Models/Tenant.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Method Illuminate\\Database\\Eloquent\\Builder<Illuminate\\Database\\Eloqu ent\\Model>::getLimit\(\) invoked with 1 parameter, 0 required\.#'
+            path: app/Models/Tenant.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$refresh_token\.#'
+            path: app/Models/User.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$refresh_token\.#'
+            path: app/Models/User.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$calendar_id\.#'
+            path: app/Models/User.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Using nullsafe method call on non-nullable type Illuminate\\Http\\Request\. Use -> instead\.#'
+            path: app/Providers/AppServiceProvider.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$original_name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$original_name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$original_name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$customer_name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$customer_name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$filename\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$total_rows\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$filename\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$filename\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$total_rows\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$filename\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$filename\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$total_rows\.#'
+            path: app/Services/ActivityLogger.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Expression on left side of \?\? is not nullable\.#'
+            path: app/Services/DashboardWidgetService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Class App\\Services\\QuickBooksService not found\.#'
+            path: app/Services/DashboardWidgetService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to method isConnected\(\) on an unknown class App\\Services\\QuickBooksService\.#'
+            path: app/Services/DashboardWidgetService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to method getCompanyInfo\(\) on an unknown class App\\Services\\QuickBooksService\.#'
+            path: app/Services/DashboardWidgetService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Method App\\Services\\EmailTrackingService::createLog\(\) should return App\\Models\\EmailLog but returns null\.#'
+            path: app/Services/EmailTrackingService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Services/EnvironmentService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Services/EnvironmentService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Called 'env' outside of the config directory which returns null when the config is cached, use 'config'\.#'
+            path: app/Services/EnvironmentService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::needsRefresh\(\)\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$expires_at\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::refreshAccessToken\(\)\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$refresh_token\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method DateTimeInterface::modify\(\)\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Google\\Service\\Calendar\\Event::\$attendees\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Google\\Service\\Calendar\\Event::\$attendees\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::needsRefresh\(\)\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$expires_at\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::refreshAccessToken\(\)\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$refresh_token\.#'
+            path: app/Services/GoogleCalendarService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$callback of method Illuminate\\Database\\Eloquent\\Collection<int,Illuminate\\Databas.*#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$original_name\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$display_name\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$type\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$role\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$group_label\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$storage_path\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$size_bytes\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$portal_promoted\.#'
+            path: app/Services/PackageIngestService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Strict comparison using === between mixed~\(0\|0\.0\|''\|'0'\|array\{\}\|false\|null\) and '' will always evaluate to false\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property App\\Models\\User::\$stripe_customer_id\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$params of method Stripe\\Service\\CustomerService::create\(\) expects array\{address\.*#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$user of method App\\Services\\StripeService::findOrCreateCustomer\(\) expects App\\Mo.*#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$params of method Stripe\\Service\\PaymentIntentService::create\(\) expects array\{amo.*#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$user of method App\\Services\\StripeService::findOrCreateCustomer\(\) expects App\\Mo.*#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$unit_amount\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$description\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$quantity\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$params of method Stripe\\Service\\Checkout\\SessionService::create\(\) expects array\.*#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$unit_amount\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$description\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$quantity\.#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #1 \$params of method Stripe\\Service\\PaymentLinkService::create\(\) expects array\{after.*#'
+            path: app/Services/StripeService.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Unsafe call to private method App\\Support\\ModuleRegistry::setting\(\) through static::\.#'
+            path: app/Support/ModuleRegistry.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Unsafe call to private method App\\Support\\ModuleRegistry::setting\(\) through static::\.#'
+            path: app/Support/ModuleRegistry.php
+            count: 1
+            reportUnmatched: false
+        -
+            message: '#Parameter #2 \$value of method Illuminate\\Support\\Collection<mixed,\(in t\|string\)>::put\(\) expects \(int\|string\), true given\.#'
+            path: app/Support/ModuleRegistry.php
+            count: 1
+            reportUnmatched: false
