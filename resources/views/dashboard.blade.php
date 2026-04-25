@@ -3,6 +3,9 @@
 @section('content')
 <div class="space-y-8">
     @php
+        $showSmbgenServiceMenu = \App\Support\ModuleRegistry::isEnabled('frontend_site')
+            && \App\Support\ModuleRegistry::isSelectedFrontend('frontend_site');
+
         $serviceMenuCards = [
             [
                 'key' => 'free_open_source',
@@ -143,6 +146,7 @@
     </div>
 
     <!-- Service Menu and Tier Selection -->
+    @if($showSmbgenServiceMenu)
     <div class="card p-6 md:p-8">
         <div class="flex flex-col gap-2 mb-6">
             <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">smbgen Service Menu</h2>
@@ -230,6 +234,7 @@
             </div>
         </form>
     </div>
+    @endif
 
     <!-- Quick Actions Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
