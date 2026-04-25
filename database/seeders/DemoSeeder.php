@@ -10,6 +10,7 @@ use App\Models\Client;
 use App\Models\CmsPage;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+use App\Models\LeadForm;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -33,7 +34,8 @@ class DemoSeeder extends Seeder
         $this->seedBookings($clients);
         $this->seedInvoices($clientUser);
         $this->seedMessages($adminUser, $clientUser);
-        $this->seedCmsPages();
+        $pages = $this->seedCmsPages();
+        $this->seedLeads($pages);
         $this->seedBlogPosts($adminUser);
     }
 
@@ -61,6 +63,8 @@ class DemoSeeder extends Seeder
         Booking::where('customer_email', 'like', '%@demo.local')->delete();
 
         Client::where('email', 'like', '%@demo.local')->delete();
+
+        LeadForm::where('email', 'like', '%@demo.local')->delete();
 
         CmsPage::where('slug', 'like', 'demo-%')->delete();
 
@@ -294,7 +298,10 @@ class DemoSeeder extends Seeder
         }
     }
 
-    private function seedCmsPages(): void
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection<int, CmsPage>
+     */
+    private function seedCmsPages(): \Illuminate\Database\Eloquent\Collection
     {
         $pages = [
             [
@@ -329,9 +336,123 @@ class DemoSeeder extends Seeder
                 'background_color' => 'bg-white',
                 'text_color' => 'text-gray-900',
                 'show_navbar' => true,
-                'has_form' => false,
+                'has_form' => $page['slug'] !== 'demo-about',
+                'form_fields' => $page['slug'] === 'demo-about' ? null : [
+                    [
+                        'type' => 'text',
+                        'name' => 'name',
+                        'label' => 'Full Name',
+                        'placeholder' => 'Jordan Smith',
+                        'required' => true,
+                    ],
+                    [
+                        'type' => 'email',
+                        'name' => 'email',
+                        'label' => 'Work Email',
+                        'placeholder' => 'jordan@example.com',
+                        'required' => true,
+                    ],
+                    [
+                        'type' => 'textarea',
+                        'name' => 'message',
+                        'label' => 'What do you need help with?',
+                        'placeholder' => 'Tell us a bit about your goals.',
+                        'required' => true,
+                    ],
+                ],
+                'form_submit_button_text' => 'Request Consultation',
+                'form_success_message' => 'Thanks for reaching out. We will follow up shortly.',
             ]));
         }
+
+        return CmsPage::whereIn('slug', array_column($pages, 'slug'))->get()->keyBy('slug');
+    }
+
+    /**
+     * @param  \Illuminate\Database\Eloquent\Collection<string, CmsPage>  $pages
+     */
+    private function seedLeads(\Illuminate\Database\Eloquent\Collection $pages): void
+    {
+        $homePage = $pages->get('demo-home');
+        $servicesPage = $pages->get('demo-services');
+
+        $leads = [
+            [
+                'cms_page_id' => $homePage?->id,
+                'name' => 'Casey Morgan',
+                'email' => 'casey.morgan@demo.local',
+                'message' => 'We need help tightening up our monthly reporting and cash flow forecasting before summer.',
+                'source_site' => 'website',
+                'notification_email' => DemoController::DEMO_ADMIN_EMAIL,
+                'ip_address' => '203.0.113.10',
+                'user_agent' => 'Mozilla/5.0 Demo Browser',
+                'referer' => 'https://demo.example.test/demo-home',
+                'form_data' => [
+                    'company' => 'Morgan Creative Studio',
+                    'timeline' => 'within_30_days',
+                    'budget' => '$5k-$10k',
+                ],
+                'created_at' => now()->subDays(5),
+            ],
+            [
+                'cms_page_id' => $servicesPage?->id,
+                'name' => 'Taylor Nguyen',
+                'email' => 'taylor.nguyen@demo.local',
+                'message' => 'Looking for an operations review and a repeatable client onboarding process for our team.',
+                'source_site' => 'landing_page',
+                'notification_email' => DemoController::DEMO_ADMIN_EMAIL,
+                'ip_address' => '203.0.113.22',
+                'user_agent' => 'Mozilla/5.0 Demo Browser',
+                'referer' => 'https://demo.example.test/demo-services',
+                'form_data' => [
+                    'team_size' => '12',
+                    'priority' => 'operations',
+                    'consultation_type' => 'strategy_call',
+                ],
+                'created_at' => now()->subDays(3),
+            ],
+            [
+                'cms_page_id' => $servicesPage?->id,
+                'name' => 'Riley Carter',
+                'email' => 'riley.carter@demo.local',
+                'message' => 'We are comparing providers and want a quote for ongoing financial planning support.',
+                'source_site' => 'social_media',
+                'notification_email' => DemoController::DEMO_ADMIN_EMAIL,
+                'ip_address' => '203.0.113.35',
+                'user_agent' => 'Mozilla/5.0 Demo Browser',
+                'referer' => 'https://linkedin.com/company/acme-services-demo',
+                'form_data' => [
+                    'company' => 'Carter Logistics',
+                    'annual_revenue' => '$2M-$5M',
+                    'needs_follow_up' => true,
+                ],
+                'created_at' => now()->subDay(),
+            ],
+            [
+                'cms_page_id' => null,
+                'name' => 'Jamie Patel',
+                'email' => 'jamie.patel@demo.local',
+                'message' => 'Referral from an existing client. Interested in a discovery call next week.',
+                'source_site' => 'referral',
+                'notification_email' => DemoController::DEMO_ADMIN_EMAIL,
+                'ip_address' => '203.0.113.44',
+                'user_agent' => 'Mozilla/5.0 Demo Browser',
+                'referer' => null,
+                'form_data' => [
+                    'referred_by' => 'Jordan Smith',
+                    'preferred_contact' => 'email',
+                ],
+                'created_at' => now()->subHours(6),
+            ],
+        ];
+
+        LeadForm::withoutEvents(function () use ($leads): void {
+            foreach ($leads as $lead) {
+                LeadForm::create($lead + [
+                    'updated_at' => $lead['created_at'],
+                ]);
+            }
+        });
     }
 
     private function seedBlogPosts(User $adminUser): void
