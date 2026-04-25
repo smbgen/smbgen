@@ -20,7 +20,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Configure which AI provider to use for content generation.
-    | Currently supported: 'anthropic' (Claude)
+    | Supported: 'anthropic' (Claude), 'openrouter'
     |
     */
 
@@ -41,6 +41,24 @@ return [
         'api_version' => '2023-06-01',
         'max_tokens' => env('ANTHROPIC_MAX_TOKENS', 4096),
         'temperature' => env('ANTHROPIC_TEMPERATURE', 0.7),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | OpenRouter Configuration
+    |--------------------------------------------------------------------------
+    |
+    | API credentials and model settings for OpenRouter integration.
+    | OpenRouter provides access to many models (GPT-4, Claude, Llama, etc.)
+    | via a single API. Get a key at https://openrouter.ai/keys
+    |
+    */
+
+    'openrouter' => [
+        'api_key' => env('OPENROUTER_API_KEY'),
+        'model' => env('OPENROUTER_MODEL', 'openai/gpt-4o'),
+        'max_tokens' => env('OPENROUTER_MAX_TOKENS', 4096),
+        'temperature' => env('OPENROUTER_TEMPERATURE', 0.7),
     ],
 
     /*

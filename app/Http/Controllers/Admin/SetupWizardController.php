@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BusinessSetting;
 use App\Models\CmsCompanyColors;
 use App\Models\CmsPage;
-use App\Services\AI\ClaudeAIService;
+use App\Services\AI\Contracts\AIServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -132,7 +132,7 @@ class SetupWizardController extends Controller
                     $prompt .= ", a company in the {$industry} industry";
                 }
 
-                $aiService = app(ClaudeAIService::class);
+                $aiService = app(AIServiceInterface::class);
                 $content = $aiService->generateLandingPage($prompt);
             }
 

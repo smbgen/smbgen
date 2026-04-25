@@ -17,31 +17,38 @@ class AISettingsController extends Controller
      */
     public function index()
     {
-        $dbApiKey = BusinessSetting::get('ai_api_key');
-        $envApiKey = config('ai.anthropic.api_key');
+        $provider = BusinessSetting::get('ai_provider', config('ai.provider', 'anthropic'));
 
-        // Decrypt database API key if it exists
-        $decryptedDbKey = null;
-        if ($dbApiKey) {
-            try {
-                $decryptedDbKey = Crypt::decryptString($dbApiKey);
-            } catch (\Exception $e) {
-                // If decryption fails, key might be stored unencrypted (legacy)
-                $decryptedDbKey = $dbApiKey;
-            }
-        }
+        // Anthropic key
+        $dbAnthropicKey = BusinessSetting::get('ai_api_key');
+        $envAnthropicKey = config('ai.anthropic.api_key');
+        $decryptedAnthropicKey = $this->decryptKey($dbAnthropicKey);
+        $anthropicKeySet = ! empty($decryptedAnthropicKey) || ! empty($envAnthropicKey);
 
-        $apiKeySet = ! empty($decryptedDbKey) || ! empty($envApiKey);
+        // OpenRouter key
+        $dbOpenRouterKey = BusinessSetting::get('ai_openrouter_api_key');
+        $envOpenRouterKey = config('ai.openrouter.api_key');
+        $decryptedOpenRouterKey = $this->decryptKey($dbOpenRouterKey);
+        $openRouterKeySet = ! empty($decryptedOpenRouterKey) || ! empty($envOpenRouterKey);
 
-        // Get available models from cache or default list
-        $availableModels = Cache::get('ai_available_models', $this->getDefaultModels());
+        $activeKey = $provider === 'openrouter' ? $decryptedOpenRouterKey : $decryptedAnthropicKey;
+        $activeEnvKey = $provider === 'openrouter' ? $envOpenRouterKey : $envAnthropicKey;
+
+        $defaultModel = $provider === 'openrouter'
+            ? config('ai.openrouter.model')
+            : config('ai.anthropic.model');
+
+        $availableModels = Cache::get('ai_available_models_'.$provider, $this->getDefaultModels($provider));
 
         $settings = [
             'enabled' => config('ai.enabled', false),
-            'api_key_set' => $apiKeySet,
-            'api_key_in_db' => ! empty($dbApiKey),
-            'api_key_last_4' => $decryptedDbKey ? '****'.substr($decryptedDbKey, -4) : ($envApiKey ? '****'.substr($envApiKey, -4) : null),
-            'model' => BusinessSetting::get('ai_model', config('ai.anthropic.model')),
+            'provider' => $provider,
+            'api_key_set' => $provider === 'openrouter' ? $openRouterKeySet : $anthropicKeySet,
+            'api_key_in_db' => $provider === 'openrouter' ? ! empty($dbOpenRouterKey) : ! empty($dbAnthropicKey),
+            'api_key_last_4' => $activeKey ? '****'.substr($activeKey, -4) : ($activeEnvKey ? '****'.substr($activeEnvKey, -4) : null),
+            'anthropic_key_set' => $anthropicKeySet,
+            'openrouter_key_set' => $openRouterKeySet,
+            'model' => BusinessSetting::get('ai_model', $defaultModel),
             'max_tokens' => BusinessSetting::get('ai_max_tokens', config('ai.anthropic.max_tokens')),
             'temperature' => BusinessSetting::get('ai_temperature', config('ai.anthropic.temperature')),
             'available_models' => $availableModels,
@@ -59,67 +66,32 @@ class AISettingsController extends Controller
         return view('admin.ai.settings', compact('settings'));
     }
 
+    private function decryptKey(?string $key): ?string
+    {
+        if (! $key) {
+            return null;
+        }
+
+        try {
+            return Crypt::decryptString($key);
+        } catch (\Exception $e) {
+            return $key;
+        }
+    }
+
     /**
-     * Fetch latest available models from Anthropic API.
+     * Fetch latest available models from the active provider's API.
      */
     public function fetchModels(Request $request)
     {
         try {
-            $apiKey = $request->input('api_key');
+            $provider = $request->input('provider', BusinessSetting::get('ai_provider', config('ai.provider', 'anthropic')));
 
-            if (! $apiKey) {
-                $apiKey = BusinessSetting::get('ai_api_key');
-                if ($apiKey) {
-                    try {
-                        $apiKey = Crypt::decryptString($apiKey);
-                    } catch (\Exception $e) {
-                        $apiKey = $apiKey; // Already plaintext (legacy)
-                    }
-                }
+            if ($provider === 'openrouter') {
+                return $this->fetchOpenRouterModels($request);
             }
 
-            if (! $apiKey) {
-                $apiKey = config('ai.anthropic.api_key');
-            }
-
-            if (! $apiKey) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'No API key configured. Please set your Anthropic API key first.',
-                ], 400);
-            }
-
-            // Fetch models from Anthropic API
-            $response = Http::withHeaders([
-                'x-api-key' => $apiKey,
-                'anthropic-version' => '2023-06-01',
-            ])->get('https://api.anthropic.com/v1/models');
-
-            if (! $response->successful()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Failed to fetch models from Anthropic. Please check your API key.',
-                ], 400);
-            }
-
-            $models = $response->json('data', []);
-
-            // Extract model IDs and sort
-            $modelList = collect($models)
-                ->pluck('id')
-                ->unique()
-                ->sort()
-                ->values()
-                ->toArray();
-
-            // Cache the models for 24 hours
-            Cache::put('ai_available_models', $modelList, now()->addHours(24));
-
-            return response()->json([
-                'success' => true,
-                'models' => $modelList,
-                'message' => 'Models fetched successfully. '.count($modelList).' models available.',
-            ]);
+            return $this->fetchAnthropicModels($request);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -128,17 +100,121 @@ class AISettingsController extends Controller
         }
     }
 
+    private function fetchAnthropicModels(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $apiKey = $request->input('api_key');
+
+        if (! $apiKey) {
+            $apiKey = $this->decryptKey(BusinessSetting::get('ai_api_key'));
+        }
+
+        if (! $apiKey) {
+            $apiKey = config('ai.anthropic.api_key');
+        }
+
+        if (! $apiKey) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No Anthropic API key configured. Please set your API key first.',
+            ], 400);
+        }
+
+        $response = Http::withHeaders([
+            'x-api-key' => $apiKey,
+            'anthropic-version' => '2023-06-01',
+        ])->get('https://api.anthropic.com/v1/models');
+
+        if (! $response->successful()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch models from Anthropic. Please check your API key.',
+            ], 400);
+        }
+
+        $modelList = collect($response->json('data', []))
+            ->pluck('id')
+            ->unique()
+            ->sort()
+            ->values()
+            ->toArray();
+
+        Cache::put('ai_available_models_anthropic', $modelList, now()->addHours(24));
+
+        return response()->json([
+            'success' => true,
+            'models' => $modelList,
+            'message' => 'Models fetched successfully. '.count($modelList).' models available.',
+        ]);
+    }
+
+    private function fetchOpenRouterModels(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $apiKey = $request->input('api_key');
+
+        if (! $apiKey) {
+            $apiKey = $this->decryptKey(BusinessSetting::get('ai_openrouter_api_key'));
+        }
+
+        if (! $apiKey) {
+            $apiKey = config('ai.openrouter.api_key');
+        }
+
+        if (! $apiKey) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No OpenRouter API key configured. Please set your API key first.',
+            ], 400);
+        }
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$apiKey,
+        ])->get('https://openrouter.ai/api/v1/models');
+
+        if (! $response->successful()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch models from OpenRouter. Please check your API key.',
+            ], 400);
+        }
+
+        $modelList = collect($response->json('data', []))
+            ->pluck('id')
+            ->unique()
+            ->sort()
+            ->values()
+            ->toArray();
+
+        Cache::put('ai_available_models_openrouter', $modelList, now()->addHours(24));
+
+        return response()->json([
+            'success' => true,
+            'models' => $modelList,
+            'message' => 'Models fetched successfully. '.count($modelList).' models available.',
+        ]);
+    }
+
     /**
      * Get default model list when API is unavailable.
      */
-    private function getDefaultModels(): array
+    private function getDefaultModels(string $provider = 'anthropic'): array
     {
-        return [
-            'claude-3-5-sonnet-20241022',
-            'claude-3-5-haiku-20241022',
-            'claude-3-opus-20240229',
-            'claude-opus-4-1',
-        ];
+        return match ($provider) {
+            'openrouter' => [
+                'openai/gpt-4o',
+                'openai/gpt-4o-mini',
+                'openai/o1',
+                'anthropic/claude-opus-4',
+                'anthropic/claude-sonnet-4',
+                'google/gemini-2.5-pro',
+                'meta-llama/llama-3.3-70b-instruct',
+            ],
+            default => [
+                'claude-3-5-sonnet-20241022',
+                'claude-3-5-haiku-20241022',
+                'claude-3-opus-20240229',
+                'claude-opus-4-1',
+            ],
+        };
     }
 
     /**
@@ -147,8 +223,11 @@ class AISettingsController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'provider' => ['nullable', 'string', 'in:anthropic,openrouter'],
             'api_key' => ['nullable', 'string', 'regex:/^sk-ant-[a-zA-Z0-9_-]+$/'],
+            'openrouter_api_key' => ['nullable', 'string', 'regex:/^sk-or-[a-zA-Z0-9_-]+$/'],
             'remove_api_key' => ['nullable', 'boolean'],
+            'remove_openrouter_api_key' => ['nullable', 'boolean'],
             'model' => ['nullable', 'string', 'min:3', 'max:100'],
             'max_tokens' => ['nullable', 'integer', 'min:100', 'max:8000'],
             'temperature' => ['nullable', 'numeric', 'min:0', 'max:1'],
@@ -171,17 +250,26 @@ class AISettingsController extends Controller
         $validated = $validator->validated();
 
         try {
-            // Handle API key
-            if ($request->filled('remove_api_key') && $validated['remove_api_key']) {
-                // Remove API key from database
-                BusinessSetting::where('key', 'ai_api_key')->delete();
-            } elseif (isset($validated['api_key']) && ! empty($validated['api_key'])) {
-                // Encrypt API key before storing in database
-                $encryptedKey = Crypt::encryptString($validated['api_key']);
-                BusinessSetting::set('ai_api_key', $encryptedKey, 'string');
+            // Save provider selection
+            if (isset($validated['provider'])) {
+                BusinessSetting::set('ai_provider', $validated['provider'], 'string');
             }
 
-            // Save settings to database
+            // Handle Anthropic API key
+            if ($request->filled('remove_api_key') && $validated['remove_api_key']) {
+                BusinessSetting::where('key', 'ai_api_key')->delete();
+            } elseif (! empty($validated['api_key'])) {
+                BusinessSetting::set('ai_api_key', Crypt::encryptString($validated['api_key']), 'string');
+            }
+
+            // Handle OpenRouter API key
+            if ($request->filled('remove_openrouter_api_key') && $validated['remove_openrouter_api_key']) {
+                BusinessSetting::where('key', 'ai_openrouter_api_key')->delete();
+            } elseif (! empty($validated['openrouter_api_key'])) {
+                BusinessSetting::set('ai_openrouter_api_key', Crypt::encryptString($validated['openrouter_api_key']), 'string');
+            }
+
+            // Save shared settings
             if (isset($validated['model'])) {
                 BusinessSetting::set('ai_model', $validated['model'], 'string');
             }

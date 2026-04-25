@@ -5,7 +5,7 @@
     <div class="admin-page-header">
         <div>
             <h1 class="admin-page-title">AI Content Generation Settings</h1>
-            <p class="admin-page-subtitle">Configure Claude AI for content generation</p>
+            <p class="admin-page-subtitle">Configure your AI provider for content generation</p>
         </div>
     </div>
 
@@ -31,6 +31,146 @@
             <form action="{{ route('admin.ai.settings.update') }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PATCH')
+
+                <!-- Provider Selection -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6" x-data="{ provider: '{{ $settings['provider'] }}' }">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">AI Provider</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                        Choose which AI provider to use for content generation.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <label class="relative flex items-start p-4 border-2 rounded-lg cursor-pointer transition-colors"
+                               :class="provider === 'anthropic' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'">
+                            <input type="radio" name="provider" value="anthropic" x-model="provider" class="sr-only">
+                            <div class="flex-1">
+                                <p class="font-semibold text-gray-900 dark:text-white">Anthropic (Claude)</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Claude 3.5 Sonnet, Opus, Haiku</p>
+                                @if($settings['anthropic_key_set'])
+                                    <span class="inline-flex items-center mt-2 text-xs text-green-600 dark:text-green-400"><i class="fas fa-check-circle mr-1"></i>Key configured</span>
+                                @else
+                                    <span class="inline-flex items-center mt-2 text-xs text-gray-400"><i class="fas fa-key mr-1"></i>No key set</span>
+                                @endif
+                            </div>
+                            <i class="fas fa-check-circle text-blue-500 ml-2 mt-0.5" x-show="provider === 'anthropic'"></i>
+                        </label>
+
+                        <label class="relative flex items-start p-4 border-2 rounded-lg cursor-pointer transition-colors"
+                               :class="provider === 'openrouter' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'">
+                            <input type="radio" name="provider" value="openrouter" x-model="provider" class="sr-only">
+                            <div class="flex-1">
+                                <p class="font-semibold text-gray-900 dark:text-white">OpenRouter</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">GPT-4o, Gemini, Llama & more</p>
+                                @if($settings['openrouter_key_set'])
+                                    <span class="inline-flex items-center mt-2 text-xs text-green-600 dark:text-green-400"><i class="fas fa-check-circle mr-1"></i>Key configured</span>
+                                @else
+                                    <span class="inline-flex items-center mt-2 text-xs text-gray-400"><i class="fas fa-key mr-1"></i>No key set</span>
+                                @endif
+                            </div>
+                            <i class="fas fa-check-circle text-blue-500 ml-2 mt-0.5" x-show="provider === 'openrouter'"></i>
+                        </label>
+                    </div>
+
+                    <!-- Anthropic API Key (shown when anthropic selected) -->
+                    <div x-show="provider === 'anthropic'" x-cloak class="space-y-4" x-data="{ showKey: false }">
+                        <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300">Anthropic API Key</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                            Get your key from <a href="https://console.anthropic.com/settings/keys" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">console.anthropic.com</a>
+                        </p>
+
+                        @if($settings['anthropic_key_set'])
+                            <div class="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                    <span class="text-sm text-gray-900 dark:text-white">
+                                        Anthropic key configured
+                                        @if($settings['provider'] === 'anthropic' && $settings['api_key_last_4'])
+                                            <code class="ml-2 text-xs bg-white dark:bg-gray-800 px-2 py-1 rounded">{{ $settings['api_key_last_4'] }}</code>
+                                        @endif
+                                    </span>
+                                </div>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" name="remove_api_key" value="1" class="form-checkbox mr-2">
+                                    <span class="text-sm text-red-600 dark:text-red-400">Remove</span>
+                                </label>
+                            </div>
+                        @endif
+
+                        <div class="relative">
+                            <input :type="showKey ? 'text' : 'password'"
+                                   name="api_key"
+                                   value=""
+                                   class="form-input pr-10"
+                                   placeholder="sk-ant-api03-xxxxxxxxxxxxx"
+                                   autocomplete="off"
+                                   data-1p-ignore
+                                   data-lpignore="true"
+                                   data-form-type="other"
+                                   data-bwignore="true"
+                                   role="presentation"
+                                   readonly
+                                   onfocus="this.removeAttribute('readonly');">
+                            <button type="button"
+                                    @click="showKey = !showKey"
+                                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+                                <i :class="showKey ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                            {{ $settings['anthropic_key_set'] ? 'Leave blank to keep existing key.' : 'Starts with "sk-ant-". You can also set ANTHROPIC_API_KEY in your .env.' }}
+                        </p>
+                    </div>
+
+                    <!-- OpenRouter API Key (shown when openrouter selected) -->
+                    <div x-show="provider === 'openrouter'" x-cloak class="space-y-4" x-data="{ showOrKey: false }">
+                        <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300">OpenRouter API Key</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                            Get your key from <a href="https://openrouter.ai/keys" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">openrouter.ai/keys</a>
+                        </p>
+
+                        @if($settings['openrouter_key_set'])
+                            <div class="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                    <span class="text-sm text-gray-900 dark:text-white">
+                                        OpenRouter key configured
+                                        @if($settings['provider'] === 'openrouter' && $settings['api_key_last_4'])
+                                            <code class="ml-2 text-xs bg-white dark:bg-gray-800 px-2 py-1 rounded">{{ $settings['api_key_last_4'] }}</code>
+                                        @endif
+                                    </span>
+                                </div>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" name="remove_openrouter_api_key" value="1" class="form-checkbox mr-2">
+                                    <span class="text-sm text-red-600 dark:text-red-400">Remove</span>
+                                </label>
+                            </div>
+                        @endif
+
+                        <div class="relative">
+                            <input :type="showOrKey ? 'text' : 'password'"
+                                   name="openrouter_api_key"
+                                   value=""
+                                   class="form-input pr-10"
+                                   placeholder="sk-or-v1-xxxxxxxxxxxxx"
+                                   autocomplete="off"
+                                   data-1p-ignore
+                                   data-lpignore="true"
+                                   data-form-type="other"
+                                   data-bwignore="true"
+                                   role="presentation"
+                                   readonly
+                                   onfocus="this.removeAttribute('readonly');">
+                            <button type="button"
+                                    @click="showOrKey = !showOrKey"
+                                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+                                <i :class="showOrKey ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                            {{ $settings['openrouter_key_set'] ? 'Leave blank to keep existing key.' : 'Starts with "sk-or-". You can also set OPENROUTER_API_KEY in your .env.' }}
+                        </p>
+                    </div>
+                </div>
 
                 <!-- Configuration Status -->
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
@@ -75,74 +215,6 @@
                     </div>
                 </div>
 
-                <!-- API Key Configuration -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">API Key</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                        Your Anthropic API key. Get one from <a href="https://console.anthropic.com/settings/keys" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">console.anthropic.com</a>
-                    </p>
-                    
-                    <div class="space-y-4" x-data="{ showKey: false }">
-                        @if($settings['api_key_set'])
-                            <div class="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-                                <div class="flex items-center">
-                                    <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                                    <span class="text-sm text-gray-900 dark:text-white">
-                                        API Key configured 
-                                        @if($settings['api_key_last_4'])
-                                            <code class="ml-2 text-xs bg-white dark:bg-gray-800 px-2 py-1 rounded">{{ $settings['api_key_last_4'] }}</code>
-                                        @endif
-                                        @if($settings['api_key_in_db'])
-                                            <span class="ml-2 text-xs text-gray-500">(stored in database)</span>
-                                        @else
-                                            <span class="ml-2 text-xs text-gray-500">(from .env)</span>
-                                        @endif
-                                    </span>
-                                </div>
-                                @if($settings['api_key_in_db'])
-                                    <label class="flex items-center cursor-pointer">
-                                        <input type="checkbox" name="remove_api_key" value="1" class="form-checkbox mr-2">
-                                        <span class="text-sm text-red-600 dark:text-red-400">Remove</span>
-                                    </label>
-                                @endif
-                            </div>
-                        @endif
-                        
-                        <div>
-                            <label class="form-label">
-                                {{ $settings['api_key_set'] ? 'Update API Key' : 'Enter API Key' }}
-                            </label>
-                            <div class="relative">
-                                <input :type="showKey ? 'text' : 'password'" 
-                                       name="api_key" 
-                                       value="" 
-                                       class="form-input pr-10" 
-                                       placeholder="sk-ant-api03-xxxxxxxxxxxxx"
-                                       autocomplete="off"
-                                       data-1p-ignore
-                                       data-lpignore="true"
-                                       data-form-type="other"
-                                       data-bwignore="true"
-                                       role="presentation"
-                                       readonly
-                                       onfocus="this.removeAttribute('readonly');">
-                                <button type="button" 
-                                        @click="showKey = !showKey"
-                                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
-                                    <i :class="showKey ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-                                </button>
-                            </div>
-                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                @if($settings['api_key_set'])
-                                    Leave blank to keep existing key. Enter a new key to update.
-                                @else
-                                    Starts with "sk-ant-". You can also set ANTHROPIC_API_KEY in your .env file.
-                                @endif
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Model Settings -->
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6" x-data="modelFetcher()">
                     <div class="flex items-center justify-between mb-4">
@@ -158,7 +230,7 @@
                     
                     <div class="space-y-4">
                         <div>
-                            <label class="form-label">Claude Model</label>
+                            <label class="form-label">Model</label>
                             <select name="model" class="form-select">
                                 @foreach($settings['available_models'] as $model)
                                     <option value="{{ $model }}" {{ $settings['model'] === $model ? 'selected' : '' }}>
@@ -167,7 +239,7 @@
                                 @endforeach
                             </select>
                             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                Select the Claude model to use for content generation. Click "Fetch Latest" to refresh available models.
+                                Select the model to use for content generation. Click "Fetch Latest" to refresh available models.
                             </p>
                         </div>
 
@@ -324,11 +396,11 @@
                 <ol class="space-y-2 text-sm text-blue-800 dark:text-blue-200">
                     <li class="flex">
                         <span class="font-bold mr-2">1.</span>
-                        <span>Get an API key from <a href="https://console.anthropic.com/" target="_blank" class="underline">console.anthropic.com</a></span>
+                        <span>Choose a provider above (Anthropic or OpenRouter)</span>
                     </li>
                     <li class="flex">
                         <span class="font-bold mr-2">2.</span>
-                        <span>Enter your API key in the form above</span>
+                        <span>Enter your API key for the chosen provider</span>
                     </li>
                     <li class="flex">
                         <span class="font-bold mr-2">3.</span>
@@ -336,45 +408,47 @@
                     </li>
                     <li class="flex">
                         <span class="font-bold mr-2">4.</span>
-                        <span>Customize model and prompts as needed</span>
+                        <span>Select a model and save</span>
                     </li>
                 </ol>
             </div>
 
-            <!-- Pricing Info -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                    <i class="fas fa-dollar-sign mr-2"></i>Pricing (Dec 2024)
-                </h3>
-                <div class="space-y-3 text-sm">
-                    <div>
-                        <p class="font-semibold text-gray-900 dark:text-white">Claude 3.5 Sonnet</p>
-                        <p class="text-gray-600 dark:text-gray-400">$3 / 1M input tokens</p>
-                        <p class="text-gray-600 dark:text-gray-400">$15 / 1M output tokens</p>
-                    </div>
-                    <div class="text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-3">
-                        Typical blog post: ~$0.02-$0.05<br>
-                        SEO metadata: ~$0.001-$0.005
-                    </div>
-                </div>
-            </div>
-
-            <!-- Documentation -->
+            <!-- Provider Links -->
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                     <i class="fas fa-book mr-2"></i>Documentation
                 </h3>
                 <ul class="space-y-2 text-sm">
+                    <li class="font-semibold text-gray-700 dark:text-gray-300">Anthropic</li>
                     <li>
-                        <a href="https://docs.anthropic.com/claude/docs" target="_blank" 
+                        <a href="https://docs.anthropic.com/claude/docs" target="_blank"
                            class="text-blue-600 dark:text-blue-400 hover:underline">
                             Claude API Docs
                         </a>
                     </li>
                     <li>
-                        <a href="https://console.anthropic.com/settings/keys" target="_blank" 
+                        <a href="https://console.anthropic.com/settings/keys" target="_blank"
                            class="text-blue-600 dark:text-blue-400 hover:underline">
-                            Manage API Keys
+                            Get Anthropic API Key
+                        </a>
+                    </li>
+                    <li class="font-semibold text-gray-700 dark:text-gray-300 pt-2">OpenRouter</li>
+                    <li>
+                        <a href="https://openrouter.ai/docs" target="_blank"
+                           class="text-blue-600 dark:text-blue-400 hover:underline">
+                            OpenRouter Docs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://openrouter.ai/keys" target="_blank"
+                           class="text-blue-600 dark:text-blue-400 hover:underline">
+                            Get OpenRouter API Key
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://openrouter.ai/models" target="_blank"
+                           class="text-blue-600 dark:text-blue-400 hover:underline">
+                            Browse OpenRouter Models
                         </a>
                     </li>
                 </ul>
@@ -393,13 +467,16 @@ document.addEventListener('alpine:init', () => {
             this.isFetching = true;
             
             try {
+                const provider = document.querySelector('input[name="provider"]:checked')?.value || '{{ $settings['provider'] }}';
+
                 const response = await fetch('{{ route("admin.ai.fetch-models") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                         'Accept': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify({ provider })
                 });
 
                 const data = await response.json();

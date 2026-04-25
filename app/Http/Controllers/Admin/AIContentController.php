@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GenerateAIContentRequest;
 use App\Models\AIGeneration;
-use App\Services\AI\ClaudeAIService;
+use App\Services\AI\Contracts\AIServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 class AIContentController extends Controller
 {
-    public function __construct(protected ClaudeAIService $claudeService) {}
+    public function __construct(protected AIServiceInterface $aiService) {}
 
     /**
      * Generate AI content based on user prompt.
@@ -22,7 +22,7 @@ class AIContentController extends Controller
         $hasAIGenerationTable = Schema::hasTable('ai_generations');
 
         // Check if AI service is available
-        if (! $this->claudeService->isAvailable()) {
+        if (! $this->aiService->isAvailable()) {
             return response()->json([
                 'success' => false,
                 'error' => 'AI content generation is not available. Please check your configuration.',
@@ -65,15 +65,15 @@ class AIContentController extends Controller
 
         try {
             $generatedContent = match ($contentType) {
-                'blog_post' => $this->claudeService->generateBlogPost($prompt, $customSystemPrompt),
-                'landing_page' => $this->claudeService->generateLandingPage($prompt, $customSystemPrompt),
-                'home_page' => $this->claudeService->generateHomePage($prompt, $customSystemPrompt),
-                'brand_positioning' => $this->claudeService->generateBrandPositioning($prompt, $customSystemPrompt),
-                'content_improvement' => $this->claudeService->improveContent(
+                'blog_post' => $this->aiService->generateBlogPost($prompt, $customSystemPrompt),
+                'landing_page' => $this->aiService->generateLandingPage($prompt, $customSystemPrompt),
+                'home_page' => $this->aiService->generateHomePage($prompt, $customSystemPrompt),
+                'brand_positioning' => $this->aiService->generateBrandPositioning($prompt, $customSystemPrompt),
+                'content_improvement' => $this->aiService->improveContent(
                     $validated['existing_content'] ?? '',
                     $customSystemPrompt
                 ),
-                'industry_variant' => $this->claudeService->generateIndustryVariant(
+                'industry_variant' => $this->aiService->generateIndustryVariant(
                     $validated['existing_content'] ?? '',
                     $validated['industry'] ?? '',
                     $customSystemPrompt
@@ -88,10 +88,8 @@ class AIContentController extends Controller
                     'type' => $contentType,
                     'prompt' => $prompt,
                     'generated_content' => $generatedContent,
-                    'model' => config('ai.anthropic.model'),
+                    'model' => $this->aiService->getUsageStats()['model'],
                     'status' => 'success',
-                    // Token counts would need to be extracted from API response
-                    // For now, we'll update this when we capture usage data
                 ]);
             }
 
@@ -114,7 +112,7 @@ class AIContentController extends Controller
                     'type' => $contentType,
                     'prompt' => $prompt,
                     'generated_content' => '',
-                    'model' => config('ai.anthropic.model'),
+                    'model' => $this->aiService->getUsageStats()['model'],
                     'status' => 'error',
                     'error_message' => $e->getMessage(),
                 ]);
@@ -149,7 +147,7 @@ class AIContentController extends Controller
         $hasAIGenerationTable = Schema::hasTable('ai_generations');
 
         // Check if AI service is available
-        if (! $this->claudeService->isAvailable()) {
+        if (! $this->aiService->isAvailable()) {
             return response()->json([
                 'success' => false,
                 'error' => 'AI content generation is not available. Please check your configuration.',
@@ -168,7 +166,7 @@ class AIContentController extends Controller
         }
 
         try {
-            $seoData = $this->claudeService->generateSEOMetadata(
+            $seoData = $this->aiService->generateSEOMetadata(
                 $title,
                 $content,
                 $validated['custom_system_prompt'] ?? null
@@ -181,7 +179,7 @@ class AIContentController extends Controller
                     'type' => 'seo_metadata',
                     'prompt' => "Generate SEO for: {$title}",
                     'generated_content' => json_encode($seoData),
-                    'model' => config('ai.anthropic.model'),
+                    'model' => $this->aiService->getUsageStats()['model'],
                     'status' => 'success',
                 ]);
             }
@@ -202,7 +200,7 @@ class AIContentController extends Controller
                     'type' => 'seo_metadata',
                     'prompt' => "Generate SEO for: {$title}",
                     'generated_content' => '',
-                    'model' => config('ai.anthropic.model'),
+                    'model' => $this->aiService->getUsageStats()['model'],
                     'status' => 'error',
                     'error_message' => $e->getMessage(),
                 ]);

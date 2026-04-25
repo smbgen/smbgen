@@ -14,7 +14,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(\App\Services\AI\Contracts\AIServiceInterface::class, function () {
+            $provider = \App\Models\BusinessSetting::get('ai_provider', config('ai.provider', 'anthropic'));
+
+            return match ($provider) {
+                'openrouter' => new \App\Services\AI\OpenRouterAIService,
+                default => new \App\Services\AI\ClaudeAIService,
+            };
+        });
     }
 
     /**
