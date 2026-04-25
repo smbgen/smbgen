@@ -66,7 +66,9 @@ class DemoSeeder extends Seeder
 
         LeadForm::where('email', 'like', '%@demo.local')->delete();
 
-        CmsPage::where('slug', 'like', 'demo-%')->delete();
+        CmsPage::where('slug', 'like', 'demo-%')
+            ->orWhere('slug', 'home')
+            ->delete();
 
         User::whereIn('email', $demoEmails)->delete();
 
@@ -75,7 +77,7 @@ class DemoSeeder extends Seeder
 
     private function seedBusinessSettings(): void
     {
-        BusinessSetting::set('company_name', 'Acme Services Co.', 'string');
+        BusinessSetting::set('company_name', 'Construction Co', 'string');
     }
 
     /**
@@ -305,11 +307,11 @@ class DemoSeeder extends Seeder
     {
         $pages = [
             [
-                'slug' => 'demo-home',
-                'title' => 'Welcome to Acme Services',
-                'body_content' => '<div class="container mx-auto px-6 py-16 text-center"><h1 class="text-5xl font-bold mb-6">Professional Services, Simplified</h1><p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">Acme Services Co. delivers expert consulting, seamless booking, and transparent billing — all in one place.</p><a href="/book" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-colors">Book a Free Consultation</a></div>',
-                'cta_text' => 'Book Now',
-                'cta_url' => '/book',
+                'slug' => 'home',
+                'title' => 'Construction Co - Built Right, Delivered On Time',
+                'body_content' => '<section class="bg-slate-900 text-white"><div class="mx-auto max-w-6xl px-6 py-20"><p class="text-sm uppercase tracking-[0.2em] text-amber-300">General Contractor · Commercial & Residential</p><h1 class="mt-4 text-4xl font-bold leading-tight md:text-6xl">Trusted Construction Partners for Projects That Cannot Slip</h1><p class="mt-6 max-w-3xl text-lg text-slate-200">Construction Co helps owners, developers, and property managers deliver high-quality builds with clear communication, disciplined schedules, and zero-surprise reporting.</p><div class="mt-8 flex flex-wrap gap-4"><a href="/contact" class="rounded-lg bg-amber-500 px-6 py-3 font-semibold text-slate-900 hover:bg-amber-400">Request a Site Walk</a><a href="/services" class="rounded-lg border border-slate-500 px-6 py-3 font-semibold text-white hover:bg-slate-800">View Services</a></div></div></section><section class="mx-auto grid max-w-6xl gap-6 px-6 py-14 md:grid-cols-3"><article class="rounded-xl border border-slate-200 p-6"><h2 class="text-xl font-semibold text-slate-900">Pre-Construction Planning</h2><p class="mt-3 text-slate-600">Scope alignment, budget modelling, and permitting coordination to reduce change orders before ground breaks.</p></article><article class="rounded-xl border border-slate-200 p-6"><h2 class="text-xl font-semibold text-slate-900">Ground-Up Construction</h2><p class="mt-3 text-slate-600">End-to-end project execution with dedicated supervision, milestone tracking, and quality control on every phase.</p></article><article class="rounded-xl border border-slate-200 p-6"><h2 class="text-xl font-semibold text-slate-900">Renovations & Tenant Improvements</h2><p class="mt-3 text-slate-600">Fast-turn interior upgrades designed to minimize downtime and keep your operations moving.</p></article></section><section class="bg-slate-50"><div class="mx-auto max-w-6xl px-6 py-12"><h3 class="text-2xl font-bold text-slate-900">Why teams choose Construction Co</h3><ul class="mt-4 grid gap-3 text-slate-700 md:grid-cols-2"><li>• Weekly owner updates with photo logs and schedule status</li><li>• Dedicated project manager and site superintendent</li><li>• Safety-first culture backed by documented procedures</li><li>• Transparent pricing and disciplined change management</li></ul></div></section>',
+                'cta_text' => 'Request a Site Walk',
+                'cta_url' => '/contact',
                 'is_published' => true,
             ],
             [
@@ -373,7 +375,7 @@ class DemoSeeder extends Seeder
      */
     private function seedLeads(\Illuminate\Database\Eloquent\Collection $pages): void
     {
-        $homePage = $pages->get('demo-home');
+        $homePage = $pages->get('home');
         $servicesPage = $pages->get('demo-services');
 
         $leads = [
@@ -386,11 +388,11 @@ class DemoSeeder extends Seeder
                 'notification_email' => DemoController::DEMO_ADMIN_EMAIL,
                 'ip_address' => '203.0.113.10',
                 'user_agent' => 'Mozilla/5.0 Demo Browser',
-                'referer' => 'https://demo.example.test/demo-home',
+                'referer' => 'https://demo.example.test/home',
                 'form_data' => [
-                    'company' => 'Morgan Creative Studio',
+                    'company' => 'Morgan Property Group',
                     'timeline' => 'within_30_days',
-                    'budget' => '$5k-$10k',
+                    'budget' => '$100k-$250k',
                 ],
                 'created_at' => now()->subDays(5),
             ],
@@ -420,10 +422,10 @@ class DemoSeeder extends Seeder
                 'notification_email' => DemoController::DEMO_ADMIN_EMAIL,
                 'ip_address' => '203.0.113.35',
                 'user_agent' => 'Mozilla/5.0 Demo Browser',
-                'referer' => 'https://linkedin.com/company/acme-services-demo',
+                'referer' => 'https://linkedin.com/company/construction-co-demo',
                 'form_data' => [
-                    'company' => 'Carter Logistics',
-                    'annual_revenue' => '$2M-$5M',
+                    'company' => 'Carter Warehousing',
+                    'annual_revenue' => '$10M-$20M',
                     'needs_follow_up' => true,
                 ],
                 'created_at' => now()->subDay(),
