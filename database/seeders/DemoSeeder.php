@@ -211,8 +211,8 @@ class DemoSeeder extends Seeder
                 'invoice_id' => $invoice->id,
                 'description' => $data['memo'],
                 'quantity' => 1,
-                'unit_price' => $data['amount'],
-                'amount' => $data['amount'],
+                'unit_amount' => $data['amount'],
+                'total_amount' => $data['amount'],
             ]);
         }
 
@@ -237,8 +237,8 @@ class DemoSeeder extends Seeder
                 'invoice_id' => $invoice->id,
                 'description' => $data['memo'],
                 'quantity' => 1,
-                'unit_price' => $data['amount'],
-                'amount' => $data['amount'],
+                'unit_amount' => $data['amount'],
+                'total_amount' => $data['amount'],
             ]);
         }
     }
