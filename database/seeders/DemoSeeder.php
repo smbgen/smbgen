@@ -7,6 +7,7 @@ use App\Models\BlogPost;
 use App\Models\Booking;
 use App\Models\BusinessSetting;
 use App\Models\Client;
+use App\Models\CmsFooterSetting;
 use App\Models\CmsNavbarSetting;
 use App\Models\CmsPage;
 use App\Models\Invoice;
@@ -28,6 +29,7 @@ class DemoSeeder extends Seeder
         $this->cleanUp();
         $this->seedBusinessSettings();
         $this->seedCmsNavbarSettings();
+        $this->seedCmsFooterSettings();
 
         $adminUser = $this->seedUsers();
         $clientUser = $this->seedClientUser();
@@ -68,8 +70,8 @@ class DemoSeeder extends Seeder
 
         LeadForm::where('email', 'like', '%@demo.local')->delete();
 
-        CmsPage::where('slug', 'like', 'demo-%')
-            ->orWhere('slug', 'home')
+        CmsPage::whereIn('slug', ['home', 'about'])
+            ->orWhere('slug', 'like', 'demo-%')
             ->delete();
 
         User::whereIn('email', $demoEmails)->delete();
@@ -90,6 +92,23 @@ class DemoSeeder extends Seeder
             ['id' => 1],
             [
                 'logo_text' => $companyName,
+                'menu_items' => [
+                    ['label' => 'Home', 'url' => '/home', 'target' => '_self', 'order' => 1],
+                    ['label' => 'Services', 'url' => '/services', 'target' => '_self', 'order' => 2],
+                    ['label' => 'Contact', 'url' => '/contact', 'target' => '_self', 'order' => 3],
+                    ['label' => 'Book', 'url' => '/book', 'target' => '_self', 'order' => 4],
+                ],
+            ]
+        );
+    }
+
+    private function seedCmsFooterSettings(): void
+    {
+        CmsFooterSetting::query()->updateOrCreate(
+            ['id' => 1],
+            [
+                'use_default' => false,
+                'footer_html' => '<footer class="bg-white border-t border-gray-200"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"><div class="grid grid-cols-1 md:grid-cols-3 gap-8"><div><h3 class="text-lg font-semibold mb-4" style="color:#111827!important;">{{ $companyName }}</h3><p class="text-sm" style="color:#4b5563!important;">Construction management & project delivery</p></div><div><h3 class="text-lg font-semibold mb-4" style="color:#111827!important;">Quick Links</h3><ul class="space-y-2"><li><a href="/home" class="text-sm" style="color:#4b5563!important;">Home</a></li><li><a href="/services" class="text-sm" style="color:#4b5563!important;">Services</a></li><li><a href="/contact" class="text-sm" style="color:#4b5563!important;">Contact</a></li><li><a href="/book" class="text-sm" style="color:#4b5563!important;">Book Site Walk</a></li></ul></div><div><h3 class="text-lg font-semibold mb-4" style="color:#111827!important;">Connect</h3><p class="text-sm" style="color:#4b5563!important;">Ready to start your next project? Send us your scope and timeline.</p></div></div><div class="border-t border-gray-200 mt-8 pt-8 text-center"><p class="text-sm" style="color:#6b7280!important;">&copy; {{ date(\'Y\') }} {{ $companyName }}. All rights reserved.</p></div></div></footer>',
             ]
         );
     }
@@ -329,19 +348,11 @@ class DemoSeeder extends Seeder
                 'is_published' => true,
             ],
             [
-                'slug' => 'demo-about',
-                'title' => 'About Acme Services',
-                'body_content' => '<div class="container mx-auto px-6 py-16"><h1 class="text-4xl font-bold mb-6">About Us</h1><p class="text-lg text-gray-600 mb-4">Acme Services Co. has been helping small and medium businesses grow since 2015. Our team of consultants specialises in operational efficiency, financial planning, and digital transformation.</p><p class="text-lg text-gray-600">We believe great service starts with listening — that\'s why every engagement begins with a complimentary discovery call.</p></div>',
+                'slug' => 'about',
+                'title' => 'About Construction Co',
+                'body_content' => '<div class="container mx-auto px-6 py-16"><h1 class="text-4xl font-bold mb-6">About Construction Co</h1><p class="text-lg text-gray-600 mb-4">Construction Co delivers commercial and residential projects with a focus on schedule reliability, field safety, and transparent communication.</p><p class="text-lg text-gray-600">From pre-construction through closeout, our team works as an extension of your team to keep projects moving and stakeholders informed.</p></div>',
                 'cta_text' => 'Meet the Team',
                 'cta_url' => '/contact',
-                'is_published' => true,
-            ],
-            [
-                'slug' => 'demo-services',
-                'title' => 'Our Services',
-                'body_content' => '<div class="container mx-auto px-6 py-16"><h1 class="text-4xl font-bold mb-10">What We Offer</h1><div class="grid md:grid-cols-3 gap-8"><div class="p-6 border rounded-xl"><h2 class="text-xl font-semibold mb-3">Strategy Consulting</h2><p class="text-gray-600">Structured planning sessions to align your team and sharpen your growth strategy.</p></div><div class="p-6 border rounded-xl"><h2 class="text-xl font-semibold mb-3">Operations Review</h2><p class="text-gray-600">End-to-end audit of your workflows, identifying bottlenecks and quick wins.</p></div><div class="p-6 border rounded-xl"><h2 class="text-xl font-semibold mb-3">Financial Planning</h2><p class="text-gray-600">Cash flow modelling, forecasting, and scenario planning to keep you on track.</p></div></div></div>',
-                'cta_text' => 'Get Started',
-                'cta_url' => '/book',
                 'is_published' => true,
             ],
         ];
@@ -352,30 +363,8 @@ class DemoSeeder extends Seeder
                 'background_color' => 'bg-white',
                 'text_color' => 'text-gray-900',
                 'show_navbar' => true,
-                'has_form' => $page['slug'] !== 'demo-about',
-                'form_fields' => $page['slug'] === 'demo-about' ? null : [
-                    [
-                        'type' => 'text',
-                        'name' => 'name',
-                        'label' => 'Full Name',
-                        'placeholder' => 'Jordan Smith',
-                        'required' => true,
-                    ],
-                    [
-                        'type' => 'email',
-                        'name' => 'email',
-                        'label' => 'Work Email',
-                        'placeholder' => 'jordan@example.com',
-                        'required' => true,
-                    ],
-                    [
-                        'type' => 'textarea',
-                        'name' => 'message',
-                        'label' => 'What do you need help with?',
-                        'placeholder' => 'Tell us a bit about your goals.',
-                        'required' => true,
-                    ],
-                ],
+                'has_form' => false,
+                'form_fields' => null,
                 'form_submit_button_text' => 'Request Consultation',
                 'form_success_message' => 'Thanks for reaching out. We will follow up shortly.',
             ]));
@@ -390,7 +379,7 @@ class DemoSeeder extends Seeder
     private function seedLeads(\Illuminate\Database\Eloquent\Collection $pages): void
     {
         $homePage = $pages->get('home');
-        $servicesPage = $pages->get('demo-services');
+        $aboutPage = $pages->get('about');
 
         $leads = [
             [
@@ -411,7 +400,7 @@ class DemoSeeder extends Seeder
                 'created_at' => now()->subDays(5),
             ],
             [
-                'cms_page_id' => $servicesPage?->id,
+                'cms_page_id' => $aboutPage?->id,
                 'name' => 'Taylor Nguyen',
                 'email' => 'taylor.nguyen@demo.local',
                 'message' => 'Looking for an operations review and a repeatable client onboarding process for our team.',
@@ -419,7 +408,7 @@ class DemoSeeder extends Seeder
                 'notification_email' => DemoController::DEMO_ADMIN_EMAIL,
                 'ip_address' => '203.0.113.22',
                 'user_agent' => 'Mozilla/5.0 Demo Browser',
-                'referer' => 'https://demo.example.test/demo-services',
+                'referer' => 'https://demo.example.test/services',
                 'form_data' => [
                     'team_size' => '12',
                     'priority' => 'operations',
@@ -428,7 +417,7 @@ class DemoSeeder extends Seeder
                 'created_at' => now()->subDays(3),
             ],
             [
-                'cms_page_id' => $servicesPage?->id,
+                'cms_page_id' => null,
                 'name' => 'Riley Carter',
                 'email' => 'riley.carter@demo.local',
                 'message' => 'We are comparing providers and want a quote for ongoing financial planning support.',

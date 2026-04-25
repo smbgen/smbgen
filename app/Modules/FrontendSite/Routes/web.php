@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\ContactController;
 use App\Models\User;
 use App\Support\ModuleRegistry;
 use Illuminate\Support\Facades\Route;
@@ -63,30 +61,8 @@ Route::middleware('moduleEnabled:frontend_site')->group(function () {
         Route::get('/grow-referrals', fn () => view('frontend.solutions.grow-referrals'))->name('grow-referrals');
     });
 
-    Route::get('/contact', function () {
-        if (config('business.features.cms')) {
-            $contactPage = \App\Models\CmsPage::where('slug', 'contact')
-                ->where('is_published', true)
-                ->first();
-
-            if ($contactPage) {
-                return view('cms.show', ['page' => $contactPage]);
-            }
-        }
-
-        return view('contact');
-    })->name('contact');
-
-    Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
-
-    if (config('business.features.booking')) {
-        Route::get('/book', [BookingController::class, 'showWizard'])->name('booking.wizard');
-        Route::get('/book/availability', [BookingController::class, 'availability'])->name('booking.availability');
-        Route::post('/book', [BookingController::class, 'book'])->name('booking.book');
-        Route::get('/book/confirmation', [BookingController::class, 'confirmation'])->name('booking.confirmation');
-    }
-
 });
 
 // CMS public routes are registered in routes/web/content.php without the
 // moduleEnabled:frontend_site gate, so they work independently of this module.
+// Contact and booking public routes are registered in routes/web/public.php.

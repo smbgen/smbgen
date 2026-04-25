@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmailTrackingController;
 use App\Http\Controllers\LeadFormController;
 use App\Http\Controllers\PaymentController;
@@ -69,6 +71,29 @@ Route::get('/auth/google/callback', [AuthenticatedSessionController::class, 'han
     ->name('auth.google.callback');
 
 Route::post('/leadform', [LeadFormController::class, 'store'])->name('leadform.store');
+
+Route::get('/contact', function () {
+    if (config('business.features.cms')) {
+        $contactPage = \App\Models\CmsPage::where('slug', 'contact')
+            ->where('is_published', true)
+            ->first();
+
+        if ($contactPage) {
+            return view('cms.show', ['page' => $contactPage]);
+        }
+    }
+
+    return view('contact');
+})->name('contact');
+
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+if (config('business.features.booking')) {
+    Route::get('/book', [BookingController::class, 'showWizard'])->name('booking.wizard');
+    Route::get('/book/availability', [BookingController::class, 'availability'])->name('booking.availability');
+    Route::post('/book', [BookingController::class, 'book'])->name('booking.book');
+    Route::get('/book/confirmation', [BookingController::class, 'confirmation'])->name('booking.confirmation');
+}
 
 Route::post('/stripe/webhook', [PaymentController::class, 'webhook'])->name('stripe.webhook');
 Route::get('/pay', [PaymentController::class, 'collect'])->name('payment.collect');
