@@ -32,12 +32,12 @@
                     </div>
                 @endif
 
-                <form action="{{ route('cms.form.submit', $page->slug) }}" method="POST" class="space-y-6 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+                <form action="{{ route('cms.form.submit', $page->slug) }}" method="POST" class="space-y-6 bg-white p-8 rounded-lg shadow-lg border border-gray-200">
                     @csrf
 
                     @foreach($page->form_fields as $field)
                         <div>
-                            <label for="{{ $field['name'] }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label for="{{ $field['name'] }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ $field['label'] ?? ucfirst($field['name']) }}
                                 @if($field['required'] ?? false)
                                     <span class="text-red-500">*</span>
@@ -51,7 +51,7 @@
                                     rows="4"
                                     placeholder="{{ $field['placeholder'] ?? '' }}"
                                     {{ ($field['required'] ?? false) ? 'required' : '' }}
-                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white @error($field['name']) border-red-500 @enderror"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error($field['name']) border-red-500 @enderror"
                                 >{{ old($field['name']) }}</textarea>
 
                             @elseif($field['type'] === 'select')
@@ -59,7 +59,7 @@
                                     name="{{ $field['name'] }}" 
                                     id="{{ $field['name'] }}"
                                     {{ ($field['required'] ?? false) ? 'required' : '' }}
-                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white @error($field['name']) border-red-500 @enderror"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error($field['name']) border-red-500 @enderror"
                                 >
                                     <option value="">Select...</option>
                                     @if(!empty($field['options']))
@@ -84,7 +84,7 @@
                                                     {{ ($field['required'] ?? false) ? 'required' : '' }}
                                                     class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                                                 >
-                                                <span class="ml-2 text-gray-700 dark:text-gray-300">{{ trim($option) }}</span>
+                                                <span class="ml-2 text-gray-700">{{ trim($option) }}</span>
                                             </label>
                                         @endforeach
                                     @endif
@@ -101,7 +101,7 @@
                                         {{ ($field['required'] ?? false) ? 'required' : '' }}
                                         class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                                     >
-                                    <label for="{{ $field['name'] }}" class="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                    <label for="{{ $field['name'] }}" class="ml-2 text-sm text-gray-700">
                                         {{ $field['placeholder'] ?? $field['label'] ?? ucfirst($field['name']) }}
                                     </label>
                                 </div>
@@ -114,7 +114,7 @@
                                     value="{{ old($field['name']) }}"
                                     placeholder="{{ $field['placeholder'] ?? '' }}"
                                     {{ ($field['required'] ?? false) ? 'required' : '' }}
-                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white @error($field['name']) border-red-500 @enderror"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error($field['name']) border-red-500 @enderror"
                                 >
                             @endif
 
