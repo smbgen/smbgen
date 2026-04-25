@@ -7,6 +7,7 @@ use App\Models\BlogPost;
 use App\Models\Booking;
 use App\Models\BusinessSetting;
 use App\Models\Client;
+use App\Models\CmsNavbarSetting;
 use App\Models\CmsPage;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
@@ -26,6 +27,7 @@ class DemoSeeder extends Seeder
     {
         $this->cleanUp();
         $this->seedBusinessSettings();
+        $this->seedCmsNavbarSettings();
 
         $adminUser = $this->seedUsers();
         $clientUser = $this->seedClientUser();
@@ -78,6 +80,18 @@ class DemoSeeder extends Seeder
     private function seedBusinessSettings(): void
     {
         BusinessSetting::set('company_name', 'Construction Co', 'string');
+    }
+
+    private function seedCmsNavbarSettings(): void
+    {
+        $companyName = config('business.name', config('business.company_name', config('app.company_name', config('app.name'))));
+
+        CmsNavbarSetting::query()->updateOrCreate(
+            ['id' => 1],
+            [
+                'logo_text' => $companyName,
+            ]
+        );
     }
 
     /**
