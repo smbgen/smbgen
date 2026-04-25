@@ -38,6 +38,8 @@ return [
 
     'tenancy_enabled' => filter_var(env('TENANCY_ENABLED', false), FILTER_VALIDATE_BOOLEAN),
 
+    'demo_mode' => (bool) env('DEMO_MODE', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

@@ -22,6 +22,7 @@
     @stack('styles')
 </head>
 <body class="font-sans antialiased text-base" style="--primary-color: {{ config('business.branding.primary_color', '#3B82F6') }}; --secondary-color: {{ config('business.branding.secondary_color', '#8B5CF6') }};">
+    <x-demo-banner />
     <div class="flex min-h-screen flex-col lg:flex-row bg-white dark:bg-gray-950">
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 border-r transform transition-transform duration-300 -translate-x-full lg:static lg:translate-x-0 lg:relative flex flex-col" style="background-color: var(--bg-primary); border-color: var(--border-color);">
             <!-- Sidebar Header -->

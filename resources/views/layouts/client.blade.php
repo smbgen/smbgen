@@ -22,6 +22,7 @@
     @stack('styles')
 </head>
 <body class="font-sans antialiased text-base" style="--primary-color: {{ config('business.branding.primary_color', '#3B82F6') }}; --secondary-color: {{ config('business.branding.secondary_color', '#8B5CF6') }};">
+    <x-demo-banner />
     <div class="min-h-screen bg-white dark:bg-gray-950">
         <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
             <div class="page-shell">

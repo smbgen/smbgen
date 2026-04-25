@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\DemoController;
+
 require __DIR__.'/web/public.php';
 require __DIR__.'/auth.php';
 require __DIR__.'/web/super_admin.php';
 require __DIR__.'/web/debug.php';
 require __DIR__.'/web/trial.php';
+
+\Illuminate\Support\Facades\Route::get('/demo', [DemoController::class, 'landing'])->name('demo.landing');
+\Illuminate\Support\Facades\Route::post('/demo/login/{role}', [DemoController::class, 'login'])->name('demo.login');
 
 \Illuminate\Support\Facades\Route::middleware(['tenant', 'tenantOnly', 'tenantUser'])->group(function () {
     require __DIR__.'/web/client.php';

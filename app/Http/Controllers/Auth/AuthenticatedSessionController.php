@@ -87,6 +87,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+        if (config('app.demo_mode')) {
+            return redirect()->route('demo.landing');
+        }
+
         return redirect('/');
     }
 

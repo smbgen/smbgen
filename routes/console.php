@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Schedule;
 
 // Clean up expired password reset tokens daily at 2 AM
 Schedule::command('auth:clear-resets')->dailyAt('02:00');
+
+// Reset demo data every hour (only runs when DEMO_MODE=true)
+Schedule::command('app:demo-reset')->hourly();
