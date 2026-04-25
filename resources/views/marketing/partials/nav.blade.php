@@ -33,7 +33,7 @@
                     Dashboard &rarr;
                 </a>
             @else
-                <a href="{{ route('login') }}" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
+                <a href="https://smbgen-construction-co-demo.on-forge.com/demo" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
                     Give it a try
                 </a>
                 <a href="{{ route('register') }}" class="bg-blue-600 text-white text-sm font-bold px-4 py-2.5 rounded-lg hover:bg-blue-700 transition-colors">
@@ -74,7 +74,7 @@
                         Dashboard
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-medium text-gray-600 text-center py-2">Give it a try</a>
+                    <a href="https://smbgen-construction-co-demo.on-forge.com/demo" class="text-sm font-medium text-gray-600 text-center py-2">Give it a try</a>
                     <a href="{{ route('register') }}" class="bg-blue-600 text-white text-sm font-bold px-4 py-2.5 rounded-lg text-center">
                         Get started &rarr;
                     </a>
