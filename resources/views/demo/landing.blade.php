@@ -57,12 +57,12 @@
             @endif
 
             <!-- Role Selection Cards -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid items-stretch sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 <!-- Admin Card -->
-                <form method="POST" action="{{ route('demo.login', 'admin') }}">
+                <form method="POST" action="{{ route('demo.login', 'admin') }}" class="h-full">
                     @csrf
-                    <button type="submit" class="group w-full text-left rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-8 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200 cursor-pointer">
+                    <button type="submit" class="group h-full w-full text-left rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-8 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200 cursor-pointer flex flex-col">
                         <div class="mb-5">
                             <div class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/60 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -77,7 +77,7 @@
                         <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                             Explore the full admin panel — manage clients, bookings, invoices, content, and settings.
                         </p>
-                        <div class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:gap-2.5 transition-all">
+                        <div class="mt-auto pt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:gap-2.5 transition-all">
                             Enter Admin Panel
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -87,9 +87,9 @@
                 </form>
 
                 <!-- Client Card -->
-                <form method="POST" action="{{ route('demo.login', 'client') }}">
+                <form method="POST" action="{{ route('demo.login', 'client') }}" class="h-full">
                     @csrf
-                    <button type="submit" class="group w-full text-left rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-8 shadow-sm hover:shadow-md hover:border-violet-300 dark:hover:border-violet-600 transition-all duration-200 cursor-pointer">
+                    <button type="submit" class="group h-full w-full text-left rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-8 shadow-sm hover:shadow-md hover:border-violet-300 dark:hover:border-violet-600 transition-all duration-200 cursor-pointer flex flex-col">
                         <div class="mb-5">
                             <div class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400 group-hover:bg-violet-200 dark:group-hover:bg-violet-900/60 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -103,7 +103,7 @@
                         <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                             Experience the client portal — view invoices, messages, bookings, and your personal dashboard.
                         </p>
-                        <div class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-violet-600 dark:text-violet-400 group-hover:gap-2.5 transition-all">
+                        <div class="mt-auto pt-6 inline-flex items-center gap-1.5 text-sm font-medium text-violet-600 dark:text-violet-400 group-hover:gap-2.5 transition-all">
                             Enter Client Portal
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -113,7 +113,7 @@
                 </form>
 
                 <!-- Frontend Interfaces Card -->
-                <div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-8 shadow-sm hover:shadow-md hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-200">
+                <div class="h-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-8 shadow-sm hover:shadow-md hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-200 flex flex-col">
                     <div class="mb-5">
                         <div class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -125,10 +125,13 @@
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         View Frontend Interfaces
                     </h2>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6">
+                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                         Preview the public Contact, Book, and Pay experiences without entering a demo account.
                     </p>
-                    <div class="grid grid-cols-1 gap-3">
+                    <div class="mt-auto pt-6 grid grid-cols-1 gap-3">
+                        <a href="{{ url('/') }}" class="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200 dark:hover:bg-emerald-900/40">
+                            Open Home Interface
+                        </a>
                         <a href="{{ route('contact') }}" class="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200 dark:hover:bg-emerald-900/40">
                             Open Contact Interface
                         </a>
