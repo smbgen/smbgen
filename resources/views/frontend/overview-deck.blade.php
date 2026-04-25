@@ -1,14 +1,14 @@
 @extends('layouts.frontend')
 
-@section('title', 'SMBGen Overview Deck')
-@section('description', 'Local-only deep overview deck of the SMBGen platform with links to every major app area and feature set.')
+@section('title', 'SMBGEN Overview Deck')
+@section('description', 'Local-only deep overview deck of the SMBGEN platform with links to every major app area and feature set.')
 
 @php
     $sections = [
         [
             'id' => 'platform-core',
             'label' => 'Core Product',
-            'title' => 'SMBGen Core Operating Loop',
+            'title' => 'SMBGEN Core Operating Loop',
             'summary' => 'Lead capture to revenue to retention in one system layer: Contact, Book, Pay, Portal, CRM, and CMS.',
             'theme' => 'blue',
             'items' => [
@@ -159,8 +159,7 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <p class="text-[11px] uppercase tracking-[0.22em] text-blue-300 font-bold">Local-only walkthrough deck</p>
-                    <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-2">SMBGen Platform Overview</h1>
-                    <p class="text-slate-300 mt-3 max-w-3xl">A recordable, deep-link-first overview to walk through the complete product surface from top-level narrative to feature-level screens.</p>
+                    <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-2">SMBGEN Platform Overview</h1>
                 </div>
                 <div class="flex gap-2 flex-wrap md:justify-end">
                     <a href="#jump" class="px-4 py-2 rounded-lg border border-white/20 text-sm font-semibold text-slate-200 hover:bg-white/10 transition-colors">Jump Index</a>
