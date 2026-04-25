@@ -57,7 +57,7 @@
             @endif
 
             <!-- Role Selection Cards -->
-            <div class="grid sm:grid-cols-2 gap-6">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 <!-- Admin Card -->
                 <form method="POST" action="{{ route('demo.login', 'admin') }}">
@@ -111,6 +111,37 @@
                         </div>
                     </button>
                 </form>
+
+                <!-- Frontend Interfaces Card -->
+                <div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-8 shadow-sm hover:shadow-md hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-200">
+                    <div class="mb-5">
+                        <div class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 0119.5 19.5h-15a2.25 2.25 0 01-2.25-2.25V6.75z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 9h19.5" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                        View Frontend Interfaces
+                    </h2>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6">
+                        Preview the public Contact, Book, and Pay experiences without entering a demo account.
+                    </p>
+                    <div class="grid grid-cols-1 gap-3">
+                        <a href="{{ route('contact') }}" class="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200 dark:hover:bg-emerald-900/40">
+                            Open Contact Interface
+                        </a>
+                        @if(config('business.features.booking'))
+                            <a href="{{ route('booking.wizard') }}" class="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200 dark:hover:bg-emerald-900/40">
+                                Open Book Interface
+                            </a>
+                        @endif
+                        <a href="{{ route('payment.collect') }}" class="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200 dark:hover:bg-emerald-900/40">
+                            Open Pay Interface
+                        </a>
+                    </div>
+                </div>
 
             </div>
 

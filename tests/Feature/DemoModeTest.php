@@ -13,6 +13,7 @@ it('shows the demo landing page when demo mode is enabled', function (): void {
 
     $response->assertOk();
     $response->assertViewIs('demo.landing');
+    $response->assertSee('View Frontend Interfaces');
 });
 
 it('returns 404 for demo landing when demo mode is disabled', function (): void {
