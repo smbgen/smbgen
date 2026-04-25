@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CmsPage;
 use App\Models\User;
 use App\Support\ModuleRegistry;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,17 @@ Route::get('/', function () {
     }
 
     if (! auth()->check()) {
+        if (config('business.features.cms')) {
+            $homePage = CmsPage::query()
+                ->where('slug', 'home')
+                ->where('is_published', true)
+                ->first();
+
+            if ($homePage) {
+                return view('cms.show', ['page' => $homePage]);
+            }
+        }
+
         return redirect()->route('login');
     }
 
