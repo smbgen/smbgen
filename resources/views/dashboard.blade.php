@@ -168,7 +168,7 @@
                                 </span>
                             </div>
                             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                {{ $presentation->visible_deliverables_count }} visible {{ \Illuminate\Support\Str::plural('file', $presentation->visible_deliverables_count) }}
+                                {{ $presentation->visible_portal_files_count }} visible {{ \Illuminate\Support\Str::plural('file', $presentation->visible_portal_files_count) }}
                             </p>
                         </div>
 

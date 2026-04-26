@@ -198,3 +198,46 @@ it('forbids clients from opening another clients presentation files', function (
 
     $response->assertForbidden();
 });
+
+it('shows portal packages when promoted files are not deliverables', function (): void {
+    $package = Package::create([
+        'name' => 'Research Package',
+        'client_id' => $this->client->id,
+        'created_by_user_id' => $this->adminUser->id,
+        'status' => 'ready',
+        'source' => 'zip_upload',
+        'portal_enabled' => true,
+    ]);
+
+    $file = PackageFile::create([
+        'package_id' => $package->id,
+        'original_name' => 'research.md',
+        'display_name' => 'Research Notes',
+        'type' => 'MARKDOWN_RESEARCH',
+        'role' => 'research',
+        'storage_path' => 'packages/'.$this->client->id.'/research.md',
+        'storage_disk' => 'private',
+        'size_bytes' => 512,
+        'portal_promoted' => true,
+    ]);
+
+    Storage::disk('private')->put($file->storage_path, '# Research Notes');
+
+    $indexResponse = $this->actingAs($this->clientUser)
+        ->get(route('client.presentations.index'));
+
+    $indexResponse->assertOk();
+    $indexResponse->assertSee('Research Package');
+
+    $showResponse = $this->actingAs($this->clientUser)
+        ->get(route('client.presentations.show', $package));
+
+    $showResponse->assertOk();
+    $showResponse->assertSee('Research Notes');
+
+    $previewResponse = $this->actingAs($this->clientUser)
+        ->get(route('client.presentations.files.preview', [$package, $file]));
+
+    $previewResponse->assertOk();
+    $previewResponse->assertSee('Research Notes', false);
+});

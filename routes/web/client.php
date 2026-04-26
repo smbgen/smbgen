@@ -61,9 +61,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             $presentations = Package::query()
                 ->visibleInPortalForClient($client)
                 ->withCount([
-                    'files as visible_deliverables_count' => function ($query): void {
-                        $query->where('role', 'deliverable')
-                            ->where('portal_promoted', true);
+                    'files as visible_portal_files_count' => function ($query): void {
+                        $query->where('portal_promoted', true);
                     },
                 ])
                 ->latest()

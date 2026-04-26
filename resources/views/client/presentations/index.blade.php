@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="mt-4 flex items-center justify-between text-sm">
-                        <span class="text-gray-700 dark:text-gray-300">{{ $package->visible_deliverables_count }} visible {{ \Illuminate\Support\Str::plural('file', $package->visible_deliverables_count) }}</span>
+                        <span class="text-gray-700 dark:text-gray-300">{{ $package->visible_portal_files_count }} visible {{ \Illuminate\Support\Str::plural('file', $package->visible_portal_files_count) }}</span>
                         <span class="font-medium text-indigo-600 dark:text-indigo-300">Open</span>
                     </div>
                 </a>

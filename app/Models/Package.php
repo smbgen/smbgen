@@ -43,10 +43,9 @@ class Package extends Model
         return $this->hasMany(PackageFile::class)->where('role', 'deliverable')->orderBy('sort_order');
     }
 
-    public function promotedDeliverables(): HasMany
+    public function promotedPortalFiles(): HasMany
     {
         return $this->hasMany(PackageFile::class)
-            ->where('role', 'deliverable')
             ->where('portal_promoted', true)
             ->orderBy('sort_order')
             ->orderBy('id');
@@ -73,8 +72,7 @@ class Package extends Model
             ->where('client_id', $client->id)
             ->where('portal_enabled', true)
             ->whereHas('files', function (Builder $query): void {
-                $query->where('role', 'deliverable')
-                    ->where('portal_promoted', true);
+                $query->where('portal_promoted', true);
             });
     }
 

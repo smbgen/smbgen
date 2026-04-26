@@ -19,9 +19,8 @@ class ClientPresentationController extends Controller
         $packages = Package::query()
             ->visibleInPortalForClient($client)
             ->withCount([
-                'files as visible_deliverables_count' => function ($query): void {
-                    $query->where('role', 'deliverable')
-                        ->where('portal_promoted', true);
+                'files as visible_portal_files_count' => function ($query): void {
+                    $query->where('portal_promoted', true);
                 },
             ])
             ->latest()
@@ -36,7 +35,7 @@ class ClientPresentationController extends Controller
 
         abort_if($package->client_id !== $client->id || ! $package->portal_enabled, 403);
 
-        $visibleFiles = $package->promotedDeliverables()->get();
+        $visibleFiles = $package->promotedPortalFiles()->get();
 
         abort_if($visibleFiles->isEmpty(), 403);
 
@@ -49,7 +48,7 @@ class ClientPresentationController extends Controller
 
         abort_if($package->client_id !== $client->id || ! $package->portal_enabled, 403);
         abort_if($file->package_id !== $package->id, 403);
-        abort_if($file->role !== 'deliverable' || ! $file->portal_promoted, 403);
+        abort_if(! $file->portal_promoted, 403);
 
         $disk = $file->storage_disk ?: 'private';
         $contents = Storage::disk($disk)->get($file->storage_path);
