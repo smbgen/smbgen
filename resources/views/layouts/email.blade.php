@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @php
+        $brandName = config('business.name')
+            ?: config('business.company_name')
+            ?: config('app.company_name', config('app.name', 'smbgen'));
+    @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name') }}</title>
+    <title>{{ $brandName }}</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -110,7 +115,7 @@
 <body>
     <div class="email-wrapper">
         <div class="email-header">
-            <h1>{{ config('business.company_name') ?? config('app.name') }}</h1>
+            <h1>{{ $brandName }}</h1>
         </div>
         
         <div class="email-body">
@@ -118,7 +123,7 @@
         </div>
         
         <div class="email-footer">
-            <p style="font-weight: 600; color: #1f2937; margin-bottom: 10px;">{{ config('business.company_name') ?? config('app.name') }}</p>
+            <p style="font-weight: 600; color: #1f2937; margin-bottom: 10px;">{{ $brandName }}</p>
             <p>&copy; {{ date('Y') }} All rights reserved.</p>
             <p style="margin-top: 15px;">
                 <a href="{{ config('app.url') }}">Visit our website</a>

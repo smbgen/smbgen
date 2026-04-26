@@ -1,8 +1,14 @@
 @extends('layouts.email')
 
 @section('content')
+    @php
+        $brandName = config('business.name')
+            ?: config('business.company_name')
+            ?: config('app.company_name', config('app.name', 'smbgen'));
+    @endphp
+
     <h2 style="margin-top: 0; color: #1e40af;">Hello {{ $clientName }},</h2>
-    <p>Welcome to {{ config('app.name') }}! Your client portal account has been created.</p>
+    <p>Welcome to {{ $brandName }}! Your client portal account has been created.</p>
 
     <p style="margin: 30px 0;">
         <strong>Your Email:</strong> {{ $emailAddress }}
@@ -23,6 +29,6 @@
         This link will expire in 60 minutes. If you didn't request this account or need assistance, please contact our support team.
     </p>
 
-    <p>Thanks,<br/>The {{ config('business.company_name') ?? config('app.name') }} Team</p>
+    <p>Thanks,<br/>The {{ $brandName }} Team</p>
 @endsection
 
