@@ -273,7 +273,6 @@
                         </div>
                     @endif
 
-                    <x-flash-messages />
                     @yield('content')
                 </div>
             </main>
