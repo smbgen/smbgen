@@ -145,6 +145,46 @@
         </div>
     </div>
 
+    <div class="card p-6">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+                <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100">Client Presentations</h2>
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Portal-ready presentations and deliverables assigned to your account.</p>
+            </div>
+            <a href="{{ route('client.presentations.index') }}" class="btn-secondary inline-flex items-center justify-center">
+                View All Presentations
+            </a>
+        </div>
+
+        <div class="mt-5 space-y-3">
+            @forelse($presentations as $presentation)
+                <a href="{{ route('client.presentations.show', $presentation) }}" class="block rounded-xl border border-gray-200 p-4 transition hover:border-indigo-300 hover:bg-indigo-50/40 dark:border-gray-700 dark:hover:border-indigo-700 dark:hover:bg-indigo-900/10">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">{{ $presentation->name }}</h3>
+                                <span class="inline-flex rounded-full px-2.5 py-1 text-xs font-semibold {{ $presentation->status_badge_class }}">
+                                    {{ ucfirst($presentation->status) }}
+                                </span>
+                            </div>
+                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                                {{ $presentation->visible_deliverables_count }} visible {{ \Illuminate\Support\Str::plural('file', $presentation->visible_deliverables_count) }}
+                            </p>
+                        </div>
+
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
+                            Updated {{ $presentation->updated_at->format('M j, Y') }}
+                        </div>
+                    </div>
+                </a>
+            @empty
+                <div class="rounded-xl border border-dashed border-gray-300 p-6 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
+                    No presentations are available in your portal yet.
+                </div>
+            @endforelse
+        </div>
+    </div>
+
     <!-- Service Menu and Tier Selection -->
     @if($showSmbgenServiceMenu)
     <details class="card p-6 md:p-8">

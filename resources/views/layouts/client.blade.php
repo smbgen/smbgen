@@ -34,6 +34,7 @@
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             @auth
                                 <x-navigation.top-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" label="Dashboard" />
+                                <x-navigation.top-link :href="route('client.presentations.index')" :active="request()->routeIs('client.presentations.*')" label="Presentations" />
                             @endauth
                         </div>
                     </div>
@@ -68,6 +69,7 @@
                 <div class="pt-2 pb-3 space-y-1">
                     @auth
                         <a href="{{ route('dashboard') }}" class="mobile-nav-link">Dashboard</a>
+                        <a href="{{ route('client.presentations.index') }}" class="mobile-nav-link">Presentations</a>
                         <a href="{{ route('messages.index') }}" class="mobile-nav-link">Messages</a>
                         <form method="POST" action="{{ route('logout') }}" class="mt-2">
                             @csrf

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -42,6 +43,15 @@ class Package extends Model
         return $this->hasMany(PackageFile::class)->where('role', 'deliverable')->orderBy('sort_order');
     }
 
+    public function promotedDeliverables(): HasMany
+    {
+        return $this->hasMany(PackageFile::class)
+            ->where('role', 'deliverable')
+            ->where('portal_promoted', true)
+            ->orderBy('sort_order')
+            ->orderBy('id');
+    }
+
     public function researchFiles(): HasMany
     {
         return $this->hasMany(PackageFile::class)->where('role', 'research')->orderBy('sort_order');
@@ -55,6 +65,17 @@ class Package extends Model
     public function emailTemplates(): HasMany
     {
         return $this->hasMany(PackageFile::class)->where('role', 'email_template')->orderBy('sort_order');
+    }
+
+    public function scopeVisibleInPortalForClient(Builder $query, Client $client): Builder
+    {
+        return $query
+            ->where('client_id', $client->id)
+            ->where('portal_enabled', true)
+            ->whereHas('files', function (Builder $query): void {
+                $query->where('role', 'deliverable')
+                    ->where('portal_promoted', true);
+            });
     }
 
     public function getStatusBadgeClassAttribute(): string

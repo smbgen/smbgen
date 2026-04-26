@@ -3,10 +3,13 @@
 use App\Http\Controllers\AISEOController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ClientFileController;
+use App\Http\Controllers\ClientPresentationController;
 use App\Http\Controllers\CyberAuditController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PortalServiceMenuController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Client;
+use App\Models\Package;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -51,8 +54,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ];
         }
 
-        return view('dashboard', compact('messages', 'unreadCount', 'recentInvoices', 'workspace'));
+        $presentations = collect();
+        $client = Client::where('email', $user->email)->first();
+
+        if ($client) {
+            $presentations = Package::query()
+                ->visibleInPortalForClient($client)
+                ->withCount([
+                    'files as visible_deliverables_count' => function ($query): void {
+                        $query->where('role', 'deliverable')
+                            ->where('portal_promoted', true);
+                    },
+                ])
+                ->latest()
+                ->take(3)
+                ->get();
+        }
+
+        return view('dashboard', compact('messages', 'unreadCount', 'recentInvoices', 'workspace', 'presentations'));
     })->name('dashboard');
+
+    Route::get('/presentations', [ClientPresentationController::class, 'index'])->name('client.presentations.index');
+    Route::get('/presentations/{package}', [ClientPresentationController::class, 'show'])->name('client.presentations.show');
+    Route::get('/presentations/{package}/files/{file}/preview', [ClientPresentationController::class, 'previewFile'])
+        ->name('client.presentations.files.preview');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
