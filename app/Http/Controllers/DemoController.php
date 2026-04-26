@@ -17,9 +17,15 @@ class DemoController extends Controller
     /**
      * Show the public demo landing page.
      */
-    public function landing(): View
+    public function landing(Request $request): View
     {
         abort_unless(config('app.demo_mode'), 404);
+
+        if (Auth::check()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
 
         return view('demo.landing');
     }
@@ -30,6 +36,13 @@ class DemoController extends Controller
     public function login(Request $request, string $role): RedirectResponse
     {
         abort_unless(config('app.demo_mode'), 404);
+
+        if (Auth::check()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
+
         $email = match ($role) {
             'admin' => self::DEMO_ADMIN_EMAIL,
             'client' => self::DEMO_CLIENT_EMAIL,
