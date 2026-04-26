@@ -30,7 +30,7 @@ class PackageController extends Controller
         }
 
         $packages = $query->paginate(20)->withQueryString();
-        $clients = Client::orderBy('name')->get(['id', 'name']);
+        $clients = Client::orderBy('name')->get(['id', 'name', 'email']);
 
         return view('admin.packages.index', compact('packages', 'clients'));
     }
@@ -40,7 +40,7 @@ class PackageController extends Controller
      */
     public function create(Request $request)
     {
-        $clients = Client::where('is_active', true)->orderBy('name')->get(['id', 'name']);
+        $clients = Client::where('is_active', true)->orderBy('name')->get(['id', 'name', 'email']);
         $selectedClient = $request->filled('client_id')
             ? Client::find($request->client_id)
             : null;
