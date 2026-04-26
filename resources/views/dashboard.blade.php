@@ -147,23 +147,29 @@
 
     <!-- Service Menu and Tier Selection -->
     @if($showSmbgenServiceMenu)
-    <div class="card p-6 md:p-8">
-        <div class="flex flex-col gap-2 mb-6">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">smbgen Service Menu</h2>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-                Toggle the services you want to engage with, then choose the account tier that best fits your business.
-            </p>
-        </div>
-
-        @if (session('status'))
-            <div class="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-800 dark:border-green-800 dark:bg-green-900/30 dark:text-green-200">
-                {{ session('status') }}
+    <details class="card p-6 md:p-8">
+        <summary class="cursor-pointer list-none">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex flex-col gap-2">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">SMBGEN Service Menu</h2>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        Toggle services and choose the account tier that fits your business.
+                    </p>
+                </div>
+                <span class="text-sm font-semibold text-indigo-600 dark:text-indigo-300">Expand</span>
             </div>
-        @endif
+        </summary>
 
-        <form method="POST" action="{{ route('portal.service-menu.update') }}" class="space-y-8">
-            @csrf
-            @method('PATCH')
+        <div class="mt-6">
+            @if (session('status'))
+                <div class="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-800 dark:border-green-800 dark:bg-green-900/30 dark:text-green-200">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('portal.service-menu.update') }}" class="space-y-8">
+                @csrf
+                @method('PATCH')
 
             <div>
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Engage Services</h3>
@@ -224,16 +230,17 @@
                 @enderror
             </div>
 
-            <div class="flex flex-wrap items-center gap-3">
-                <button type="submit" class="btn-success">
-                    Save Service Menu
-                </button>
-                <p class="text-xs text-gray-500 dark:text-gray-400">
-                    Anyone with a smbgen login can view this menu and choose how they want to engage.
-                </p>
-            </div>
-        </form>
-    </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="submit" class="btn-success">
+                        Save Service Menu
+                    </button>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                        Anyone with a smbgen login can view this menu and choose how they want to engage.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </details>
     @endif
 
     <!-- Quick Actions Grid -->
