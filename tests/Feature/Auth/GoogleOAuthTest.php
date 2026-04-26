@@ -29,8 +29,10 @@ class GoogleOAuthTest extends TestCase
         $response->assertStatus(302);
     }
 
-    public function test_google_callback_creates_new_user_and_logs_in(): void
+    public function test_google_callback_creates_new_non_admin_user_and_logs_in_when_tenancy_is_disabled(): void
     {
+        config()->set('app.tenancy_enabled', false);
+
         $socialiteUser = $this->mockSocialiteUser(
             id: '12345',
             name: 'Alex Ramsey',
@@ -47,7 +49,7 @@ class GoogleOAuthTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'alex@example.com',
             'google_id' => '12345',
-            'role' => 'tenant_admin',
+            'role' => User::ROLE_CLIENT,
         ]);
         $this->assertDatabaseHas('clients', [
             'email' => 'alex@example.com',
@@ -56,8 +58,8 @@ class GoogleOAuthTest extends TestCase
         ]);
         $user = User::where('email', 'alex@example.com')->firstOrFail();
         $this->assertTrue($user->hasVerifiedEmail());
-        $this->assertTrue($user->isTenantAdmin());
-        $response->assertRedirect('/admin/dashboard');
+        $this->assertTrue($user->isClient());
+        $response->assertRedirect('/dashboard');
     }
 
     public function test_google_callback_logs_in_existing_user(): void
@@ -89,7 +91,7 @@ class GoogleOAuthTest extends TestCase
         $response->assertRedirect('/dashboard');
     }
 
-    public function test_google_callback_redirects_admin_to_super_admin_dashboard(): void
+    public function test_google_callback_redirects_admin_to_admin_dashboard_when_super_admin_routes_are_disabled(): void
     {
         $user = User::factory()->admin()->create([
             'email' => 'admin@example.com',
@@ -108,7 +110,7 @@ class GoogleOAuthTest extends TestCase
 
         $response = $this->get(route('auth.google.callback'));
 
-        $response->assertRedirect(route('super-admin.dashboard', absolute: false));
+        $response->assertRedirect(route('admin.dashboard', absolute: false));
     }
 
     public function test_google_callback_redirects_tenant_admin_to_admin_dashboard(): void

@@ -29,7 +29,15 @@ class RedirectIfAuthenticated
     private function redirectAuthenticatedUser(Request $request, User $user): Response
     {
         if ($user->isSuperAdmin()) {
-            return redirect()->route('super-admin.dashboard');
+            if ($this->superAdminRoutesEnabled()) {
+                return redirect()->route('super-admin.dashboard');
+            }
+
+            if ($this->isCompanyAdministrator($user) || $user->isTenantAdmin()) {
+                return $this->tenantAwareRedirect($request, $user, '/admin/dashboard');
+            }
+
+            return $this->tenantAwareRedirect($request, $user, '/dashboard');
         }
 
         if ($this->isCompanyAdministrator($user)) {
@@ -112,5 +120,10 @@ class RedirectIfAuthenticated
         $envFlag = filter_var((string) env('TENANCY_ENABLED', 'false'), FILTER_VALIDATE_BOOLEAN);
 
         return (bool) config('app.tenancy_enabled', false) || $envFlag;
+    }
+
+    private function superAdminRoutesEnabled(): bool
+    {
+        return (bool) config('app.super_admin_routes_enabled', false);
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\SuperAdmin\DiagnosticsController;
 use App\Http\Controllers\SuperAdmin\TenantController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['centralOnly', 'auth', 'verified', 'superAdmin'])
+Route::middleware(['superAdminRoutesEnabled', 'centralOnly', 'auth', 'verified', 'superAdmin'])
     ->prefix('super-admin')
     ->name('super-admin.')
     ->group(function () {

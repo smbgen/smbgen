@@ -3,6 +3,10 @@
 use App\Models\Tenant;
 use App\Models\User;
 
+beforeEach(function () {
+    config()->set('app.super_admin_routes_enabled', true);
+});
+
 it('super admin can set a tenant primary domain', function () {
     $superAdmin = User::factory()->superAdmin()->create();
 

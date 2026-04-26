@@ -139,12 +139,16 @@ class AuthenticatedSessionController extends Controller
 
             // Check if User model exists and has required fields
             Log::info('Checking User model...');
+            $provisionedRole = $this->isTenancyEnabled()
+                ? User::ROLE_TENANT_ADMIN
+                : User::ROLE_CLIENT;
+
             $user = User::firstOrCreate(
                 ['email' => $googleUser->getEmail()],
                 [
                     'name' => $googleUser->getName(),
                     'google_id' => $googleUser->getId(),
-                    'role' => User::ROLE_TENANT_ADMIN,
+                    'role' => $provisionedRole,
                     'password' => Hash::make(Str::random(32)), // unguessable; user signs in via Google
                 ]
             );
@@ -218,12 +222,16 @@ class AuthenticatedSessionController extends Controller
     private function resolvePostLoginRedirect(Request $request, User $user): RedirectResponse
     {
         if ($user->isSuperAdmin()) {
-            return redirect()->route('super-admin.dashboard');
+            return $this->resolveSuperAdminRedirect($request, $user);
         }
 
         if ($this->isCompanyAdministrator($user)) {
             if (empty($user->tenant_id)) {
-                return redirect()->route('super-admin.dashboard');
+                if ($this->superAdminRoutesEnabled()) {
+                    return redirect()->route('super-admin.dashboard');
+                }
+
+                return redirect('/admin/dashboard');
             }
 
             $targetPath = $this->requiresDomainOnboarding($user)
@@ -239,6 +247,19 @@ class AuthenticatedSessionController extends Controller
                 : '/admin/dashboard';
 
             return $this->tenantAwareRedirect($request, $user, $targetPath);
+        }
+
+        return $this->tenantAwareRedirect($request, $user, '/dashboard');
+    }
+
+    private function resolveSuperAdminRedirect(Request $request, User $user): RedirectResponse
+    {
+        if ($this->superAdminRoutesEnabled()) {
+            return redirect()->route('super-admin.dashboard');
+        }
+
+        if ($this->isCompanyAdministrator($user) || $user->isTenantAdmin()) {
+            return $this->tenantAwareRedirect($request, $user, '/admin/dashboard');
         }
 
         return $this->tenantAwareRedirect($request, $user, '/dashboard');
@@ -298,5 +319,10 @@ class AuthenticatedSessionController extends Controller
         $envFlag = filter_var((string) env('TENANCY_ENABLED', 'false'), FILTER_VALIDATE_BOOLEAN);
 
         return (bool) config('app.tenancy_enabled', false) || $envFlag;
+    }
+
+    private function superAdminRoutesEnabled(): bool
+    {
+        return (bool) config('app.super_admin_routes_enabled', false);
     }
 }

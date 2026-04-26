@@ -72,7 +72,7 @@ if (config('app.debug')) {
             \Illuminate\Support\Facades\Auth::login($user);
 
             $redirect = match (true) {
-                $user->isSuperAdmin() => route('super-admin.dashboard'),
+                $user->isSuperAdmin() && config('app.super_admin_routes_enabled', false) && Route::has('super-admin.dashboard') => route('super-admin.dashboard'),
                 $user->role === 'company_administrator' => route('admin.dashboard'),
                 default => route('dashboard'),
             };

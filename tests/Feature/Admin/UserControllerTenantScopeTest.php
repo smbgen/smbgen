@@ -61,3 +61,20 @@ it('assigns tenant id to newly created users', function () {
         'tenant_id' => 'tenant-a',
     ]);
 });
+
+it('elevate assigns company administrator role and clears super admin flag', function () {
+    $targetUser = User::factory()->create([
+        'role' => User::ROLE_USER,
+        'tenant_id' => 'tenant-a',
+        'is_super_admin' => true,
+    ]);
+
+    $response = $this->actingAs($this->tenantAdmin)
+        ->post(route('admin.users.elevate', $targetUser));
+
+    $response->assertRedirect();
+
+    $targetUser->refresh();
+    expect($targetUser->role)->toBe(User::ROLE_ADMINISTRATOR)
+        ->and($targetUser->is_super_admin)->toBeFalse();
+});

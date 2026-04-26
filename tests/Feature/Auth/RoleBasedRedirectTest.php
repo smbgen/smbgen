@@ -30,7 +30,7 @@ class RoleBasedRedirectTest extends TestCase
         $response->assertRedirect(route('dashboard', absolute: false));
     }
 
-    public function test_company_administrator_is_redirected_to_super_admin_dashboard_after_login(): void
+    public function test_company_administrator_is_redirected_to_admin_dashboard_after_login_when_super_admin_routes_are_disabled(): void
     {
         $user = User::factory()->admin()->create();
 
@@ -39,12 +39,24 @@ class RoleBasedRedirectTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertRedirect(route('super-admin.dashboard', absolute: false));
+        $response->assertRedirect(route('admin.dashboard', absolute: false));
     }
 
     public function test_tenant_admin_is_redirected_to_admin_dashboard_after_login(): void
     {
         $user = User::factory()->tenantAdmin()->create();
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $response->assertRedirect(route('admin.dashboard', absolute: false));
+    }
+
+    public function test_super_admin_is_redirected_to_admin_dashboard_when_super_admin_routes_are_disabled(): void
+    {
+        $user = User::factory()->superAdmin()->create();
 
         $response = $this->post('/login', [
             'email' => $user->email,

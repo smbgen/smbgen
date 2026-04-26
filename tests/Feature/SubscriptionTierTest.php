@@ -130,6 +130,8 @@ class SubscriptionTierTest extends TestCase
 
     public function test_super_admin_can_change_tenant_tier(): void
     {
+        config()->set('app.super_admin_routes_enabled', true);
+
         $admin = User::create([
             'tenant_id' => null,
             'name' => 'Super Admin',

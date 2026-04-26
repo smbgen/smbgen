@@ -194,12 +194,14 @@ class UserController extends Controller
 
         $this->authorizeTenantUserAccess($admin, $user);
 
-        // Prevent elevating the current user (no-op) or demoting if already admin
-        if ($user->isAdministrator()) {
+        if ($user->role === User::ROLE_ADMINISTRATOR && ! $user->is_super_admin) {
             return back()->with('status', $user->email.' is already an administrator.');
         }
 
-        $user->update(['role' => User::ROLE_ADMINISTRATOR]);
+        $user->update([
+            'role' => User::ROLE_ADMINISTRATOR,
+            'is_super_admin' => false,
+        ]);
 
         return back()->with('status', 'Elevated '.$user->email.' to company administrator.');
     }

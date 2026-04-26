@@ -207,13 +207,13 @@ class TenantController extends Controller
             : $impersonation;
 
         if (! $superAdminId) {
-            return redirect()->route('super-admin.dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         $superAdmin = User::find($superAdminId);
 
         if (! $superAdmin) {
-            return redirect()->route('super-admin.dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         auth()->login($superAdmin);
@@ -232,6 +232,10 @@ class TenantController extends Controller
 
     private function centralSuperAdminUrl(): string
     {
+        if (! config('app.super_admin_routes_enabled', false)) {
+            return URL::route('admin.dashboard', absolute: true);
+        }
+
         return URL::route('super-admin.tenants.index', absolute: true);
     }
 

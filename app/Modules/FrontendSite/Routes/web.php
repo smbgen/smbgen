@@ -27,7 +27,9 @@ Route::get('/', function () {
 
     $authenticatedUser = auth()->user();
 
-    if ($authenticatedUser->isSuperAdmin()) {
+    if ($authenticatedUser->isSuperAdmin()
+        && config('app.super_admin_routes_enabled', false)
+        && Route::has('super-admin.dashboard')) {
         return redirect()->route('super-admin.dashboard');
     }
 

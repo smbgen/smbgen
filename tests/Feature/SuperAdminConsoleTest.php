@@ -9,6 +9,7 @@ use Stancl\Tenancy\Database\Models\Domain;
 
 beforeEach(function () {
     $this->withoutVite();
+    config()->set('app.super_admin_routes_enabled', true);
     $this->superAdmin = User::factory()->superAdmin()->create();
     $this->admin = User::factory()->admin()->create();
 });
