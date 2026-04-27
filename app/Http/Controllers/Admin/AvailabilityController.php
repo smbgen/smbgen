@@ -15,8 +15,12 @@ class AvailabilityController extends Controller
         // Allow switching between staff members
         $selectedUserId = $request->input('user_id', Auth::id());
 
-        // Get all company administrators for the dropdown
-        $staffMembers = \App\Models\User::where('role', 'company_administrator')
+        // Get all staff members (all administrator roles) for the dropdown
+        $staffMembers = \App\Models\User::whereIn('role', [
+            \App\Models\User::ROLE_ADMINISTRATOR,
+            \App\Models\User::ROLE_ADMINISTRATOR_LEGACY,
+            \App\Models\User::ROLE_TENANT_ADMIN,
+        ])
             ->orderBy('name')
             ->get();
 
