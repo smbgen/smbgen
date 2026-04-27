@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Package;
 use App\Models\PackageFile;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -75,6 +76,20 @@ class ClientPresentationController extends Controller
         return response($contents, 200)
             ->header('Content-Type', $mime)
             ->header('Content-Disposition', $disposition.'; filename="'.addslashes($file->original_name).'"');
+    }
+
+    public function fileContent(Package $package, PackageFile $file): JsonResponse
+    {
+        $client = $this->currentClient();
+
+        abort_if($package->client_id !== $client->id || ! $package->portal_enabled, 403);
+        abort_if($file->package_id !== $package->id, 403);
+        abort_if(! $file->portal_promoted, 403);
+
+        $disk = $file->storage_disk ?: 'private';
+        $contents = Storage::disk($disk)->get($file->storage_path);
+
+        return response()->json(['content' => $contents ?? '']);
     }
 
     private function currentClient(): Client

@@ -169,6 +169,37 @@ it('allows a client to preview only their promoted presentation files', function
     $response->assertSee('Preview Deck', false);
 });
 
+it('allows a client to fetch promoted markdown file content for preview', function (): void {
+    $package = Package::create([
+        'name' => 'Research Content Deck',
+        'client_id' => $this->client->id,
+        'created_by_user_id' => $this->adminUser->id,
+        'status' => 'ready',
+        'source' => 'zip_upload',
+        'portal_enabled' => true,
+    ]);
+
+    $file = PackageFile::create([
+        'package_id' => $package->id,
+        'original_name' => 'notes.md',
+        'display_name' => 'Research Notes',
+        'type' => 'MARKDOWN_RESEARCH',
+        'role' => 'research',
+        'storage_path' => 'packages/'.$this->client->id.'/notes.md',
+        'storage_disk' => 'private',
+        'size_bytes' => 1024,
+        'portal_promoted' => true,
+    ]);
+
+    Storage::disk('private')->put($file->storage_path, "# Notes\n\nPortal preview content");
+
+    $response = $this->actingAs($this->clientUser)
+        ->getJson(route('client.presentations.files.content', [$package, $file]));
+
+    $response->assertOk();
+    $response->assertJsonPath('content', "# Notes\n\nPortal preview content");
+});
+
 it('forbids clients from opening another clients presentation files', function (): void {
     $package = Package::create([
         'name' => 'Protected Deck',
@@ -195,6 +226,36 @@ it('forbids clients from opening another clients presentation files', function (
 
     $response = $this->actingAs($this->otherClientUser)
         ->get(route('client.presentations.files.preview', [$package, $file]));
+
+    $response->assertForbidden();
+});
+
+it('forbids clients from fetching another clients presentation file content', function (): void {
+    $package = Package::create([
+        'name' => 'Protected Content Deck',
+        'client_id' => $this->client->id,
+        'created_by_user_id' => $this->adminUser->id,
+        'status' => 'ready',
+        'source' => 'zip_upload',
+        'portal_enabled' => true,
+    ]);
+
+    $file = PackageFile::create([
+        'package_id' => $package->id,
+        'original_name' => 'protected.md',
+        'display_name' => 'Protected Notes',
+        'type' => 'MARKDOWN_RESEARCH',
+        'role' => 'research',
+        'storage_path' => 'packages/'.$this->client->id.'/protected.md',
+        'storage_disk' => 'private',
+        'size_bytes' => 1024,
+        'portal_promoted' => true,
+    ]);
+
+    Storage::disk('private')->put($file->storage_path, '# Protected');
+
+    $response = $this->actingAs($this->otherClientUser)
+        ->get(route('client.presentations.files.content', [$package, $file]));
 
     $response->assertForbidden();
 });

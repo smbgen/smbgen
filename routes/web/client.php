@@ -77,6 +77,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/presentations/{package}', [ClientPresentationController::class, 'show'])->name('client.presentations.show');
     Route::get('/presentations/{package}/files/{file}/preview', [ClientPresentationController::class, 'previewFile'])
         ->name('client.presentations.files.preview');
+    Route::get('/presentations/{package}/files/{file}/content', [ClientPresentationController::class, 'fileContent'])
+        ->name('client.presentations.files.content');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
