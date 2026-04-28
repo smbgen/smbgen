@@ -125,7 +125,7 @@
             </p>
 
             <div class="flex flex-col sm:flex-row gap-3 mb-10" data-reveal>
-                <a href="{{ route('login') }}"
+                <a href="https://smbgen-construction-co-demo.on-forge.com/demo"
                    class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition-colors shadow-xl shadow-indigo-900/30 border border-indigo-500/40"
                    data-magnetic>
                     Give it a try &rarr;
