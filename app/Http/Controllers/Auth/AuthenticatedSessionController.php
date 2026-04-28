@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
+use Throwable;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -78,8 +79,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        // Log the logout before destroying the session
-        \App\Services\ActivityLogger::logLogout();
+        // Never block logout if activity logging fails (e.g., DB issue in production).
+        try {
+            \App\Services\ActivityLogger::logLogout();
+        } catch (Throwable $exception) {
+            Log::warning('Logout activity logging failed', [
+                'user_id' => Auth::id(),
+                'error' => $exception->getMessage(),
+            ]);
+        }
 
         Auth::guard('web')->logout();
 
