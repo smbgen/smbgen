@@ -49,20 +49,31 @@
                 {{-- Auth Links --}}
                 @auth
                     <a 
-                        href="{{ auth()->user()->role === 'company_administrator' ? route('admin.dashboard') : route('dashboard') }}" 
+                        href="{{ auth()->user()->isAdministrator() ? route('admin.dashboard') : route('dashboard') }}" 
                         class="hover:opacity-80 transition-opacity duration-200 font-medium"
                         style="color: {{ $textColor }};"
                     >
                         Dashboard
                     </a>
                 @else
-                    <a 
-                        href="{{ route('login') }}" 
-                        class="hover:opacity-80 transition-opacity duration-200 font-medium"
-                        style="color: {{ $textColor }};"
-                    >
-                        Give it a try
-                    </a>
+                    @if(\App\Support\ModuleRegistry::isEnabled('frontend_site') && \App\Support\ModuleRegistry::isSelectedFrontend('frontend_site'))
+                        <a 
+                            href="https://smbgen-construction-co-demo.on-forge.com/demo" 
+                            target="_blank"
+                            class="hover:opacity-80 transition-opacity duration-200 font-medium"
+                            style="color: {{ $textColor }};"
+                        >
+                            Give it a try
+                        </a>
+                    @else
+                        <a 
+                            href="{{ route('login') }}" 
+                            class="hover:opacity-80 transition-opacity duration-200 font-medium"
+                            style="color: {{ $textColor }};"
+                        >
+                            Login
+                        </a>
+                    @endif
                 @endauth
             </div>
 
@@ -126,20 +137,31 @@
             {{-- Auth Links --}}
             @auth
                 <a 
-                    href="{{ auth()->user()->role === 'company_administrator' ? route('admin.dashboard') : route('dashboard') }}" 
+                    href="{{ auth()->user()->isAdministrator() ? route('admin.dashboard') : route('dashboard') }}" 
                     class="block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-opacity"
                     style="color: {{ $textColor }};"
                 >
                     Dashboard
                 </a>
             @else
-                <a 
-                    href="{{ route('login') }}" 
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-opacity"
-                    style="color: {{ $textColor }};"
-                >
-                    Give it a try
-                </a>
+                @if(\App\Support\ModuleRegistry::isEnabled('frontend_site') && \App\Support\ModuleRegistry::isSelectedFrontend('frontend_site'))
+                    <a 
+                        href="https://smbgen-construction-co-demo.on-forge.com/demo" 
+                        target="_blank"
+                        class="block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-opacity"
+                        style="color: {{ $textColor }};"
+                    >
+                        Give it a try
+                    </a>
+                @else
+                    <a 
+                        href="{{ route('login') }}" 
+                        class="block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-opacity"
+                        style="color: {{ $textColor }};"
+                    >
+                        Login
+                    </a>
+                @endif
             @endauth
         </div>
     </div>
