@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\CmsPage;
-use App\Models\User;
 use App\Support\ModuleRegistry;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +32,7 @@ Route::get('/', function () {
         return redirect()->route('super-admin.dashboard');
     }
 
-    if (in_array($authenticatedUser->role, [User::ROLE_ADMINISTRATOR, User::ROLE_ADMINISTRATOR_LEGACY, 'company_administrator'], true)) {
+    if ($authenticatedUser->isAdministrator()) {
         return redirect()->route('admin.dashboard');
     }
 

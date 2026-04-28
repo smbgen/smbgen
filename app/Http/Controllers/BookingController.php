@@ -18,8 +18,8 @@ class BookingController extends Controller
 {
     public function showWizard()
     {
-        // Get all company administrators with availability AND active Google Calendar credentials
-        $availableStaff = \App\Models\User::where('role', 'company_administrator')
+        // Get all administrators with availability AND active Google Calendar credentials
+        $availableStaff = \App\Models\User::administrators()
             ->whereHas('googleCredential', function ($q) {
                 $q->whereNotNull('refresh_token');
             })
@@ -42,15 +42,15 @@ class BookingController extends Controller
         $staffId = $request->input('staff_id');
 
         if ($staffId) {
-            $admin = \App\Models\User::where('id', $staffId)
-                ->where('role', 'company_administrator')
+            $admin = \App\Models\User::administrators()
+                ->where('id', $staffId)
                 ->whereHas('googleCredential', function ($q) {
                     $q->whereNotNull('refresh_token');
                 })
                 ->with('googleCredential')
                 ->first();
         } else {
-            $admin = \App\Models\User::where('role', 'company_administrator')
+            $admin = \App\Models\User::administrators()
                 ->whereHas('googleCredential', function ($q) {
                     $q->whereNotNull('refresh_token');
                 })
@@ -283,7 +283,7 @@ class BookingController extends Controller
             if ($staffId) {
                 $staffUser = \App\Models\User::find($staffId);
             } else {
-                $staffUser = \App\Models\User::where('role', 'company_administrator')
+                $staffUser = \App\Models\User::administrators()
                     ->whereHas('googleCredential')
                     ->first();
             }
@@ -393,7 +393,7 @@ class BookingController extends Controller
 
             // Fallback to any admin with Google Calendar if booked staff doesn't have it
             if (! $admin) {
-                $admin = \App\Models\User::where('role', 'company_administrator')
+                $admin = \App\Models\User::administrators()
                     ->whereHas('googleCredential', function ($q) {
                         $q->whereNotNull('refresh_token');
                     })

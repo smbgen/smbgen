@@ -33,7 +33,7 @@ class SendTestEmails extends Command
 
         // If no recipient specified, use first admin user
         if (! $recipient) {
-            $admin = User::where('role', 'administrator')->first();
+            $admin = User::administrators()->first();
             if (! $admin) {
                 $admin = User::first();
             }

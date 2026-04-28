@@ -109,7 +109,11 @@ class MessageController extends Controller
         if ($user->isAdministrator()) {
             // Admins can message:
             // 1. Any non-admin user
-            $users = User::where('role', '!=', 'company_administrator')
+            $users = User::whereNotIn('role', [
+                \App\Models\User::ROLE_ADMINISTRATOR,
+                \App\Models\User::ROLE_ADMINISTRATOR_LEGACY,
+                \App\Models\User::ROLE_TENANT_ADMIN,
+            ])
                 ->where('id', '!=', $user->id)
                 ->get()
                 ->map(function ($u) {
@@ -138,7 +142,7 @@ class MessageController extends Controller
             $recipients = $users->concat($clients)->sortBy('name')->values();
         } else {
             // Non-admins can message administrators
-            $recipients = User::where('role', 'company_administrator')
+            $recipients = User::administrators()
                 ->orderBy('name')
                 ->get()
                 ->map(function ($u) {

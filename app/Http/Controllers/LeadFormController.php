@@ -34,7 +34,7 @@ class LeadFormController extends Controller
 
         // Send email to ALL admin users
         try {
-            $adminUsers = \App\Models\User::where('role', 'company_administrator')->get();
+            $adminUsers = \App\Models\User::administrators()->get();
 
             if ($adminUsers->count() > 0) {
                 foreach ($adminUsers as $admin) {

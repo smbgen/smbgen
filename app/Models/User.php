@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -163,6 +164,21 @@ class User extends Authenticatable implements MustVerifyEmail
 
         // Fallback to legacy column
         return $this->google_calendar_id ?? 'primary';
+    }
+
+    /**
+     * Scope to all administrator roles (company_administrator, legacy administrator, tenant_admin).
+     *
+     * @param  Builder<User>  $query
+     * @return Builder<User>
+     */
+    public function scopeAdministrators(Builder $query): Builder
+    {
+        return $query->whereIn('role', [
+            self::ROLE_ADMINISTRATOR,
+            self::ROLE_ADMINISTRATOR_LEGACY,
+            self::ROLE_TENANT_ADMIN,
+        ]);
     }
 
     /**

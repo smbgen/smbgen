@@ -177,8 +177,8 @@ class TenantController extends Controller
 
     public function impersonate(Request $request, Tenant $tenant)
     {
-        $adminUser = User::where('tenant_id', $tenant->id)
-            ->where('role', 'company_administrator')
+        $adminUser = User::administrators()
+            ->where('tenant_id', $tenant->id)
             ->first();
 
         if (! $adminUser) {
