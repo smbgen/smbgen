@@ -14,7 +14,7 @@ it('renders the home page with smbgen core messaging', function () {
     $response->assertOk();
     $response->assertSee('smbgen-core');
     $response->assertSee('Small business operating system');
-    $response->assertSee('Live in one day.');
+    $response->assertSee('On your domain in one day.');
     $response->assertSee('Core product is free');
     $response->assertSee('Pay only for consulting');
     $response->assertSee('YourBusiness.com/Pay');
@@ -36,6 +36,31 @@ it('renders the solutions page with simple smbgen core explanation pages', funct
     $response->assertSee('Portal access. CRM. CMS.');
     $response->assertSee('A superior contact form.');
     $response->assertSee('A CRM your team will actually use.');
+});
+
+it('renders ai solutions area and assistant pages', function () {
+    $aiArea = $this->get(route('solutions.ai'));
+    $aiArea->assertOk();
+    $aiArea->assertSee('AI Solutions');
+    $aiArea->assertSee('Dedicated context-aware AI assistants');
+    $aiArea->assertSee('HR Assistant');
+    $aiArea->assertSee('Biz Dev Assistant');
+    $aiArea->assertSee('GTM Assistant');
+
+    $this->get(route('solutions.ai.hr'))
+        ->assertOk()
+        ->assertSee('HR Assistant')
+        ->assertSee('people-ops knowledge base');
+
+    $this->get(route('solutions.ai.biz-dev'))
+        ->assertOk()
+        ->assertSee('Biz Dev Assistant')
+        ->assertSee('repeatable pipeline engine');
+
+    $this->get(route('solutions.ai.gtm'))
+        ->assertOk()
+        ->assertSee('GTM Assistant')
+        ->assertSee('go-to-market execution');
 });
 
 it('shows the smbgen github org link in public navigation', function () {

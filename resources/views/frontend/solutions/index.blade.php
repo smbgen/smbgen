@@ -173,6 +173,27 @@
                 </span>
             </a>
 
+            {{-- AI Solutions --}}
+            <a href="{{ route('solutions.ai') }}" class="sa-card-hover group bg-white/4 hover:bg-fuchsia-500/8 border border-white/8 hover:border-fuchsia-500/30 rounded-2xl p-6 flex flex-col gap-4">
+                <div class="w-12 h-12 rounded-xl bg-fuchsia-500/15 border border-fuchsia-500/20 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3a2.25 2.25 0 00-2.25 2.25V9H5.25A2.25 2.25 0 003 11.25v1.5A2.25 2.25 0 005.25 15H7.5v3.75A2.25 2.25 0 009.75 21h4.5a2.25 2.25 0 002.25-2.25V15h2.25A2.25 2.25 0 0021 12.75v-1.5A2.25 2.25 0 0018.75 9H16.5V5.25A2.25 2.25 0 0014.25 3h-4.5z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-white font-bold text-base mb-1 group-hover:text-fuchsia-300 transition-colors">AI Solutions</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">"I need AI assistants that know my business context for hiring, pipeline growth, and go-to-market execution."</p>
+                </div>
+                <div class="flex flex-wrap gap-1.5 mt-auto">
+                    <span class="text-xs px-2 py-0.5 rounded-md bg-fuchsia-600/15 text-fuchsia-400 border border-fuchsia-600/20">HR</span>
+                    <span class="text-xs px-2 py-0.5 rounded-md bg-indigo-600/15 text-indigo-400 border border-indigo-600/20">Biz Dev</span>
+                    <span class="text-xs px-2 py-0.5 rounded-md bg-cyan-600/15 text-cyan-400 border border-cyan-600/20">GTM</span>
+                </div>
+                <span class="text-fuchsia-400 text-xs font-semibold flex items-center gap-1">
+                    Explore AI assistants &rarr;
+                </span>
+            </a>
+
             {{-- Just talk to us --}}
             <a href="{{ $bookHref }}?intent=solutions" class="sa-card-hover group bg-gradient-to-br from-white/5 to-white/3 hover:from-indigo-500/10 hover:to-violet-500/8 border border-white/8 hover:border-indigo-500/30 rounded-2xl p-6 flex flex-col gap-4 justify-between">
                 <div>

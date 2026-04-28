@@ -67,6 +67,10 @@ Route::middleware('moduleEnabled:frontend_site')->group(function () {
 
     Route::prefix('solutions')->name('solutions.')->group(function () {
         Route::get('/areas', fn () => view('frontend.solutions.index'))->name('areas');
+        Route::get('/ai', fn () => view('frontend.solutions.ai'))->name('ai');
+        Route::get('/ai/hr', fn () => view('frontend.solutions.ai-hr'))->name('ai.hr');
+        Route::get('/ai/biz-dev', fn () => view('frontend.solutions.ai-biz-dev'))->name('ai.biz-dev');
+        Route::get('/ai/gtm', fn () => view('frontend.solutions.ai-gtm'))->name('ai.gtm');
         Route::get('/more-leads', fn () => view('frontend.solutions.more-leads'))->name('more-leads');
         Route::get('/streamline-bookings', fn () => view('frontend.solutions.streamline-bookings'))->name('streamline-bookings');
         Route::get('/get-paid-faster', fn () => view('frontend.solutions.get-paid-faster'))->name('get-paid-faster');

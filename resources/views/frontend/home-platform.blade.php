@@ -102,21 +102,21 @@
 {{-- ================================================================ --}}
 {{-- HERO                                                              --}}
 {{-- ================================================================ --}}
-<section class="hp-hero-bg px-6 py-10 lg:py-14">
+<section class="hp-hero-bg px-6 py-10 lg:py-12">
     <div class="hp-hero-orb hp-hero-orb-a" aria-hidden="true"></div>
     <div class="hp-hero-orb hp-hero-orb-b" aria-hidden="true"></div>
-    <div class="hp-hero-shell max-w-7xl mx-auto w-full py-6 grid lg:grid-cols-[1.12fr_0.88fr] gap-8 xl:gap-12 items-start">
+    <div class="hp-hero-shell max-w-7xl mx-auto w-full py-4 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
 
         {{-- Left: copy --}}
-        <div data-reveal="left">
+        <div class="md:col-start-1" data-reveal="left">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 bg-white/70 text-slate-600 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
                 <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse inline-block"></span>
                 Small business operating system
             </div>
 
-            <h1 class="text-4xl md:text-6xl xl:text-7xl font-black leading-[1.03] tracking-tight mb-5">
-                <span class="text-slate-900">Your business OS.</span><br>
-                <span class="hp-gradient-headline">Live in one day.</span>
+            <h1 class="text-3xl md:text-5xl xl:text-6xl font-black leading-[1.03] tracking-tight mb-5">
+                <span class="text-slate-900">One operating system.</span><br>
+                <span class="hp-gradient-headline">On your domain in one day.</span>
             </h1>
 
             <p class="text-slate-600 text-lg md:text-xl mb-6 leading-relaxed font-light max-w-2xl">
@@ -137,149 +137,95 @@
                 </a>
             </div>
 
-            <div class="mb-5 grid grid-cols-1 gap-2.5 sm:grid-cols-3" data-reveal>
-                <div class="rounded-xl border border-indigo-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Deployable in one day</div>
-                <div class="rounded-xl border border-emerald-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Core product is free</div>
-                <div class="rounded-xl border border-blue-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Pay only for consulting</div>
-            </div>
-
-            <div class="mb-6 rounded-2xl border border-slate-200 bg-white/70 px-4 py-4 text-sm text-slate-700" data-reveal>
-                <p class="font-semibold">Your brand domain stays front and center.</p>
-                <p class="mt-1 text-slate-600">Clients use your routes, not a shared tenant URL: YourBusiness.com/Contact, YourBusiness.com/Book, YourBusiness.com/Pay.</p>
-            </div>
-
-            {{-- Story flow --}}
-            <div class="mb-2" data-reveal>
-                @php
-                    $heroStory = [
-                        [
-                            'stage' => 'Before',
-                            'title' => 'Scattered tools and follow-ups',
-                            'detail' => 'Leads, calendar, payment, and files live in different places.',
-                            'stageClass' => 'text-rose-700',
-                            'cardClass' => 'border-rose-200 bg-rose-50/80',
-                        ],
-                        [
-                            'stage' => 'Day 1',
-                            'title' => 'We deploy your business operating system',
-                            'detail' => 'Single-tenant setup on your domain with your exact workflows.',
-                            'stageClass' => 'text-indigo-700',
-                            'cardClass' => 'border-indigo-200 bg-indigo-50/80',
-                        ],
-                        [
-                            'stage' => 'Outcome',
-                            'title' => 'YourBusiness.com runs the whole journey',
-                            'detail' => 'Contact, Book, and Pay routes move clients through one system.',
-                            'stageClass' => 'text-emerald-700',
-                            'cardClass' => 'border-emerald-200 bg-emerald-50/80',
-                        ],
-                    ];
-                @endphp
-                <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
-                    @foreach($heroStory as $story)
-                        <div class="rounded-2xl border px-4 py-4 backdrop-blur-sm h-full min-w-0 {{ $story['cardClass'] }}">
-                            <p class="mb-2 text-[10px] font-black uppercase tracking-[0.16em] {{ $story['stageClass'] }}">{{ $story['stage'] }}</p>
-                            <p class="text-sm font-extrabold text-slate-900 leading-tight mb-1.5">{{ $story['title'] }}</p>
-                            <p class="text-xs leading-relaxed text-slate-600">{{ $story['detail'] }}</p>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            <p class="text-xs font-semibold text-slate-500">Context-aware AI can draft CMS pages in seconds, then your team edits and publishes.</p>
         </div>
 
-        {{-- Right: rotating booking form mockup --}}
+        {{-- Right: rotating core feature visual --}}
         @php
-            $heroForms = [
+            $coreFeatureFrames = [
                 [
-                    'industry' => 'Real Estate',
-                    'color'    => 'emerald',
-                    'badge'    => 'bg-emerald-500/20 border-emerald-500/30 text-emerald-300',
-                    'dot'      => 'bg-emerald-400',
-                    'btn'      => 'bg-emerald-600 hover:bg-emerald-500',
-                    'title'    => 'Schedule a Showing',
-                    'subtitle' => "We'll confirm within 2 hours.",
-                    'fields'   => [
-                        ['label' => 'Property Address', 'value' => '142 Maple Drive, Rockville MD'],
-                        ['label' => 'Preferred Date & Time', 'value' => 'Tomorrow — afternoon'],
-                        ['label' => 'Your Name', 'value' => 'Sarah Johnson'],
-                    ],
-                    'cta' => 'Request Showing',
+                    'feature' => 'Contact',
+                    'url' => 'yourbusiness.com/contact',
+                    'workflow' => 'Capture and qualify inbound leads with structured intake.',
+                    'headline' => 'New lead captured: Commercial HVAC install request',
+                    'summary' => 'Lead score is high and auto-routing has assigned next action to sales.',
+                    'status' => 'Routing lead',
+                    'modules' => ['Intake fields', 'Lead score', 'CRM sync'],
+                    'color' => 'blue',
                 ],
                 [
-                    'industry' => 'Home Services',
-                    'color'    => 'orange',
-                    'badge'    => 'bg-orange-500/20 border-orange-500/30 text-orange-300',
-                    'dot'      => 'bg-orange-400',
-                    'btn'      => 'bg-orange-600 hover:bg-orange-500',
-                    'title'    => 'Book a Service Call',
-                    'subtitle' => 'Same-day availability in your area.',
-                    'fields'   => [
-                        ['label' => 'Service Type', 'value' => 'HVAC Repair'],
-                        ['label' => 'Service Address', 'value' => '78 Oak Street, Frederick MD'],
-                        ['label' => 'Best Time', 'value' => 'Weekday morning, flexible'],
-                    ],
-                    'cta' => 'Book Now',
+                    'feature' => 'Book',
+                    'url' => 'yourbusiness.com/book',
+                    'workflow' => 'Offer live availability and instantly confirm appointments.',
+                    'headline' => 'Appointment confirmed: Tuesday at 11:30 AM',
+                    'summary' => 'Confirmation and reminders are queued with calendar sync enabled.',
+                    'status' => 'Syncing booking',
+                    'modules' => ['Availability', 'Confirmations', 'Reminders'],
+                    'color' => 'violet',
                 ],
                 [
-                    'industry' => 'Legal',
-                    'color'    => 'blue',
-                    'badge'    => 'bg-blue-500/20 border-blue-500/30 text-blue-300',
-                    'dot'      => 'bg-blue-400',
-                    'btn'      => 'bg-blue-600 hover:bg-blue-500',
-                    'title'    => 'Request a Consultation',
-                    'subtitle' => 'Confidential. No obligation.',
-                    'fields'   => [
-                        ['label' => 'Matter Type', 'value' => 'Business Contract Review'],
-                        ['label' => 'Brief Description', 'value' => 'Reviewing a partnership agreement'],
-                        ['label' => 'Preferred Time', 'value' => 'This week, flexible'],
-                    ],
-                    'cta' => 'Request Consultation',
+                    'feature' => 'Pay',
+                    'url' => 'yourbusiness.com/pay',
+                    'workflow' => 'Move clients from approval to payment without friction.',
+                    'headline' => 'Invoice paid: #2408 - $2,400.00 received',
+                    'summary' => 'Payment recorded and linked to project timeline and account history.',
+                    'status' => 'Processing payment',
+                    'modules' => ['Secure checkout', 'Payment status', 'Receipt sync'],
+                    'color' => 'emerald',
                 ],
                 [
-                    'industry' => 'Health & Wellness',
-                    'color'    => 'pink',
-                    'badge'    => 'bg-pink-500/20 border-pink-500/30 text-pink-300',
-                    'dot'      => 'bg-pink-400',
-                    'btn'      => 'bg-pink-600 hover:bg-pink-500',
-                    'title'    => 'Book an Appointment',
-                    'subtitle' => 'New and returning clients welcome.',
-                    'fields'   => [
-                        ['label' => 'Service', 'value' => 'Deep Tissue Massage — 60 min'],
-                        ['label' => 'Provider', 'value' => 'Any available'],
-                        ['label' => 'Preferred Date', 'value' => 'Saturday morning'],
-                    ],
-                    'cta' => 'Book Appointment',
+                    'feature' => 'Client Portal',
+                    'url' => 'yourbusiness.com/portal',
+                    'workflow' => 'Give clients one place for files, messages, and progress.',
+                    'headline' => 'Client update posted: Proposal v3 ready for approval',
+                    'summary' => 'Portal notification sent and discussion thread attached to project record.',
+                    'status' => 'Updating portal',
+                    'modules' => ['File delivery', 'Threaded notes', 'Billing view'],
+                    'color' => 'orange',
                 ],
                 [
-                    'industry' => 'Consulting',
-                    'color'    => 'violet',
-                    'badge'    => 'bg-violet-500/20 border-violet-500/30 text-violet-300',
-                    'dot'      => 'bg-violet-400',
-                    'btn'      => 'bg-violet-600 hover:bg-violet-500',
-                    'title'    => 'Schedule a Discovery Call',
-                    'subtitle' => '30 minutes. No prep required.',
-                    'fields'   => [
-                        ['label' => 'Company Name', 'value' => 'Apex Growth Partners'],
-                        ['label' => 'Primary Challenge', 'value' => 'Scaling our sales process'],
-                        ['label' => 'Team Size', 'value' => '10–50 employees'],
-                    ],
-                    'cta' => 'Schedule Call',
+                    'feature' => 'AI-enabled CMS',
+                    'url' => 'yourbusiness.com/offers/spring-hvac-tune-up',
+                    'workflow' => 'Generate and refine publish-ready pages from your business context.',
+                    'headline' => 'AI draft ready: Spring HVAC Tune-Up campaign page',
+                    'summary' => 'AI generated service copy, FAQ, and local trust sections for editorial review.',
+                    'status' => 'Generating content',
+                    'modules' => ['Service blocks', 'SEO meta', 'FAQ'],
+                    'color' => 'fuchsia',
+                ],
+                [
+                    'feature' => 'CRM',
+                    'url' => 'yourbusiness.com/crm',
+                    'workflow' => 'Track every opportunity and enforce next best actions.',
+                    'headline' => 'Pipeline update: 4 deals moved to proposal stage',
+                    'summary' => 'Follow-up tasks are scheduled automatically for owners and managers.',
+                    'status' => 'Updating pipeline',
+                    'modules' => ['Deal stages', 'Owner tasks', 'Forecast sync'],
+                    'color' => 'indigo',
                 ],
             ];
         @endphp
 
         <div
-            class="hidden lg:flex flex-col hp-float-card lg:pt-2"
+            class="hidden lg:flex flex-col hp-float-card lg:col-start-2 lg:row-start-1 lg:pt-1"
             data-reveal="right"
             x-data="{
                 current: 0,
-                total: {{ count($heroForms) }},
-                init() { setInterval(() => { this.current = (this.current + 1) % this.total }, 3800) }
+                total: {{ count($coreFeatureFrames) }},
+                progress: 24,
+                init() {
+                    setInterval(() => {
+                        this.current = (this.current + 1) % this.total;
+                        this.progress = 24;
+                    }, 4200);
+                    setInterval(() => {
+                        this.progress = this.progress >= 96 ? 96 : this.progress + 8;
+                    }, 360);
+                }
             }"
         >
-            {{-- Card stack --}}
-            <div class="relative" style="min-height: 390px;">
-                @foreach($heroForms as $idx => $form)
+            <div class="relative" style="min-height: 380px;">
+                @foreach($coreFeatureFrames as $idx => $frame)
                     <div
                         x-show="current === {{ $idx }}"
                         x-transition:enter="transition ease-out duration-500"
@@ -290,66 +236,223 @@
                         x-transition:leave-end="opacity-0 -translate-y-3"
                         class="absolute inset-0"
                     >
-                        {{-- Browser chrome card --}}
-                        <div class="bg-[#0d1829] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
-
-                            {{-- Chrome bar --}}
-                            <div class="bg-white/5 border-b border-white/8 px-4 py-3 flex items-center gap-3">
+                        <div class="bg-[#0d1829] border border-white/10 rounded-xl shadow-xl overflow-hidden">
+                            <div class="bg-white/5 border-b border-white/8 px-3 py-2.5 flex items-center gap-2.5">
                                 <div class="flex gap-1.5">
-                                    <span class="w-3 h-3 rounded-full bg-red-500/60"></span>
-                                    <span class="w-3 h-3 rounded-full bg-yellow-500/60"></span>
-                                    <span class="w-3 h-3 rounded-full bg-green-500/60"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/60"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-green-500/60"></span>
                                 </div>
-                                <div class="flex-1 bg-white/5 rounded-md px-3 py-1 text-[11px] text-gray-500 font-mono">
-                                    yourbusiness.com/book
+                                <div class="flex-1 bg-white/5 rounded-md px-3 py-1 text-[11px] text-gray-500 font-mono truncate">
+                                    {{ $frame['url'] }}
                                 </div>
-                                <span class="text-[11px] font-bold px-2.5 py-1 rounded-lg border {{ $form['badge'] }} shrink-0">
-                                    {{ $form['industry'] }}
+                                <span class="text-[10px] font-bold px-2 py-1 rounded-md border bg-{{ $frame['color'] }}-500/20 border-{{ $frame['color'] }}-500/30 text-{{ $frame['color'] }}-300 shrink-0">
+                                    {{ $frame['feature'] }}
                                 </span>
                             </div>
 
-                            {{-- Form body --}}
-                            <div class="px-6 py-6">
-                                <p class="text-white font-black text-lg mb-0.5">{{ $form['title'] }}</p>
-                                <p class="text-gray-500 text-xs mb-5">{{ $form['subtitle'] }}</p>
-
-                                <div class="flex flex-col gap-4">
-                                    @foreach($form['fields'] as $field)
-                                        <div>
-                                            <label class="text-gray-400 text-xs font-semibold block mb-1.5">{{ $field['label'] }}</label>
-                                            <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-gray-300 font-light">
-                                                {{ $field['value'] }}
-                                            </div>
-                                        </div>
-                                    @endforeach
+                            <div class="px-4 py-4 space-y-3.5">
+                                <div class="rounded-lg border border-white/10 bg-white/5 p-3">
+                                    <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold mb-2">Live Workflow</p>
+                                    <p class="text-xs text-gray-200 leading-relaxed">{{ $frame['workflow'] }}</p>
                                 </div>
 
-                                <button type="button" class="mt-5 w-full {{ $form['btn'] }} text-white font-bold text-sm py-3 rounded-xl transition-colors pointer-events-none">
-                                    {{ $form['cta'] }} &rarr;
-                                </button>
-                            </div>
+                                <div class="rounded-lg border border-{{ $frame['color'] }}-500/20 bg-{{ $frame['color'] }}-500/10 p-3">
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <p class="text-[10px] uppercase tracking-[0.2em] text-{{ $frame['color'] }}-300 font-bold">In Motion</p>
+                                        <span class="inline-flex items-center gap-1 text-[10px] text-{{ $frame['color'] }}-200 font-semibold">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-{{ $frame['color'] }}-300 animate-pulse"></span>
+                                            {{ $frame['status'] }}
+                                        </span>
+                                    </div>
+                                    @if($frame['feature'] === 'Contact')
+                                        <div class="mt-2 space-y-1.5">
+                                            <div class="grid grid-cols-3 gap-1.5 text-[10px] text-blue-200">
+                                                <div class="rounded bg-blue-500/20 px-2 py-1 text-center">Intake</div>
+                                                <div class="rounded bg-blue-500/20 px-2 py-1 text-center">Score</div>
+                                                <div class="rounded bg-blue-500/20 px-2 py-1 text-center">Route</div>
+                                            </div>
+                                            <div class="flex items-center gap-1.5 text-[10px] text-blue-100">
+                                                <span class="w-2 h-2 rounded-full bg-blue-300 animate-pulse"></span>
+                                                Lead routed to owner
+                                            </div>
+                                        </div>
+                                    @elseif($frame['feature'] === 'Book')
+                                        <div class="mt-2 space-y-1.5">
+                                            <div class="grid grid-cols-4 gap-1 text-[10px] text-violet-100">
+                                                <div class="rounded bg-violet-500/20 px-2 py-1 text-center">9:00</div>
+                                                <div class="rounded bg-violet-500/20 px-2 py-1 text-center">10:30</div>
+                                                <div class="rounded bg-violet-600/50 px-2 py-1 text-center font-bold">11:30</div>
+                                                <div class="rounded bg-violet-500/20 px-2 py-1 text-center">1:00</div>
+                                            </div>
+                                            <div class="text-[10px] text-violet-100">Calendar + reminder synced</div>
+                                        </div>
+                                    @elseif($frame['feature'] === 'Pay')
+                                        <div class="mt-2 space-y-1.5">
+                                            <div class="h-2 rounded-full bg-emerald-950/50 overflow-hidden">
+                                                <div class="h-2 bg-emerald-400 transition-all duration-300" :style="`width: ${progress}%`"></div>
+                                            </div>
+                                            <div class="grid grid-cols-3 gap-1.5 text-[10px] text-emerald-100">
+                                                <div class="rounded bg-emerald-500/20 px-2 py-1 text-center">Authorize</div>
+                                                <div class="rounded bg-emerald-500/20 px-2 py-1 text-center">Capture</div>
+                                                <div class="rounded bg-emerald-600/50 px-2 py-1 text-center font-bold">Receipt</div>
+                                            </div>
+                                        </div>
+                                    @elseif($frame['feature'] === 'Client Portal')
+                                        <div class="mt-2 space-y-1.5 text-[10px]">
+                                            <div class="flex items-center justify-between rounded-md bg-white/10 px-2.5 py-1.5 text-gray-200"><span>File uploaded</span><span>Now</span></div>
+                                            <div class="flex items-center justify-between rounded-md bg-white/10 px-2.5 py-1.5 text-gray-200"><span>Client viewed</span><span>+2m</span></div>
+                                            <div class="flex items-center justify-between rounded-md bg-orange-500/20 px-2.5 py-1.5 text-orange-100"><span>Comment</span><span>1 unread</span></div>
+                                        </div>
+                                    @elseif($frame['feature'] === 'AI-enabled CMS')
+                                        <div class="mt-2 space-y-1.5">
+                                            <div class="h-2 rounded-full bg-fuchsia-950/50 overflow-hidden">
+                                                <div class="h-2 bg-fuchsia-400 transition-all duration-300" :style="`width: ${progress}%`"></div>
+                                            </div>
+                                            <div class="grid grid-cols-3 gap-1.5 text-[10px] text-fuchsia-100">
+                                                <div class="rounded bg-fuchsia-500/20 px-2 py-1 text-center">Draft</div>
+                                                <div class="rounded bg-fuchsia-500/20 px-2 py-1 text-center">Refine</div>
+                                                <div class="rounded bg-fuchsia-600/50 px-2 py-1 text-center font-bold">Publish</div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="mt-2 space-y-1.5">
+                                            <div class="grid grid-cols-3 gap-1.5 text-[10px] text-indigo-100">
+                                                <div class="rounded bg-indigo-500/20 px-2 py-1 text-center">Lead</div>
+                                                <div class="rounded bg-indigo-500/20 px-2 py-1 text-center">Proposal</div>
+                                                <div class="rounded bg-indigo-600/50 px-2 py-1 text-center font-bold">Close</div>
+                                            </div>
+                                            <div class="h-2 rounded-full bg-indigo-950/50 overflow-hidden">
+                                                <div class="h-2 bg-indigo-400 transition-all duration-300" :style="`width: ${progress}%`"></div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
 
+                                <div class="rounded-lg border border-white/10 bg-white/5 p-3">
+                                    <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold mb-2">Latest Output</p>
+                                    <p class="text-[13px] text-white font-bold leading-snug mb-1">{{ $frame['headline'] }}</p>
+                                    <p class="text-[11px] text-gray-400 leading-relaxed mb-2">{{ $frame['summary'] }}</p>
+
+                                    @if($frame['feature'] === 'Contact')
+                                        <div class="space-y-2 mb-3">
+                                            <div class="h-8 rounded-lg bg-white/10 border border-white/10"></div>
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div class="h-8 rounded-lg bg-white/10 border border-white/10"></div>
+                                                <div class="h-8 rounded-lg bg-white/10 border border-white/10"></div>
+                                            </div>
+                                            <div class="rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-2 text-[11px] text-blue-200">High-intent lead automatically flagged</div>
+                                        </div>
+                                    @elseif($frame['feature'] === 'Book')
+                                        <div class="space-y-2 mb-3">
+                                            <div class="grid grid-cols-4 gap-1.5 text-[10px] font-semibold text-violet-200">
+                                                <div class="rounded bg-violet-500/20 px-2 py-1 text-center">Tue</div>
+                                                <div class="rounded bg-violet-500/20 px-2 py-1 text-center">Wed</div>
+                                                <div class="rounded bg-violet-500/20 px-2 py-1 text-center">Thu</div>
+                                                <div class="rounded bg-violet-500/20 px-2 py-1 text-center">Fri</div>
+                                            </div>
+                                            <div class="rounded-lg border border-violet-500/30 bg-violet-500/10 px-3 py-2 text-[11px] text-violet-200">11:30 AM slot reserved and confirmed</div>
+                                        </div>
+                                    @elseif($frame['feature'] === 'Pay')
+                                        <div class="space-y-2 mb-3">
+                                            <div class="flex items-center justify-between rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-[11px] text-emerald-200">
+                                                <span>Invoice #2408</span>
+                                                <span>$2,400.00</span>
+                                            </div>
+                                            <div class="h-7 rounded-lg bg-white/10 border border-white/10"></div>
+                                            <div class="rounded-lg bg-emerald-600/80 px-3 py-2 text-center text-[11px] font-semibold text-white">Payment successful</div>
+                                        </div>
+                                    @elseif($frame['feature'] === 'Client Portal')
+                                        <div class="space-y-2 mb-3 text-[11px]">
+                                            <div class="flex items-center justify-between rounded-lg border border-orange-500/30 bg-orange-500/10 px-3 py-2 text-orange-200"><span>Proposal v3</span><span>Ready</span></div>
+                                            <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-gray-200"><span>Client message</span><span>1 unread</span></div>
+                                            <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-gray-200"><span>Billing status</span><span>Current</span></div>
+                                        </div>
+                                    @elseif($frame['feature'] === 'AI-enabled CMS')
+                                        <div class="space-y-2 mb-3">
+                                            <div class="h-8 rounded-lg bg-white/10 border border-white/10"></div>
+                                            <div class="h-16 rounded-lg bg-white/10 border border-white/10"></div>
+                                            <div class="grid grid-cols-3 gap-2">
+                                                <div class="h-10 rounded-lg bg-fuchsia-500/20 border border-fuchsia-500/30"></div>
+                                                <div class="h-10 rounded-lg bg-fuchsia-500/20 border border-fuchsia-500/30"></div>
+                                                <div class="h-10 rounded-lg bg-fuchsia-500/20 border border-fuchsia-500/30"></div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="space-y-2 mb-3 text-[11px]">
+                                            <div class="rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-indigo-200">Deals moved this week: 12</div>
+                                            <div class="h-2 rounded-full bg-indigo-900/40 overflow-hidden">
+                                                <div class="h-2 w-2/3 bg-indigo-400"></div>
+                                            </div>
+                                            <div class="flex items-center justify-between text-gray-300"><span>Forecast</span><span>$84k</span></div>
+                                        </div>
+                                    @endif
+
+                                    <p class="text-[11px] font-mono text-{{ $frame['color'] }}-300 truncate">{{ $frame['url'] }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
             </div>
 
-            {{-- Dot indicators + label --}}
-            <div class="flex items-center gap-3 mt-6 px-1">
-                @foreach($heroForms as $idx => $form)
+            <div class="flex items-center gap-1.5 mt-2 px-1">
+                @foreach($coreFeatureFrames as $idx => $frame)
                     <button
                         type="button"
-                        @click="current = {{ $idx }}"
+                        @click="current = {{ $idx }}; progress = 24"
                         class="transition-all duration-300 rounded-full"
-                        :class="current === {{ $idx }} ? 'w-5 h-2 {{ $form['dot'] }}' : 'w-2 h-2 bg-white/20 hover:bg-white/40'"
+                        :class="current === {{ $idx }} ? 'w-4 h-2 bg-{{ $frame['color'] }}-400' : 'w-2 h-2 bg-white/20 hover:bg-white/40'"
                     ></button>
                 @endforeach
-                <span class="text-gray-600 text-xs ml-2">
-                    @foreach($heroForms as $idx => $form)
-                        <span x-show="current === {{ $idx }}" class="font-semibold text-gray-400">{{ $form['industry'] }}</span>
-                    @endforeach
-                    &mdash; industry-specific by default
-                </span>
+            </div>
+        </div>
+
+        <div class="md:col-span-2 mt-1" data-reveal>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-3 mb-3">
+                <div class="rounded-xl border border-indigo-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Deployable in one day</div>
+                <div class="rounded-xl border border-emerald-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Core product is free</div>
+                <div class="rounded-xl border border-blue-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Pay only for consulting</div>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 bg-white/70 px-4 py-4 text-sm text-slate-700 mb-3">
+                <p class="font-semibold">Your brand domain stays front and center.</p>
+                <p class="mt-1 text-slate-600">Clients use your routes, not a shared tenant URL: YourBusiness.com/Contact, YourBusiness.com/Book, YourBusiness.com/Pay.</p>
+            </div>
+
+            @php
+                $heroStory = [
+                    [
+                        'stage' => 'Before',
+                        'title' => 'Scattered tools and follow-ups',
+                        'detail' => 'Leads, calendar, payment, and files live in different places.',
+                        'stageClass' => 'text-rose-700',
+                        'cardClass' => 'border-rose-200 bg-rose-50/80',
+                    ],
+                    [
+                        'stage' => 'Day 1',
+                        'title' => 'We deploy your business operating system',
+                        'detail' => 'Single-tenant setup on your domain with your exact workflows.',
+                        'stageClass' => 'text-indigo-700',
+                        'cardClass' => 'border-indigo-200 bg-indigo-50/80',
+                    ],
+                    [
+                        'stage' => 'Outcome',
+                        'title' => 'YourBusiness.com runs the whole journey',
+                        'detail' => 'Contact, Book, and Pay routes move clients through one system.',
+                        'stageClass' => 'text-emerald-700',
+                        'cardClass' => 'border-emerald-200 bg-emerald-50/80',
+                    ],
+                ];
+            @endphp
+            <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+                @foreach($heroStory as $story)
+                    <div class="rounded-2xl border px-4 py-4 backdrop-blur-sm h-full min-w-0 {{ $story['cardClass'] }}">
+                        <p class="mb-2 text-[10px] font-black uppercase tracking-[0.16em] {{ $story['stageClass'] }}">{{ $story['stage'] }}</p>
+                        <p class="text-sm font-extrabold text-slate-900 leading-tight mb-1.5">{{ $story['title'] }}</p>
+                        <p class="text-xs leading-relaxed text-slate-600">{{ $story['detail'] }}</p>
+                    </div>
+                @endforeach
             </div>
         </div>
 

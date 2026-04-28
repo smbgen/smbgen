@@ -26,6 +26,17 @@
                 ['label' => 'Google Workspace Integrations', 'href' => route('google.workspace')],
             ],
         ],
+        [
+            'heading' => 'AI Solutions',
+            'description' => 'Dedicated context-aware assistants for key business functions',
+            'cardStyle' => 'background: linear-gradient(135deg, #f5f3ff 0%, #eff6ff 45%, #ecfeff 100%); border-color: #c4b5fd;',
+            'links' => [
+                ['label' => 'AI Solutions Overview', 'href' => Route::has('solutions.ai') ? route('solutions.ai') : route('contact')],
+                ['label' => 'HR Assistant', 'href' => Route::has('solutions.ai.hr') ? route('solutions.ai.hr') : route('contact')],
+                ['label' => 'Biz Dev Assistant', 'href' => Route::has('solutions.ai.biz-dev') ? route('solutions.ai.biz-dev') : route('contact')],
+                ['label' => 'GTM Assistant', 'href' => Route::has('solutions.ai.gtm') ? route('solutions.ai.gtm') : route('contact')],
+            ],
+        ],
     ];
 
     $salesMenu = [
