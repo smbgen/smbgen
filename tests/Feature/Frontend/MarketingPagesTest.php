@@ -13,8 +13,11 @@ it('renders the home page with smbgen core messaging', function () {
 
     $response->assertOk();
     $response->assertSee('smbgen-core');
-    $response->assertSee('Contact');
-    $response->assertSee('Client Portal');
+    $response->assertSee('Small business operating system');
+    $response->assertSee('Live in one day.');
+    $response->assertSee('Core product is free');
+    $response->assertSee('Pay only for consulting');
+    $response->assertSee('YourBusiness.com/Pay');
 });
 
 it('renders the services page with smbgen core services messaging', function () {

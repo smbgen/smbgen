@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'smbgen — Web Presence That Converts')
-@section('description', 'smbgen gives small and mid-market businesses one connected platform to capture leads, book clients, collect payments, manage relationships, and grow — built specifically for your industry.')
+@section('title', 'smbgen — Small Business Operating System')
+@section('description', 'smbgen is the small business operating system you can deploy in one day. The core product is free, and you only pay for consulting when you want implementation help or ongoing updates.')
 
 @push('head')
 <style>
@@ -102,29 +102,30 @@
 {{-- ================================================================ --}}
 {{-- HERO                                                              --}}
 {{-- ================================================================ --}}
-<section class="hp-hero-bg min-h-[92vh] flex items-center px-6">
+<section class="hp-hero-bg px-6 py-10 lg:py-14">
     <div class="hp-hero-orb hp-hero-orb-a" aria-hidden="true"></div>
     <div class="hp-hero-orb hp-hero-orb-b" aria-hidden="true"></div>
-    <div class="hp-hero-shell max-w-6xl mx-auto w-full py-20 grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+    <div class="hp-hero-shell max-w-7xl mx-auto w-full py-6 grid lg:grid-cols-[1.12fr_0.88fr] gap-8 xl:gap-12 items-start">
 
         {{-- Left: copy --}}
         <div data-reveal="left">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 bg-white/70 text-slate-600 text-xs font-bold uppercase tracking-widest mb-10 backdrop-blur-sm">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 bg-white/70 text-slate-600 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
                 <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse inline-block"></span>
-                Built for small &amp; mid-market businesses
+                Small business operating system
             </div>
 
-            <h1 class="text-5xl md:text-6xl xl:text-7xl font-black leading-[1.02] tracking-tight mb-8">
-                <span class="text-slate-900">Web Presence</span><br>
-                <span class="hp-gradient-headline">That Converts.</span>
+            <h1 class="text-4xl md:text-6xl xl:text-7xl font-black leading-[1.03] tracking-tight mb-5">
+                <span class="text-slate-900">Your business OS.</span><br>
+                <span class="hp-gradient-headline">Live in one day.</span>
             </h1>
 
-            <p class="text-slate-600 text-lg md:text-xl mb-10 leading-relaxed font-light">
-                One platform where your leads come in, appointments get booked, payments are collected,
-                and client relationships are managed — without juggling six different tools.
+            <p class="text-slate-600 text-lg md:text-xl mb-6 leading-relaxed font-light max-w-2xl">
+                smbgen gives you one connected system for leads, bookings, payments, client communication,
+                and operations. The core product is free. You only pay if you want consulting to implement,
+                customize, or continuously improve it. This is a single-tenant deployment hosted independently for your business.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-3 mb-10" data-reveal>
+            <div class="flex flex-col sm:flex-row gap-3 mb-6" data-reveal>
                 <a href="https://smbgen-construction-co-demo.on-forge.com/demo"
                    class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition-colors shadow-xl shadow-indigo-900/30 border border-indigo-500/40"
                    data-magnetic>
@@ -132,64 +133,54 @@
                 </a>
                 <a href="{{ Route::has('booking.wizard') ? route('booking.wizard') : route('contact') }}"
                    class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/70 hover:bg-white text-slate-700 font-semibold text-sm border border-slate-200 transition-colors shadow-sm">
-                    Book a discovery call
+                    Book implementation help
                 </a>
             </div>
 
-            {{-- Journey tags --}}
-            <div class="mb-8" data-reveal>
+            <div class="mb-5 grid grid-cols-1 gap-2.5 sm:grid-cols-3" data-reveal>
+                <div class="rounded-xl border border-indigo-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Deployable in one day</div>
+                <div class="rounded-xl border border-emerald-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Core product is free</div>
+                <div class="rounded-xl border border-blue-100 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700">Pay only for consulting</div>
+            </div>
+
+            <div class="mb-6 rounded-2xl border border-slate-200 bg-white/70 px-4 py-4 text-sm text-slate-700" data-reveal>
+                <p class="font-semibold">Your brand domain stays front and center.</p>
+                <p class="mt-1 text-slate-600">Clients use your routes, not a shared tenant URL: YourBusiness.com/Contact, YourBusiness.com/Book, YourBusiness.com/Pay.</p>
+            </div>
+
+            {{-- Story flow --}}
+            <div class="mb-2" data-reveal>
                 @php
-                    $journeyGroups = [
+                    $heroStory = [
                         [
-                            'label' => 'Attract',
-                            'stageClass' => 'text-blue-700',
-                            'steps' => [
-                                ['Lead', 'bg-blue-50 border-blue-200 text-blue-800'],
-                                ['Nurture', 'bg-violet-50 border-violet-200 text-violet-800'],
-                            ],
+                            'stage' => 'Before',
+                            'title' => 'Scattered tools and follow-ups',
+                            'detail' => 'Leads, calendar, payment, and files live in different places.',
+                            'stageClass' => 'text-rose-700',
+                            'cardClass' => 'border-rose-200 bg-rose-50/80',
                         ],
                         [
-                            'label' => 'Convert',
+                            'stage' => 'Day 1',
+                            'title' => 'We deploy your business operating system',
+                            'detail' => 'Single-tenant setup on your domain with your exact workflows.',
                             'stageClass' => 'text-indigo-700',
-                            'steps' => [
-                                ['Propose', 'bg-indigo-50 border-indigo-200 text-indigo-800'],
-                                ['Close', 'bg-cyan-50 border-cyan-200 text-cyan-800'],
-                            ],
+                            'cardClass' => 'border-indigo-200 bg-indigo-50/80',
                         ],
                         [
-                            'label' => 'Fulfill',
+                            'stage' => 'Outcome',
+                            'title' => 'YourBusiness.com runs the whole journey',
+                            'detail' => 'Contact, Book, and Pay routes move clients through one system.',
                             'stageClass' => 'text-emerald-700',
-                            'steps' => [
-                                ['Pay', 'bg-emerald-50 border-emerald-200 text-emerald-800'],
-                                ['Deliver', 'bg-orange-50 border-orange-200 text-orange-800'],
-                            ],
-                        ],
-                        [
-                            'label' => 'Expand',
-                            'stageClass' => 'text-amber-700',
-                            'steps' => [
-                                ['Retain', 'bg-amber-50 border-amber-200 text-amber-800'],
-                                ['Refer', 'bg-yellow-50 border-yellow-200 text-yellow-800'],
-                            ],
+                            'cardClass' => 'border-emerald-200 bg-emerald-50/80',
                         ],
                     ];
                 @endphp
-                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                    @foreach($journeyGroups as $groupIndex => $group)
-                        <div class="rounded-2xl border border-slate-200 bg-white/70 px-3 py-3 backdrop-blur-sm h-full min-w-0">
-                            <div class="mb-2 text-[10px] font-black uppercase tracking-[0.16em] {{ $group['stageClass'] }} text-center">
-                                {{ $group['label'] }}
-                            </div>
-                            <div class="flex flex-wrap items-center justify-center gap-2 min-h-[40px]">
-                                @foreach($group['steps'] as $stepIndex => [$label, $cls])
-                                    <span class="inline-flex min-w-[82px] items-center justify-center px-3 py-1.5 rounded-xl border {{ $cls }} text-xs font-bold leading-tight text-center">{{ $label }}</span>
-                                    @if($stepIndex < count($group['steps']) - 1)
-                                        <svg class="h-3.5 w-3.5 shrink-0 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 5l7 7-7 7"/>
-                                        </svg>
-                                    @endif
-                                @endforeach
-                            </div>
+                <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+                    @foreach($heroStory as $story)
+                        <div class="rounded-2xl border px-4 py-4 backdrop-blur-sm h-full min-w-0 {{ $story['cardClass'] }}">
+                            <p class="mb-2 text-[10px] font-black uppercase tracking-[0.16em] {{ $story['stageClass'] }}">{{ $story['stage'] }}</p>
+                            <p class="text-sm font-extrabold text-slate-900 leading-tight mb-1.5">{{ $story['title'] }}</p>
+                            <p class="text-xs leading-relaxed text-slate-600">{{ $story['detail'] }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -278,7 +269,7 @@
         @endphp
 
         <div
-            class="hidden lg:flex flex-col hp-float-card"
+            class="hidden lg:flex flex-col hp-float-card lg:pt-2"
             data-reveal="right"
             x-data="{
                 current: 0,
@@ -287,7 +278,7 @@
             }"
         >
             {{-- Card stack --}}
-            <div class="relative" style="min-height: 340px;">
+            <div class="relative" style="min-height: 390px;">
                 @foreach($heroForms as $idx => $form)
                     <div
                         x-show="current === {{ $idx }}"
@@ -310,7 +301,7 @@
                                     <span class="w-3 h-3 rounded-full bg-green-500/60"></span>
                                 </div>
                                 <div class="flex-1 bg-white/5 rounded-md px-3 py-1 text-[11px] text-gray-500 font-mono">
-                                    yourbusiness.smbgen.com/book
+                                    yourbusiness.com/book
                                 </div>
                                 <span class="text-[11px] font-bold px-2.5 py-1 rounded-lg border {{ $form['badge'] }} shrink-0">
                                     {{ $form['industry'] }}
@@ -729,7 +720,7 @@
         <div class="text-center mb-16">
             <span class="text-indigo-400 text-xs font-black uppercase tracking-[0.2em] mb-4 block">The Process</span>
             <h2 class="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-4">From first call to live platform.</h2>
-            <p class="text-gray-400 text-lg max-w-xl mx-auto font-light">We move fast. Most clients are live within days, not months.</p>
+            <p class="text-gray-400 text-lg max-w-xl mx-auto font-light">We move fast. Most businesses can deploy in one day.</p>
         </div>
 
         <div class="grid md:grid-cols-4 gap-0 relative">
@@ -752,9 +743,9 @@
                     [
                         'num'   => '03',
                         'color' => 'cyan',
-                        'title' => 'Go live in days, not months',
-                        'desc'  => 'Your platform is live and capturing leads, bookings, and payments. We handle the technical setup; you focus on clients.',
-                        'extra' => 'Typical setup: 3–7 business days.',
+                        'title' => 'Deploy in one day',
+                        'desc'  => 'Your platform goes live quickly with lead capture, booking, and payments connected. We handle setup while your team keeps running.',
+                        'extra' => 'Typical deployment: one business day.',
                     ],
                     [
                         'num'   => '04',
@@ -831,9 +822,9 @@
                         <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.648.5.5 5.648.5 12c0 5.084 3.292 9.396 7.86 10.918.575.106.785-.25.785-.556 0-.274-.01-1-.015-1.962-3.197.694-3.872-1.54-3.872-1.54-.523-1.328-1.277-1.682-1.277-1.682-1.044-.714.079-.699.079-.699 1.154.08 1.761 1.186 1.761 1.186 1.026 1.758 2.693 1.25 3.35.956.104-.743.402-1.25.731-1.537-2.552-.29-5.236-1.276-5.236-5.68 0-1.255.449-2.282 1.184-3.086-.119-.29-.513-1.459.112-3.042 0 0 .966-.31 3.166 1.179A10.98 10.98 0 0 1 12 6.032c.977.005 1.961.132 2.881.387 2.198-1.49 3.163-1.18 3.163-1.18.627 1.584.233 2.753.114 3.043.737.804 1.182 1.83 1.182 3.086 0 4.415-2.688 5.387-5.25 5.671.413.355.781 1.055.781 2.126 0 1.536-.014 2.774-.014 3.151 0 .309.207.668.79.555C20.21 21.392 23.5 17.082 23.5 12 23.5 5.648 18.352.5 12 .5Z"/></svg>
                         View on GitHub &rarr;
                     </a>
-                    <a href="{{ route('register') }}"
+                    <a href="{{ Route::has('booking.wizard') ? route('booking.wizard') : route('contact') }}"
                        class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-colors shadow-lg shadow-emerald-900/40">
-                        Start free &rarr;
+                        Book implementation help &rarr;
                     </a>
                 </div>
             </div>
@@ -863,7 +854,7 @@
                 <div class="flex flex-col gap-3">
                     @foreach([
                         ['No vendor lock-in', 'Your data is yours. Export everything, always.', 'text-emerald-400'],
-                        ['No "call for pricing"', 'The core platform is free. Paid tiers are clear and fair.', 'text-blue-400'],
+                        ['Core is free', 'Pay only for consulting when you need implementation or updates.', 'text-blue-400'],
                         ['Built in public', 'Roadmap, issues, and contributions are all on GitHub.', 'text-violet-400'],
                     ] as [$title, $desc, $color])
                         <div class="flex items-start gap-3 bg-white/3 border border-white/8 rounded-xl px-4 py-3.5">
