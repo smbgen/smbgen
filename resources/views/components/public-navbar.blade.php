@@ -3,7 +3,7 @@
     $bgColor = $navbarSettings->getBackgroundColor();
     $textColor = $navbarSettings->getTextColor();
     $menuItems = $navbarSettings->getOrderedMenuItems();
-    $logoText = $navbarSettings->logo_text ?? config('business.name');
+    $logoText = config('app.name');
     $logoImage = $navbarSettings->logo_image_url;
     $isSticky = $navbarSettings->is_sticky ?? true;
 @endphp
