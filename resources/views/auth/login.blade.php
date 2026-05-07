@@ -358,12 +358,12 @@
       ctx.globalCompositeOperation = 'destination-out';
       ctx.fillStyle = 'black';
 
-      const fontSize = Math.max(40, Math.min(140, (canvas.width / DPR) * 0.09));
+      const fontSize = Math.max(20, Math.min(56, (canvas.width / DPR) * 0.04));
       ctx.font = `700 ${fontSize}px Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial`;
-      ctx.textAlign = 'center';
+      ctx.textAlign = 'right';
       ctx.textBaseline = 'middle';
 
-      const textX = (canvas.width / DPR) * 0.72;
+      const textX = (canvas.width / DPR) * 0.52;
       const textY = (canvas.height / DPR) * 0.88;
 
       try {
