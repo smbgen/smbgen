@@ -363,7 +363,7 @@
       ctx.textAlign = 'right';
       ctx.textBaseline = 'middle';
 
-      const textX = (canvas.width / DPR) * 0.52;
+      const textX = (canvas.width / DPR) - 32;
       const textY = (canvas.height / DPR) * 0.88;
 
       try {
