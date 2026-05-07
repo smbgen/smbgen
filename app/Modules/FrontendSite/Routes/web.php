@@ -1,43 +1,7 @@
 <?php
 
-use App\Models\CmsPage;
 use App\Support\ModuleRegistry;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    if (ModuleRegistry::isEnabled('frontend_site') && ModuleRegistry::isSelectedFrontend('frontend_site')) {
-        return view('frontend.home-platform');
-    }
-
-    if (! auth()->check()) {
-        if (config('business.features.cms')) {
-            $homePage = CmsPage::query()
-                ->where('slug', 'home')
-                ->where('is_published', true)
-                ->first();
-
-            if ($homePage) {
-                return view('cms.show', ['page' => $homePage]);
-            }
-        }
-
-        return redirect()->route('login');
-    }
-
-    $authenticatedUser = auth()->user();
-
-    if ($authenticatedUser->isSuperAdmin()
-        && config('app.super_admin_routes_enabled', false)
-        && Route::has('super-admin.dashboard')) {
-        return redirect()->route('super-admin.dashboard');
-    }
-
-    if ($authenticatedUser->isAdministrator()) {
-        return redirect()->route('admin.dashboard');
-    }
-
-    return redirect()->route('dashboard');
-})->name('home');
 
 Route::middleware('moduleEnabled:frontend_site')->group(function () {
     Route::get('/platform', fn () => view('frontend.home-platform'))->name('home.platform');

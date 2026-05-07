@@ -9,6 +9,25 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
+Route::get('/', function () {
+    if (auth()->check()) {
+        $user = auth()->user();
+        if ($user->isSuperAdmin() && config('app.super_admin_routes_enabled', false) && Route::has('super-admin.dashboard')) {
+            return redirect()->route('super-admin.dashboard');
+        }
+        if ($user->isAdministrator()) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('dashboard');
+    }
+
+    if (\App\Support\ModuleRegistry::isEnabled('frontend_site') && \App\Support\ModuleRegistry::isSelectedFrontend('frontend_site')) {
+        return view('frontend.home-platform');
+    }
+
+    return view(config('app.home_view', 'glasgow-design-build'));
+})->name('home');
+
 Route::get('/track/email/{id}', [EmailTrackingController::class, 'trackOpen'])->name('email.track.open');
 Route::get('/track/click/{id}', [EmailTrackingController::class, 'trackClick'])->name('email.track.click');
 
