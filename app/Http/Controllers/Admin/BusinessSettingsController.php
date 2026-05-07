@@ -12,8 +12,7 @@ class BusinessSettingsController extends Controller
     {
         try {
             $settings = [
-                'app_name' => BusinessSetting::get('app_name', config('app.name', 'smbgen')),
-                'company_name' => BusinessSetting::get('company_name', config('business.company_name', 'smbgen')),
+                'app_name' => BusinessSetting::get('app_name', config('app.name')),
             ];
 
             // Get admin users with their notification preferences
@@ -38,7 +37,6 @@ class BusinessSettingsController extends Controller
         try {
             $validated = $request->validate([
                 'app_name' => 'required|string|max:255',
-                'company_name' => 'required|string|max:255',
                 'admin_notifications' => 'nullable|array',
                 'admin_notifications.*.notify_on_new_leads' => 'boolean',
                 'admin_notifications.*.notify_on_new_bookings' => 'boolean',
@@ -46,7 +44,6 @@ class BusinessSettingsController extends Controller
 
             // Save to database
             BusinessSetting::set('app_name', $validated['app_name'], 'string');
-            BusinessSetting::set('company_name', $validated['company_name'], 'string');
 
             // Update admin notification preferences
             if (isset($validated['admin_notifications'])) {
@@ -65,7 +62,6 @@ class BusinessSettingsController extends Controller
             $envUpdateFailed = false;
             try {
                 $this->updateEnvFile('APP_NAME', $validated['app_name']);
-                $this->updateEnvFile('BUSINESS_COMPANY_NAME', $validated['company_name']);
             } catch (\Exception $e) {
                 $envUpdateFailed = true;
                 \Log::warning('Failed to update .env file', [

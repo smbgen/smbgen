@@ -16,8 +16,7 @@ return [
     |
     */
 
-    'name' => env('BUSINESS_NAME', env('COMPANY_NAME', 'smbgen')),
-    'company_name' => env('COMPANY_NAME', 'smbgen'),
+    'name' => env('BUSINESS_NAME', env('APP_NAME', 'smbgen')),
     'tagline' => env('BUSINESS_TAGLINE', 'Client Management & AI Tools'),
     'description' => env('BUSINESS_DESCRIPTION', 'Professional client management platform with AI-powered tools'),
 

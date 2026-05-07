@@ -41,7 +41,7 @@ class ContactController extends Controller
                 Mail::to($validated['email'])
                     ->send(new ContactInquiryReceived(
                         name: $validated['name'],
-                        companyName: config('business.company_name'),
+                        companyName: config('app.name'),
                     ));
             } catch (\Exception $e) {
                 Log::warning('Failed to send customer confirmation email', [

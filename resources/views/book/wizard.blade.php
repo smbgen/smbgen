@@ -78,7 +78,7 @@
     <!-- Header -->
     <div class="text-center mb-8">
         <h1 class="text-3xl md:text-5xl font-bold booking-text mb-3">Book an Appointment</h1>
-        <p class="text-xl booking-text mb-2">with {{ config('business.company_name') }}</p>
+        <p class="text-xl booking-text mb-2">with {{ config('app.name') }}</p>
         <p class="booking-text-muted">Select a day and time that works for you</p>
     </div>
 

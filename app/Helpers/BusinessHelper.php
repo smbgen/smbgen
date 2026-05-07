@@ -13,14 +13,6 @@ class BusinessHelper
     }
 
     /**
-     * Get company name
-     */
-    public static function companyName(): string
-    {
-        return config('business.company_name', 'smbgen');
-    }
-
-    /**
      * Get business tagline
      */
     public static function tagline(): string

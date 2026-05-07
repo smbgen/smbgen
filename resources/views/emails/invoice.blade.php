@@ -97,7 +97,7 @@
     <div style="border-top: 2px solid #e5e7eb; margin-top: 30px; padding-top: 20px;">
         <p style="font-size: 15px; color: #4b5563;">If you have any questions about this invoice, please don't hesitate to contact us.</p>
         <p style="font-size: 15px; color: #1f2937; margin-top: 20px;">Thank you for your business!</p>
-        <p style="font-size: 15px; color: #1f2937; margin-top: 5px;"><strong>The {{ config('business.company_name') ?? config('app.name') }} Team</strong></p>
+        <p style="font-size: 15px; color: #1f2937; margin-top: 5px;"><strong>The {{ config('app.name') }} Team</strong></p>
     </div>
 @endsection
 

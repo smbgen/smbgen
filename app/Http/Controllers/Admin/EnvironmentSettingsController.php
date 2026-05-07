@@ -50,15 +50,6 @@ class EnvironmentSettingsController extends Controller
                 'title' => 'Business Information',
                 'description' => 'Company details and branding',
                 'items' => [
-                    'company_name' => [
-                        'env_key' => 'BUSINESS_COMPANY_NAME',
-                        'env_value' => env('BUSINESS_COMPANY_NAME'),
-                        'db_value' => BusinessSetting::get('company_name'),
-                        'current_value' => config('business.company_name'),
-                        'label' => 'Company Name',
-                        'description' => 'Your company name for branding and legal purposes',
-                        'type' => 'text',
-                    ],
                 ],
             ],
             'mail' => [
@@ -205,14 +196,6 @@ class EnvironmentSettingsController extends Controller
                 if ($request->has('app_name')) {
                     BusinessSetting::set('app_name', $request->input('app_name'), 'string');
                     $updated[] = 'Application Name';
-                }
-            }
-
-            // Handle business settings
-            if (! env('BUSINESS_COMPANY_NAME')) {
-                if ($request->has('company_name')) {
-                    BusinessSetting::set('company_name', $request->input('company_name'), 'string');
-                    $updated[] = 'Company Name';
                 }
             }
 

@@ -200,7 +200,7 @@
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-600 to-secondary-600 flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-bridge text-white text-xs"></i>
                     </div>
-                    <span class="text-gray-900 dark:text-white font-semibold text-sm">{{ collect(explode(' ', config('app.company_name', config('app.name'))))->map(fn($w) => strtoupper(substr($w, 0, 1)))->take(3)->implode('') }}</span>
+                    <span class="text-gray-900 dark:text-white font-semibold text-sm">{{ collect(explode(' ', config('app.name')))->map(fn($w) => strtoupper(substr($w, 0, 1)))->take(3)->implode('') }}</span>
                 </div>
 
                 <!-- Desktop quick links (visible only on desktop) -->

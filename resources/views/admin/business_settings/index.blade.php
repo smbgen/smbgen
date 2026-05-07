@@ -42,17 +42,6 @@
                     @enderror
                 </div>
 
-                <div>
-                    <label for="company_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Company Name</label>
-                    <input id="company_name" type="text" name="company_name" value="{{ old('company_name', $settings['company_name'] ?? config('business.company_name', 'smbgen')) }}" class="block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500" required>
-                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                        Your business name used in emails, bookings, and public pages. 
-                        <span class="text-blue-700 dark:text-blue-400">✓ Syncs to <code class="rounded bg-gray-200 px-1 dark:bg-gray-700">BUSINESS_COMPANY_NAME</code> in .env file.</span>
-                    </p>
-                    @error('company_name')
-                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                    @enderror
-                </div>
             </div>
         </section>
 

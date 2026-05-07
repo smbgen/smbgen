@@ -49,7 +49,7 @@
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             <a href="{{ route('dashboard') }}" class="text-xl font-bold text-gray-900 dark:text-gray-100">
-                                {{ config('app.company_name', 'smbgen') }}
+                                {{ config('app.name') }}
                             </a>
                         </div>
 

@@ -179,8 +179,7 @@ class EmailController extends Controller
 
     public function getTemplate(Request $request)
     {
-        $appName = config('app.name');
-        $companyName = config('business.company_name', $appName);
+        $companyName = config('app.name');
 
         $templates = [
             'welcome' => [

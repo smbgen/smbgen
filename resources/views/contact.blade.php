@@ -13,7 +13,7 @@
         <!-- Header -->
         <div class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                Contact {{ config('business.company_name') }}
+                Contact {{ config('app.name') }}
             </h1>
             <p class="text-lg max-w-2xl mx-auto">
                 Fill out the form below and we'll get back to you as soon as possible.

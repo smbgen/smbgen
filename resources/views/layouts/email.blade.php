@@ -2,9 +2,7 @@
 <html>
 <head>
     @php
-        $brandName = config('business.name')
-            ?: config('business.company_name')
-            ?: config('app.company_name', config('app.name', 'smbgen'));
+        $brandName = config('app.name');
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

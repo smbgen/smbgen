@@ -9,7 +9,7 @@
         <i class="fas fa-bridge text-white {{ $compact ? 'text-xs' : 'text-lg' }}"></i>
     </div>
     <div class="flex flex-col min-w-0">
-        <span class="text-gray-900 dark:text-white font-bold {{ $compact ? 'text-sm' : 'text-lg' }} leading-tight truncate max-w-40">{{ config('app.company_name', 'smbgen') }}</span>
+        <span class="text-gray-900 dark:text-white font-bold {{ $compact ? 'text-sm' : 'text-lg' }} leading-tight truncate max-w-40">{{ config('app.name') }}</span>
         @if($subtitle)
             <span class="text-gray-500 dark:text-gray-400 text-sm">{{ $subtitle }}</span>
         @endif

@@ -24,5 +24,5 @@
 
     <p style="margin-top: 30px;">Please review this submission and follow up with the lead as appropriate.</p>
 
-    <p>Thanks,<br/>The {{ config('business.company_name') ?? config('app.name') }} Team</p>
+    <p>Thanks,<br/>The {{ config('app.name') }} Team</p>
 @endsection

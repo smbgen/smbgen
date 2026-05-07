@@ -115,7 +115,7 @@
     @yield('content')
 
     @php
-        $companyName = config('business.company_name', config('app.name', 'smbgen'));
+        $companyName = config('app.name');
         $companyWebsite = config('business.contact.website');
         $companyHost = $companyWebsite ? parse_url($companyWebsite, PHP_URL_HOST) : null;
     @endphp

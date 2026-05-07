@@ -32,7 +32,7 @@ class NewContactInquiry extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Contact Form Inquiry - '.config('business.company_name'),
+            subject: 'New Contact Form Inquiry - '.config('app.name'),
             replyTo: [$this->replyToEmail],
         );
     }

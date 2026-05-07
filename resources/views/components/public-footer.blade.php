@@ -1,6 +1,6 @@
 @php
     $footerSettings = \App\Models\CmsFooterSetting::getSettings();
-    $companyName = config('business.company_name', config('app.name'));
+    $companyName = config('app.name');
     $companyWebsite = config('business.contact.website');
     $companyHost = $companyWebsite ? parse_url($companyWebsite, PHP_URL_HOST) : null;
     

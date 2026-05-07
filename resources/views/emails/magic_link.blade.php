@@ -16,6 +16,6 @@
         If you didn't request this, please ignore this email or contact support if you're concerned about your account security.
     </p>
 
-    <p>Thanks,<br/>The {{ config('business.company_name') ?? config('app.name') }} Team</p>
+    <p>Thanks,<br/>The {{ config('app.name') }} Team</p>
 @endsection
 

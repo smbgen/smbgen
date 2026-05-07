@@ -40,7 +40,7 @@
 
     <div style="margin-top: 32px; padding: 16px; background: #f9fafb; border-radius: 8px; text-align: center;">
         <p style="margin: 0; color: #6b7280; font-size: 13px;">
-            This message was sent from your {{ config('business.company_name') ?? config('app.name') }} portal.
+            This message was sent from your {{ config('app.name') }} portal.
         </p>
     </div>
 @endsection

@@ -25,7 +25,7 @@
             @endif
         </div>
         <div class="right">
-            <div><strong>{{ config('business.company_name') ?? 'Company' }}</strong></div>
+            <div><strong>{{ config('app.name') }}</strong></div>
             <div class="muted">{{ config('business.contact.email') ?? 'N/A' }}</div>
             <div class="muted">{{ config('business.contact.website') ?? 'N/A' }}</div>
         </div>
