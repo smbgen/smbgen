@@ -123,7 +123,7 @@
                 </svg>
             </div>
             <div class="flex flex-col leading-none">
-                <span class="font-extrabold text-gray-900 text-lg tracking-tight">smbgen</span>
+                <span class="font-extrabold text-gray-900 text-lg tracking-tight">{{ config('app.name') }}</span>
                 <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400">platform</span>
             </div>
         </a>

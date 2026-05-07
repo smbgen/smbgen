@@ -12,7 +12,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                 </svg>
             </div>
-            <span class="font-extrabold text-gray-900 text-lg tracking-tight">smbgen</span>
+            <span class="font-extrabold text-gray-900 text-lg tracking-tight">{{ config('app.name') }}</span>
         </a>
 
         {{-- Desktop links --}}
