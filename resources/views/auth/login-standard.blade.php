@@ -13,16 +13,17 @@
     <canvas id="loginParticles" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
   </div>
 
-  <div class="px-4 w-full max-w-md z-10">
-    {{-- Company name badge & dark mode toggle --}}
-    <div class="flex items-center justify-between mb-4">
-      <div class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/70 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur-sm dark:border-gray-600 dark:bg-gray-800/70 dark:text-gray-200">
-        {{ config('app.company_name', config('app.name')) }}
-      </div>
-      <x-dark-mode-toggle />
-    </div>
+  <div class="px-4 w-full max-w-5xl z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-    <div class="bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-[28px] shadow-xl p-6 sm:p-8">
+    {{-- Left: login form --}}
+    <div>
+      <div class="flex items-center justify-between mb-4">
+        <div class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/70 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur-sm dark:border-gray-600 dark:bg-gray-800/70 dark:text-gray-200">
+          {{ config('app.name') }}
+        </div>
+        <x-dark-mode-toggle />
+      </div>
+      <div class="bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-[28px] shadow-xl p-6 sm:p-8">
       <div class="space-y-6">
         <div class="space-y-3">
           <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-700 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-200">
@@ -103,10 +104,20 @@
     </div>
   </div>
 
+    {{-- Right: brand name --}}
+    <div class="hidden lg:flex items-center justify-end">
+      <p class="text-right font-black text-white/20 dark:text-white/10 leading-none select-none"
+         style="font-size: clamp(3rem, 6vw, 6rem);">
+        {{ config('app.name') }}
+      </p>
+    </div>
+
+  </div>
+
   {{-- Footer --}}
   <footer class="absolute bottom-0 w-full text-center pb-3 text-gray-500 dark:text-gray-400 text-sm z-10">
     <div class="opacity-75">
-      © {{ date('Y') }} {{ config('app.company_name', config('app.name')) }} ·
+      © {{ date('Y') }} {{ config('app.name') }} ·
       <a href="{{ config('app.url') }}/privacy-policy" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white underline">Privacy</a> ·
       <a href="{{ config('app.url') }}/terms" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white underline">Terms</a>
     </div>
@@ -119,7 +130,7 @@
   <div id="secureSessionToast" class="bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg w-full opacity-100 pointer-events-none" role="alert">
     <div class="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border-b-0 py-1 px-2 rounded-t-lg flex items-center">
       <strong class="text-xs">Session protection enabled</strong>
-      <small class="text-xs ml-auto text-right">    <strong>{{ config('app.company_name', config('app.name')) }}</strong><br> cloud monitoring</small>
+      <small class="text-xs ml-auto text-right">    <strong>{{ config('app.name') }}</strong><br> cloud monitoring</small>
     </div>
     <div class="text-xs py-2 px-3">
       <div>IP: {{ request()->ip() }}</div>
@@ -129,7 +140,7 @@
   </div>
 
   <a id="sessionPill" href="{{ config('app.url') }}" target="_blank" rel="noopener noreferrer" aria-label="Open {{ config('app.name') }} in a new tab" class="hidden bg-green-600 text-white text-xs rounded-full px-2 py-0.5 shadow-lg mt-2 text-center transform origin-center pointer-events-auto cursor-pointer">
-    <strong>{{ config('app.company_name', config('app.name')) }}</strong>
+    <strong>{{ config('app.name') }}</strong>
   </a>
 </div>
 
@@ -302,24 +313,6 @@
         ctx.fillStyle = `rgba(${palette.cursorRgb},${cursorOpacity})`;
         ctx.arc(cp.x, cp.y, cp.r, 0, Math.PI * 2);
         ctx.fill();
-      }
-
-      ctx.save();
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.fillStyle = 'black';
-
-      const fontSize = Math.max(20, Math.min(56, (canvas.width / DPR) * 0.04));
-      ctx.font = `700 ${fontSize}px Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial`;
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'middle';
-
-      const textX = (canvas.width / DPR) - 32;
-      const textY = (canvas.height / DPR) * 0.88;
-
-      try {
-        ctx.fillText(@json(config('app.company_name', config('app.name'))), textX, textY);
-      } catch (e) {
-        // no-op
       }
 
       ctx.restore();
